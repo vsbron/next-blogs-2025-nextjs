@@ -5,7 +5,7 @@ import Search from "./Search";
 function Header() {
   // Returned JSX
   return (
-    <header>
+    <header className="sticky top-0 z-100 shadow-xl py-4 bg-foreground">
       <div className="max-w-7xl flex justify-between gap-x-8 mx-auto">
         <Logo />
         <div className="flex gap-x-6">
