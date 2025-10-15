@@ -1,8 +1,10 @@
 function Logo() {
   // Returned JSX
   return (
-    <div>Logo</div>
-  )
+    <div className="font-popping text-2xl">
+      Next<span className="font-semibold uppercase">Blog</span>
+    </div>
+  );
 }
 
-export default Logo
+export default Logo;
