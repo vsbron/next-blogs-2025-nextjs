@@ -1,5 +1,6 @@
 import Logo from "./Logo";
 import Navbar from "./Navbar";
+import ThemeToggle from "./ThemeToggle";
 import Search from "./Search";
 
 function Header() {
@@ -10,6 +11,7 @@ function Header() {
         <Logo />
         <div className="flex gap-x-6">
           <Search />
+          <ThemeToggle />
           <Navbar />
         </div>
       </div>

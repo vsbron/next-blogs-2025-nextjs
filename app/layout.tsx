@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
@@ -29,13 +30,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
       >
-        <Header />
-        <main className="max-w-7xl mx-auto h-screen py-8">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="max-w-7xl mx-auto h-screen py-8">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
