@@ -1,8 +1,21 @@
+import Link from "next/link";
+
+import { Button } from "./ui/button";
+import { PencilLine } from "lucide-react";
+
 function Navbar() {
   // Returned JSX
   return (
-    <nav>Navbar</nav>
-  )
+    <div className="flex items-center gap-4">
+      <Link href="/posts">Explore</Link>
+      <Button asChild>
+        <Link href="/dashboard/add-post">
+          <PencilLine />
+          Post
+        </Link>
+      </Button>
+    </div>
+  );
 }
 
-export default Navbar
+export default Navbar;

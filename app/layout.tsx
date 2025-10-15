@@ -41,7 +41,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
-          <main className="max-w-7xl mx-auto h-screen py-8">{children}</main>
+          <main className="max-w-7xl mx-auto py-8 min-h-[500px]">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
