@@ -5,7 +5,7 @@ function Logo() {
   return (
     <div className="font-poppins text-2xl text-primary hover:text-primary-light transition-colors">
       <Link href="/">
-        Next<span className="font-semibold uppercase">Blog</span>
+        Next<span className="font-semibold uppercase">Blogs</span>
       </Link>
     </div>
   );

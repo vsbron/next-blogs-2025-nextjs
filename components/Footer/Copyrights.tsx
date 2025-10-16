@@ -3,7 +3,7 @@ function Copyrights() {
   return (
     <div>
       <div className="font-poppins text-xl mb-1">
-        Next<span className="font-semibold">BLOG</span>
+        Next<span className="font-semibold uppercase">Blogs</span>
       </div>
       <div>
         Built by VSBroN as a portfolio project.

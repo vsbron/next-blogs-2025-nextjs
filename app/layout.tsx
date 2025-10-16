@@ -22,7 +22,7 @@ const LatoSerif = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "NextBlog",
+  title: "NextBlogs",
   description: "Multi-user blogging platform",
 };
 
