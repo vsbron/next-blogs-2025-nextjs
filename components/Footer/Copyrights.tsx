@@ -2,10 +2,10 @@ function Copyrights() {
   // Returned JSX
   return (
     <div>
-      <div className="font-poppins text-xl mb-1">
-        Next<span className="font-semibold uppercase">Blogs</span>
-      </div>
-      <div>
+      <svg width="121" height="30" className="fill-foreground">
+        <use href="/logo.svg#logo"></use>
+      </svg>
+      <div className="text-sm">
         Built by VSBroN as a portfolio project.
         <br />
         This project is available on{" "}

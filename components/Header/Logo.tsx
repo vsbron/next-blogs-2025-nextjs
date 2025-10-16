@@ -3,11 +3,15 @@ import Link from "next/link";
 function Logo() {
   // Returned JSX
   return (
-    <div className="font-poppins text-2xl text-primary hover:text-primary-light transition-colors">
-      <Link href="/">
-        Next<span className="font-semibold uppercase">Blogs</span>
-      </Link>
-    </div>
+    <Link href="/">
+      <svg
+        width="142"
+        height="35"
+        className="fill-primary relative top-0.5 hover:fill-primary-light transition-all dark:fill-white dark:hover:fill-muted-foreground"
+      >
+        <use href="/logo.svg#logo"></use>
+      </svg>
+    </Link>
   );
 }
 
