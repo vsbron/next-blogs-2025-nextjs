@@ -1,6 +1,6 @@
 "use client";
 import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/nextjs";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 function Authentication() {
