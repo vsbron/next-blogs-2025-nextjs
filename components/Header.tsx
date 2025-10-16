@@ -2,6 +2,7 @@ import Logo from "./Logo";
 import Navbar from "./Navbar";
 import ThemeToggle from "./ThemeToggle";
 import Search from "./Search";
+import Authentication from "./Authentication";
 
 function Header() {
   // Returned JSX
@@ -13,6 +14,7 @@ function Header() {
           <Search />
           <Navbar />
           <ThemeToggle />
+          <Authentication />
         </div>
       </div>
     </header>

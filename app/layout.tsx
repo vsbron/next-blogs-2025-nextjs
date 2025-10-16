@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
@@ -30,23 +31,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
         >
-          <Header />
-          <main className="max-w-7xl mx-auto py-8 min-h-[500px]">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
-      </body>
-    </html>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="max-w-7xl mx-auto py-8 min-h-[500px]">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
