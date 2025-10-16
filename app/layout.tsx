@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import Container from "@/components/Container";
 
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
@@ -43,8 +44,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            <main className="max-w-7xl mx-auto py-8 min-h-[500px]">
-              {children}
+            <main>
+              <Container className="py-8">{children}</Container>
             </main>
             <Footer />
           </ThemeProvider>

@@ -1,3 +1,4 @@
+import Container from "./Container";
 import Copyrights from "./Footer/Copyrights";
 import FooterNavbar from "./Footer/FooterNavbar";
 import LegalInfo from "./Footer/LegalInfo";
@@ -7,12 +8,12 @@ function Footer() {
   // Returned JSX
   return (
     <footer className="bg-muted">
-      <div className="max-w-7xl mx-auto py-6">
+      <Container className="py-6">
         <FooterNavbar />
         <PoweredBy />
         <LegalInfo />
         <Copyrights />
-      </div>
+      </Container>
     </footer>
   );
 }
