@@ -17,7 +17,7 @@ function Authentication() {
 
   // Returned JSX
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-4">
       <SignedOut>
         <Button variant="outline" size="sm" onClick={triggerSignInPopUp}>
           Log in

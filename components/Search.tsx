@@ -8,7 +8,7 @@ function Search() {
       <input
         type="search"
         name="search"
-        className="border rounded-sm border-primary/50"
+        className="border rounded-sm border-foreground/50"
       />
       <Button
         type="submit"
