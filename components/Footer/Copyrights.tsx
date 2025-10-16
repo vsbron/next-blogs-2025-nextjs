@@ -2,7 +2,8 @@ function Copyrights() {
   // Returned JSX
   return (
     <div>
-      <svg width="121" height="30" className="fill-foreground">
+      <svg width="121" height="30" className="fill-foreground/90">
+        <title>NextBlog</title>
         <use href="/logo.svg#logo"></use>
       </svg>
       <div className="text-sm">
