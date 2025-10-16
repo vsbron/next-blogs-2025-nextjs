@@ -1,18 +1,11 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// Declaring the public routes
-const isPublicRoute = createRouteMatcher([
-  "/",
-  "/posts(.*)",
-  "/author",
-  "/about",
-  "/contact",
-  "/site-map",
-]);
+// Declaring the private routes
+const isPrivateRoute = createRouteMatcher(["/dashboard(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   // Protect all pages from non authorized users
-  if (!isPublicRoute(req)) {
+  if (isPrivateRoute(req)) {
     await auth.protect();
   }
 });
