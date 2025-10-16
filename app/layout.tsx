@@ -45,7 +45,7 @@ export default function RootLayout({
           >
             <Header />
             <main>
-              <Container className="py-8">{children}</Container>
+              <Container className="pt-8 pb-12">{children}</Container>
             </main>
             <Footer />
           </ThemeProvider>

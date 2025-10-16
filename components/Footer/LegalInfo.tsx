@@ -3,10 +3,11 @@ function LegalInfo() {
   return (
     <div>
       <h4 className="font-poppins">Legal Info</h4>
-      <p>
+      <p className="text-sm">
         All posts are created by individual users. NextBlog is not responsible
-        for their content. Redistribution or copying without permission is
-        prohibited.
+        for their content.
+        <br />
+        Redistribution or copying without permission is prohibited.
       </p>
     </div>
   );
