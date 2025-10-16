@@ -6,29 +6,31 @@ function FooterNavbar() {
   // Returned JSX
   return (
     <div>
-      <h3 className="font-poppins text-xl">Menu</h3>
-      <nav className="flex items-start gap-x-6">
-        {primaryLinks.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="text-lg text-primary hover:text-primary-light"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-      <nav className="flex items-start gap-x-6">
-        {secondaryLinks.map(({ href, label }) => (
-          <Link
-            key={href}
-            href={href}
-            className="text-md text-primary hover:text-primary-light"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
+      <h3 className="font-poppins text-xl mb-1">Menu</h3>
+      <div className="flex gap-20 text-[17px]">
+        <nav className="flex flex-col gap-y-0.5">
+          {primaryLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className=" text-primary hover:text-primary-light"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+        <nav className="flex flex-col gap-y-0.5">
+          {secondaryLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className=" text-primary hover:text-primary-light"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }

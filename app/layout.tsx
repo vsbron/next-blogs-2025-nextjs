@@ -45,7 +45,9 @@ export default function RootLayout({
           >
             <Header />
             <main>
-              <Container className="pt-8 pb-12">{children}</Container>
+              <Container className="pt-8 pb-12 flex flex-col gap-6">
+                {children}
+              </Container>
             </main>
             <Footer />
           </ThemeProvider>

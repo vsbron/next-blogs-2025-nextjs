@@ -2,7 +2,7 @@ function Copyrights() {
   // Returned JSX
   return (
     <div>
-      <div className="font-poppins text-xl">
+      <div className="font-poppins text-xl mb-1">
         Next<span className="font-semibold">BLOG</span>
       </div>
       <div>
