@@ -3,7 +3,7 @@ import Link from "next/link";
 function Logo() {
   // Returned JSX
   return (
-    <div className="font-popping text-2xl text-primary">
+    <div className="font-poppins text-2xl text-primary hover:text-primary-light transition-colors">
       <Link href="/">
         Next<span className="font-semibold uppercase">Blog</span>
       </Link>

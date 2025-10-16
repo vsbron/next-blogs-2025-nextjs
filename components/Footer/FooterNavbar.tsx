@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { links } from "@/utils/links";
 
-function Navbar() {
+function FooterNavbar() {
   // Returned JSX
   return (
     <nav className="flex flex-col items-start gap-y-2">
@@ -15,4 +15,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default FooterNavbar;

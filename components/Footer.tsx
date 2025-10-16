@@ -1,6 +1,6 @@
 import Copyrights from "./Footer/Copyrights";
+import FooterNavbar from "./Footer/FooterNavbar";
 import LegalInfo from "./Footer/LegalInfo";
-import Navbar from "./Footer/Navbar";
 import PoweredBy from "./Footer/PoweredBy";
 
 function Footer() {
@@ -8,7 +8,7 @@ function Footer() {
   return (
     <footer className="bg-muted">
       <div className="max-w-7xl mx-auto py-6">
-        <Navbar />
+        <FooterNavbar />
         <PoweredBy />
         <LegalInfo />
         <Copyrights />

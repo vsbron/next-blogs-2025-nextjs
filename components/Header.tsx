@@ -2,10 +2,10 @@ import Link from "next/link";
 import { PencilLine } from "lucide-react";
 
 import Authentication from "./Header/Authentication";
+import HeaderNavbar from "./Header/HeaderNavbar";
+import HeaderSeparator from "./Header/HeaderSeparator";
 import Logo from "./Header/Logo";
-import Navbar from "./Header/Navbar";
 import Search from "./Header/Search";
-import Separator from "./Header/Separator";
 import ThemeToggle from "./ThemeToggle";
 import { Button } from "./ui/button";
 
@@ -16,9 +16,9 @@ function Header() {
       <div className="max-w-7xl flex justify-between gap-x-8 mx-auto">
         <div className="flex gap-8">
           <Logo />
-          <Separator />
+          <HeaderSeparator />
           <div className="flex gap-8 items-center">
-            <Navbar />
+            <HeaderNavbar />
             <Search />
           </div>
         </div>
