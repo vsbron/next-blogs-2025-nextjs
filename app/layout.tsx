@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "NextBlogs is a modern multi-user blogging platform to read, create, and share articles with a clean, user-friendly experience.",
   icons: {
     icon: [
-      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/favicon2.ico", sizes: "any" },
       { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/apple-touch-icon.png", sizes: "180x180" },
     ],
