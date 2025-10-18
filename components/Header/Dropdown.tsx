@@ -59,7 +59,11 @@ function Dropdown() {
           {/* MOBILE MENU */}
           <div className="lg:hidden">
             {primaryLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent">
+              <DropdownMenuItem
+                key={href}
+                className="focus:bg-transparent"
+                asChild
+              >
                 <Link href={href} className="link-primary">
                   {label}
                 </Link>
@@ -69,7 +73,11 @@ function Dropdown() {
           </div>
           <SignedIn>
             {personalAreaLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent">
+              <DropdownMenuItem
+                key={href}
+                className="focus:bg-transparent"
+                asChild
+              >
                 <Link href={href} className="link-primary">
                   {label}
                 </Link>
