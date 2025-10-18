@@ -16,15 +16,15 @@ function Header() {
   return (
     <header className="sticky top-0 z-100 shadow-xl bg-background dark:border-b dark:border-b-foreground-muted py-4">
       <Container className="flex justify-between gap-x-8">
-        <div className="flex gap-8">
+        <div className="flex">
           <Logo />
-          <HeaderSeparator />
           <div className="flex gap-8 items-center">
+            <HeaderSeparator />
             <HeaderNavbar />
             <Search />
           </div>
         </div>
-        <div className="flex gap-x-4 items-center">
+        <div className="flex gap-x-3 sm:gap-x-4 items-center">
           <SignedIn>
             <Button size="sm" asChild>
               <Link href="/profile/add-post">

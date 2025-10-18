@@ -3,7 +3,7 @@ function FooterSocials() {
   return (
     <div>
       <h3 className="font-poppins text-xl mb-1">Socials</h3>
-      <div className="flex flex-col">
+      <div className="flex lg:flex-col gap-6 lg:gap-0.5">
         <div>
           <a
             href="https://facebook.com/"

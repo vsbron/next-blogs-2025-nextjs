@@ -11,12 +11,12 @@ function Footer() {
   return (
     <footer className="bg-muted">
       <Container className="py-12 flex flex-col gap-y-4">
-        <div className="grid grid-cols-[600px_1fr] items-start">
+        <div className="grid lg:grid-cols-[600px_1fr] items-start gap-8">
           <FooterNavbar />
           <FooterSocials />
         </div>
         <FooterSeparator />
-        <div className="grid grid-cols-[600px_1fr] items-start">
+        <div className="grid xl:grid-cols-[600px_1fr] items-start gap-8">
           <PoweredBy />
           <LegalInfo />
         </div>

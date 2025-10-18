@@ -9,7 +9,11 @@ type ContainerProps = {
 // The container
 function Container({ className, children }: ContainerProps) {
   // Returned JSX
-  return <div className={cn("max-w-7xl mx-auto", className)}>{children}</div>;
+  return (
+    <div className={cn("max-w-7xl mx-auto px-4 xs:px-8", className)}>
+      {children}
+    </div>
+  );
 }
 
 export default Container;

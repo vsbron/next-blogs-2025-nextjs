@@ -51,7 +51,7 @@ function Dropdown() {
         <DropdownMenuSeparator />
         <div className="py-2 px-6">
           {/* MOBILE MENU */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             {primaryLinks.map(({ label, href }) => (
               <DropdownMenuItem key={href} className="focus:bg-transparent">
                 <Link href={href} className="link-primary">
@@ -59,7 +59,7 @@ function Dropdown() {
                 </Link>
               </DropdownMenuItem>
             ))}
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator className="mt-3 mb-2" />
           </div>
           <SignedIn>
             {personalAreaLinks.map(({ label, href }) => (

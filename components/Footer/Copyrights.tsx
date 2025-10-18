@@ -1,12 +1,12 @@
 function Copyrights() {
   // Returned JSX
   return (
-    <div className="flex items-center gap-x-4 text-sm">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-x-4 text-sm">
       <svg width="121" height="30" className="fill-foreground/90">
         <title>NextBlog</title>
         <use href="/logo.svg#logo"></use>
       </svg>
-      <span className="inline-block ml-2">
+      <span className="inline-block">
         Built by VSBroN as a portfolio{" "}
         <a
           href="https://github.com/vsbron/next-blog-2025-nextjs"
