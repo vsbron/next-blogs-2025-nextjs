@@ -1,7 +1,7 @@
 {
-  "name": "NextBlogs",
+  "name": "NextBlogs - Read, Create, and Share your stories",
   "short_name": "NextBlogs",
-  "description": "A modern multi-user blogging platform to read, write, and share articles",
+  "description": "Modern multi-user blogging platform to discover and enjoy articles on a variety of topics with a clean, user-friendly experience.",
   "icons": [
     {
       "src": "/icon-192x192.png",
@@ -21,6 +21,6 @@
     }
   ],
   "theme_color": "#6f42c1",
-  "background_color": "#fff",
+  "background_color": "#f8f9fa",
   "display": "standalone"
 }

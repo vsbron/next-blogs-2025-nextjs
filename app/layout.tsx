@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Lato, Poppins } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
+import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
-import Container from "@/components/Container";
 
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
@@ -22,9 +22,14 @@ const LatoSerif = Lato({
 });
 
 export const metadata: Metadata = {
-  title: "NextBlogs - Share, Discover, and Read Quality Articles",
+  metadataBase: new URL("https://next-blogs-2025.vercel.app/"),
+  title: {
+    default: "NextBlogs - Read, Create, and Share your stories",
+    template: "%s | NextBlogs",
+  },
   description:
-    "NextBlogs is a modern multi-user blogging platform to read, create, and share articles with a clean, user-friendly experience.",
+    "Modern multi-user blogging platform to discover and enjoy articles on a variety of topics with a clean, user-friendly experience.",
+  creator: "VSBroN",
   icons: {
     icon: [
       { url: "/favicon2.ico", sizes: "any" },
@@ -33,7 +38,39 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png" }],
   },
+  openGraph: {
+    type: "website",
+    url: "https://next-blogs-2025.vercel.app/",
+    title: "NextBlogs - Read, Create, and Share your stories",
+    description:
+      "Modern multi-user blogging platform to discover and enjoy articles on a variety of topics with a clean, user-friendly experience.",
+
+    siteName: "NextBlogs",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "NextBlogs Preview",
+      },
+    ],
+    locale: "en_US",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "NextBlogs - Read, Create, and Share your stories",
+    description:
+      "Modern multi-user blogging platform to discover and enjoy articles on a variety of topics with a clean, user-friendly experience.",
+    images: ["/og-image.png"],
+  },
   manifest: "/manifest.webmanifest",
+  themeColor: "#6f42c1",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  referrer: "origin-when-cross-origin",
 };
 
 export default function RootLayout({
