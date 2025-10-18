@@ -24,7 +24,7 @@ function Authentication() {
           <div onClick={triggerSignInPopUp}>Log in</div>
         </Button>
       </DropdownMenuItem>
-      <DropdownMenuItem className="focus:bg-transparent">
+      <DropdownMenuItem className="focus:bg-transparent -mt-1 sm:mt-0">
         <Button variant="outline" size="sm" asChild>
           <div onClick={triggerSignUpPopUp}>Sign Up</div>
         </Button>

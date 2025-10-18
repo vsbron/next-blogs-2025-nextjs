@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SignedIn } from "@clerk/nextjs";
 import { PencilLine } from "lucide-react";
 
 import Container from "./Container";
@@ -15,11 +14,11 @@ function Header() {
   // Returned JSX
   return (
     <header className="sticky top-0 z-100 shadow-xl bg-background dark:border-b dark:border-b-foreground-muted py-4">
-      <Container className="flex justify-between gap-x-8">
-        <div className="flex">
+      <Container className="flex justify-between">
+        <div className="flex gap-x-8">
           <Logo />
-          <div className="flex gap-8 items-center">
-            <HeaderSeparator />
+          <HeaderSeparator />
+          <div className="flex gap-x-6 items-center">
             <HeaderNavbar />
             <Search />
           </div>
