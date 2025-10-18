@@ -32,11 +32,11 @@ function FooterNavbar() {
         <h3 className="font-poppins text-xl mb-2">Personal Area</h3>
         <div>
           <SignedOut>
-            <div className="flex flex-col gap-2">
+            <div className="flex sm:flex-col gap-2">
               <Button variant="default" onClick={triggerSignInPopUp}>
                 Log in
               </Button>
-              <Button variant="default" onClick={triggerSignUpPopUp}>
+              <Button variant="outline" onClick={triggerSignUpPopUp}>
                 Sign Up
               </Button>
             </div>

@@ -1,6 +1,7 @@
 "use client";
 import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
 import { LogOut, MenuIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import Authentication from "./Authentication";
@@ -14,6 +15,7 @@ import {
 } from "../ui/dropdown-menu";
 
 import { personalAreaLinks, primaryLinks } from "@/utils/links";
+import defaultAvatar from "@/assets/defaultUser.png";
 
 function Dropdown() {
   // Get the Clerk object
@@ -34,7 +36,11 @@ function Dropdown() {
       >
         <div className="pt-2 pb-4 pl-8 pr-4 flex justify-between items-center gap-x-8">
           <div className="flex items-center gap-x-3">
-            <div className="w-9 h-9 rounded-full border border-primary mt-0.5"></div>
+            <Image
+              src={defaultAvatar}
+              className="w-10 h-10 mt-0.5"
+              alt="User"
+            />
             <div className="text-sm">
               <div>{clerk.isSignedIn ? "Display name" : "Unknown user"}</div>
               <div className="text-muted-foreground/75 text-sm">

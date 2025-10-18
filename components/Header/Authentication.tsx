@@ -2,6 +2,7 @@
 import { useClerk } from "@clerk/nextjs";
 
 import { DropdownMenuItem } from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 function Authentication() {
   // Get the Clerk object
@@ -19,14 +20,14 @@ function Authentication() {
   return (
     <>
       <DropdownMenuItem className="focus:bg-transparent">
-        <div className="link-primary" onClick={triggerSignInPopUp}>
-          Log in
-        </div>
+        <Button size="sm" asChild>
+          <div onClick={triggerSignInPopUp}>Log in</div>
+        </Button>
       </DropdownMenuItem>
       <DropdownMenuItem className="focus:bg-transparent">
-        <div className="link-primary" onClick={triggerSignUpPopUp}>
-          Sign Up
-        </div>
+        <Button variant="outline" size="sm" asChild>
+          <div onClick={triggerSignUpPopUp}>Sign Up</div>
+        </Button>
       </DropdownMenuItem>
     </>
   );

@@ -25,14 +25,12 @@ function Header() {
           </div>
         </div>
         <div className="flex gap-x-3 sm:gap-x-4 items-center">
-          <SignedIn>
-            <Button size="sm" asChild>
-              <Link href="/profile/add-post">
-                <PencilLine />
-                Post
-              </Link>
-            </Button>
-          </SignedIn>
+          <Button size="sm" asChild>
+            <Link href="/profile/add-post">
+              <PencilLine />
+              Post
+            </Link>
+          </Button>
           <ThemeToggle />
           <Dropdown />
         </div>
