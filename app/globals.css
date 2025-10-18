@@ -135,6 +135,9 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  .link-primary {
+    @apply cursor-pointer text-primary hover:text-primary-light;
+  }
 }
 
 ul {

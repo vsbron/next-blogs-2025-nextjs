@@ -4,7 +4,7 @@ import { Button } from "../ui/button";
 function Search() {
   // Returned JSX
   return (
-    <form className="flex items-center relative">
+    <form className="items-center relative hidden lg:flex">
       <input
         type="search"
         name="search"

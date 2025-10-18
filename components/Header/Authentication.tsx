@@ -1,31 +1,34 @@
 "use client";
 import { useClerk } from "@clerk/nextjs";
 
+import { DropdownMenuItem } from "../ui/dropdown-menu";
+
 function Authentication() {
   // Get the Clerk object
   const clerk = useClerk();
-  3;
+
+  // Authentication pop up triggers
+  const triggerSignInPopUp = () => {
+    clerk.openSignIn({});
+  };
+  const triggerSignUpPopUp = () => {
+    clerk.openSignUp({});
+  };
 
   // Returned JSX
   return (
-    <div className="flex flex-col gap-2 items-end">
-      <div
-        className="cursor-pointer text-primary hover:text-primary-light"
-        onClick={() => {
-          clerk.openSignIn({});
-        }}
-      >
-        Log in
-      </div>
-      <div
-        className="cursor-pointer text-primary hover:text-primary-light"
-        onClick={() => {
-          clerk.openSignUp({});
-        }}
-      >
-        Sign Up
-      </div>
-    </div>
+    <>
+      <DropdownMenuItem className="focus:bg-transparent">
+        <div className="link-primary" onClick={triggerSignInPopUp}>
+          Log in
+        </div>
+      </DropdownMenuItem>
+      <DropdownMenuItem className="focus:bg-transparent">
+        <div className="link-primary" onClick={triggerSignUpPopUp}>
+          Sign Up
+        </div>
+      </DropdownMenuItem>
+    </>
   );
 }
 

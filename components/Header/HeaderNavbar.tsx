@@ -7,7 +7,7 @@ function HeaderNavbar() {
 
   // Returned JSX
   return (
-    <div className="flex items-center gap-6 text-[17px]">
+    <div className="hidden lg:flex items-center gap-6 text-[17px]">
       {headerLinks.map(({ href, label }) => (
         <Link
           key={href}
