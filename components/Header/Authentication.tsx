@@ -1,37 +1,30 @@
 "use client";
-import { SignedIn, SignedOut, UserButton, useClerk } from "@clerk/nextjs";
-import { Button } from "../ui/button";
-import Link from "next/link";
+import { useClerk } from "@clerk/nextjs";
 
 function Authentication() {
   // Get the Clerk object
   const clerk = useClerk();
-
-  // Authentication pop up triggers
-  const triggerSignInPopUp = () => {
-    clerk.openSignIn({});
-  };
-  const triggerSignUpPopUp = () => {
-    clerk.openSignUp({});
-  };
+  3;
 
   // Returned JSX
   return (
-    <div className="flex gap-4">
-      <SignedOut>
-        <Button variant="outline" size="sm" onClick={triggerSignInPopUp}>
-          Log in
-        </Button>
-        <Button variant="outline" size="sm" onClick={triggerSignUpPopUp}>
-          Sign Up
-        </Button>
-      </SignedOut>
-      <SignedIn>
-        <Button variant="outline" size="sm" asChild>
-          <Link href="/dashboard/profile">Dashboard</Link>
-        </Button>
-        <UserButton />
-      </SignedIn>
+    <div className="flex flex-col gap-2 items-end">
+      <div
+        className="cursor-pointer text-primary hover:text-primary-light"
+        onClick={() => {
+          clerk.openSignIn({});
+        }}
+      >
+        Log in
+      </div>
+      <div
+        className="cursor-pointer text-primary hover:text-primary-light"
+        onClick={() => {
+          clerk.openSignUp({});
+        }}
+      >
+        Sign Up
+      </div>
     </div>
   );
 }

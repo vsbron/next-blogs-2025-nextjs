@@ -51,7 +51,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "NextBlogs Preview",
+        alt: "NextBlogs",
       },
     ],
     locale: "en_US",
