@@ -8,7 +8,8 @@ function Search() {
       <input
         type="search"
         name="search"
-        className="border rounded-sm border-foreground/50"
+        className="border rounded-sm border-foreground/50 px-2"
+        placeholder="Search posts..."
       />
       <Button
         type="submit"

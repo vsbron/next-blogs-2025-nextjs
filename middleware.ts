@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
 // Declaring the private routes
-const isPrivateRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isPrivateRoute = createRouteMatcher(["/profile(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   // Protect private pages from non authorized users

@@ -25,7 +25,7 @@ function Header() {
         </div>
         <div className="flex gap-x-6 items-center">
           <Button size="sm" asChild>
-            <Link href="/dashboard/add-post">
+            <Link href="/profile/add-post">
               <PencilLine />
               Post
             </Link>
