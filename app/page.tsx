@@ -1,4 +1,5 @@
 import FeaturedCard from "@/components/FeaturedCard";
+import SecondaryPosts from "@/components/SecondaryPosts";
 import SectionTitle from "@/components/SectionTitle";
 
 function Home() {
@@ -6,10 +7,7 @@ function Home() {
   return (
     <>
       <FeaturedCard />
-      <section>
-        <SectionTitle as="h2">Secondary posts</SectionTitle>
-        <p>Secondary three popular posts</p>
-      </section>
+      <SecondaryPosts />
       <section>
         <SectionTitle as="h2">CTA section</SectionTitle>
         <p>CTA part for user to register or start posting</p>

@@ -1,7 +1,7 @@
 // Map of styles
 const styles = {
-  h1: "text-3xl sm:text-4xl mb-4",
-  h2: "text-2xl sm:text-3xl",
+  h1: "text-3xl sm:text-4xl mb-5",
+  h2: "text-2xl sm:text-3xl mb-4",
   h3: "text-xl sm:text-2xl",
   h4: "text-lg sm:text-xl",
   h5: "text-base sm:text-lg",
