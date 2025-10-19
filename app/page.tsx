@@ -1,13 +1,11 @@
+import FeaturedCard from "@/components/FeaturedCard";
 import SectionTitle from "@/components/SectionTitle";
 
 function Home() {
   // Returned JSX
   return (
     <>
-      <section>
-        <SectionTitle as="h1">Featured posts</SectionTitle>
-        <p>Section featuring the main post based on number of likes</p>
-      </section>
+      <FeaturedCard />
       <section>
         <SectionTitle as="h2">Secondary posts</SectionTitle>
         <p>Secondary three popular posts</p>

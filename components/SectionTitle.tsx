@@ -1,11 +1,11 @@
 // Map of styles
 const styles = {
-  h1: "text-3xl sm:text-4xl mb-1",
-  h2: "text-2xl sm:text-3xl mb-1",
-  h3: "text-xl sm:text-2xl mb-1",
-  h4: "text-lg sm:text-xl mb-1",
-  h5: "text-base sm:text-lg mb-1",
-  h6: "text-base mb-1",
+  h1: "text-3xl sm:text-4xl mb-4",
+  h2: "text-2xl sm:text-3xl",
+  h3: "text-xl sm:text-2xl",
+  h4: "text-lg sm:text-xl",
+  h5: "text-base sm:text-lg",
+  h6: "text-base",
 };
 
 // Props type
@@ -17,7 +17,7 @@ type SectionTitleProps = {
 // The component
 function SectionTitle({ as: Tag, children }: SectionTitleProps) {
   // Returned JSX
-  return <Tag className={`font-poppins ${styles[Tag]}`}>{children}</Tag>;
+  return <Tag className={`font-poppins mb-3 ${styles[Tag]}`}>{children}</Tag>;
 }
 
 export default SectionTitle;
