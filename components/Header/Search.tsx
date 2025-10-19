@@ -1,27 +1,28 @@
 "use client";
-import { useEffect, useState } from "react";
-import { SearchIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { SearchIcon, XIcon } from "lucide-react";
 
 import { Button } from "../ui/button";
 
 function Search() {
-  // Create state variable for searching
+  // Create state variable for search term, searching state and referrer for input field
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Toggle functions
+  // Toggle search field functions
   const showSearch = () => {
     setIsSearching(true);
   };
   const hideSearch = () => {
     setIsSearching(false);
+    setSearchTerm("");
   };
 
   // useEffect function with key events
   useEffect(() => {
     const toggleSearch = (e: KeyboardEvent) => {
-      if (e.code === "Escape") {
-        hideSearch();
-      }
+      if (e.code === "Escape") hideSearch();
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         showSearch();
@@ -35,6 +36,11 @@ function Search() {
     return () => document.removeEventListener("keydown", toggleSearch);
   }, []);
 
+  // useEffect function that puts focus on the input
+  useEffect(() => {
+    if (isSearching) inputRef.current?.focus();
+  }, [isSearching]);
+
   // Returned JSX
   return (
     <>
@@ -47,26 +53,44 @@ function Search() {
       >
         <SearchIcon />
       </Button>
-      {isSearching && (
-        <>
-          <div className="fixed inset-0 bg-black/85" onClick={hideSearch} />
-          <form className="fixed top-15 left-0 right-0 mx-auto z-50 w-80 xs:w-96">
-            <input
-              type="search"
-              name="search"
-              className="border rounded-3xl border-foreground/50 pt-5 pb-6 pl-4 pr-13 bg-background h-10 w-full text-2xl outline-0"
-              placeholder="Search posts..."
-            />
-            <Button
-              type="submit"
-              variant="link"
-              className="absolute right-0 top-1"
-            >
-              <SearchIcon className="!w-9 !h-9" />
-            </Button>
-          </form>
-        </>
-      )}
+
+      <div
+        className={`fixed inset-0 bg-black/85 transition-opacity z-150 ${
+          isSearching ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={hideSearch}
+      >
+        <XIcon
+          stroke="white"
+          className="fixed top-3 right-5 w-8 h-8 z-50 cursor-pointer"
+        />
+      </div>
+      <form
+        className={`fixed top-15 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
+          isSearching
+            ? "opacity-100 translate-y-0 pointer-events-auto delay-200"
+            : "opacity-0 translate-y-6 pointer-events-none"
+        }`}
+      >
+        <input
+          type="search"
+          name="search"
+          className="border rounded-3xl border-foreground/50 pt-5 pb-6 pl-4 pr-13 bg-background h-10 w-full text-2xl outline-0"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search posts..."
+          disabled={!isSearching}
+          ref={inputRef}
+        />
+        <Button
+          type="submit"
+          variant="link"
+          className="absolute right-0 top-1"
+          disabled={!isSearching}
+        >
+          <SearchIcon className="!w-8 !h-8" />
+        </Button>
+      </form>
     </>
   );
 }

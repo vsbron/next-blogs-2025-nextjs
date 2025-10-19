@@ -17,8 +17,10 @@ function Header() {
       <Container className="flex justify-between">
         <div className="flex gap-x-8">
           <Logo />
-          <HeaderSeparator />
-          <HeaderNavbar />
+          <div className="hidden lg:contents">
+            <HeaderSeparator />
+            <HeaderNavbar />
+          </div>
         </div>
         <div className="flex gap-x-2 xs:gap-x-4 items-center">
           <Button size="sm" asChild>
