@@ -22,7 +22,9 @@ function Search() {
   // useEffect function with key events
   useEffect(() => {
     const toggleSearch = (e: KeyboardEvent) => {
-      if (e.code === "Escape") hideSearch();
+      if (e.code === "Escape") {
+        hideSearch();
+      }
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         showSearch();
