@@ -1,0 +1,90 @@
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar1Icon, EyeIcon, StarIcon, ThumbsUpIcon } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+import LionImg from "@/assets/article-lion.jpg";
+
+function FeaturedPost() {
+  // Returned JSX
+  return (
+    <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4">
+      <Link href="/">
+        <FeaturedImage />
+      </Link>
+      <Card className="gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
+        <CardHeader className="px-0">
+          <FeaturedStats />
+          <Link href="/">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-poppins xs:mt-2">
+              Why Lions are Awesome? We have 101 Reasons that prove it!
+            </h2>
+          </Link>
+        </CardHeader>
+        <CardContent className="px-0">
+          <p className="mb-6 text-sm md:text-base">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
+            accusantium voluptatum! Ipsum, consectetur itaque totam illo fuga
+            hic iure eum neque eaque ab? Minus atque alias dicta ex tempore,
+            iure libero quos. Maxime obcaecati nesciunt similique aut
+            praesentium harum perspiciatis.
+          </p>
+          <Button asChild>
+            <Link href="/">Read more</Link>
+          </Button>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
+// Helper components
+function FeaturedImage() {
+  // Returned JSX
+  return (
+    <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg border-0 relative group">
+      <CardContent className="relative h-44 xs:h-60 sm:h-96 overflow-hidden">
+        <Image
+          src={LionImg}
+          fill
+          alt="Lion"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover rounded-lg sm:group-hover:scale-110 transition-transform duration-300 ease-out"
+        />
+      </CardContent>
+    </Card>
+  );
+}
+function FeaturedStats() {
+  // Returned JSX
+  return (
+    <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
+      <div className="bg-accent/10 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
+        <StarIcon
+          width={15}
+          height={15}
+          className="fill-accent stroke-accent"
+        />{" "}
+        Featured<span className="hidden xs:inline"> article</span>
+      </div>
+      <div className="flex items-center gap-3 lg:gap-4 text-foreground/50 font-semibold">
+        <div className="flex items-center gap-x-1">
+          <EyeIcon className="w-4 h-4 stroke-primary/80" />
+          53
+        </div>
+        <div className="flex items-center gap-x-1">
+          <ThumbsUpIcon className="w-4 h-4 stroke-primary/80" />
+          12
+        </div>
+        <div className="flex items-center gap-x-1.5">
+          <Calendar1Icon className="w-4 h-4 stroke-primary/80" />
+          Oct 19 2025
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default FeaturedPost;

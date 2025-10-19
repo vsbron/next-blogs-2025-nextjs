@@ -7,7 +7,7 @@ function HeaderNavbar() {
 
   // Returned JSX
   return (
-    <div className="flex items-center gap-6 text-[17px] font-poppins">
+    <div className="flex items-center gap-8 text-[17px] font-poppins">
       {headerLinks.map(({ href, label }) => (
         <Link
           key={href}

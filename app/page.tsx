@@ -1,4 +1,4 @@
-import FeaturedCard from "@/components/FeaturedCard";
+import FeaturedPost from "@/components/FeaturedPost";
 import SecondaryPosts from "@/components/SecondaryPosts";
 import SectionTitle from "@/components/SectionTitle";
 
@@ -6,7 +6,7 @@ function Home() {
   // Returned JSX
   return (
     <>
-      <FeaturedCard />
+      <FeaturedPost />
       <SecondaryPosts />
       <section>
         <SectionTitle as="h2">CTA section</SectionTitle>
