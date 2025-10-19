@@ -7,6 +7,7 @@ import SectionTitle from "./SectionTitle";
 
 import LionImg from "@/assets/article-lion.jpg";
 import UFOImg from "@/assets/article-ufo.jpg";
+import { Button } from "./ui/button";
 
 function FeaturedCard() {
   // Returned JSX
@@ -25,9 +26,8 @@ function FeaturedCard() {
               Why Lions are awesome?
             </h2>
             <div className="flex gap-x-5 mb-2 items-center text-muted-foreground/60 text-sm">
-              <div>
-                by{" "}
-                <Link href="/" className="text-muted-foreground">
+              <div className="text-accent font-bold">
+                <Link href="/" className="">
                   username
                 </Link>
               </div>
@@ -44,9 +44,11 @@ function FeaturedCard() {
               error consequatur, quis nisi illum ullam fugiat voluptatum
               molestiae debitis.
               <br />
-              <Link href="/" className="link-primary">
-                Read more...
-              </Link>
+              <Button size="sm" className="mt-4" asChild>
+                <Link href="/" className="link-primary">
+                  Read more
+                </Link>
+              </Button>
             </p>
           </CardContent>
         </Card>
@@ -61,9 +63,8 @@ function FeaturedCard() {
               We are not alone in this world
             </h2>
             <div className="flex gap-x-5 mb-2 items-center text-muted-foreground/60 text-sm">
-              <div>
-                by{" "}
-                <Link href="/" className="text-muted-foreground">
+              <div className="text-accent font-bold">
+                <Link href="/" className="">
                   username
                 </Link>
               </div>
@@ -80,9 +81,11 @@ function FeaturedCard() {
               doloribus consequuntur autem non temporibus sit magnam rerum omnis
               aperiam.
               <br />
-              <Link href="/" className="link-primary">
-                Read more...
-              </Link>
+              <Button size="sm" className="mt-4" asChild>
+                <Link href="/" className="link-primary">
+                  Read more
+                </Link>
+              </Button>
             </p>
           </CardContent>
         </Card>

@@ -8,6 +8,7 @@ import SectionTitle from "./SectionTitle";
 import AIImg from "@/assets/article-ai.jpg";
 import CityImg from "@/assets/article-city.jpg";
 import VegetablesImg from "@/assets/article-vegetables.jpg";
+import { Button } from "./ui/button";
 
 function SecondaryPosts() {
   // Returned JSX
@@ -26,9 +27,8 @@ function SecondaryPosts() {
               How to survive in a huge city
             </h3>
             <div className="flex gap-x-5 mb-2 items-center text-muted-foreground/60 text-sm">
-              <div>
-                by{" "}
-                <Link href="/" className="text-muted-foreground">
+              <div className="text-accent font-bold">
+                <Link href="/" className="">
                   username
                 </Link>
               </div>
@@ -45,9 +45,11 @@ function SecondaryPosts() {
               doloribus consequuntur autem non temporibus sit magnam rerum omnis
               aperiam.
               <br />
-              <Link href="/" className="link-primary">
-                Read more...
-              </Link>
+              <Button size="sm" className="mt-4" asChild>
+                <Link href="/" className="link-primary">
+                  Read more
+                </Link>
+              </Button>
             </p>
           </CardContent>
         </Card>
@@ -62,9 +64,8 @@ function SecondaryPosts() {
               AI solved another major problem
             </h3>
             <div className="flex gap-x-5 mb-2 items-center text-muted-foreground/60 text-sm">
-              <div>
-                by{" "}
-                <Link href="/" className="text-muted-foreground">
+              <div className="text-accent font-bold">
+                <Link href="/" className="">
                   username
                 </Link>
               </div>
@@ -80,9 +81,11 @@ function SecondaryPosts() {
               error consequatur, quis nisi illum ullam fugiat voluptatum
               molestiae debitis.
               <br />
-              <Link href="/" className="link-primary">
-                Read more...
-              </Link>
+              <Button size="sm" className="mt-4" asChild>
+                <Link href="/" className="link-primary">
+                  Read more
+                </Link>
+              </Button>
             </p>
           </CardContent>
         </Card>
@@ -102,9 +105,8 @@ function SecondaryPosts() {
               Eat HEALTHY!
             </h3>
             <div className="flex gap-x-5 mb-2 items-center text-muted-foreground/60 text-sm">
-              <div>
-                by{" "}
-                <Link href="/" className="text-muted-foreground">
+              <div className="text-accent font-bold">
+                <Link href="/" className="">
                   username
                 </Link>
               </div>
@@ -121,9 +123,11 @@ function SecondaryPosts() {
               doloribus consequuntur autem non temporibus sit magnam rerum omnis
               aperiam.
               <br />
-              <Link href="/" className="link-primary">
-                Read more...
-              </Link>
+              <Button size="sm" className="mt-4" asChild>
+                <Link href="/" className="link-primary">
+                  Read more
+                </Link>
+              </Button>
             </p>
           </CardContent>
         </Card>
