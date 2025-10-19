@@ -18,18 +18,16 @@ function Header() {
         <div className="flex gap-x-8">
           <Logo />
           <HeaderSeparator />
-          <div className="flex gap-x-6 items-center">
-            <HeaderNavbar />
-            <Search />
-          </div>
+          <HeaderNavbar />
         </div>
-        <div className="flex gap-x-3 sm:gap-x-4 items-center">
+        <div className="flex gap-x-2 xs:gap-x-4 items-center">
           <Button size="sm" asChild>
             <Link href="/profile/add-post">
               <PencilLine />
-              Post
+              <span className="hidden xs:inline">Post</span>
             </Link>
           </Button>
+          <Search />
           <ThemeToggle />
           <Dropdown />
         </div>

@@ -50,7 +50,7 @@ function Search() {
       {isSearching && (
         <>
           <div className="fixed inset-0 bg-black/85" onClick={hideSearch} />
-          <form className="fixed top-15 left-0 right-0 mx-auto z-50 w-96">
+          <form className="fixed top-15 left-0 right-0 mx-auto z-50 w-80 xs:w-96">
             <input
               type="search"
               name="search"
