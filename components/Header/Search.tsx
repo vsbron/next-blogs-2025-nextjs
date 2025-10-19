@@ -57,7 +57,7 @@ function Search() {
       </Button>
 
       <div
-        className={`fixed inset-0 bg-black/85 transition-opacity z-150 ${
+        className={`fixed inset-0 bg-black/90 transition-opacity z-150 ${
           isSearching ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={hideSearch}
@@ -68,7 +68,7 @@ function Search() {
         />
       </div>
       <form
-        className={`fixed top-15 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
+        className={`fixed top-20 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
           isSearching
             ? "opacity-100 translate-y-0 pointer-events-auto delay-200"
             : "opacity-0 translate-y-6 pointer-events-none"
@@ -77,7 +77,7 @@ function Search() {
         <input
           type="search"
           name="search"
-          className="border rounded-3xl border-foreground/50 pt-5 pb-6 pl-4 pr-13 bg-background h-10 w-full text-2xl outline-0"
+          className="border rounded-3xl border-white/50 pt-6 pb-7 pl-4 pr-13 bg-transparent text-white h-10 w-full text-2xl outline-0 shadow-primary/60 shadow-[0_0_70px_5px]"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search posts..."
@@ -87,10 +87,10 @@ function Search() {
         <Button
           type="submit"
           variant="link"
-          className="absolute right-0 top-1"
+          className="absolute right-0 top-2"
           disabled={!isSearching}
         >
-          <SearchIcon className="!w-8 !h-8" />
+          <SearchIcon className="!w-8 !h-8 stroke-white" />
         </Button>
       </form>
     </>
