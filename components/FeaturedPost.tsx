@@ -7,32 +7,40 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import LionImg from "@/assets/article-lion.jpg";
 
-function FeaturedPost() {
+// Props type
+type FeaturedPostProps = {
+  title: string;
+  preview: string;
+  date: string;
+  views: number;
+  likes: number;
+  href: string;
+};
+
+// The component
+function FeaturedPost(post: FeaturedPostProps) {
+  // Destructure the passed data
+  const { title, preview, date, views, likes, href } = post;
+
   // Returned JSX
   return (
     <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4">
-      <Link href="/">
+      <Link href={href}>
         <FeaturedImage />
       </Link>
       <Card className="gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
-          <FeaturedStats />
-          <Link href="/">
+          <FeaturedStats date={date} views={views} likes={likes} />
+          <Link href={href} className="hover:text-foreground/75 transition-all">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-poppins xs:mt-2">
-              Why Lions are Awesome? We have 101 Reasons that prove it!
+              {title}
             </h2>
           </Link>
         </CardHeader>
         <CardContent className="px-0">
-          <p className="mb-6 text-sm md:text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
-            accusantium voluptatum! Ipsum, consectetur itaque totam illo fuga
-            hic iure eum neque eaque ab? Minus atque alias dicta ex tempore,
-            iure libero quos. Maxime obcaecati nesciunt similique aut
-            praesentium harum perspiciatis.
-          </p>
+          <p className="mb-6 text-sm md:text-base">{preview}</p>
           <Button asChild>
-            <Link href="/">Read more</Link>
+            <Link href={href}>Read more</Link>
           </Button>
         </CardContent>
       </Card>
@@ -57,7 +65,14 @@ function FeaturedImage() {
     </Card>
   );
 }
-function FeaturedStats() {
+
+// Props type
+type FeaturedStatsProps = {
+  date: string;
+  views: number;
+  likes: number;
+};
+function FeaturedStats({ date, views, likes }: FeaturedStatsProps) {
   // Returned JSX
   return (
     <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
@@ -72,15 +87,15 @@ function FeaturedStats() {
       <div className="flex items-center gap-3 lg:gap-4 text-foreground/50 font-semibold">
         <div className="flex items-center gap-x-1">
           <EyeIcon className="w-4 h-4 stroke-primary/80" />
-          53
+          {views}
         </div>
         <div className="flex items-center gap-x-1">
           <ThumbsUpIcon className="w-4 h-4 stroke-primary/80" />
-          12
+          {likes}
         </div>
         <div className="flex items-center gap-x-1.5">
           <Calendar1Icon className="w-4 h-4 stroke-primary/80" />
-          Oct 19 2025
+          {date}
         </div>
       </div>
     </div>
