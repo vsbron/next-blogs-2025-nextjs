@@ -70,7 +70,7 @@ function Search() {
       <form
         className={`fixed top-20 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
           isSearching
-            ? "opacity-100 translate-y-0 pointer-events-auto delay-200"
+            ? "opacity-100 translate-y-0 pointer-events-auto delay-150"
             : "opacity-0 translate-y-6 pointer-events-none"
         }`}
       >

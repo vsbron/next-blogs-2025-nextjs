@@ -23,18 +23,26 @@ function Header() {
           </div>
         </div>
         <div className="flex gap-x-2 xs:gap-x-4 items-center">
-          <Button size="sm" asChild>
-            <Link href="/profile/add-post">
-              <PencilLine />
-              <span className="hidden xs:inline">Post</span>
-            </Link>
-          </Button>
+          <PostButton />
           <Search />
           <ThemeToggle />
           <Dropdown />
         </div>
       </Container>
     </header>
+  );
+}
+
+// Helper component
+function PostButton() {
+  // Returned JSX
+  return (
+    <Button size="sm" asChild>
+      <Link href="/profile/add-post">
+        <PencilLine />
+        <span className="hidden xs:inline">Post</span>
+      </Link>
+    </Button>
   );
 }
 
