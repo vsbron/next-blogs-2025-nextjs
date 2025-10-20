@@ -1,7 +1,7 @@
 function PreviewTilesGrid({ children }: { children: React.ReactNode }) {
   // Returned JSX
   return (
-    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8">
+    <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-6">
       {children}
     </div>
   );

@@ -9,36 +9,35 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import LionImg from "@/assets/article-lion.jpg";
 import FeaturedBG from "@/assets/featuredBG.png";
 
-// Props type
-type FeaturedPostProps = {
-  title: string;
-  preview: string;
-  date: string;
-  views: number;
-  likes: number;
-  href: string;
+// Dummy article
+const featuredArticle = {
+  title: "Why Lions are Awesome? We have 101 Reasons that prove it!",
+  preview:
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium voluptatum! Ipsum, consectetur itaque totam illo fuga hic iure eum neque eaque ab? Minus atque alias dicta ex tempore, iure libero quos. Maxime obcaecati nesciunt similique aut praesentium harum perspiciatis.",
+  date: "Oct 19, 2025",
+  views: 53,
+  likes: 12,
+  href: "/",
 };
 
 // The component
-function FeaturedPost(post: FeaturedPostProps) {
-  // Destructure the passed data
-  const { title, preview, date, views, likes, href } = post;
+function FeaturedPost() {
+  // Destructure the post data
+  const { title, preview, date, views, likes, href } = featuredArticle;
 
   // Returned JSX
   return (
-    <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4 relative">
+    <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4 relative mb-2">
       <Image
         src={FeaturedBG}
         alt={title}
-        className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-10 sm:opacity-15 object-cover"
+        className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-10 sm:opacity-12 object-cover"
       />
-      <Link href={href}>
-        <FeaturedImage title={title} />
-      </Link>
+      <FeaturedImage title={title} href={href} />
       <Card className="gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
           <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
-            <div className="bg-accent/10 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
+            <div className="bg-accent/15 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
               <StarIcon
                 width={15}
                 height={15}
@@ -66,19 +65,21 @@ function FeaturedPost(post: FeaturedPostProps) {
 }
 
 // Helper component
-function FeaturedImage({ title }: { title: string }) {
+function FeaturedImage({ title, href }: { title: string; href: string }) {
   // Returned JSX
   return (
-    <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg border-0 relative group">
-      <CardContent className="relative h-44 xs:h-60 sm:h-96 overflow-hidden rounded-lg">
-        <Image
-          src={LionImg}
-          fill
-          alt={title}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
-        />
-      </CardContent>
+    <Card className="p-3 sm:p-5 shadow-md sm:shadow-xl border-0 relative mb-2">
+      <Link className="group" href={href}>
+        <CardContent className="relative h-44 xs:h-60 sm:h-110 overflow-hidden rounded-lg ">
+          <Image
+            src={LionImg}
+            fill
+            alt={title}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
+          />
+        </CardContent>
+      </Link>
     </Card>
   );
 }
