@@ -1,5 +1,5 @@
-import FeaturedPost from "@/components/FeaturedPost";
-import SecondaryPosts from "@/components/SecondaryPosts";
+import FeaturedPost from "@/components/Index/FeaturedPost";
+import SecondaryPosts from "@/components/Index/SecondaryPosts";
 import SectionTitle from "@/components/SectionTitle";
 
 // Dummy article
