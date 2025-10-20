@@ -1,6 +1,10 @@
-import FeaturedPost from "@/components/Index/FeaturedPost";
-import SecondaryPosts from "@/components/Index/SecondaryPosts";
+import Link from "next/link";
+
 import SectionTitle from "@/components/SectionTitle";
+import FeaturedPost from "@/components/Index/FeaturedPost";
+import RecentPosts from "@/components/Index/RecentPosts";
+import SecondaryPosts from "@/components/Index/SecondaryPosts";
+import { Button } from "@/components/ui/button";
 
 // Dummy article
 const featuredArticle = {
@@ -24,10 +28,15 @@ function Home() {
         <p>CTA part for user to register or start posting</p>
       </section>
       <section>
-        <SectionTitle as="h2">Recent posts</SectionTitle>
-        <p>
-          Grid featuring some recent posts made with the link to see all posts
-        </p>
+        <div className="flex items-center justify-between w-full mb-4">
+          <SectionTitle as="h2" className="!mb-0">
+            Recent posts
+          </SectionTitle>
+          <Button variant="outline" size="sm">
+            <Link href="/posts">See all</Link>
+          </Button>
+        </div>
+        <RecentPosts />
       </section>
       <section>
         <SectionTitle as="h2">Stats columns</SectionTitle>

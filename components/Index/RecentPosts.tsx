@@ -4,6 +4,7 @@ import PreviewTilesGrid from "../PreviewTilesGrid";
 import AIImg from "@/assets/article-ai.jpg";
 import CityImg from "@/assets/article-city.jpg";
 import VegetablesImg from "@/assets/article-vegetables.jpg";
+import UFOImg from "@/assets/article-ufo.jpg";
 
 // 3 Dummy articles
 const dummyArticles = [
@@ -36,7 +37,7 @@ const dummyArticles = [
   },
 ];
 
-function SecondaryPosts() {
+function RecentPosts() {
   // Returned JSX
   return (
     <section>
@@ -44,9 +45,12 @@ function SecondaryPosts() {
         <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
         <ArticlePreviewTile {...dummyArticles[1]} image={AIImg} />
         <ArticlePreviewTile {...dummyArticles[2]} image={VegetablesImg} />
+        <ArticlePreviewTile {...dummyArticles[1]} image={UFOImg} />
+        <ArticlePreviewTile {...dummyArticles[2]} image={VegetablesImg} />
+        <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
       </PreviewTilesGrid>
     </section>
   );
 }
 
-export default SecondaryPosts;
+export default RecentPosts;

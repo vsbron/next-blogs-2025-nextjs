@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import LionImg from "@/assets/article-lion.jpg";
 import FeaturedBG from "@/assets/featuredBG.png";
+import ArticlePreviewStats from "../ArticlePreviewStats";
 
 // Props type
 type FeaturedPostProps = {
@@ -36,7 +37,17 @@ function FeaturedPost(post: FeaturedPostProps) {
       </Link>
       <Card className="gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
-          <FeaturedStats date={date} views={views} likes={likes} />
+          <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
+            <div className="bg-accent/10 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
+              <StarIcon
+                width={15}
+                height={15}
+                className="fill-accent stroke-accent"
+              />{" "}
+              Featured<span className="hidden xs:inline"> article</span>
+            </div>
+            <ArticlePreviewStats views={views} likes={likes} date={date} />
+          </div>
           <Link href={href} className="hover:text-foreground/75 transition-all">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-poppins xs:mt-2">
               {title}
@@ -69,42 +80,6 @@ function FeaturedImage({ title }: { title: string }) {
         />
       </CardContent>
     </Card>
-  );
-}
-
-// Props type
-type FeaturedStatsProps = {
-  date: string;
-  views: number;
-  likes: number;
-};
-function FeaturedStats({ date, views, likes }: FeaturedStatsProps) {
-  // Returned JSX
-  return (
-    <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
-      <div className="bg-accent/10 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
-        <StarIcon
-          width={15}
-          height={15}
-          className="fill-accent stroke-accent"
-        />{" "}
-        Featured<span className="hidden xs:inline"> article</span>
-      </div>
-      <div className="flex items-center gap-3 lg:gap-4 text-foreground/50 font-semibold">
-        <div className="flex items-center gap-x-1">
-          <EyeIcon className="w-4 h-4 stroke-primary/80" />
-          {views}
-        </div>
-        <div className="flex items-center gap-x-1">
-          <ThumbsUpIcon className="w-4 h-4 stroke-primary/80" />
-          {likes}
-        </div>
-        <div className="flex items-center gap-x-1.5">
-          <Calendar1Icon className="w-4 h-4 stroke-primary/80" />
-          {date}
-        </div>
-      </div>
-    </div>
   );
 }
 
