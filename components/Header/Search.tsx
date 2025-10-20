@@ -77,7 +77,7 @@ function Search() {
         <input
           type="search"
           name="search"
-          className="border rounded-3xl border-white/50 pt-6 pb-7 pl-4 pr-13 bg-transparent text-white h-10 w-full text-2xl outline-0 shadow-primary/60 shadow-[0_0_70px_5px]"
+          className="border rounded-3xl border-white/50 pt-6 pb-7 pl-5 pr-13 bg-transparent text-white h-10 w-full text-2xl outline-0 shadow-primary/60 shadow-[0_0_70px_5px]"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search posts..."
