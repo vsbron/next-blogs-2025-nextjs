@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar1Icon, EyeIcon, StarIcon, ThumbsUpIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 
+import ArticlePreviewStats from "../ArticlePreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import LionImg from "@/assets/article-lion.jpg";
 import FeaturedBG from "@/assets/featuredBG.png";
-import ArticlePreviewStats from "../ArticlePreviewStats";
 
 // Props type
 type FeaturedPostProps = {
@@ -65,12 +65,12 @@ function FeaturedPost(post: FeaturedPostProps) {
   );
 }
 
-// Helper components
+// Helper component
 function FeaturedImage({ title }: { title: string }) {
   // Returned JSX
   return (
     <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg border-0 relative group">
-      <CardContent className="relative h-44 xs:h-60 sm:h-96 overflow-hidden">
+      <CardContent className="relative h-44 xs:h-60 sm:h-96 overflow-hidden rounded-lg">
         <Image
           src={LionImg}
           fill

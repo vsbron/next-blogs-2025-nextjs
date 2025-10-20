@@ -26,12 +26,12 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
   return (
     <Card className="p-0 gap-0">
       <Link href={href}>
-        <div className="relative h-60 mb-2">
+        <div className="relative h-60 mb-2 group overflow-hidden rounded-lg">
           <Image
             src={image}
             fill
             alt={title}
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
             className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
           />
         </div>
@@ -40,7 +40,7 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
         <ArticlePreviewStats views={views} likes={likes} date={date} />
       </CardHeader>
       <CardContent className="pb-5 px-4">
-        <Link href={href}>
+        <Link href={href} className="hover:text-foreground/75 transition-all">
           <h2 className="text-lg md:text-xl font-poppins">{title}</h2>
         </Link>
         <p className="mb-6 text-sm md:text-base">{limitPreview(preview)}</p>
