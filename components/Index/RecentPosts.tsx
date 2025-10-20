@@ -1,5 +1,10 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+import SectionTitle from "../SectionTitle";
 import ArticlePreviewTile from "../ArticlePreviewTile";
 import PreviewTilesGrid from "../PreviewTilesGrid";
+import { Button } from "@/components/ui/button";
 
 import AIImg from "@/assets/article-ai.jpg";
 import CityImg from "@/assets/article-city.jpg";
@@ -41,6 +46,16 @@ function RecentPosts() {
   // Returned JSX
   return (
     <section>
+      <div className="flex items-center justify-between w-full mb-4">
+        <SectionTitle as="h2" className="!mb-0">
+          Recent posts
+        </SectionTitle>
+        <Button variant="outline" size="sm" asChild>
+          <Link href="/posts" className="flex items-center gap-x-1">
+            See all posts <ArrowRight className="!w-4 !h-4 mt-0.5" />
+          </Link>
+        </Button>
+      </div>
       <PreviewTilesGrid>
         <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
         <ArticlePreviewTile {...dummyArticles[1]} image={AIImg} />

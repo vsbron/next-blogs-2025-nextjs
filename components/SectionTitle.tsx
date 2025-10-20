@@ -15,11 +15,18 @@ type SectionTitleProps = {
   className?: string;
 };
 
+// Classes for BEFORE element
+const beforeElement = `before:content-[""] before:absolute before:h-6 before:w-6 before:bg-accent before:rounded-lg before:left-0 before:top-1.5`;
+
 // The component
 function SectionTitle({ as: Tag, children, className }: SectionTitleProps) {
   // Returned JSX
   return (
-    <Tag className={`font-poppins ${styles[Tag]} ${className}`}>{children}</Tag>
+    <Tag
+      className={`font-poppins pl-8 relative ${styles[Tag]} ${className} ${beforeElement}`}
+    >
+      {children}
+    </Tag>
   );
 }
 
