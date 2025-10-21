@@ -36,7 +36,7 @@ function CTASection() {
         </p>
         <div className="border-b border-border/50 w-full mt-5 mb-4"></div>
         <SignedIn>
-          <p className="text-lg sm:text-xl !mb-4 pr-20">
+          <p className="text-lg sm:text-xl mb-4 pr-20">
             Create a new post and share your story with the community!
           </p>
           <Button size="lg" asChild>
@@ -47,7 +47,7 @@ function CTASection() {
           </Button>
         </SignedIn>
         <SignedOut>
-          <p className="text-lg sm:text-xl !mb-4">
+          <p className="text-lg sm:text-xl mb-4">
             Sign up or log in to start sharing your stories today!
           </p>
           <div className="flex gap-2 sm:gap-4">
