@@ -144,8 +144,18 @@ body {
   }
 }
 
+p {
+  margin: 10px 0 45px;
+}
+p + p {
+  margin-top: -25px;
+}
+
 ul {
   list-style-type: disc;
   padding-left: 20px;
-  margin: 5px 0;
+  margin: 10px 0 45px;
+}
+p + ul {
+  margin-top: -35px;
 }
