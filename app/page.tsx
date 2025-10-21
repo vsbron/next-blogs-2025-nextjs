@@ -11,9 +11,7 @@ function Home() {
     <>
       <FeaturedPost />
       <SecondaryPosts />
-      <SectionSeparator />
       <CTASection />
-      <SectionSeparator />
       <RecentPosts />
       <SectionSeparator />
       <IndexStats />
