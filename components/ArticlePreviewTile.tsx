@@ -22,6 +22,7 @@ type ArticlePreviewProps = {
 function ArticlePreviewTile(post: ArticlePreviewProps) {
   // Destructure props
   const { title, preview, date, views, likes, image, href } = post;
+
   // Returned JSX
   return (
     <Card className="p-0 gap-0">
@@ -39,12 +40,14 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
       <CardHeader className="px-4">
         <ArticlePreviewStats views={views} likes={likes} date={date} />
       </CardHeader>
-      <CardContent className="pb-5 px-4">
+      <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
           <h2 className="text-lg md:text-xl font-poppins">{title}</h2>
         </Link>
-        <p className="mb-6 text-sm md:text-base">{limitPreview(preview)}</p>
-        <Button variant="outline" size="sm" asChild>
+        <p className="mb-6 text-sm md:text-base">
+          {limitPreview(preview, 160)}
+        </p>
+        <Button variant="outline" size="sm" className="mt-auto" asChild>
           <Link href={href}>Read more</Link>
         </Button>
       </CardContent>

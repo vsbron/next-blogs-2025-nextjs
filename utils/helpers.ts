@@ -1,5 +1,10 @@
 // Helper function that shortens the preview text
-export function limitPreview(text: string) {
-  // Return shortened text
-  return text.split(" ").slice(0, 17).join(" ") + "...";
+export function limitPreview(text: string, maxChars: number) {
+  // If below the limit - return text
+  if (text.length <= maxChars) return text;
+
+  // Get to the last space withing the range and add "..."
+  const trimmed = text.slice(0, maxChars);
+  const lastSpace = trimmed.lastIndexOf(" ");
+  return trimmed.slice(0, lastSpace) + "...";
 }

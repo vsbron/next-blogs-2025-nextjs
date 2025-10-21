@@ -139,6 +139,9 @@ body {
   .link-primary {
     @apply text-primary hover:text-primary-light cursor-pointer;
   }
+  .single-line-preview {
+    @apply overflow-hidden whitespace-nowrap text-ellipsis;
+  }
 }
 
 ul {

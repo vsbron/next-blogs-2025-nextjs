@@ -31,7 +31,7 @@ function FeaturedPost() {
       <Image
         src={FeaturedBG}
         alt={title}
-        className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-10 sm:opacity-12 object-cover"
+        className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-8 sm:opacity-10 object-cover"
       />
       <FeaturedImage title={title} href={href} />
       <Card className="gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">

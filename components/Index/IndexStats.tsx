@@ -1,14 +1,15 @@
 import Link from "next/link";
+import { EyeIcon, FilePenLine, ThumbsUpIcon } from "lucide-react";
 
-import PreviewTilesGrid from "../PreviewTilesGrid";
 import SectionTitle from "../SectionTitle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { EyeIcon, FilePenLine, ThumbsUpIcon } from "lucide-react";
+
+import { limitPreview } from "@/utils/helpers";
 
 // Dummy data
 const viewsList = [
   {
-    label: "Why Lions are Awesome? We have 101",
+    label: "Why Lions are Awesome? We have 101 reasons that prove it!",
     href: "/",
     views: 953,
   },
@@ -33,7 +34,7 @@ const viewsList = [
     views: 528,
   },
   {
-    label: "Why Lions are Awesome? We have 102",
+    label: "Why Lions are Awesome? We have 102 reasons that prove it!",
     href: "/",
     views: 369,
   },
@@ -60,7 +61,7 @@ const viewsList = [
 ];
 const likesList = [
   {
-    label: "Why Lions are Awesome? We have 101",
+    label: "Why Lions are Awesome? We have 101 reasons that prove it!",
     href: "/",
     likes: 953,
   },
@@ -85,7 +86,7 @@ const likesList = [
     likes: 528,
   },
   {
-    label: "Why Lions are Awesome? We have 102",
+    label: "Why Lions are Awesome? We have 102 reasons that prove it!",
     href: "/",
     likes: 369,
   },
@@ -127,12 +128,16 @@ function IndexStats() {
   // Returned JSX
   return (
     <section className="pb-8">
-      <SectionTitle as="h2">Stats columns</SectionTitle>
-      <PreviewTilesGrid>
+      <SectionTitle as="h2">Top Posts & Users</SectionTitle>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-6">
         <StatsCard list={viewsList} title="Most liked posts" />
-        <StatsCard list={likesList} title="Most viewed posts" />
+        <StatsCard
+          list={likesList}
+          title="Most viewed posts"
+          className="md:hidden lg:block"
+        />
         <StatsCard list={authorsList} title="User with most posts" />
-      </PreviewTilesGrid>
+      </div>
     </section>
   );
 }
@@ -147,24 +152,30 @@ type StatsCardProps = {
     likes?: number;
   }[];
   title: string;
+  className?: string;
 };
 
 // Helper component
-function StatsCard({ list, title }: StatsCardProps) {
+function StatsCard({ list, title, className }: StatsCardProps) {
   // Returned JSX
   return (
-    <Card className="gap-0 px-6">
-      <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3">
+    <Card
+      className={`gap-0 py-4 xs:py-6 px-6 truncate max-w-[450px] ${className}`}
+    >
+      <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
+        {list[0].views && <EyeIcon className="!w-5 !h-5 stroke-primary" />}
+        {list[0].likes && <ThumbsUpIcon className="!w-5 !h-5 stroke-primary" />}
+        {list[0].posts && <FilePenLine className="!w-5 !h-5 stroke-primary" />}
         {title}
       </CardHeader>
       <CardContent className="px-0">
-        <ul className="!pl-0 flex flex-col gap-1 text-lg">
+        <ul className="!pl-0 flex flex-col gap-1 text-sm lg:text-base">
           {list.map(({ label, href, posts, views, likes }) => (
             <li
               key={label}
               className="flex justify-between items-center gap-x-4"
             >
-              <Link href={href} className="link-primary">
+              <Link href={href} className="link-primary single-line-preview">
                 {label}
               </Link>
 
