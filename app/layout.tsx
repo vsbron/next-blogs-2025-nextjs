@@ -12,7 +12,7 @@ import "./globals.css";
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "600", "800", "900"],
 });
 
 const LatoSerif = Lato({
