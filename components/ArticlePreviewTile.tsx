@@ -27,7 +27,7 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
   return (
     <Card className="p-0 gap-0">
       <Link href={href}>
-        <div className="relative h-60 mb-2 group overflow-hidden rounded-lg">
+        <div className="relative h-40 sm:h-60 mb-2 group overflow-hidden rounded-lg">
           <Image
             src={image}
             fill
@@ -42,9 +42,9 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
-          <h2 className="text-lg md:text-xl font-poppins">{title}</h2>
+          <h2 className="xs:text-lg md:text-xl font-poppins">{title}</h2>
         </Link>
-        <p className="mb-6 text-sm md:text-base">
+        <p className="mb-3 xs:mb-6 text-sm md:text-base">
           {limitPreview(preview, 160)}
         </p>
         <Button variant="outline" size="sm" className="mt-auto" asChild>

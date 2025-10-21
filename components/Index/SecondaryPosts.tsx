@@ -44,6 +44,9 @@ function SecondaryPosts() {
         <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
         <ArticlePreviewTile {...dummyArticles[1]} image={AIImg} />
         <ArticlePreviewTile {...dummyArticles[2]} image={VegetablesImg} />
+        <ArticlePreviewTile {...dummyArticles[1]} image={AIImg} />
+        <ArticlePreviewTile {...dummyArticles[2]} image={VegetablesImg} />
+        <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
       </PreviewTilesGrid>
     </section>
   );
