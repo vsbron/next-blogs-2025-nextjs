@@ -74,7 +74,7 @@ function CTASection() {
 function CTABackground() {
   // Returned JSX
   return (
-    <div className="absolute h-full -right-6 xs:right-0 inset-0 left-1/3 overflow-hidden -z-10">
+    <div className="absolute h-full -right-5 xs:right-0 inset-0 left-1/3 overflow-hidden -z-10">
       <Image
         src={CTAImg}
         alt="NextBlogs"
