@@ -12,7 +12,7 @@ function Container({ className, children }: ContainerProps) {
   return (
     <div
       className={cn(
-        "max-w-7xl 2xl:max-w-[1400px] mx-auto px-6 sm:px-8",
+        "max-w-7xl 2xl:max-w-[1400px] mx-auto px-5 sm:px-8",
         className
       )}
     >
