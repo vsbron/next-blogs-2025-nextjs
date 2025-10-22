@@ -66,9 +66,6 @@ function RecentPosts() {
         <ArticlePreviewTile {...dummyArticles[0]} image={VegetablesImg} />
         <ArticlePreviewTile {...dummyArticles[1]} image={CityImg} />
         <ArticlePreviewTile {...dummyArticles[2]} image={AIImg} />
-        <ArticlePreviewTile {...dummyArticles[1]} image={CityImg} />
-        <ArticlePreviewTile {...dummyArticles[2]} image={VegetablesImg} />
-        <ArticlePreviewTile {...dummyArticles[0]} image={UFOImg} />
       </PreviewTilesGrid>
     </section>
   );

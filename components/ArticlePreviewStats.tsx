@@ -22,17 +22,17 @@ function ArticlePreviewStats({
         reverse ? "flex-row-reverse" : ""
       }`}
     >
-      <div className="flex items-center gap-x-1">
-        <EyeIcon className="w-4 h-4 stroke-primary/80" />
-        {views}
+      <div className="flex items-center gap-x-1.5">
+        <Calendar1Icon className="w-4 h-4 stroke-primary/80" />
+        {date}
       </div>
       <div className="flex items-center gap-x-1">
         <ThumbsUpIcon className="w-4 h-4 stroke-primary/80" />
         {likes}
       </div>
-      <div className="flex items-center gap-x-1.5">
-        <Calendar1Icon className="w-4 h-4 stroke-primary/80" />
-        {date}
+      <div className="flex items-center gap-x-1">
+        <EyeIcon className="w-4 h-4 stroke-primary/80" />
+        {views}
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const featuredArticle = {
 };
 
 // The component
-function FeaturedMainPost() {
+function HeroFeatured() {
   // Destructure the post data
   const { title, preview, date, views, likes, href } = featuredArticle;
 
@@ -31,9 +31,10 @@ function FeaturedMainPost() {
       <Image
         src={FeaturedBG}
         alt={title}
+        sizes="(max-width: 768px) 100vw, 50vw"
         className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-8 sm:opacity-10 object-cover"
       />
-      <FeaturedImage title={title} href={href} />
+      <ArticleImage title={title} href={href} />
       <Card className="gap-1 sm:gap-3 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
           <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
@@ -45,7 +46,12 @@ function FeaturedMainPost() {
               />{" "}
               Featured<span className="hidden xs:inline"> article</span>
             </div>
-            <ArticlePreviewStats views={views} likes={likes} date={date} />
+            <ArticlePreviewStats
+              views={views}
+              likes={likes}
+              date={date}
+              reverse={true}
+            />
           </div>
           <Link href={href} className="hover:text-foreground/75 transition-all">
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-poppins xs:mt-2">
@@ -65,7 +71,7 @@ function FeaturedMainPost() {
 }
 
 // Helper component
-function FeaturedImage({ title, href }: { title: string; href: string }) {
+function ArticleImage({ title, href }: { title: string; href: string }) {
   // Returned JSX
   return (
     <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg shadow-primary/35 border-0 relative sm:mb-2">
@@ -84,4 +90,4 @@ function FeaturedImage({ title, href }: { title: string; href: string }) {
   );
 }
 
-export default FeaturedMainPost;
+export default HeroFeatured;

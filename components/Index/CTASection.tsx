@@ -23,7 +23,7 @@ function CTASection() {
 
   // Returned JSX
   return (
-    <section className="py-8 xs:py-20 md:py-24 my-12 relative">
+    <section className="py-8 xs:py-18 sm:py-20 md:py-24 my-2 lg:my-12 relative">
       <SectionTitle as="h1" className="pr-10">
         Read, Create and Share your stories on{" "}
         <span className="text-primary font-semibold">nextblogs</span>
@@ -74,12 +74,12 @@ function CTASection() {
 function CTABackground() {
   // Returned JSX
   return (
-    <div className="absolute h-full inset-0 left-1/3 overflow-hidden -z-10">
+    <div className="absolute h-full -right-4 xs:right-0 inset-0 left-1/3 overflow-hidden -z-10">
       <Image
         src={CTAImg}
         alt="NextBlogs"
         fill
-        className="object-cover sm:rounded-xl"
+        className="object-cover xs:rounded-xl"
       />
       <div className="absolute inset-0 right-0 bg-gradient-to-r from-background/100 via-background/100 via-[20%] to-background/70 xs:to-background/0" />
     </div>

@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { limitPreview } from "@/utils/helpers";
 import UFOImg from "@/assets/article-ufo.jpg";
 
-function FeaturedPostsMini({ articles }: { articles: any[] }) {
+function HeroQuick({ articles }: { articles: any[] }) {
   // Returned JSX
   return (
     <Card className="gap-0 py-0 bg-0 border-0 rounded-none shadow-none">
@@ -34,6 +34,7 @@ function FeaturedPostsMini({ articles }: { articles: any[] }) {
                   fill
                   alt={title}
                   className="rounded-md object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
                 />
               </div>
             </Link>
@@ -47,4 +48,4 @@ function FeaturedPostsMini({ articles }: { articles: any[] }) {
   );
 }
 
-export default FeaturedPostsMini;
+export default HeroQuick;

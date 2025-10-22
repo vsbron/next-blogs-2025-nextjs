@@ -1,11 +1,11 @@
-import FeaturedMainPost from "./FeaturedMainPost";
-import FeaturedPostsMini from "./FeaturedPostsMini";
-import FeaturedSecondaryPost from "./FeaturedSecondaryPost";
+import HeroFeatured from "./HeroFeatured";
+import HeroSecondary from "./HeroSecondary";
+import HeroQuick from "./HeroQuick";
 
 import CityImg from "@/assets/article-city.jpg";
 import AIImg from "@/assets/article-ai.jpg";
 
-// 3 Dummy articles
+// Dummy articles
 const dummyArticles = [
   {
     title: "How to survive in a huge city",
@@ -54,27 +54,26 @@ const dummyArticles = [
   },
 ];
 
-function FeaturedPosts() {
+function HeroSection() {
   // Returned JSX
   return (
     <>
-      <FeaturedMainPost />
+      <HeroFeatured />
       <section>
-        <div className="grid grid-cols-[2fr_1fr] gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-6 items-start">
           <div>
             <div className="flex flex-col gap-6">
-              <FeaturedSecondaryPost
-                article={dummyArticles[0]}
-                image={CityImg}
-              />
-              <FeaturedSecondaryPost article={dummyArticles[1]} image={AIImg} />
+              <HeroSecondary article={dummyArticles[0]} image={CityImg} />
+              <HeroSecondary article={dummyArticles[1]} image={AIImg} />
             </div>
           </div>
-          <FeaturedPostsMini articles={dummyArticles} />
+          <div className="hidden lg:block">
+            <HeroQuick articles={dummyArticles} />
+          </div>
         </div>
       </section>
     </>
   );
 }
 
-export default FeaturedPosts;
+export default HeroSection;
