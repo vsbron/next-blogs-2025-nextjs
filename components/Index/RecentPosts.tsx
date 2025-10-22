@@ -65,7 +65,9 @@ function RecentPosts() {
         <ArticlePreviewTile {...dummyArticles[0]} image={CityImg} />
         <ArticlePreviewTile {...dummyArticles[0]} image={VegetablesImg} />
         <ArticlePreviewTile {...dummyArticles[1]} image={CityImg} />
-        <ArticlePreviewTile {...dummyArticles[2]} image={AIImg} />
+        <div className="hidden md:contents">
+          <ArticlePreviewTile {...dummyArticles[2]} image={AIImg} />
+        </div>
       </PreviewTilesGrid>
     </section>
   );
