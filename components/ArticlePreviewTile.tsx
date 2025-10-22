@@ -26,8 +26,8 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
   // Returned JSX
   return (
     <Card className="p-0 gap-0">
-      <Link href={href}>
-        <div className="relative h-40 sm:h-60 mb-2 group overflow-hidden rounded-lg">
+      <Link href={href} className="mb-3">
+        <div className="relative h-40 sm:h-60 group overflow-hidden rounded-lg">
           <Image
             src={image}
             fill

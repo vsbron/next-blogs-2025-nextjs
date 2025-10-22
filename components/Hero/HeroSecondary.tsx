@@ -28,9 +28,9 @@ function HeroSecondary({
   const { title, preview, date, views, likes, href } = article;
   // Returned JSX
   return (
-    <section className="grid sm:grid-cols-[.75fr_1fr] items-start gap-y-0 gap-x-3 lg:gap-x-4 relative">
+    <section className="grid sm:grid-cols-[.75fr_1fr] items-start gap-y-1 gap-x-3 lg:gap-x-4 relative">
       <ArticleImage title={title} href={href} image={image} />
-      <Card className="gap-1 sm:gap-x-3 lg:gap-2 px-1 sm:px-6 pt-2 pb-0 lg:p-3 shadow-none bg-0 border-none">
+      <Card className="gap-1 sm:gap-x-3 lg:gap-2 px-0 sm:px-6 pt-2 pb-0 lg:p-3 shadow-none bg-0 border-none">
         <CardHeader className="px-0 gap-1">
           <div className="flex justify-start xs:border-b xs:pb-2 border-foreground/10">
             <ArticlePreviewStats views={views} likes={likes} date={date} />
@@ -68,7 +68,7 @@ function ArticleImage({
 }) {
   // Returned JSX
   return (
-    <Card className="p-2 sm:p-3 shadow-md shadow-primary/35 border-0 relative sm:mb-2">
+    <Card className="p-2 sm:p-3 shadow-sm xs:shadow-md shadow-primary/35 border-0 relative sm:mb-2">
       <Link className="group" href={href}>
         <CardContent className="relative h-40 sm:h-50 lg:h-60 overflow-hidden rounded-lg">
           <Image

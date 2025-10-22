@@ -27,7 +27,7 @@ function HeroFeatured() {
 
   // Returned JSX
   return (
-    <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4 relative xs:mb-2">
+    <section className="grid sm:grid-cols-[.75fr_1fr] lg:grid-cols-2 items-center gap-y-0 gap-x-3 lg:gap-x-4 relative mb-2">
       <Image
         src={FeaturedBG}
         alt={title}
@@ -35,7 +35,7 @@ function HeroFeatured() {
         className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-8 sm:opacity-10 object-cover"
       />
       <ArticleImage title={title} href={href} />
-      <Card className="gap-1 sm:gap-3 px-1 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
+      <Card className="gap-1 sm:gap-3 px-0 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
           <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
             <div className="bg-accent/15 font-bold px-2 py-1 rounded-lg flex items-center gap-1 lg:gap-1.5">
