@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { EyeIcon, FilePenLine, ThumbsUpIcon } from "lucide-react";
 
-import SectionTitle from "../SectionTitle";
+import SectionTitle from "./SectionTitle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 // Dummy data

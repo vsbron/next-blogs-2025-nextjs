@@ -1,9 +1,10 @@
+import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
 
 function PrivacyPolicyPage() {
   // Returned JSX
   return (
-    <article className="max-w-4xl">
+    <ArticleLayout>
       <SectionTitle>Privacy policy</SectionTitle>
       <p>
         Welcome to <strong>NextBlogs</strong>. We value your privacy and are
@@ -92,7 +93,7 @@ function PrivacyPolicyPage() {
         <br />
         <a href="mailto:support@mail.app">support@mail.app</a>
       </p>
-    </article>
+    </ArticleLayout>
   );
 }
 

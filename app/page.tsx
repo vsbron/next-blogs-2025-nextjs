@@ -1,7 +1,7 @@
 import HeroSection from "@/components/Hero/HeroSection";
-import CTASection from "@/components/Index/CTASection";
-import IndexStats from "@/components/Index/IndexStats";
-import RecentPosts from "@/components/Index/RecentPosts";
+import CTASection from "@/components/CTASection";
+import IndexStats from "@/components/PostStats";
+import RecentPosts from "@/components/RecentPosts";
 import SectionSeparator from "@/components/SectionSeparator";
 
 function Home() {
@@ -9,7 +9,7 @@ function Home() {
   return (
     <>
       <HeroSection />
-      <CTASection />
+      <CTASection index={true} />
       <RecentPosts />
       <SectionSeparator />
       <IndexStats />

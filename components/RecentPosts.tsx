@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import SectionTitle from "../SectionTitle";
-import ArticlePreviewTile from "../ArticlePreviewTile";
-import PreviewTilesGrid from "../PreviewTilesGrid";
+import SectionTitle from "./SectionTitle";
+import ArticlePreviewTile from "./ArticlePreviewTile";
+import PreviewTilesGrid from "./PreviewTilesGrid";
 import { Button } from "@/components/ui/button";
 
 import AIImg from "@/assets/article-ai.jpg";

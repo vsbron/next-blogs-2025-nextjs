@@ -1,11 +1,12 @@
 import Link from "next/link";
 
 import SectionTitle from "@/components/SectionTitle";
+import ArticleLayout from "@/components/ArticleLayout";
 
 function TermsOfUsePage() {
   // Returned JSX
   return (
-    <article className="max-w-4xl">
+    <ArticleLayout>
       <SectionTitle>Terms of use</SectionTitle>
       <p>
         Welcome to <strong>NextBlogs</strong> (“we”, “our”, or “us”). By
@@ -119,7 +120,7 @@ function TermsOfUsePage() {
         For questions about these Terms, contact us at{" "}
         <a href="mailto:support@mail.app">support@mail.app</a>.
       </p>
-    </article>
+    </ArticleLayout>
   );
 }
 

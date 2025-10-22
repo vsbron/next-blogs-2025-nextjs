@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 import CTAImg from "@/assets/ctaImg.png";
 
-function CTASection() {
+function CTASection({ index = false }: { index?: boolean }) {
   // Get the Clerk object
   const clerk = useClerk();
 
@@ -23,8 +23,12 @@ function CTASection() {
 
   // Returned JSX
   return (
-    <section className="py-8 xs:py-18 sm:py-20 md:py-24 my-6 lg:my-12 relative">
-      <SectionTitle as="h1" className="pr-10">
+    <section
+      className={`py-8 xs:py-18 sm:py-20 md:py-24 relative ${
+        index ? "my-6 lg:my-12" : "my-6"
+      }`}
+    >
+      <SectionTitle as={index ? "h1" : "div"} className="pr-10">
         Read, Create and Share your stories on{" "}
         <span className="text-primary font-semibold">nextblogs</span>
       </SectionTitle>
