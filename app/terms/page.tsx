@@ -1,8 +1,21 @@
 import Link from "next/link";
+import { Metadata } from "next";
 
-import SectionTitle from "@/components/SectionTitle";
 import ArticleLayout from "@/components/ArticleLayout";
+import SectionTitle from "@/components/SectionTitle";
 
+// Meta data
+export const metadata: Metadata = {
+  title: "Terms of Use",
+  description:
+    "Review the Terms of Use for NextBlogs. Learn about your rights, responsibilities, and the conditions for using our website and services.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+// The page
 function TermsOfUsePage() {
   // Returned JSX
   return (
@@ -21,14 +34,14 @@ function TermsOfUsePage() {
         complete.
       </p>
 
-      <SectionTitle as="h2">User Accounts</SectionTitle>
+      <SectionTitle as="h2">User accounts</SectionTitle>
       <p>
         You are responsible for maintaining the confidentiality of your account
         credentials and for all activity that occurs under your account. Notify
         us immediately of any unauthorized use or security breach.
       </p>
 
-      <SectionTitle as="h2">User Content</SectionTitle>
+      <SectionTitle as="h2">User content</SectionTitle>
       <p>
         You retain ownership of the content you create and publish on NextBlogs.
         By posting content on the platform you grant NextBlogs a non-exclusive,
@@ -42,7 +55,7 @@ function TermsOfUsePage() {
         or third-party rights (including intellectual property rights).
       </p>
 
-      <SectionTitle as="h2">Acceptable Use</SectionTitle>
+      <SectionTitle as="h2">Acceptable use</SectionTitle>
       <p>You must not:</p>
       <ul>
         <li>
@@ -60,7 +73,7 @@ function TermsOfUsePage() {
         </li>
       </ul>
 
-      <SectionTitle as="h2">Moderation and Removal</SectionTitle>
+      <SectionTitle as="h2">Moderation and removal</SectionTitle>
       <p>
         We reserve the right, but are not obligated, to remove or restrict
         access to content that violates these Terms or is otherwise
@@ -78,7 +91,7 @@ function TermsOfUsePage() {
         NextBlogs you consent to that collection and processing.
       </p>
 
-      <SectionTitle as="h2">Third-Party Services</SectionTitle>
+      <SectionTitle as="h2">Third-party services</SectionTitle>
       <p>
         NextBlogs may integrate with third-party services (e.g., authentication,
         analytics, hosting). Those services are governed by their own terms and
@@ -94,7 +107,7 @@ function TermsOfUsePage() {
         VERIFY IT.
       </p>
 
-      <SectionTitle as="h2">Limitation of Liability</SectionTitle>
+      <SectionTitle as="h2">Limitation of liability</SectionTitle>
       <p>
         TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT WILL NEXTBLOGS, ITS
         AFFILIATES, OR CONTRIBUTORS BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
@@ -102,20 +115,20 @@ function TermsOfUsePage() {
         SERVICE.
       </p>
 
-      <SectionTitle as="h2">Changes to These Terms</SectionTitle>
+      <SectionTitle as="h2">Changes to these terms</SectionTitle>
       <p>
         We may update these Terms from time to time. We will post the updated
         Terms with a new “Last updated” date. Continued use of the service after
         changes constitutes acceptance of the revised Terms.
       </p>
 
-      <SectionTitle as="h2">Governing Law</SectionTitle>
+      <SectionTitle as="h2">Governing law</SectionTitle>
       <p>
         These Terms are governed by the laws of the applicable jurisdiction
         where NextBlogs operates, without regard to conflict-of-law principles.
       </p>
 
-      <SectionTitle as="h3">Contact</SectionTitle>
+      <SectionTitle as="h3">Contact us</SectionTitle>
       <p>
         For questions about these Terms, contact us at{" "}
         <a href="mailto:support@mail.app">support@mail.app</a>.

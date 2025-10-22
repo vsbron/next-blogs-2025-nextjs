@@ -1,6 +1,20 @@
+import { Metadata } from "next";
+
 import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
 
+// Meta data
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "Understand how NextBlogs collects, uses, and protects your personal information. Read our Privacy Policy for details on data handling and user rights.",
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+// The page
 function PrivacyPolicyPage() {
   // Returned JSX
   return (
@@ -13,7 +27,7 @@ function PrivacyPolicyPage() {
         website and related services.
       </p>
 
-      <SectionTitle as="h2">Information We Collect</SectionTitle>
+      <SectionTitle as="h2">Information we collect</SectionTitle>
       <p>
         We collect information to provide and improve our services. This
         includes:
@@ -32,7 +46,7 @@ function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <SectionTitle as="h2">How We Use Your Information</SectionTitle>
+      <SectionTitle as="h2">How we use your information</SectionTitle>
       <ul>
         <li>To operate and improve the NextBlogs platform.</li>
         <li>To personalize your experience and display relevant content.</li>
@@ -40,7 +54,7 @@ function PrivacyPolicyPage() {
         <li>To ensure compliance with our Terms of Use and prevent misuse.</li>
       </ul>
 
-      <SectionTitle as="h2">Sharing of Information</SectionTitle>
+      <SectionTitle as="h2">Sharing of information</SectionTitle>
       <p>
         We do not sell your personal data. We only share information in the
         following cases:
@@ -59,7 +73,7 @@ function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <SectionTitle as="h2">Data Retention</SectionTitle>
+      <SectionTitle as="h2">Data retention</SectionTitle>
       <p>
         We retain your data as long as your account is active or as needed to
         provide our services. You can request deletion of your account and data
@@ -73,20 +87,20 @@ function PrivacyPolicyPage() {
         completely secure, and you use NextBlogs at your own risk.
       </p>
 
-      <SectionTitle as="h2">Your Rights</SectionTitle>
+      <SectionTitle as="h2">Your rights</SectionTitle>
       <p>
         You can access, update, or delete your personal information anytime
         through your account settings. For any privacy-related requests, contact
         us using the details below.
       </p>
 
-      <SectionTitle as="h2">Changes to This Policy</SectionTitle>
+      <SectionTitle as="h2">Changes to this policy</SectionTitle>
       <p>
         We may update this Privacy Policy from time to time. Any changes will be
         posted on this page with a new “Last updated” date.
       </p>
 
-      <SectionTitle as="h2">Contact Us</SectionTitle>
+      <SectionTitle as="h2">Contact us</SectionTitle>
       <p>
         If you have any questions or concerns about this Privacy Policy, please
         contact us at:
