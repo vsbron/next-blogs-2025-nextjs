@@ -21,7 +21,7 @@ const featuredArticle = {
 };
 
 // The component
-function FeaturedPost() {
+function FeaturedMainPost() {
   // Destructure the post data
   const { title, preview, date, views, likes, href } = featuredArticle;
 
@@ -84,4 +84,4 @@ function FeaturedImage({ title, href }: { title: string; href: string }) {
   );
 }
 
-export default FeaturedPost;
+export default FeaturedMainPost;

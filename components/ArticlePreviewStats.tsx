@@ -5,13 +5,23 @@ type ArticlePreviewStatsProps = {
   views: number;
   likes: number;
   date: string;
+  reverse?: boolean;
 };
 
 // The component
-function ArticlePreviewStats({ views, likes, date }: ArticlePreviewStatsProps) {
+function ArticlePreviewStats({
+  views,
+  likes,
+  date,
+  reverse = false,
+}: ArticlePreviewStatsProps) {
   // Returned JSX
   return (
-    <div className="flex items-center gap-3 lg:gap-4 text-foreground/50 text-sm font-semibold">
+    <div
+      className={`flex items-center gap-3 lg:gap-4 text-foreground/50 text-sm font-semibold ${
+        reverse ? "flex-row-reverse" : ""
+      }`}
+    >
       <div className="flex items-center gap-x-1">
         <EyeIcon className="w-4 h-4 stroke-primary/80" />
         {views}
