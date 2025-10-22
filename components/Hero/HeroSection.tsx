@@ -60,12 +60,10 @@ function HeroSection() {
     <>
       <HeroFeatured />
       <section>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-6 items-start">
-          <div>
-            <div className="flex flex-col gap-6">
-              <HeroSecondary article={dummyArticles[0]} image={CityImg} />
-              <HeroSecondary article={dummyArticles[1]} image={AIImg} />
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-2 xs:gap-6 items-start">
+          <div className="flex flex-col gap-8">
+            <HeroSecondary article={dummyArticles[0]} image={CityImg} />
+            <HeroSecondary article={dummyArticles[1]} image={AIImg} />
           </div>
           <div className="hidden lg:block">
             <HeroQuick articles={dummyArticles} />

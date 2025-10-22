@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { limitPreview } from "@/utils/helpers";
 
+// Props type
 type HeroSecondaryProps = {
   title: string;
   preview: string;
@@ -15,6 +16,7 @@ type HeroSecondaryProps = {
   href: string;
 };
 
+// The component
 function HeroSecondary({
   article,
   image,
@@ -26,9 +28,9 @@ function HeroSecondary({
   const { title, preview, date, views, likes, href } = article;
   // Returned JSX
   return (
-    <section className="grid sm:grid-cols-[.75fr_1fr] items-start gap-y-0 gap-x-3 lg:gap-x-4 relative mb-2">
+    <section className="grid sm:grid-cols-[.75fr_1fr] items-start gap-y-0 gap-x-3 lg:gap-x-4 relative">
       <ArticleImage title={title} href={href} image={image} />
-      <Card className="gap-1 sm:gap-x-3 lg:gap-2 sm:px-6 sm:py-2 lg:p-3 shadow-none bg-0 border-none">
+      <Card className="gap-1 sm:gap-x-3 lg:gap-2 px-1 sm:px-6 pt-2 pb-0 lg:p-3 shadow-none bg-0 border-none">
         <CardHeader className="px-0 gap-1">
           <div className="flex justify-start xs:border-b xs:pb-2 border-foreground/10">
             <ArticlePreviewStats views={views} likes={likes} date={date} />
