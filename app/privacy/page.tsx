@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Understand how NextBlogs collects, uses, and protects your personal information. Read our Privacy Policy for details on data handling and user rights.",
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 // The page

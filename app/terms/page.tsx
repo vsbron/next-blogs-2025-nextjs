@@ -9,10 +9,6 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description:
     "Review the Terms of Use for NextBlogs. Learn about your rights, responsibilities, and the conditions for using our website and services.",
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 // The page
