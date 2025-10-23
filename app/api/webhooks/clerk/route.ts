@@ -1,31 +1,36 @@
-import crypto from "crypto";
+// app/api/webhooks/clerk/route.ts
+import { PrismaClient } from "@prisma/client";
+
+declare global {
+  var prisma: PrismaClient | undefined;
+}
+
+export const prisma =
+  global.prisma ?? new PrismaClient({ log: ["query", "error", "warn"] });
+
+if (process.env.NODE_ENV !== "production") global.prisma = prisma;
 
 export const POST = async (req: Request) => {
-  const { PrismaClient } = await import("@prisma/client");
-  const prisma = new PrismaClient();
+  try {
+    const rawBody = await req.text();
+    const event = JSON.parse(rawBody);
+    console.log("Webhook received:", event);
 
-  const rawBody = await req.text();
-  const signature = req.headers.get("clerk-signature");
+    if (event.type === "user.created") {
+      const clerkUser = event.data;
+      await prisma.user.create({
+        data: {
+          clerkId: clerkUser.id,
+          email: clerkUser.email_addresses?.[0]?.email_address ?? "",
+          name: clerkUser.first_name ?? "",
+        },
+      });
+      console.log(`User created in DB: ${clerkUser.id}`);
+    }
 
-  // verify webhook
-  const hmac = crypto.createHmac("sha256", process.env.CLERK_WEBHOOK_SECRET!);
-  hmac.update(rawBody);
-  const expectedSignature = hmac.digest("hex");
-  if (signature !== expectedSignature)
-    return new Response("Invalid signature", { status: 400 });
-
-  const event = JSON.parse(rawBody);
-
-  if (event.type === "user.created") {
-    const clerkUser = event.data;
-    await prisma.user.create({
-      data: {
-        clerkId: clerkUser.id,
-        email: clerkUser.email_addresses[0].email_address,
-        name: clerkUser.first_name,
-      },
-    });
+    return new Response("OK", { status: 200 });
+  } catch (err) {
+    console.error("Webhook error:", err);
+    return new Response("Server error", { status: 500 });
   }
-
-  return new Response(null, { status: 200 });
 };
