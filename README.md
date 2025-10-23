@@ -78,7 +78,7 @@ NextBlog allows users to browse, read, and create blog posts while managing thei
 
 ### **Additional Pages**
 
-- About, Contact, 404 Page.
+- About, Contact, 404 Page, Terms of use, Privacy Policy
 - Legal info displayed in the footer.
 
 ---
