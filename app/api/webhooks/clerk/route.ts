@@ -1,10 +1,9 @@
-// app/api/webhooks/clerk/route.ts
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 
-const prisma = new PrismaClient();
-
 export const POST = async (req: Request) => {
+  const { PrismaClient } = await import("@prisma/client");
+  const prisma = new PrismaClient();
+
   const rawBody = await req.text();
   const signature = req.headers.get("clerk-signature");
 
