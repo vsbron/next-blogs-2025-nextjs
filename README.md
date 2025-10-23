@@ -91,7 +91,7 @@ NextBlog allows users to browse, read, and create blog posts while managing thei
 - **Styling**: Tailwind CSS with ShadCN components and custom color palette.
 - **State Management**: Local component state and remote state handling where needed.
 - **Theming**: Light and dark mode toggle using NextThemes.
-- **Data Handling**: Prisma prepared for database models (users, posts, tags, likes, comments).
+- **Data Handling**: Prisma prepared for the database models (users, posts, tags, likes, comments).
 
 ## Live version
 
