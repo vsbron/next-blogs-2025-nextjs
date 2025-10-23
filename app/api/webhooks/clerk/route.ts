@@ -1,16 +1,7 @@
-// app/api/webhooks/clerk/route.ts
-import { PrismaClient } from "@prisma/client";
-
-declare global {
-  var prisma: PrismaClient | undefined;
-}
-
-const prisma =
-  global.prisma ?? new PrismaClient({ log: ["query", "error", "warn"] });
-
-if (process.env.NODE_ENV !== "production") global.prisma = prisma;
-
 export const POST = async (req: Request) => {
+  const { PrismaClient } = await import("@prisma/client");
+  const prisma = new PrismaClient();
+
   try {
     const rawBody = await req.text();
     const event = JSON.parse(rawBody);
