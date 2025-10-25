@@ -6,6 +6,9 @@ import type { WebhookEvent } from "@clerk/nextjs/server";
 // Create Prisma client
 const prisma = new PrismaClient();
 
+// ID offset
+const ID_OFFSET = 1725;
+
 export async function POST(req: Request) {
   // Get the payload and headers
   const payload = await req.text();
@@ -36,17 +39,27 @@ export async function POST(req: Request) {
 
   // Handle user created event
   if (evt.type === "user.created") {
+    // Get the event data
     const u = evt.data;
+
+    // Get last user to calculate manual ID
+    const lastUser = await prisma.user.findFirst({
+      orderBy: { id: "desc" },
+    });
+    const nextId = (lastUser?.id ?? 0) + 1 + ID_OFFSET;
+
     await prisma.user.create({
       data: {
         clerkId: u.id,
+        id: nextId,
         email:
           u.email_addresses?.[0]?.email_address ??
           u.external_accounts?.[0]?.email_address ??
           "",
-        name:
+        displayName:
           [u.first_name, u.last_name].filter(Boolean).join(" ") ||
           "Unnamed user",
+        username: `User${nextId}`,
       },
     });
   }
