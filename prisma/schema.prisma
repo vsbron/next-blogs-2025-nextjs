@@ -14,9 +14,36 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  clerkId   String   @unique
-  email     String
-  name      String?
-  createdAt DateTime @default(now())
+  id              Int           @id @default(autoincrement())
+  clerkId         String        @unique
+  email           String        @unique
+  username        String        @unique
+  avatarUrl       String?
+  displayName     String
+  bio             String?
+  dateCreated     DateTime      @default(now())
+  posts           Post[]
+  likes           Like[]
+}
+
+model Post {
+  id              Int           @id @default(autoincrement())
+  title           String
+  preview         String
+  text            String
+  imageUrl        String
+  published       DateTime      @default(now())
+  updated         DateTime      @updatedAt
+  authorId        Int
+  author          User          @relation(fields: [authorId], references: [id])
+  likes           Like[]
+}
+
+model Like {
+  id              Int           @id @default(autoincrement())
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          Int
+  post            Post          @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId          Int
+  @@unique([userId,postId])
 }
