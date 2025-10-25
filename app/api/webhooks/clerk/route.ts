@@ -60,6 +60,7 @@ export async function POST(req: Request) {
           [u.first_name, u.last_name].filter(Boolean).join(" ") ||
           "Unnamed user",
         username: `User${nextId}`,
+        avatarUrl: u.image_url,
       },
     });
   }
