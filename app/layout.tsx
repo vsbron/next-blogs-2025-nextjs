@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   manifest: "/manifest.webmanifest",
-  themeColor: "#6f42c1",
+  // themeColor: "#6f42c1",
   robots: {
     index: true,
     follow: true,
