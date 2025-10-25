@@ -40,8 +40,13 @@ export async function POST(req: Request) {
     await prisma.user.create({
       data: {
         clerkId: u.id,
-        email: u.email_addresses?.[0]?.email_address ?? "",
-        name: u.first_name ?? "",
+        email:
+          u.email_addresses?.[0]?.email_address ??
+          u.external_accounts?.[0]?.email_address ??
+          "",
+        name:
+          [u.first_name, u.last_name].filter(Boolean).join(" ") ||
+          "Unnamed user",
       },
     });
   }
