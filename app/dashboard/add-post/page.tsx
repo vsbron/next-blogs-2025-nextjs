@@ -1,8 +1,23 @@
+import { Metadata } from "next";
+
+import SectionTitle from "@/components/SectionTitle";
+
+// Metadata
+export const metadata: Metadata = {
+  title: "Add a Post",
+  description:
+    "Create and publish new articles to share your stories with the NextBlogs community.",
+};
+
+// The page
+
 function AddPostPage() {
   // Returned JSX
   return (
-    <div>Add Post Page</div>
-  )
+    <section>
+      <SectionTitle>Add a new post</SectionTitle>
+    </section>
+  );
 }
 
-export default AddPostPage
+export default AddPostPage;

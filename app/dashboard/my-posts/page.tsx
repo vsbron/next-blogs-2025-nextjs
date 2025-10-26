@@ -1,8 +1,23 @@
+import { Metadata } from "next";
+
+import SectionTitle from "@/components/SectionTitle";
+
+// Metadata
+export const metadata: Metadata = {
+  title: "My Posts",
+  description:
+    "View, edit, and manage all the posts you've created on NextBlogs.",
+};
+
+// The page
+
 function ProfilePostsPage() {
   // Returned JSX
   return (
-    <div>Profile Posts Page</div>
-  )
+    <section>
+      <SectionTitle>List of my posts</SectionTitle>
+    </section>
+  );
 }
 
-export default ProfilePostsPage
+export default ProfilePostsPage;
