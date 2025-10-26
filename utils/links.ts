@@ -13,8 +13,8 @@ export const secondaryLinks = [
 ];
 
 export const personalAreaLinks = [
-  { label: "Manage profile", href: "/profile/profile" },
-  { label: "Add a post", href: "/profile/add-post" },
-  { label: "My posts", href: "/profile/my-posts" },
-  { label: "Stats", href: "/profile/stats" },
+  { label: "Manage profile", href: "/dashboard/profile" },
+  { label: "Add a post", href: "/dashboard/add-post" },
+  { label: "My posts", href: "/dashboard/my-posts" },
+  { label: "Stats", href: "/dashboard/stats" },
 ];
