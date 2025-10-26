@@ -6,8 +6,6 @@ import type { WebhookEvent } from "@clerk/nextjs/server";
 // Create Prisma client
 const prisma = new PrismaClient();
 
-// ID offset
-const ID_OFFSET = 1725;
 
 export async function POST(req: Request) {
   // Get the payload and headers
@@ -46,7 +44,7 @@ export async function POST(req: Request) {
     const lastUser = await prisma.user.findFirst({
       orderBy: { id: "desc" },
     });
-    const nextId = (lastUser?.id ?? 0) + 1 + ID_OFFSET;
+    const nextId = (lastUser?.id ?? 0) + 1;
 
     await prisma.user.create({
       data: {

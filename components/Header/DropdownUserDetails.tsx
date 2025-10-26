@@ -11,8 +11,8 @@ import defaultAvatar from "@/assets/defaultUser.png";
 import useUser from "@/hooks/useUser";
 
 function DropdownUserDetails() {
-  // Get some user data and signOut function from Clerk
-  const { user: clerkUser, signOut } = useClerk();
+  // Get user data, signOut function and isSignedIn state from Clerk
+  const { user: clerkUser, signOut, isSignedIn } = useClerk();
   const clerkId = clerkUser?.id as string;
 
   // Get the user and isPending state
@@ -22,12 +22,12 @@ function DropdownUserDetails() {
   return (
     <div className="pt-2 pb-4 pl-8 pr-4 flex justify-between items-center gap-x-8">
       <div className="flex items-center gap-x-3">
-        {isPending ? (
+        {isSignedIn && isPending ? (
           <>
-            <Skeleton className="h-10 w-10 rounded-full mt-0.5" />
+            <Skeleton className="h-10 w-10 rounded-full" />
             <div className="space-y-2">
-              <Skeleton className="h-3 w-15" />
-              <Skeleton className="h-3 w-12" />
+              <Skeleton className="h-2.5 w-15" />
+              <Skeleton className="h-2.5 w-12" />
             </div>
           </>
         ) : (
@@ -36,7 +36,7 @@ function DropdownUserDetails() {
               src={user?.avatarUrl ?? defaultAvatar}
               width={40}
               height={40}
-              className="mt-0.5 rounded-full"
+              className="rounded-full"
               alt={user?.username ?? "Unknown user"}
             />
             <div className="text-sm">
