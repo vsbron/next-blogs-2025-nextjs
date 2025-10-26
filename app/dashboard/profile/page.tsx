@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import SectionTitle from "@/components/SectionTitle";
+import Profile from "@/components/dashboard/Profile";
 
 // Metadata
 export const metadata: Metadata = {
@@ -10,14 +10,9 @@ export const metadata: Metadata = {
 };
 
 // The page
-
 function ProfilePage() {
   // Returned JSX
-  return (
-    <section>
-      <SectionTitle>Manage profile</SectionTitle>
-    </section>
-  );
+  return <Profile />;
 }
 
 export default ProfilePage;

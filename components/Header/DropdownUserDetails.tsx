@@ -1,22 +1,17 @@
 "use client";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
-import { useClerk } from "@clerk/nextjs";
-import { SignedIn } from "@clerk/clerk-react";
+import { SignedIn } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 import defaultAvatar from "@/assets/defaultUser.png";
-import useUser from "@/hooks/useUser";
 
 function DropdownUserDetails() {
-  // Get user data, signOut function and isSignedIn state from Clerk
-  const { user: clerkUser, signOut, isSignedIn } = useClerk();
-  const clerkId = clerkUser?.id as string;
-
-  // Get the user and isPending state
-  const { user, isPending } = useUser(clerkId ?? "");
+  // Get the user details and auth state and function
+  const { user, isPending, signOut, isSignedIn } = useCurrentUser();
 
   // Returned JSX
   return (

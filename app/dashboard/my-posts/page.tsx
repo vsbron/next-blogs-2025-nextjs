@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 // The page
-
 function ProfilePostsPage() {
   // Returned JSX
   return (
