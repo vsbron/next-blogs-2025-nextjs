@@ -15,9 +15,8 @@ function DropdownUserDetails() {
   const { user: clerkUser, signOut } = useClerk();
   const clerkId = clerkUser?.id as string;
 
-  const { user, isPending } = useUser(clerkId);
-
-  // const isPending = true;
+  // Get the user and isPending state
+  const { user, isPending } = useUser(clerkId ?? "");
 
   // Returned JSX
   return (
@@ -38,12 +37,12 @@ function DropdownUserDetails() {
               width={40}
               height={40}
               className="mt-0.5 rounded-full"
-              alt={user ? user.username : "Unknown user"}
+              alt={user?.username ?? "Unknown user"}
             />
             <div className="text-sm">
-              <div>{user ? user.displayName : "Unknown user"}</div>
+              <div>{user?.displayName ?? "Unknown user"}</div>
               <div className="text-muted-foreground/75 text-sm">
-                {user ? user.username : "No username"}
+                {user?.username ?? "No username"}
               </div>
             </div>
           </>
