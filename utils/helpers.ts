@@ -8,3 +8,12 @@ export function limitPreview(text: string, maxChars: number) {
   const lastSpace = trimmed.lastIndexOf(" ");
   return trimmed.slice(0, lastSpace) + "...";
 }
+
+// Helper function to format date
+export const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(date);
+};

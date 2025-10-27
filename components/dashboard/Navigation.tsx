@@ -10,15 +10,15 @@ function Navigation() {
 
   // Returned JSX
   return (
-    <div className="flex items-center font-poppins border-b">
+    <div className="flex flex-col font-poppins border-r">
       {personalAreaLinks.map(({ label, href }) => (
         <div
           key={href}
-          className={`border-1 border-b-0 rounded-t-lg hover:bg-accent-light transition-colors ${
+          className={`border-1 border-r-0 rounded-l-lg hover:bg-accent-light transition-colors ${
             pathname === href ? "!bg-primary !text-background" : ""
           }`}
         >
-          <Link href={href} className="inline-block py-2 px-5">
+          <Link href={href} className="block py-2.5 px-6.5">
             {label}
           </Link>
         </div>
