@@ -34,12 +34,12 @@ function Dropdown() {
         <DropdownMenuSeparator />
 
         {/* MENUS */}
-        <div className="py-2 px-6">
+        <div className="py-2 px-6 flex flex-col items-start">
           {/* MOBILE MENU */}
           <div className="lg:hidden">
             {primaryLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent">
-                <Link href={href} className="link-primary">
+              <DropdownMenuItem key={href} className="focus:bg-transparent" asChild>
+                <Link href={href} className="link-primary cursor-pointer">
                   {label}
                 </Link>
               </DropdownMenuItem>
@@ -49,8 +49,8 @@ function Dropdown() {
           {/* SIGNED IN MENU */}
           <SignedIn>
             {personalAreaLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent">
-                <Link href={href} className="link-primary">
+              <DropdownMenuItem key={href} className="focus:bg-transparent" asChild>
+                <Link href={href} className="link-primary cursor-pointer">
                   {label}
                 </Link>
               </DropdownMenuItem>
