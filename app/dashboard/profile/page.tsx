@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Profile from "@/components/dashboard/Profile";
+import DashboardProfile from "@/components/dashboard/DashboardProfile";
 
 // Metadata
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 // The page
 function ProfilePage() {
   // Returned JSX
-  return <Profile />;
+  return <DashboardProfile />;
 }
 
 export default ProfilePage;
