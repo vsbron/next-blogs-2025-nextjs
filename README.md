@@ -1,8 +1,7 @@
 # NextBlogs
 
-NextBlogs is a multi-user blogging platform built with modern technologies, providing a clean and interactive environment for writing, exploring, and reading blogs.
-
-It features a home page with featured posts, a post feed, user profiles, and an easy-to-use editor for creating content. Authentication is handled with Clerk, ensuring secure sign-up and login.
+NextBlogs is a modern, multi-user blogging platform built with **Next.js**, **Clerk**, **Prisma**, and **Supabase**.  
+It provides a clean, responsive environment for writing, exploring, and reading blogs — with full authentication, user profiles, and post management.
 
 ---
 
@@ -14,8 +13,7 @@ It features a home page with featured posts, a post feed, user profiles, and an 
    - [Home Page](#home-page)
    - [Post Page](#post-page)
    - [Author Page](#author-page)
-   - [Profile Page](#profile-page)
-   - [Dashboard Pages](#dashboard-pages)
+   - [Dashboard](#dashboard)
    - [Additional Pages](#additional-pages)
 4. [Technical Details](#technical-details)
 
@@ -23,23 +21,29 @@ It features a home page with featured posts, a post feed, user profiles, and an 
 
 ## Project Overview
 
-NextBlog allows users to browse, read, and create blog posts while managing their own profiles. Key aspects include:
+NextBlogs allows users to browse, read, and publish blog posts while managing their personal profiles and activity data.  
+The app focuses on a smooth UI, consistent design, and modern architecture.
 
-- **Core Layout**: Full-width header and footer, main content in a centered container.
-- **Dynamic Content**: Posts with titles, text, tags, and engagement metrics.
-- **User Authentication**: Secure sign-up and login with Clerk.
-- **Modern UI/UX**: Responsive layout, clean design, and intuitive navigation.
+**Core principles:**
+
+- Clean and minimal design
+- Modular components
+- Secure authentication and database integration
+- Clear separation between public and private (dashboard) routes
 
 ---
 
 ## Features
 
-- **Home Page**: Displays a featured post, secondary posts, and a feed of recent posts.
-- **Profile and Author Pages**: Show user information, avatar, posts, and stats.
-- **Post Management**: Users can write posts with a distraction-free editor.
-- **UI Components**: Reusable components for header, footer, cards, and sections.
-- **Theme Support**: Dark and light modes with a theme toggle.
-- **Search Bar**: Quick access to find posts.
+- 🧭 **Home Page** with featured and recent posts
+- 🧑‍💻 **User Authentication** powered by **Clerk**
+- 🗂️ **Dashboard** for managing profile, posts, and stats
+- ✍️ **Distraction-free Editor** for creating and editing posts
+- 💾 **Data Storage** handled by **Supabase (Postgres)** via **Prisma ORM**
+- 🧩 **Reusable UI Components** (ShadCN, Tailwind CSS)
+- 🌙 **Light/Dark Theme Toggle**
+- 🔍 **Search Bar** for finding posts
+- 💬 **Future plans**: Likes, comments, and favorite categories
 
 ---
 
@@ -47,52 +51,56 @@ NextBlog allows users to browse, read, and create blog posts while managing thei
 
 ### **Home Page**
 
-- Featured post at the top.
-- Three secondary posts below the featured post.
-- Grid of recent posts.
-- Columns showcasing popular authors, most liked posts, and popular tags.
-- CTA section encouraging users to write a post.
-- Footer with navigation links and legal info.
+- Hero featured post
+- Secondary posts
+- Grid of recent posts
+- CTA inviting users to write a post
+- Sections for popular authors, most-viewed and top-liked post
 
 ### **Post Page**
 
-- Displays post content with title, text, tags, and author info.
-- Meta details include date, reading time, and engagement.
-- Comments section for interaction.
+- Full post view with author info, date, and reading time
+- Tag display and meta details
 
 ### **Author Page**
 
-- Shows author profile info: avatar, name, bio, social links, date joined.
-- Displays the author’s posts in a card layout.
+- Public author profile: avatar, bio, join date, social links
+- List of author's posts
 
-### **Profile Page**
+### **Dashboard**
 
-- Displays logged-in user’s info.
-- Options to edit profile, change avatar, view posts, and see statistics.
+Private area accessible only to logged-in users.
 
-### **Dashboard Pages**
+- **Manage Profile**: View and edit user details (avatar, display name, bio, etc.)
+- **Add Post**: Minimal editor for creating new posts
+- **My Posts**: All user's posts with edit/delete options
+- **Stats**: Engagement overview (planned)
 
-- **Add Post**: Minimal, distraction-free editor for creating posts.
-- **All Posts**: Overview of all posts by the user, with options to edit or delete.
-- **Stats**: Placeholder for post and engagement statistics (planned).
+> Dashboard routes are non-indexed (`robots: noindex, nofollow`).
 
-### **Additional Pages**
+---
 
-- About, Contact, 404 Page, Terms of use, Privacy Policy
-- Legal info displayed in the footer.
+## **Additional Pages**
+
+- About, Contact, 404
+- Terms of Use and Privacy Policy
+- Footer includes navigation + legal info
 
 ---
 
 ## Technical Details
 
-- **Framework**: Next.js with TypeScript.
-- **Routing**: App Router for page navigation.
-- **Authentication**: Clerk for user sign-up, login, and protected routes.
-- **Styling**: Tailwind CSS with ShadCN components and custom color palette.
-- **State Management**: Local component state and remote state handling where needed.
-- **Theming**: Light and dark mode toggle using NextThemes.
-- **Data Handling**: Prisma prepared for database models (users, posts, tags, likes, comments).
+- **Framework**: Next.js (App Router, TypeScript)
+- **Auth**: Clerk (sign-in, sign-up, protected routes)
+- **Database**: Supabase (PostgreSQL)
+- **ORM**: Prisma (models for users, posts, likes, comments)
+- **Styling**: Tailwind CSS + ShadCN UI
+- **State & Data**: React Query for fetching and caching
+- **Themes**: NextThemes for dark/light mode
+- **Deployment**: Vercel
 
-## Live version
+---
+
+## Live Version
 
 https://next-blogs-2025.vercel.app/
