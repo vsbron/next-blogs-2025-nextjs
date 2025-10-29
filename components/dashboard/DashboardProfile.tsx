@@ -1,22 +1,33 @@
 "use client";
 import { useState } from "react";
 
+import useCurrentUser from "@/hooks/useCurrentUser";
+
+import EditCredentials from "./EditCredentials";
 import ProfileDetails from "@/components/ProfileDetails";
 import SectionTitle from "@/components/SectionTitle";
-import ProfileEdit from "@/components/dashboard/ProfileEdit";
+import EditProfile from "@/components/dashboard/EditProfile";
 import { Button } from "@/components/ui/button";
-import useCurrentUser from "@/hooks/useCurrentUser";
 
 function DashboardProfile() {
   // Get the user details and auth state and function
   const { user, isPending } = useCurrentUser();
 
   // Create state value for editing mode
-  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [isEditingDetails, setIsEditingDetails] = useState<boolean>(false);
+  const [isEditingCredentials, setIsEditingCredentials] =
+    useState<boolean>(false);
 
   // Mode toggle function
-  const toggleEditingMode = () => {
-    setIsEditing((iE) => !iE);
+  const enterEditDetails = () => {
+    setIsEditingDetails(true);
+  };
+  const enterEditCredentials = () => {
+    setIsEditingCredentials(true);
+  };
+  const exitEditMode = () => {
+    setIsEditingDetails(false);
+    setIsEditingCredentials(false);
   };
 
   // Guard clause
@@ -26,14 +37,23 @@ function DashboardProfile() {
   return (
     <section>
       <SectionTitle>Manage profile</SectionTitle>
-      {isEditing ? <ProfileEdit user={user} /> : <ProfileDetails user={user} />}
-      <Button
-        onClick={toggleEditingMode}
-        className="mt-10"
-        disabled={isPending}
-      >
-        {isEditing ? "Save changes" : "Edit profile"}
-      </Button>
+      {!(isEditingCredentials || isEditingDetails) && (
+        <>
+          <ProfileDetails user={user} />
+          <div className="flex gap-x-4 mt-10">
+            <Button onClick={enterEditCredentials} disabled={isPending}>
+              Change email/password
+            </Button>
+            <Button onClick={enterEditDetails} disabled={isPending}>
+              Edit profile
+            </Button>
+          </div>
+        </>
+      )}
+      {isEditingDetails && <EditProfile user={user} exitFn={exitEditMode} />}
+      {isEditingCredentials && (
+        <EditCredentials clerkId={user.clerkId} exitFn={exitEditMode} />
+      )}
     </section>
   );
 }
