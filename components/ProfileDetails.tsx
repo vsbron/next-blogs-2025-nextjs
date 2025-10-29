@@ -6,9 +6,25 @@ import { formatDate } from "@/utils/helpers";
 
 function ProfileDetails({ user }: { user: User }) {
   // Destructure the user
-  const { avatarUrl, displayName, email, id, bio, dateCreated, username } =
-    user;
-  const date = formatDate(dateCreated);
+  const {
+    avatarUrl,
+    displayName,
+    email,
+    id,
+    bio,
+    dateCreated,
+    username,
+    birthday,
+    gender,
+    country,
+    socials,
+  } = user;
+
+  // Format dates
+  const dateJoined = formatDate(dateCreated);
+  const dateBirth = birthday ? formatDate(new Date(birthday)) : "Unknown";
+
+  console.log(socials);
 
   // Returned JSX
   return (
@@ -36,11 +52,13 @@ function ProfileDetails({ user }: { user: User }) {
       <ProfileDetailLine label="ID">{id}</ProfileDetailLine>
       <ProfileDetailLine label="Email">{email}</ProfileDetailLine>
       <ProfileDetailLine label="Date joined" className="mb-3">
-        {date}
+        {dateJoined}
       </ProfileDetailLine>
-      <ProfileDetailLine label="Birthday">Unknown</ProfileDetailLine>
-      <ProfileDetailLine label="Gender">Unknown</ProfileDetailLine>
-      <ProfileDetailLine label="Country">Unknown</ProfileDetailLine>
+      <ProfileDetailLine label="Birthday">{dateBirth}</ProfileDetailLine>
+      <ProfileDetailLine label="Gender">{gender}</ProfileDetailLine>
+      <ProfileDetailLine label="Country">
+        {country || "Unknown"}
+      </ProfileDetailLine>
       <div className="mb-3 max-w-[550px]">
         Bio:
         <br />

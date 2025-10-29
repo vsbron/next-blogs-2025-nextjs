@@ -59,13 +59,13 @@ export async function POST(req: Request) {
         username: `User${nextId}`,
         avatarUrl: u.image_url,
         gender: "Unknown",
-        socials: {
-          website: "",
-          facebook: "",
-          x: "",
-          instagram: "",
-          reddit: "",
-        },
+        socials: [
+          { key: "website", value: "" },
+          { key: "facebook", value: "" },
+          { key: "x", value: "" },
+          { key: "instagram", value: "" },
+          { key: "reddit", value: "" },
+        ],
       },
     });
   }
