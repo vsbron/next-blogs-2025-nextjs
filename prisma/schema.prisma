@@ -32,7 +32,7 @@ model User {
   gender          Gender        @default(Unknown)
   country         String?
   bio             String?
-  socials         Json?
+  socials         Json
 
   posts           Post[]
   likes           Like[]

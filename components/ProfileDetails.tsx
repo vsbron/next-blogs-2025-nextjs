@@ -3,6 +3,7 @@ import { User } from "@prisma/client";
 
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
+import Link from "next/link";
 
 function ProfileDetails({ user }: { user: User }) {
   // Destructure the user
@@ -20,11 +21,10 @@ function ProfileDetails({ user }: { user: User }) {
     socials,
   } = user;
 
-  // Format dates
+  // Format dates and socials
   const dateJoined = formatDate(dateCreated);
   const dateBirth = birthday ? formatDate(new Date(birthday)) : "Unknown";
-
-  console.log(socials);
+  const socialsArray = socials as { key: string; value: string }[];
 
   // Returned JSX
   return (
@@ -39,16 +39,12 @@ function ProfileDetails({ user }: { user: User }) {
             className="rounded-full"
           />
         </div>
-        <div className="flex flex-col items-start gap-1 font-poppins">
-          <h2 className="text-3xl">
-            <span className="text-foreground/60">Name:</span> {displayName}
-          </h2>
-          <h4 className="text-2xl">
-            <span className="text-foreground/60">Username:</span> {username}
-          </h4>
+        <div className="flex flex-col items-start font-poppins">
+          <h2 className="text-3xl">{displayName}</h2>
+          <h4 className="text-2xl text-foreground/50">{username}</h4>
         </div>
       </div>
-      <h5 className="text-lg font-medium font-poppins">Details:</h5>
+      <h5 className="text-xl font-medium font-poppins">Details:</h5>
       <ProfileDetailLine label="ID">{id}</ProfileDetailLine>
       <ProfileDetailLine label="Email">{email}</ProfileDetailLine>
       <ProfileDetailLine label="Date joined" className="mb-3">
@@ -59,16 +55,30 @@ function ProfileDetails({ user }: { user: User }) {
       <ProfileDetailLine label="Country">
         {country || "Unknown"}
       </ProfileDetailLine>
-      <div className="mb-3 max-w-[550px]">
-        Bio:
-        <br />
-        <b>
+      <div className="mb-4 max-w-[550px]">
+        <span className="block font-semibold">About:</span>
+        <span>
           {bio ||
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt iste hic atque doloremque cupiditate quo distinctio dolore accusantium a doloribus dicta eligendi numquam recusandae iusto tempora exercitationem, cum fuga! Debitis."}
-        </b>
+        </span>
       </div>
       <div>
-        Social accounts: <div className="flex items-center gap-x-4 mt-1"></div>
+        <div className="text-xl font-poppins">Social accounts:</div>
+        <div className="flex items-center gap-x-4 mt-2">
+          {socialsArray.map(({ key, value }) => (
+            <a
+              href={value}
+              key={key}
+              target="_blank"
+              rel="noreferrer"
+              className={value ? "" : "opacity-50 pointer-events-none"}
+            >
+              <svg className="fill-foreground hover:fill-primary-light transition-all w-5 h-5">
+                <use href={`/set-socials.svg#${key}`}></use>
+              </svg>
+            </a>
+          ))}
+        </div>
       </div>
     </>
   );
@@ -90,8 +100,10 @@ function ProfileDetailLine({
   // Returned JSX
   return (
     <div>
-      <span className={`inline-block w-30 ${className}`}>{label}:</span>
-      <b>{children}</b>
+      <span className={`inline-block w-30 font-semibold ${className}`}>
+        {label}:
+      </span>
+      <span>{children}</span>
     </div>
   );
 }
