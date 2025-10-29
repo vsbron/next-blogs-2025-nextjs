@@ -1,16 +1,9 @@
 "use client";
 import { User } from "@prisma/client";
 import { Button } from "../ui/button";
-import TextInput from "../form/textInput";
 import TextAreaInput from "../form/TextAreaInput";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import SelectInput from "../form/SelectInput";
+import BaseInput from "../form/BaseInput";
 
 // Props type
 type EditProfileProps = {
@@ -28,8 +21,8 @@ function EditProfile({ user, exitFn }: EditProfileProps) {
     <>
       <h2 className="font-poppins text-2xl mb-4">Edit credentials</h2>
       <form className="flex flex-col gap-4">
-        <TextInput id="username" label="Username" placeholder="Set username" />
-        <TextInput
+        <BaseInput id="username" label="Username" placeholder="Set username" />
+        <BaseInput
           id="displayName"
           label="Display name"
           placeholder="Enter your name"

@@ -3,7 +3,7 @@ import { Label } from "../ui/label";
 import FormGroup from "./FormGroup";
 
 // Props type
-type TextInputProps = {
+type BaseInputProps = {
   type?: string;
   id: string;
   label: string;
@@ -11,7 +11,7 @@ type TextInputProps = {
 };
 
 // The component
-function TextInput({ type = "text", id, label, placeholder }: TextInputProps) {
+function BaseInput({ type = "text", id, label, placeholder }: BaseInputProps) {
   // Returned JSX
   return (
     <FormGroup>
@@ -21,4 +21,4 @@ function TextInput({ type = "text", id, label, placeholder }: TextInputProps) {
   );
 }
 
-export default TextInput;
+export default BaseInput;
