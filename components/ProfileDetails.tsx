@@ -3,7 +3,6 @@ import { User } from "@prisma/client";
 
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
-import Link from "next/link";
 
 function ProfileDetails({ user }: { user: User }) {
   // Destructure the user
@@ -30,7 +29,7 @@ function ProfileDetails({ user }: { user: User }) {
   return (
     <>
       <div className="flex items-center gap-x-6 mb-6">
-        <div className="w-25 h-25 relative">
+        <div className="w-22 h-22 relative">
           <Image
             src={avatarUrl || defaultAvatar}
             fill
