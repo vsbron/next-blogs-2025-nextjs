@@ -13,17 +13,30 @@ datasource db {
   url = env("DATABASE_URL")
 }
 
+enum Gender {
+  Male
+  Female
+  Unknown
+}
+
 model User {
   id              Int           @id @unique
   clerkId         String        @unique
   email           String        @unique
   username        String        @unique
   avatarUrl       String?
-  displayName     String
-  bio             String?
   dateCreated     DateTime      @default(now())
+  
+  displayName     String
+  birthday        String?
+  gender          Gender        @default(Unknown)
+  country         String?
+  bio             String?
+  socials         Json?
+
   posts           Post[]
   likes           Like[]
+  categories      String[]
 }
 
 model Post {

@@ -6,7 +6,6 @@ import type { WebhookEvent } from "@clerk/nextjs/server";
 // Create Prisma client
 const prisma = new PrismaClient();
 
-
 export async function POST(req: Request) {
   // Get the payload and headers
   const payload = await req.text();
@@ -59,6 +58,14 @@ export async function POST(req: Request) {
           "Unnamed user",
         username: `User${nextId}`,
         avatarUrl: u.image_url,
+        gender: "Unknown",
+        socials: {
+          website: "",
+          facebook: "",
+          x: "",
+          instagram: "",
+          reddit: "",
+        },
       },
     });
   }
