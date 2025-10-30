@@ -7,15 +7,26 @@ type TextAreaInputProps = {
   id: string;
   label: string;
   placeholder: string;
+  height?: string;
 };
 
 // The component
-function TextAreaInput({ id, label, placeholder }: TextAreaInputProps) {
+function TextAreaInput({
+  id,
+  label,
+  placeholder,
+  height = "75",
+}: TextAreaInputProps) {
   // Returned JSX
   return (
     <FormGroup>
       <Label htmlFor={id}>{label}</Label>
-      <Textarea id={id} placeholder={placeholder} className="resize-none" />
+      <Textarea
+        id={id}
+        placeholder={placeholder}
+        className={"resize-none"}
+        style={{ height: `${height}px` }}
+      />
     </FormGroup>
   );
 }
