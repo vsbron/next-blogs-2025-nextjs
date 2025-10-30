@@ -1,6 +1,6 @@
 "use client";
+import TextInput from "@/components/form/TextInput";
 import { Button } from "@/components/ui/button";
-import BaseInput from "../form/BaseInput";
 
 // Props type
 type EditCredentialsProps = {
@@ -15,20 +15,20 @@ function EditCredentials({ clerkId, exitFn }: EditCredentialsProps) {
     <>
       <h2 className="font-poppins text-2xl mb-4">Edit credentials</h2>
       <form className="flex flex-col gap-4">
-        <BaseInput id="email" label="Email" placeholder="Enter your email" />
-        <BaseInput
+        <TextInput id="email" label="Email" placeholder="Enter your email" />
+        <TextInput
           type="password"
           id="currentPassword"
           label="Current password"
           placeholder="Enter your current password"
         />
-        <BaseInput
+        <TextInput
           type="password"
           id="password"
           label="New password"
           placeholder="Choose your new password"
         />
-        <BaseInput
+        <TextInput
           type="password"
           id="confirmPassword"
           label="Confirm new password"

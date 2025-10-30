@@ -1,8 +1,8 @@
 "use client";
 import { useClerk } from "@clerk/nextjs";
 
-import { DropdownMenuItem } from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 function Authentication() {
   // Get the Clerk object

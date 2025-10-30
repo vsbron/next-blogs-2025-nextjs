@@ -8,7 +8,7 @@ import HeaderSeparator from "./Header/HeaderSeparator";
 import Dropdown from "./Header/Dropdown";
 import Logo from "./Header/Logo";
 import Search from "./Header/Search";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 function Header() {
   // Returned JSX

@@ -1,17 +1,17 @@
-import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { MenuIcon } from "lucide-react";
 import Link from "next/link";
+import { MenuIcon } from "lucide-react";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 import Authentication from "./Authentication";
 import DropdownUserDetails from "./DropdownUserDetails";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 
 import { personalAreaLinks, primaryLinks } from "@/utils/links";
 

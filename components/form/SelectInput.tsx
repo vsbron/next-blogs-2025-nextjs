@@ -1,12 +1,12 @@
-import { Label } from "../ui/label";
+import FormGroup from "./FormGroup";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import FormGroup from "./FormGroup";
+} from "@/components/ui/select";
 
 // Props type
 type SelectInputProps = {

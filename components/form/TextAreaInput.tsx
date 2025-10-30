@@ -1,6 +1,6 @@
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
 import FormGroup from "./FormGroup";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 // Props type
 type TextAreaInputProps = {

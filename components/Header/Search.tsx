@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
 
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 function Search() {
   // Create state variable for search term, searching state and referrer for input field

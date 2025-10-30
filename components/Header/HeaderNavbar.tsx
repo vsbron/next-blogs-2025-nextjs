@@ -1,5 +1,6 @@
-import { primaryLinks } from "@/utils/links";
 import Link from "next/link";
+
+import { primaryLinks } from "@/utils/links";
 
 function HeaderNavbar() {
   // Remove the home page link

@@ -1,9 +1,9 @@
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import FormGroup from "./FormGroup";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 // Props type
-type BaseInputProps = {
+type TextInputProps = {
   type?: string;
   id: string;
   label: string;
@@ -11,7 +11,7 @@ type BaseInputProps = {
 };
 
 // The component
-function BaseInput({ type = "text", id, label, placeholder }: BaseInputProps) {
+function TextInput({ type = "text", id, label, placeholder }: TextInputProps) {
   // Returned JSX
   return (
     <FormGroup>
@@ -21,4 +21,4 @@ function BaseInput({ type = "text", id, label, placeholder }: BaseInputProps) {
   );
 }
 
-export default BaseInput;
+export default TextInput;
