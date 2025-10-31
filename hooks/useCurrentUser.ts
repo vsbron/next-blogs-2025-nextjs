@@ -2,7 +2,7 @@
 import { useClerk } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
-import { getUser } from "@/utils/actions";
+import { getUser } from "@/utils/actions/users";
 
 // Custom hook that fetches user data and returns it with a bunch of other stuff
 function useCurrentUser() {

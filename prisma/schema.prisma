@@ -30,7 +30,7 @@ model User {
   gender          Gender        @default(Unknown)
   country         String?
   bio             String?
-  socials         Json
+  socials         Json 
 
   posts           Post[]
   likes           Like[]
@@ -48,7 +48,8 @@ model Post {
   authorId        Int
   author          User          @relation(fields: [authorId], references: [id])
   likes           Like[]
-}
+  views           Int           @default(0)
+} 
 
 model Like {
   id              Int           @id @default(autoincrement())

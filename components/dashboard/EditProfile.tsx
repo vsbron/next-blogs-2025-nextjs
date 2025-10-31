@@ -17,7 +17,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { updateUserAction } from "@/utils/actions";
+import { updateUserAction } from "@/utils/actions/users";
 import { Input } from "../ui/input";
 
 // Props type
