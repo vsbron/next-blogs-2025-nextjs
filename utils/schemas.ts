@@ -31,3 +31,15 @@ export const userSchema = z.object({
 });
 
 export type UserSchema = z.infer<typeof userSchema>;
+
+export const postSchema = z.object({
+  title: z
+    .string()
+    .min(3, "Post title should be at least 3 characters")
+    .max(20, "Post title should be at most 20 characters"),
+  preview: z
+    .string()
+    .min(10, "Post preview should be at least 10 characters")
+    .max(40, "Post preview should be at most 40 characters"),
+  text: z.string().min(100, "Post text should be at least 100 characters"),
+});

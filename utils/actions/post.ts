@@ -3,6 +3,7 @@
 import db from "../db";
 import { fetchCurrentUserId } from "./actionHelpers";
 import { renderError } from "../helpers";
+import { postSchema } from "../schemas";
 
 // Action function to create a new post
 export const createPostAction = async (
@@ -13,10 +14,9 @@ export const createPostAction = async (
   const userId = await fetchCurrentUserId();
 
   try {
-    // Get the post main fields
-    const title = formData.get("title") as string;
-    const preview = formData.get("preview") as string;
-    const text = formData.get("text") as string;
+    // Get all the form data and validate it
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = postSchema.parse(rawData);
 
     // Temp
     // const image = formData.get("imageUrl") as File;
@@ -26,9 +26,7 @@ export const createPostAction = async (
     // Create post in the database
     await db.post.create({
       data: {
-        title,
-        preview,
-        text,
+        ...validatedFields,
         imageUrl,
         authorId: userId,
       },
