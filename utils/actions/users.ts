@@ -6,7 +6,7 @@ import db from "../db";
 import { userSchema } from "../schemas";
 
 // Server action function that returns user based on clerkID
-export async function getUser(clerkId: string) {
+export async function fetchCurrentUser(clerkId: string) {
   // Guard clause
   if (!clerkId) return;
 

@@ -2,12 +2,12 @@
 import { useClerk } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 
-import { getUser } from "@/utils/actions/users";
+import { fetchCurrentUser } from "@/utils/actions/users";
 
 // Custom hook that fetches user data and returns it with a bunch of other stuff
 function useCurrentUser() {
   // Get user data, signOut function and isSignedIn state from Clerk
-  const { user: clerkUser, signOut, isSignedIn } = useClerk();
+  const { user: clerkUser, isSignedIn } = useClerk();
   const clerkId = clerkUser?.id as string;
 
   // Fetch the user data based on ClerkId
@@ -17,12 +17,12 @@ function useCurrentUser() {
     error,
   } = useQuery({
     queryKey: ["user", clerkId],
-    queryFn: () => getUser(clerkId),
+    queryFn: () => fetchCurrentUser(clerkId),
     enabled: !!clerkId,
   });
 
   // Return everything
-  return { clerkId, user, isPending, error, signOut, isSignedIn };
+  return { user, isPending, error, isSignedIn };
 }
 
 export default useCurrentUser;
