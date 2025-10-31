@@ -2,7 +2,7 @@
 import { User } from "@prisma/client";
 
 import TextAreaInput from "@/components/form/TextAreaInput";
-import TextInput from "@/components/form/TextInput";
+import FormInput from "@/components/form/FormInput";
 import SelectInput from "@/components/form/SelectInput";
 import { Button } from "@/components/ui/button";
 import SectionSeparator from "../SectionSeparator";
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form";
 import { updateUserAction } from "@/utils/actions/users";
 import { Input } from "../ui/input";
+import { SubmitButton } from "../form/Buttons";
 
 // Props type
 type EditProfileProps = {
@@ -103,7 +104,7 @@ function EditProfile({ user, exitFn }: EditProfileProps) {
             )}
           />
 
-          <Button type="submit">Update User</Button>
+          <SubmitButton text="Update User" />
 
           <Button variant="outline" onClick={exitFn}>
             Cancel
@@ -118,14 +119,14 @@ export default EditProfile;
 
 {
   /* <form className="flex flex-col gap-4">
-        <TextInput id="username" label="Username" placeholder="Set username" />
-        <TextInput
+        <FormInput id="username" label="Username" placeholder="Set username" />
+        <FormInput
           id="displayName"
           label="Display name"
           placeholder="Enter your name"
         />
         <SelectInput id="gender" label="Gender" />
-        <TextInput
+        <FormInput
           id="country"
           label="Country"
           placeholder="Where you're blogging from?"
@@ -138,27 +139,27 @@ export default EditProfile;
         />
         <SectionSeparator />
         
-        <TextInput
+        <FormInput
           id="website"
           label="Website"
           placeholder="https://domain.com/"
         />
-        <TextInput
+        <FormInput
           id="facebook"
           label="Facebook"
           placeholder="https://facebook.com/username"
         />
-        <TextInput
+        <FormInput
           id="x"
           label="X (Twitter)"
           placeholder="https://x.com/username"
         />
-        <TextInput
+        <FormInput
           id="instagram"
           label="Instagram"
           placeholder="https://instagram.com/username"
         />
-        <TextInput
+        <FormInput
           id="reddit"
           label="Reddit"
           placeholder="https://www.reddit.com/user/username"

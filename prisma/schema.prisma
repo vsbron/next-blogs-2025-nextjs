@@ -22,7 +22,7 @@ model User {
   clerkId         String        @unique
   email           String        @unique
   username        String        @unique
-  avatarUrl       String?
+  imageUrl        String?
   dateCreated     DateTime      @default(now())
   
   displayName     String

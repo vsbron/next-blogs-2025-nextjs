@@ -1,40 +1,40 @@
 import FormGroup from "./FormGroup";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 
 // Props type
-type TextAreaInputProps = {
+type FormInputProps = {
+  type?: string;
   id: string;
   label?: string;
   placeholder?: string;
   defaultValue?: string;
-  height?: string;
 };
 
 // The component
-function TextAreaInput({
+function FormInput({
+  type = "text",
   id,
   label,
   placeholder,
   defaultValue,
-  height = "75",
-}: TextAreaInputProps) {
+}: FormInputProps) {
   // Returned JSX
   return (
     <FormGroup>
       <Label htmlFor={id} className="capitalize">
         {label || id}
       </Label>
-      <Textarea
+      <Input
         id={id}
         name={id}
-        className={"resize-none"}
-        style={{ height: `${height}px` }}
+        type={type}
         placeholder={placeholder}
         defaultValue={defaultValue}
+        required
       />
     </FormGroup>
   );
 }
 
-export default TextAreaInput;
+export default FormInput;
