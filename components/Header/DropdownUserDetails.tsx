@@ -28,7 +28,7 @@ function DropdownUserDetails() {
         ) : (
           <>
             <Image
-              src={user?.avatarUrl ?? defaultAvatar}
+              src={user?.imageUrl ?? defaultAvatar}
               width={40}
               height={40}
               className="rounded-full"

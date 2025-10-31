@@ -17,7 +17,7 @@ export const fetchRecentPosts = async () => {
         select: {
           id: true,
           username: true,
-          avatarUrl: true,
+          imageUrl: true,
         },
       },
       _count: { select: { likes: true } },

@@ -7,7 +7,7 @@ import { formatDate } from "@/utils/helpers";
 function ProfileDetails({ user }: { user: User }) {
   // Destructure the user
   const {
-    avatarUrl,
+    imageUrl,
     displayName,
     email,
     id,
@@ -31,7 +31,7 @@ function ProfileDetails({ user }: { user: User }) {
       <div className="flex items-center gap-x-6 mb-6">
         <div className="w-22 h-22 relative">
           <Image
-            src={avatarUrl || defaultAvatar}
+            src={imageUrl || defaultAvatar}
             fill
             alt={displayName || "Unknown user"}
             sizes="100px"
