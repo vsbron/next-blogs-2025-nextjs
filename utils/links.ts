@@ -16,5 +16,6 @@ export const personalAreaLinks = [
   { label: "Manage profile", href: "/dashboard/profile" },
   { label: "Add a post", href: "/dashboard/add-post" },
   { label: "My posts", href: "/dashboard/my-posts" },
+  { label: "Liked posts", href: "/dashboard/liked-posts" },
   { label: "Stats", href: "/dashboard/stats" },
 ];

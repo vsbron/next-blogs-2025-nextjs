@@ -1,8 +1,7 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { PencilLine } from "lucide-react";
-import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
@@ -10,17 +9,6 @@ import { Button } from "@/components/ui/button";
 import CTAImg from "@/assets/ctaImg.png";
 
 function CTASection({ index = false }: { index?: boolean }) {
-  // Get the Clerk object
-  const clerk = useClerk();
-
-  // Authentication pop up triggers
-  const triggerSignIn = () => {
-    clerk.openSignIn({});
-  };
-  const triggerSignUp = () => {
-    clerk.openSignUp({});
-  };
-
   // Returned JSX
   return (
     <section
@@ -55,17 +43,16 @@ function CTASection({ index = false }: { index?: boolean }) {
             Sign up or log in to start sharing your stories today!
           </p>
           <div className="flex gap-2 sm:gap-4">
-            <Button size="lg" className="text-lg" onClick={triggerSignIn}>
-              Log in
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-lg"
-              onClick={triggerSignUp}
-            >
-              Sign Up
-            </Button>
+            <SignInButton mode="modal">
+              <Button size="lg" className="text-lg">
+                Log In
+              </Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button variant="outline" size="lg" className="text-lg">
+                Sign Up
+              </Button>
+            </SignUpButton>
           </div>
         </SignedOut>
       </div>

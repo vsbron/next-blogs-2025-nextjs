@@ -12,7 +12,7 @@ function PoweredBy() {
           <Link
             key={title}
             href={href}
-            className="fill-foreground/90 hover:fill-muted-foreground transition-all"
+            className="fill-muted-foreground hover:fill-foreground/90 transition-all"
           >
             <svg className="w-6 h-6 sm:w-8 sm:h-8">
               <title>{title}</title>

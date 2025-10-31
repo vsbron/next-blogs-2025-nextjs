@@ -1,5 +1,4 @@
-"use client";
-import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 import FooterNavColumn from "./FooterNavColumn";
 import { Button } from "@/components/ui/button";
@@ -7,17 +6,6 @@ import { Button } from "@/components/ui/button";
 import { personalAreaLinks, primaryLinks, secondaryLinks } from "@/utils/links";
 
 function FooterNavbar() {
-  // Get the Clerk object
-  const clerk = useClerk();
-
-  // Authentication pop up triggers
-  const triggerSignInPopUp = () => {
-    clerk.openSignIn({});
-  };
-  const triggerSignUpPopUp = () => {
-    clerk.openSignUp({});
-  };
-
   // Returned JSX
   return (
     <div className="flex flex-col sm:flex-row gap-8 sm:gap-24">
@@ -33,12 +21,12 @@ function FooterNavbar() {
         <div>
           <SignedOut>
             <div className="flex sm:flex-col gap-2">
-              <Button variant="default" onClick={triggerSignInPopUp}>
-                Log in
-              </Button>
-              <Button variant="outline" onClick={triggerSignUpPopUp}>
-                Sign Up
-              </Button>
+              <SignInButton mode="modal">
+                <Button>Log In</Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button variant="outline">Sign Up</Button>
+              </SignUpButton>
             </div>
           </SignedOut>
           <SignedIn>
