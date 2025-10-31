@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ReactQueryProvider } from "@/components/react-query-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
@@ -99,6 +100,7 @@ export default function RootLayout({
                 </Container>
               </main>
               <Footer />
+              <Toaster />
             </ThemeProvider>
           </body>
         </html>

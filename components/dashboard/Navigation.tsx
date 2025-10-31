@@ -10,7 +10,7 @@ function Navigation() {
 
   // Returned JSX
   return (
-    <div className="flex flex-col font-poppins border-r">
+    <div className="flex flex-col font-poppins border-r max-content-width">
       {personalAreaLinks.map(({ label, href }) => (
         <div
           key={href}
@@ -18,7 +18,7 @@ function Navigation() {
             pathname === href ? "!bg-primary !text-background" : ""
           }`}
         >
-          <Link href={href} className="block py-2.5 px-6.5">
+          <Link href={href} className="block py-2.5 px-6.5 whitespace-nowrap">
             {label}
           </Link>
         </div>

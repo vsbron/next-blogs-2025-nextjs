@@ -32,6 +32,7 @@ function TextAreaInput({
         style={{ height: `${height}px` }}
         placeholder={placeholder}
         defaultValue={defaultValue}
+        required
       />
     </FormGroup>
   );

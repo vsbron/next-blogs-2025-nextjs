@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 function layout({ children }: { children: React.ReactNode }) {
   // Returned JSX
   return (
-    <div className="flex gap-x-8">
+    <div className="flex gap-x-8 w-full">
       <Navigation />
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 }

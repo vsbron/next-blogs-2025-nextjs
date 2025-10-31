@@ -1,10 +1,12 @@
+import { Prisma } from "@prisma/client";
+
 import FormGroup from "./FormGroup";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 function ImageInput() {
   // Name for the image id & name
-  const name = "imageUrl";
+  const name = Prisma.UserScalarFieldEnum.imageUrl;
 
   // Returned JSX
   return (
