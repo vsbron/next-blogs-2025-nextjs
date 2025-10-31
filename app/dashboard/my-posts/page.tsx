@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 // The page
-function ProfilePostsPage() {
+async function ProfilePostsPage() {
   // Returned JSX
   return (
     <section>

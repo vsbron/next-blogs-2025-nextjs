@@ -1,6 +1,6 @@
 "use server";
 import db from "../db";
-import { fetchCurrentUserId } from "./users";
+import { fetchCurrentUserId } from "./actionHelpers";
 
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {
@@ -60,14 +60,11 @@ export const fetchMostViewedPosts = async () => {
 // Server action function that fetches user's liked posts
 export const fetchUserLikedPosts = async () => {
   // Get the current user Id
-  const user = await fetchCurrentUserId();
-
-  // Guard clause
-  if (!user) throw new Error("Cannot find associated user ID");
+  const userId = await fetchCurrentUserId();
 
   // Search all user's liked posts
   const posts = await db.post.findMany({
-    where: { likes: { some: { userId: user.id } } },
+    where: { likes: { some: { userId } } },
     select: {
       id: true,
       title: true,

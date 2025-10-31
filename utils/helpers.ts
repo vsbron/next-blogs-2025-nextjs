@@ -17,3 +17,12 @@ export const formatDate = (date: Date) => {
     day: "numeric",
   }).format(date);
 };
+
+// Rendering error function for actions
+export const renderError = (err: unknown, text: string) => {
+  console.log(err);
+  return {
+    message:
+      err instanceof Error ? err.message : `There was an error while ${text}`,
+  };
+};
