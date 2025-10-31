@@ -1,9 +1,10 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 import db from "../db";
 import { userSchema } from "../schemas";
+import { redirect } from "next/navigation";
 
 // Server action function that returns user based on clerkID
 export async function fetchCurrentUser(clerkId: string) {
@@ -16,6 +17,22 @@ export async function fetchCurrentUser(clerkId: string) {
   // Return user
   return user;
 }
+
+export const fetchCurrentUserId = async () => {
+  // Get the current user clerkId
+  const { userId: clerkId } = await auth();
+  if (!clerkId) redirect("/");
+
+  // Fetch user id
+  const fetchedUser = await db.user.findUnique({
+    where: { clerkId },
+    select: { id: true },
+  });
+  if (!fetchedUser) throw new Error("User not found");
+
+  // Return user id
+  return fetchedUser;
+};
 
 // Server action function that fetches users with most posts
 export const fetchUsersWithMostPosts = async () => {

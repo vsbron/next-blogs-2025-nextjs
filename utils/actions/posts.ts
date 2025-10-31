@@ -1,6 +1,6 @@
 "use server";
-import { auth } from "@clerk/nextjs/server";
 import db from "../db";
+import { fetchCurrentUserId } from "./users";
 
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {
@@ -59,19 +59,8 @@ export const fetchMostViewedPosts = async () => {
 
 // Server action function that fetches user's liked posts
 export const fetchUserLikedPosts = async () => {
-  // Get the current user clerkId
-  const { userId: clerkId } = await auth();
-
-  // Guard clause
-  if (!clerkId) {
-    throw new Error("You are not authenticated");
-  }
-
-  // Fetch the user's inner ID from Prisma
-  const user = await db.user.findUnique({
-    where: { clerkId },
-    select: { id: true },
-  });
+  // Get the current user Id
+  const user = await fetchCurrentUserId();
 
   // Guard clause
   if (!user) throw new Error("Cannot find associated user ID");
