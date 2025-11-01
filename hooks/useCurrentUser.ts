@@ -17,7 +17,7 @@ function useCurrentUser() {
     error,
   } = useQuery({
     queryKey: ["user", clerkId],
-    queryFn: () => fetchCurrentUser(clerkId),
+    queryFn: () => fetchCurrentUser(),
     enabled: !!clerkId,
   });
 
