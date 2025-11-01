@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useActionState } from "react";
+import { useEffect } from "react";
+import { useFormState } from "react-dom";
 
 import { toast } from "sonner";
-import { type actionFunction } from "@/utils/types";
 import { cn } from "@/lib/utils";
+import { type actionFunction } from "@/utils/types";
 
 // Set the Initial state
 const initialState = {
@@ -20,7 +21,7 @@ type FormContainerProps = {
 // The component
 function FormContainer({ action, children, className }: FormContainerProps) {
   // Get the form state and action
-  const [state, formAction] = useActionState(action, initialState);
+  const [state, formAction] = useFormState(action, initialState);
 
   // use effect function that displays the toast when state changes
   useEffect(() => {

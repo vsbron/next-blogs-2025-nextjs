@@ -38,7 +38,7 @@ function PostButton() {
   // Returned JSX
   return (
     <Button size="sm" asChild>
-      <Link href="/profile/add-post">
+      <Link href="/dashboard/add-post">
         <PencilLine />
         <span className="hidden xs:inline">Post</span>
       </Link>
