@@ -1,32 +1,38 @@
 "use client";
+import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import FormInput from "../form/FormInput";
 import TextAreaInput from "../form/TextAreaInput";
 import ImageInput from "../form/ImageInput";
-import { Button } from "@/components/ui/button";
 
 import { createPostAction } from "@/utils/actions/post";
 import { handleFormAction } from "@/utils/helpers";
-import { postSchema } from "@/utils/schemas";
+import { imageSchema, postSchema } from "@/utils/schemas";
 import { SubmitButton } from "../form/Buttons";
 
+// Type for form values
 type FormValues = {
   title: string;
   preview: string;
   text: string;
-  imageUrl?: File;
+  imageUrl: File;
 };
 
+// The component
 function AddNewPost() {
+  // Combine 2 schemas
+  const combinedSchema = z.intersection(postSchema, imageSchema);
+
   // Get the form values from React-Hook-Form
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
-    resolver: zodResolver(postSchema),
+    resolver: zodResolver(combinedSchema),
     mode: "onBlur",
   });
 
@@ -62,6 +68,7 @@ function AddNewPost() {
       <ImageInput
         {...register("imageUrl")}
         label="Add an image"
+        setValue={setValue}
         error={errors.imageUrl?.message}
       />
       <SubmitButton text="Add a post" isPending={isSubmitting} />

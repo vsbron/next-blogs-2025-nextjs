@@ -14,5 +14,6 @@ export function validatedWithZodSchema<T>(
     throw new Error(error.join(", "));
   }
 
+  // Return the data
   return result.data;
 }

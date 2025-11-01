@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_IMAGE_FILE_SIZE } from "./constants";
 
 export const userSchema = z.object({
   username: z
@@ -32,6 +33,8 @@ export const userSchema = z.object({
 
 export type UserSchema = z.infer<typeof userSchema>;
 
+/**********************************/
+
 export const postSchema = z.object({
   title: z
     .string()
@@ -49,3 +52,28 @@ export const postSchema = z.object({
     { message: "Post text must be between 10 and 1500 words" }
   ),
 });
+
+export const imageSchema = z.object({
+  imageUrl: validateImageFile(),
+});
+
+function validateImageFile() {
+  // Set maximum size for an image
+  const maxUploadSize = MAX_IMAGE_FILE_SIZE;
+  const acceptedFileTypes = ["image/"];
+
+  return (
+    z
+      .instanceof(File)
+      // Check the size
+      .refine((file) => {
+        return !file || file.size <= maxUploadSize;
+      }, "File size must be less than 3MB")
+      // Check the file type
+      .refine((file) => {
+        return (
+          !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
+        );
+      }, "File must be an image")
+  );
+}

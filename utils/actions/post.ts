@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import db from "../db";
-import { postSchema } from "../schemas";
+import { imageSchema, postSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
 import { actionReturnType } from "../types";
 import { renderError } from "../helpers";
@@ -21,6 +21,13 @@ export const createPostAction = async (
     // Get all the form data and validate it
     const rawData = Object.fromEntries(formData);
     const validatedFields = validatedWithZodSchema(postSchema, rawData);
+
+    // Get the image from formData
+    const file = formData.get("imageUrl") as File;
+
+    const validatedImage = validatedWithZodSchema(imageSchema, {
+      imageUrl: file,
+    });
 
     // Temp
     // const image = formData.get("imageUrl") as File;
