@@ -1,31 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import FormGroup from "./FormGroup";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "./RichTextEditor";
 
 // Props type
 type TextAreaInputProps = React.ComponentProps<"textarea"> & {
   error?: string;
   label?: string;
-  height?: string;
+  control: any;
 };
 
 // The component
-function TextAreaInput({ error, ...props }: TextAreaInputProps) {
+function TextAreaInput({ error, control, ...props }: TextAreaInputProps) {
   // Destructure some props
-  const { id, label, height } = props;
+  const { id, label } = props;
 
   // Returned JSX
   return (
-    <FormGroup>
+    <FormGroup className="max-w-full">
       <Label htmlFor={id} className="capitalize">
         {label || id}
       </Label>
-      <Textarea
-        {...props}
-        className={"resize-none"}
-        style={{ height: `${height}px` }}
-        required
-      />
+      <RichTextEditor control={control} />
       {error && <span className="text-red-500 text-sm">{error}</span>}
     </FormGroup>
   );

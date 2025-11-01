@@ -3,6 +3,7 @@ import { useFormStatus } from "react-dom";
 import { RxReload } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 // Button sizes
 type btnSize = "default" | "lg" | "sm";
@@ -19,7 +20,7 @@ type SubmitButtonProps = {
 export function SubmitButton({
   className = "",
   text = "Submit",
-  size = "default",
+  size = "lg",
   isPending,
 }: SubmitButtonProps) {
   // Returned JSX
@@ -27,7 +28,7 @@ export function SubmitButton({
     <Button
       type="submit"
       disabled={isPending}
-      className={className}
+      className={cn("self-start mt-4", className)}
       size={size}
     >
       {isPending ? (

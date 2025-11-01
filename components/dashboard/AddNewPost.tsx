@@ -30,6 +30,7 @@ function AddNewPost() {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(combinedSchema),
@@ -58,10 +59,11 @@ function AddNewPost() {
         {...register("preview")}
         error={errors.preview?.message}
       />
+
       <TextAreaInput
         id="text"
         label="Compose your post"
-        height="150"
+        control={control}
         {...register("text")}
         error={errors.text?.message}
       />
@@ -72,7 +74,7 @@ function AddNewPost() {
         error={errors.imageUrl?.message}
       />
 
-      <SubmitButton text="Add a post" isPending={isSubmitting} />
+      <SubmitButton text="Submit post" isPending={isSubmitting} />
     </form>
   );
 }
