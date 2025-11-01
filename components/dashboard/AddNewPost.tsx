@@ -3,14 +3,14 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { SubmitButton } from "../form/Buttons";
 import FormInput from "../form/FormInput";
-import TextAreaInput from "../form/TextAreaInput";
 import ImageInput from "../form/ImageInput";
+import TextAreaInput from "../form/TextAreaInput";
 
 import { createPostAction } from "@/utils/actions/post";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
-import { SubmitButton } from "../form/Buttons";
 
 // Type for form values
 type FormValues = {
