@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
+import { auth } from "@clerk/nextjs/server";
 import db from "../db";
-import { fetchCurrentUserId } from "./actionHelpers";
 import { renderError } from "../helpers";
 import { postSchema } from "../schemas";
+import { redirect } from "next/navigation";
 
 // Action function to create a new post
 export const createPostAction = async (
   prevState: any,
   formData: FormData
 ): Promise<{ message: string }> => {
-  // Get the current user
-  const userId = await fetchCurrentUserId();
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
 
   try {
     // Get all the form data and validate it

@@ -39,16 +39,9 @@ export async function POST(req: Request) {
     // Get the event data
     const u = evt.data;
 
-    // Get last user to calculate manual ID
-    const lastUser = await prisma.user.findFirst({
-      orderBy: { id: "desc" },
-    });
-    const nextId = (lastUser?.id ?? 0) + 1;
-
     await prisma.user.create({
       data: {
         clerkId: u.id,
-        id: nextId,
         email:
           u.email_addresses?.[0]?.email_address ??
           u.external_accounts?.[0]?.email_address ??
@@ -56,7 +49,7 @@ export async function POST(req: Request) {
         displayName:
           [u.first_name, u.last_name].filter(Boolean).join(" ") ||
           "Unnamed user",
-        username: `User${nextId}`,
+        username: `User${Math.floor(Date.now() / 1000)}`,
         imageUrl: u.image_url,
         gender: "Unknown",
         socials: [

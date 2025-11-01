@@ -1,6 +1,7 @@
 "use server";
+import { auth } from "@clerk/nextjs/server";
 import db from "../db";
-import { fetchCurrentUserId } from "./actionHelpers";
+import { redirect } from "next/navigation";
 
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {
@@ -13,13 +14,7 @@ export const fetchRecentPosts = async () => {
       preview: true,
       imageUrl: true,
       published: true,
-      author: {
-        select: {
-          id: true,
-          username: true,
-          imageUrl: true,
-        },
-      },
+      views: true,
       _count: { select: { likes: true } },
     },
   });
@@ -59,8 +54,9 @@ export const fetchMostViewedPosts = async () => {
 
 // Server action function that fetches user's liked posts
 export const fetchUserLikedPosts = async () => {
-  // Get the current user Id
-  const userId = await fetchCurrentUserId();
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
 
   // Search all user's liked posts
   const posts = await db.post.findMany({
@@ -71,7 +67,6 @@ export const fetchUserLikedPosts = async () => {
       preview: true,
       imageUrl: true,
       published: true,
-      author: true,
     },
   });
 

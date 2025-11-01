@@ -10,7 +10,6 @@ function ProfileDetails({ user }: { user: User }) {
     imageUrl,
     displayName,
     email,
-    id,
     bio,
     dateCreated,
     username,
@@ -44,7 +43,6 @@ function ProfileDetails({ user }: { user: User }) {
         </div>
       </div>
       <h5 className="text-xl font-medium font-poppins">Details:</h5>
-      <ProfileDetailLine label="ID">{id}</ProfileDetailLine>
       <ProfileDetailLine label="Email">{email}</ProfileDetailLine>
       <ProfileDetailLine label="Date joined" className="mb-3">
         {dateJoined}
