@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-// Type for action function
-export type actionFunction = (
-  prevState: any,
-  formData: FormData
-) => Promise<{ message: string }>;
+// Type for action function and its return
+export type actionFunction = (formData: FormData) => actionReturnType;
+export type actionReturnType = Promise<{ success: boolean; message: string }>;

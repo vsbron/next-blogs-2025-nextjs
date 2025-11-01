@@ -4,15 +4,15 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import db from "../db";
-import { renderError } from "../helpers";
 import { postSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
+import { actionReturnType } from "../types";
+import { renderError } from "../helpers";
 
 // Action function to create a new post
 export const createPostAction = async (
-  prevState: any,
   formData: FormData
-): Promise<{ message: string }> => {
+): actionReturnType => {
   // Get the current user clerkId
   const { userId } = await auth();
   if (!userId) redirect("/");
@@ -36,7 +36,7 @@ export const createPostAction = async (
       },
     });
 
-    return { message: "Post successfully created" };
+    return { success: true, message: "Post successfully created" };
   } catch (err) {
     return renderError(err, "creating a post");
   }

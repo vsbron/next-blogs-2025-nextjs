@@ -1,4 +1,4 @@
-import z, { ZodType } from "zod";
+import { ZodType } from "zod";
 
 // Helper function that validates data and returns error if fails
 export function validatedWithZodSchema<T>(

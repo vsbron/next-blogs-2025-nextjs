@@ -12,6 +12,7 @@ type SubmitButtonProps = {
   className?: string;
   text?: string;
   size?: btnSize;
+  isPending: boolean;
 };
 
 // Submit button
@@ -19,14 +20,17 @@ export function SubmitButton({
   className = "",
   text = "Submit",
   size = "default",
+  isPending,
 }: SubmitButtonProps) {
-  // Get the current form status
-  const { pending } = useFormStatus();
-
   // Returned JSX
   return (
-    <Button type="submit" disabled={pending} className={className} size={size}>
-      {pending ? (
+    <Button
+      type="submit"
+      disabled={isPending}
+      className={className}
+      size={size}
+    >
+      {isPending ? (
         <>
           <RxReload className="mr-2 h-4 w-4 animate-spin" />
           Please wait...

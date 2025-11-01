@@ -104,8 +104,6 @@ function EditProfile({ user, exitFn }: EditProfileProps) {
             )}
           />
 
-          <SubmitButton text="Update User" />
-
           <Button variant="outline" onClick={exitFn}>
             Cancel
           </Button>

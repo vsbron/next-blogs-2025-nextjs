@@ -3,36 +3,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 // Props type
-type FormInputProps = {
-  type?: string;
-  id: string;
+type FormInputProps = React.ComponentProps<"input"> & {
+  error?: string;
   label?: string;
-  placeholder?: string;
-  defaultValue?: string;
 };
 
 // The component
-function FormInput({
-  type = "text",
-  id,
-  label,
-  placeholder,
-  defaultValue,
-}: FormInputProps) {
+function FormInput({ error, ...props }: FormInputProps) {
+  // Destructure some props
+  const { id, label } = props;
+
   // Returned JSX
   return (
     <FormGroup>
       <Label htmlFor={id} className="capitalize">
-        {label || id}
+        {id || label}
       </Label>
-      <Input
-        id={id}
-        name={id}
-        type={type}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
-        required
-      />
+      <Input {...props} />
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </FormGroup>
   );
 }

@@ -3,22 +3,17 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 // Props type
-type TextAreaInputProps = {
-  id: string;
+type TextAreaInputProps = React.ComponentProps<"textarea"> & {
+  error?: string;
   label?: string;
-  placeholder?: string;
-  defaultValue?: string;
   height?: string;
 };
 
 // The component
-function TextAreaInput({
-  id,
-  label,
-  placeholder,
-  defaultValue,
-  height = "75",
-}: TextAreaInputProps) {
+function TextAreaInput({ error, ...props }: TextAreaInputProps) {
+  // Destructure some props
+  const { id, label, height } = props;
+
   // Returned JSX
   return (
     <FormGroup>
@@ -26,14 +21,12 @@ function TextAreaInput({
         {label || id}
       </Label>
       <Textarea
-        id={id}
-        name={id}
+        {...props}
         className={"resize-none"}
         style={{ height: `${height}px` }}
-        placeholder={placeholder}
-        defaultValue={defaultValue}
         required
       />
+      {error && <span className="text-red-500 text-sm">{error}</span>}
     </FormGroup>
   );
 }

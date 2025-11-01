@@ -36,7 +36,6 @@ function EditCredentials({ clerkId, exitFn }: EditCredentialsProps) {
           placeholder="Confirm your new password"
         />
         <div className="flex gap-x-4 mt-4">
-          <SubmitButton text="Save" />
           <Button variant="outline" onClick={exitFn}>
             Cancel
           </Button>
