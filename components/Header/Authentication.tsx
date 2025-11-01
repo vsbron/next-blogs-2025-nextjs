@@ -6,7 +6,7 @@ import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 function Authentication() {
   // Returned JSX
   return (
-    <>
+    <div className="flex flex-col">
       <DropdownMenuItem className="focus:bg-transparent">
         <SignInButton mode="modal">
           <Button size="sm">Log In</Button>
@@ -19,7 +19,7 @@ function Authentication() {
           </Button>
         </SignUpButton>
       </DropdownMenuItem>
-    </>
+    </div>
   );
 }
 

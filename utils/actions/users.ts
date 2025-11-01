@@ -14,7 +14,7 @@ export async function fetchCurrentUser() {
   const { userId } = await auth();
 
   // Guard clause
-  if (!userId) redirect("/");
+  if (!userId) return null;
 
   // Fetch the user from database
   const user = await db.user.findUnique({ where: { clerkId: userId } });

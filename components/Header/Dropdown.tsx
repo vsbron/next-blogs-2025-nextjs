@@ -14,8 +14,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { personalAreaLinks, primaryLinks } from "@/utils/links";
+import { auth } from "@clerk/nextjs/server";
 
-function Dropdown() {
+async function Dropdown() {
+  // Get the isSignedIn state
+  const { userId } = await auth();
+  const isSignedIn = !!userId;
+
   // Returned JSX
   return (
     <DropdownMenu>
@@ -27,18 +32,30 @@ function Dropdown() {
       <DropdownMenuContent
         align="end"
         sideOffset={10}
-        className="bg-background py-2 rounded-md border border-border w-72 z-150"
+        className={`bg-background rounded-md border border-border z-150 ${
+          isSignedIn ? "w-72 " : "w-auto"
+        }`}
       >
         {/* USER DETAILS */}
-        <DropdownUserDetails />
-        <DropdownMenuSeparator />
+        <SignedIn>
+          <DropdownUserDetails />
+          <DropdownMenuSeparator />
+        </SignedIn>
 
         {/* MENUS */}
-        <div className="py-2 px-6 flex flex-col items-start">
+        <div
+          className={` flex flex-col items-start ${
+            isSignedIn ? "py-2 px-6" : "py-1 px-2"
+          }`}
+        >
           {/* MOBILE MENU */}
           <div className="lg:hidden">
             {primaryLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent" asChild>
+              <DropdownMenuItem
+                key={href}
+                className="focus:bg-transparent"
+                asChild
+              >
                 <Link href={href} className="link-primary cursor-pointer">
                   {label}
                 </Link>
@@ -49,7 +66,11 @@ function Dropdown() {
           {/* SIGNED IN MENU */}
           <SignedIn>
             {personalAreaLinks.map(({ label, href }) => (
-              <DropdownMenuItem key={href} className="focus:bg-transparent" asChild>
+              <DropdownMenuItem
+                key={href}
+                className="focus:bg-transparent"
+                asChild
+              >
                 <Link href={href} className="link-primary cursor-pointer">
                   {label}
                 </Link>

@@ -1,23 +1,22 @@
-"use client";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
-import { SignedIn, SignOutButton } from "@clerk/nextjs";
+import { SignOutButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import useCurrentUser from "@/hooks/useCurrentUser";
 
 import defaultAvatar from "@/assets/defaultUser.png";
+import { fetchCurrentUser } from "@/utils/actions/users";
 
-function DropdownUserDetails() {
-  // Get the user details and auth state and function
-  const { user, isPending, isSignedIn } = useCurrentUser();
+async function DropdownUserDetails() {
+  // Get current user
+  const user = await fetchCurrentUser();
 
   // Returned JSX
   return (
     <div className="pt-2 pb-4 pl-8 pr-4 flex justify-between items-center gap-x-8">
       <div className="flex items-center gap-x-3">
-        {isSignedIn && isPending ? (
+        {!user ? (
           <>
             <Skeleton className="h-10 w-10 rounded-full" />
             <div className="space-y-2">
@@ -43,13 +42,11 @@ function DropdownUserDetails() {
           </>
         )}
       </div>
-      <SignedIn>
-        <SignOutButton>
-          <Button variant="outline" size="sm">
-            <LogOut className="stroke-muted-foreground" />
-          </Button>
-        </SignOutButton>
-      </SignedIn>
+      <SignOutButton>
+        <Button variant="outline" size="sm">
+          <LogOut className="stroke-muted-foreground" />
+        </Button>
+      </SignOutButton>
     </div>
   );
 }
