@@ -1,5 +1,3 @@
-"use client";
-import { useFormStatus } from "react-dom";
 import { RxReload } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";

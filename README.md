@@ -36,14 +36,13 @@ The app focuses on a smooth UI, consistent design, and modern architecture.
 ## Features
 
 - 🧭 **Home Page** with featured and recent posts
-- 🧑‍💻 **User Authentication** powered by **Clerk**
-- 🗂️ **Dashboard** for managing profile, posts, and stats
-- ✍️ **Distraction-free Editor** for creating and editing posts
+- 🧑‍💻 **User Authentication** via **Clerk**; users are created in Prisma/Supabase and linked through `clerkId`
+- ✍️ **Add Post** feature using **Quill WYSIWYG editor**
+- 🗂️ **Dashboard** with user details, Add Post, My Posts, Liked Posts, and Stats
 - 💾 **Data Storage** handled by **Supabase (Postgres)** via **Prisma ORM**
 - 🧩 **Reusable UI Components** (ShadCN, Tailwind CSS)
 - 🌙 **Light/Dark Theme Toggle**
 - 🔍 **Search Bar** for finding posts
-- 💬 **Future plans**: Likes, comments, and favorite categories
 
 ---
 
@@ -94,6 +93,7 @@ Private area accessible only to logged-in users.
 - **Auth**: Clerk (sign-in, sign-up, protected routes)
 - **Database**: Supabase (PostgreSQL)
 - **ORM**: Prisma (models for users, posts, likes, comments)
+- **Editor**: Quill WYSIWYG for adding posts
 - **Styling**: Tailwind CSS + ShadCN UI
 - **State & Data**: React Query for fetching and caching
 - **Themes**: NextThemes for dark/light mode
