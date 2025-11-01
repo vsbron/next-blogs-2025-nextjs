@@ -1,17 +1,23 @@
 "use server";
+import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
 import { userSchema } from "../schemas";
+import { validatedWithZodSchema } from "../schemaFunctions";
+import { renderError } from "../helpers";
 
 // Server action function that returns user based on clerkID
-export async function fetchCurrentUser(clerkId: string) {
-  // Guard clause
-  if (!clerkId) return;
+export async function fetchCurrentUser() {
+  // Get current user ID
+  const { userId } = await auth();
 
-  // Fetch the user based on clerkID
-  const user = await db.user.findUnique({ where: { clerkId } });
+  // Guard clause
+  if (!userId) redirect("/");
+
+  // Fetch the user from database
+  const user = await db.user.findUnique({ where: { clerkId: userId } });
 
   // Return user
   return user;
@@ -32,31 +38,28 @@ export const fetchUsersWithMostPosts = async () => {
   return authors;
 };
 
-// -----------------------------------------------
-
 // Action function for updating the user
 export async function updateUserAction(formData: FormData) {
-  // Get the current user
-  const sessionUser = await currentUser();
-  if (!sessionUser) return;
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
+  try {
+    // Get all the form data and validate it
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = validatedWithZodSchema(userSchema, rawData);
 
-  // Get the data from the form and parse it
-  const data = Object.fromEntries(formData);
-  const parsed = userSchema.safeParse(data);
-  console.log(parsed);
-  if (!parsed.success) return;
+    // Update the prisma
+    await db.user.update({
+      where: { clerkId: userId },
+      data: validatedFields,
+    });
 
-  // Remove empty or undefined fields to avoid overwriting
-  const updateData = Object.fromEntries(
-    Object.entries(parsed.data).filter(([_, v]) => v !== undefined && v !== "")
-  );
+    // Revalidate path
+    revalidatePath("/dashboard/profile");
 
-  // Update the prisma
-  await db.user.update({
-    where: { clerkId: sessionUser!.id },
-    data: updateData,
-  });
-
-  // Revalidate path
-  revalidatePath("/dashboard/profile");
+    // Return success message
+    return { success: true, message: "User updated successfully" };
+  } catch (err) {
+    return renderError(err, "updating the user");
+  }
 }

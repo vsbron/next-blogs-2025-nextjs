@@ -16,8 +16,8 @@ export const userSchema = z.object({
   // gender: z.enum(["Male", "Female", "Unknown"]),
   country: z
     .string()
-    .min(3, "Country name should be at least 3 characters")
-    .max(30, "Country name should be at most 30 characters"),
+    .max(30, "Country name should be at most 30 characters")
+    .optional(),
   bio: z
     .string()
     .max(300, "About text should be at most 300 characters")

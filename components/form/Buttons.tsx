@@ -18,7 +18,7 @@ type SubmitButtonProps = {
 export function SubmitButton({
   className = "",
   text = "Submit",
-  size = "lg",
+  size = "default",
   isPending,
 }: SubmitButtonProps) {
   // Returned JSX
@@ -26,7 +26,7 @@ export function SubmitButton({
     <Button
       type="submit"
       disabled={isPending}
-      className={cn("self-start mt-4", className)}
+      className={cn("self-start", className)}
       size={size}
     >
       {isPending ? (

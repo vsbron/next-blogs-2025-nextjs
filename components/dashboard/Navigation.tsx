@@ -10,12 +10,12 @@ function Navigation() {
 
   // Returned JSX
   return (
-    <div className="flex flex-col font-poppins border-r max-content-width">
+    <div className="hidden sm:flex flex-col font-poppins border-r max-content-width">
       {personalAreaLinks.map(({ label, href }) => (
         <div
           key={href}
           className={`border-1 border-r-0 rounded-l-lg hover:bg-accent-light transition-colors ${
-            pathname === href ? "!bg-primary !text-background" : ""
+            pathname.startsWith(href) ? "!bg-primary !text-background" : ""
           }`}
         >
           <Link href={href} className="block py-2.5 px-6.5 whitespace-nowrap">

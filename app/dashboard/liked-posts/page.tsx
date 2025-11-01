@@ -15,7 +15,7 @@ function LikedPostsPage() {
   // Returned JSX
   return (
     <section>
-      <SectionTitle>The posts you liked</SectionTitle>
+      <SectionTitle>Posts you liked</SectionTitle>
     </section>
   );
 }

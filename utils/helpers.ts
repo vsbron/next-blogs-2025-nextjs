@@ -55,5 +55,6 @@ export async function handleFormAction(
     redirect(redirectTo);
   }
 
+  // Return the result
   return result;
 }

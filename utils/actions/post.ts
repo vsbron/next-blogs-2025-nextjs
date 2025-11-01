@@ -20,7 +20,6 @@ export const createPostAction = async (
   try {
     // Get all the form data and validate it
     const rawData = Object.fromEntries(formData);
-
     const validatedFields = validatedWithZodSchema(postSchema, rawData);
 
     // Get the image from formData
@@ -43,6 +42,7 @@ export const createPostAction = async (
       },
     });
 
+    // Return success message
     return { success: true, message: "Post successfully created" };
   } catch (err) {
     return renderError(err, "creating a post");

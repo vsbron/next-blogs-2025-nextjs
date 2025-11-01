@@ -17,7 +17,7 @@ function FormInput({ error, ...props }: FormInputProps) {
   return (
     <FormGroup>
       <Label htmlFor={id} className="capitalize">
-        {id || label}
+        {label || id}
       </Label>
       <Input {...props} />
       {error && <span className="text-red-500 text-sm">{error}</span>}

@@ -1,21 +1,15 @@
-"use client";
+import Link from "next/link";
+
+import { SubmitButton } from "@/components/form/Buttons";
 import FormInput from "@/components/form/FormInput";
 import { Button } from "@/components/ui/button";
-import { SubmitButton } from "../form/Buttons";
-
-// Props type
-type EditCredentialsProps = {
-  clerkId: string;
-  exitFn: () => void;
-};
 
 // The component
-function EditCredentials({ clerkId, exitFn }: EditCredentialsProps) {
+function EditCredentials() {
   // Returned JSX
   return (
-    <>
-      <h2 className="font-poppins text-2xl mb-4">Edit credentials</h2>
-      <form className="flex flex-col gap-4">
+    <section>
+      <form className="basic-form">
         <FormInput id="email" placeholder="Enter your email" />
         <FormInput
           type="password"
@@ -35,13 +29,14 @@ function EditCredentials({ clerkId, exitFn }: EditCredentialsProps) {
           label="Confirm new password"
           placeholder="Confirm your new password"
         />
-        <div className="flex gap-x-4 mt-4">
-          <Button variant="outline" onClick={exitFn}>
-            Cancel
+        <div className="flex gap-4 items-center mt-2">
+          <Button variant="outline" asChild>
+            <Link href="/dashboard/profile/">Go Back</Link>
           </Button>
+          <SubmitButton text="Update credentials" isPending={false} />
         </div>
       </form>
-    </>
+    </section>
   );
 }
 

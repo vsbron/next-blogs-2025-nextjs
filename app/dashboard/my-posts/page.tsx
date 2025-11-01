@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import SectionTitle from "@/components/SectionTitle";
+import { fetchRecentPosts } from "@/utils/actions/posts";
 
 // Metadata
 export const metadata: Metadata = {
@@ -11,10 +12,16 @@ export const metadata: Metadata = {
 
 // The page
 async function ProfilePostsPage() {
+  // Temp
+  const posts = await fetchRecentPosts();
+
   // Returned JSX
   return (
     <section>
       <SectionTitle>List of my posts</SectionTitle>
+      {posts.map((post) => (
+        <h2 key={post.id}>{post.title}</h2>
+      ))}
     </section>
   );
 }
