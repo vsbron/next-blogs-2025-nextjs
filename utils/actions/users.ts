@@ -23,7 +23,7 @@ export const fetchUsersWithMostPosts = async () => {
     take: 10,
     orderBy: { posts: { _count: "desc" } },
     select: {
-      id: true,
+      displayName: true,
       username: true,
       _count: { select: { posts: true } },
     },
