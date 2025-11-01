@@ -67,10 +67,11 @@ function AddNewPost() {
       />
       <ImageInput
         {...register("imageUrl")}
-        label="Add an image"
+        label="Add an image (1MB)"
         setValue={setValue}
         error={errors.imageUrl?.message}
       />
+
       <SubmitButton text="Add a post" isPending={isSubmitting} />
     </form>
   );

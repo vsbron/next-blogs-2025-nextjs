@@ -8,6 +8,7 @@ import { imageSchema, postSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
 import { actionReturnType } from "../types";
 import { renderError } from "../helpers";
+import { uploadImage } from "../supabase";
 
 // Action function to create a new post
 export const createPostAction = async (
@@ -25,20 +26,19 @@ export const createPostAction = async (
     // Get the image from formData
     const file = formData.get("imageUrl") as File;
 
+    // Validate the image file
     const validatedImage = validatedWithZodSchema(imageSchema, {
       imageUrl: file,
     });
 
-    // Temp
-    // const image = formData.get("imageUrl") as File;
-    const imageUrl =
-      "https://hips.hearstapps.com/hmg-prod/images/dutch-colonial-house-style-66956274903da.jpg";
+    // Upload the image and get the full path
+    const fullPath = await uploadImage(validatedImage.imageUrl);
 
     // Create post in the database
     await db.post.create({
       data: {
         ...validatedFields,
-        imageUrl,
+        imageUrl: fullPath,
         authorId: userId,
       },
     });
