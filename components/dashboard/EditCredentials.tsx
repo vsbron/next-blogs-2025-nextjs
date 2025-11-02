@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { SubmitButton } from "@/components/form/Buttons";
+import { ButtonsContainer, SubmitButton } from "@/components/form/Buttons";
 import FormInput from "@/components/form/FormInput";
 import { Button } from "@/components/ui/button";
 
@@ -29,12 +29,12 @@ function EditCredentials() {
           label="Confirm new password"
           placeholder="Confirm your new password"
         />
-        <div className="flex gap-4 items-center mt-2">
+        <ButtonsContainer>
           <Button variant="outline" asChild>
             <Link href="/dashboard/profile/">Go Back</Link>
           </Button>
           <SubmitButton text="Update credentials" isPending={false} />
-        </div>
+        </ButtonsContainer>
       </form>
     </section>
   );

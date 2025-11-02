@@ -1,10 +1,9 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
 
-import { ArticlePreviewTileSkeleton } from "@/components/ArticlePreviewTile";
-import PreviewTilesGrid from "@/components/PreviewTilesGrid";
 import SectionTitle from "@/components/SectionTitle";
 import MyPosts from "@/components/dashboard/MyPosts";
+import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Metadata
 export const metadata: Metadata = {
@@ -19,7 +18,7 @@ async function ProfilePostsPage() {
   return (
     <section>
       <SectionTitle>List of my posts</SectionTitle>
-      <Suspense fallback={<SkeletonTemp />}>
+      <Suspense fallback={<SkeletonPostsGrid />}>
         <MyPosts />
       </Suspense>
     </section>
@@ -27,15 +26,3 @@ async function ProfilePostsPage() {
 }
 
 export default ProfilePostsPage;
-
-// Skeleton layout
-function SkeletonTemp() {
-  // Returned JSX
-  return (
-    <PreviewTilesGrid>
-      <ArticlePreviewTileSkeleton />
-      <ArticlePreviewTileSkeleton />
-      <ArticlePreviewTileSkeleton />
-    </PreviewTilesGrid>
-  );
-}

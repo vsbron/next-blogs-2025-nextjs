@@ -1,8 +1,9 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
-import DashboardProfile from "@/components/dashboard/DashboardProfile";
 import SectionTitle from "@/components/SectionTitle";
-import { fetchCurrentUser } from "@/utils/actions/users";
+import DashboardProfile from "@/components/dashboard/DashboardProfile";
+import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 
 // Metadata
 export const metadata: Metadata = {
@@ -13,14 +14,13 @@ export const metadata: Metadata = {
 
 // The page
 async function ProfilePage() {
-  // Get current user
-  const user = await fetchCurrentUser();
-
   // Returned JSX
   return (
     <>
       <SectionTitle>Manage profile</SectionTitle>
-      {!user ? <p>Loading...</p> : <DashboardProfile user={user} />}
+      <Suspense fallback={<SkeletonProfile />}>
+        <DashboardProfile />
+      </Suspense>
     </>
   );
 }

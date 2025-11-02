@@ -4,7 +4,7 @@ import { User } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SubmitButton } from "@/components/form/Buttons";
+import { ButtonsContainer, SubmitButton } from "@/components/form/Buttons";
 import FormInput from "@/components/form/FormInput";
 import { Button } from "@/components/ui/button";
 
@@ -41,7 +41,7 @@ function EditProfile({ user }: { user: User }) {
     },
   });
 
-  // On submit handler
+  // Form submit handler
   const onSubmit = async (data: FormValues) => {
     await handleFormAction(updateUserAction, data, "/dashboard/profile");
   };
@@ -76,12 +76,12 @@ function EditProfile({ user }: { user: User }) {
           {...register("bio")}
           error={errors.bio?.message}
         />
-        <div className="flex gap-4 items-center mt-2">
+        <ButtonsContainer>
           <Button variant="outline" asChild>
             <Link href="/dashboard/profile/">Go Back</Link>
           </Button>
           <SubmitButton text="Update user" isPending={isSubmitting} />
-        </div>
+        </ButtonsContainer>
       </form>
     </section>
   );

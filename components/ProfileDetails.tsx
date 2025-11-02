@@ -4,6 +4,10 @@ import { User } from "@prisma/client";
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
 
+import { FaBirthdayCake, FaFlag, FaCalendarAlt, FaUser } from "react-icons/fa";
+import { BiMaleFemale } from "react-icons/bi";
+import { IoMailSharp } from "react-icons/io5";
+
 function ProfileDetails({ user }: { user: User }) {
   // Destructure the user
   const {
@@ -43,21 +47,30 @@ function ProfileDetails({ user }: { user: User }) {
         </div>
       </div>
       <h5 className="text-xl font-medium font-poppins">Details:</h5>
-      <ProfileDetailLine label="Email">{email}</ProfileDetailLine>
-      <ProfileDetailLine label="Date joined" className="mb-3">
+      <ProfileDetailLine icon={<IoMailSharp />} label="Email">
+        {email}
+      </ProfileDetailLine>
+      <ProfileDetailLine
+        icon={<FaCalendarAlt />}
+        label="Date joined"
+        className="mb-3"
+      >
         {dateJoined}
       </ProfileDetailLine>
-      <ProfileDetailLine label="Birthday">{dateBirth}</ProfileDetailLine>
-      <ProfileDetailLine label="Gender">{gender}</ProfileDetailLine>
-      <ProfileDetailLine label="Country">
+      <ProfileDetailLine icon={<FaBirthdayCake />} label="Birthday">
+        {dateBirth}
+      </ProfileDetailLine>
+      <ProfileDetailLine icon={<BiMaleFemale />} label="Gender">
+        {gender}
+      </ProfileDetailLine>
+      <ProfileDetailLine icon={<FaFlag />} label="Country" className="mb-3">
         {country || "Unknown"}
       </ProfileDetailLine>
       <div className="mb-4 max-w-[550px]">
-        <span className="block font-semibold">About:</span>
-        <span>
-          {bio ||
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt iste hic atque doloremque cupiditate quo distinctio dolore accusantium a doloribus dicta eligendi numquam recusandae iusto tempora exercitationem, cum fuga! Debitis."}
+        <span className="flex gap-1 items-center font-semibold">
+          <FaUser /> About:
         </span>
+        <span>{bio || "No info on user"}</span>
       </div>
       <div>
         <div className="text-xl font-poppins">Social accounts:</div>
@@ -86,6 +99,7 @@ type ProfileDetailLineProps = {
   label: string;
   children: React.ReactNode;
   className?: string;
+  icon: React.ReactNode;
 };
 
 // Helper component
@@ -93,13 +107,13 @@ function ProfileDetailLine({
   label,
   children,
   className,
+  icon,
 }: ProfileDetailLineProps) {
   // Returned JSX
   return (
-    <div>
-      <span className={`inline-block w-30 font-semibold ${className}`}>
-        {label}:
-      </span>
+    <div className={`flex gap-x-1 items-center ${className}`}>
+      {icon}
+      <span className="w-30 font-semibold">{label}:</span>
       <span>{children}</span>
     </div>
   );

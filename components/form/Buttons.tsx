@@ -14,6 +14,15 @@ type SubmitButtonProps = {
   isPending: boolean;
 };
 
+// Buttons container
+export function ButtonsContainer({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col items-start xs:flex-row gap-y-2 gap-x-4 mt-10">
+      {children}
+    </div>
+  );
+}
+
 // Submit button
 export function SubmitButton({
   className = "",

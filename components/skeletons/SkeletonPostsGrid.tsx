@@ -1,0 +1,33 @@
+import PreviewTilesGrid from "@/components/PreviewTilesGrid";
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
+// Skeleton Posts grid layout
+function SkeletonPostsGrid() {
+  // Returned JSX
+  return (
+    <PreviewTilesGrid>
+      <ArticlePreviewTileSkeleton />
+      <ArticlePreviewTileSkeleton />
+      <ArticlePreviewTileSkeleton />
+    </PreviewTilesGrid>
+  );
+}
+
+// Helper component
+function ArticlePreviewTileSkeleton() {
+  // Returned JSX
+  return (
+    <Card className="p-0 gap-4 bg-background">
+      <Skeleton className="h-40 sm:h-60"></Skeleton>
+      <div className="px-4 pb-5 flex flex-col gap-3">
+        <Skeleton className="h-3.5 w-25"></Skeleton>
+        <Skeleton className="h-4.5 w-35 mt-1"></Skeleton>
+        <Skeleton className="h-3.5 w-50"></Skeleton>
+        <Skeleton className="h-8 w-23.5 mt-3.5"></Skeleton>
+      </div>
+    </Card>
+  );
+}
+
+export default SkeletonPostsGrid;
