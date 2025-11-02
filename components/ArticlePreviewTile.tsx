@@ -1,5 +1,7 @@
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
+import { Prisma } from "@prisma/client";
+import db from "@/utils/db";
 
 import ArticlePreviewStats from "./ArticlePreviewStats";
 import { Button } from "@/components/ui/button";
@@ -9,22 +11,14 @@ import { formatDate, limitPreview } from "@/utils/helpers";
 import { Skeleton } from "./ui/skeleton";
 
 // Props type
-export type ArticlePreviewProps = {
-  post: {
-    id: number;
-    title: string;
-    preview: string;
-    published: Date;
-    views: number;
-    _count: { likes: number };
-    imageUrl: string;
-  };
-};
+type PostWithCount = Prisma.PostGetPayload<{
+  include: { _count: { select: { likes: true } } };
+}>;
 
 // The component
-function ArticlePreviewTile({ post }: ArticlePreviewProps) {
-  // Destructure props
-  const { id, title, preview, published, views, _count, imageUrl } = post;
+function ArticlePreviewTile({ post }: { post: PostWithCount }) {
+  // Destructure props and configure
+  const { id, title, preview, published, views, imageUrl, _count } = post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 

@@ -1,11 +1,10 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
+import { ArticlePreviewTileSkeleton } from "@/components/ArticlePreviewTile";
+import PreviewTilesGrid from "@/components/PreviewTilesGrid";
 import SectionTitle from "@/components/SectionTitle";
 import MyPosts from "@/components/dashboard/MyPosts";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Suspense } from "react";
-import PreviewTilesGrid from "@/components/PreviewTilesGrid";
-import { ArticlePreviewTileSkeleton } from "@/components/ArticlePreviewTile";
 
 // Metadata
 export const metadata: Metadata = {
@@ -29,7 +28,9 @@ async function ProfilePostsPage() {
 
 export default ProfilePostsPage;
 
+// Skeleton layout
 function SkeletonTemp() {
+  // Returned JSX
   return (
     <PreviewTilesGrid>
       <ArticlePreviewTileSkeleton />

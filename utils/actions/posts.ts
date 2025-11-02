@@ -8,13 +8,7 @@ export const fetchRecentPosts = async () => {
   const posts = await db.post.findMany({
     take: 9,
     orderBy: { published: "desc" },
-    select: {
-      id: true,
-      title: true,
-      preview: true,
-      imageUrl: true,
-      published: true,
-      views: true,
+    include: {
       _count: { select: { likes: true } },
     },
   });
