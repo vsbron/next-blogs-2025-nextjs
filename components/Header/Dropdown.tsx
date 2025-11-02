@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MenuIcon } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 import Authentication from "./Authentication";
@@ -14,7 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { personalAreaLinks, primaryLinks } from "@/utils/links";
-import { auth } from "@clerk/nextjs/server";
 
 async function Dropdown() {
   // Get the isSignedIn state
@@ -32,7 +32,7 @@ async function Dropdown() {
       <DropdownMenuContent
         align="end"
         sideOffset={10}
-        className={`bg-background rounded-md border border-border z-150 ${
+        className={`bg-background py-2 rounded-md border border-border z-150 ${
           isSignedIn ? "w-72 " : "w-auto"
         }`}
       >

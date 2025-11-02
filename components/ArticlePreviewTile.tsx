@@ -5,23 +5,28 @@ import ArticlePreviewStats from "./ArticlePreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { limitPreview } from "@/utils/helpers";
+import { formatDate, limitPreview } from "@/utils/helpers";
+import { Skeleton } from "./ui/skeleton";
 
 // Props type
-type ArticlePreviewProps = {
-  title: string;
-  preview: string;
-  date: string;
-  views: number;
-  likes: number;
-  image: StaticImageData;
-  href: string;
+export type ArticlePreviewProps = {
+  post: {
+    id: number;
+    title: string;
+    preview: string;
+    published: Date;
+    views: number;
+    _count: { likes: number };
+    imageUrl: string;
+  };
 };
 
 // The component
-function ArticlePreviewTile(post: ArticlePreviewProps) {
+function ArticlePreviewTile({ post }: ArticlePreviewProps) {
   // Destructure props
-  const { title, preview, date, views, likes, image, href } = post;
+  const { id, title, preview, published, views, _count, imageUrl } = post;
+  const href = `/posts/${id}`;
+  const date = formatDate(published);
 
   // Returned JSX
   return (
@@ -29,7 +34,7 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
       <Link href={href} className="mb-3">
         <div className="relative h-40 sm:h-60 group overflow-hidden rounded-lg">
           <Image
-            src={image}
+            src={imageUrl}
             fill
             alt={title}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
@@ -38,7 +43,7 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
         </div>
       </Link>
       <CardHeader className="px-4">
-        <ArticlePreviewStats views={views} likes={likes} date={date} />
+        <ArticlePreviewStats views={views} likes={_count.likes} date={date} />
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
@@ -55,4 +60,18 @@ function ArticlePreviewTile(post: ArticlePreviewProps) {
   );
 }
 
+export function ArticlePreviewTileSkeleton() {
+  // Returned JSX
+  return (
+    <Card className="p-0 gap-4 bg-background">
+      <Skeleton className="h-40 sm:h-60"></Skeleton>
+      <div className="px-4 pb-5 flex flex-col gap-3">
+        <Skeleton className="h-3.5 w-25"></Skeleton>
+        <Skeleton className="h-4.5 w-35 mt-1"></Skeleton>
+        <Skeleton className="h-3.5 w-50"></Skeleton>
+        <Skeleton className="h-8 w-23.5 mt-3.5"></Skeleton>
+      </div>
+    </Card>
+  );
+}
 export default ArticlePreviewTile;

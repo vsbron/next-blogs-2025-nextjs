@@ -20,7 +20,7 @@ async function ProfilePage() {
   return (
     <>
       <SectionTitle>Manage profile</SectionTitle>
-      {!user ? <div>Loading...</div> : <DashboardProfile user={user} />}
+      {!user ? <p>Loading...</p> : <DashboardProfile user={user} />}
     </>
   );
 }
