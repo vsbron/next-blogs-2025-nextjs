@@ -6,7 +6,6 @@ import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ReactQueryProvider } from "@/components/react-query-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
@@ -82,29 +81,27 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <ReactQueryProvider>
-        <html lang="en" suppressHydrationWarning>
-          <body
-            className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
           >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
-              <main>
-                <Container className="pt-6 xs:pt-8 lg:pt-12 pb-12 flex flex-col gap-8">
-                  {children}
-                </Container>
-              </main>
-              <Footer />
-              <Toaster />
-            </ThemeProvider>
-          </body>
-        </html>
-      </ReactQueryProvider>
+            <Header />
+            <main>
+              <Container className="pt-6 xs:pt-8 lg:pt-12 pb-12 flex flex-col gap-8">
+                {children}
+              </Container>
+            </main>
+            <Footer />
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
