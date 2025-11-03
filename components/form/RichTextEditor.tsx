@@ -7,7 +7,7 @@ const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 // Set the modules and formats
 const modules = {
   toolbar: [
-    [{ header: [2, 3, false] }],
+    [{ header: [2, 3, 4, false] }],
     ["bold", "italic", "underline", "strike"],
     [{ list: "ordered" }, { list: "bullet" }],
     ["link"],

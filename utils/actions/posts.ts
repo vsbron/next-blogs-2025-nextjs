@@ -17,6 +17,18 @@ const postFields = {
 };
 
 /* GLOBAL POSTS */
+
+export const fetchPost = async (postId: string) => {
+  // Fetch the post using its ID
+  const post = await db.post.findUnique({ where: { id: Number(postId) } });
+
+  // Guard clause
+  if (!post) redirect("/posts");
+
+  // Return post
+  return post;
+};
+
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {
   const posts = await db.post.findMany({

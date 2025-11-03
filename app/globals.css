@@ -156,30 +156,49 @@ h6 {
   font-family: "Poppins";
 }
 
+article h2 {
+  font-size: 1.85rem;
+  margin-top: 1rem;
+}
+article h3 {
+  font-size: 1.55rem;
+  margin-top: 1rem;
+}
+article h4 {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
 article p {
-  margin: 10px 0 45px;
+  margin: 10px 0 35px;
 }
 article p + p {
-  margin-top: -25px;
+  margin-top: -15px;
 }
 
 article ul {
   list-style-type: disc;
-  padding-left: 20px;
-  margin: 10px 0 45px;
 }
-article p + ul {
-  margin-top: -35px;
+
+article ol {
+  list-style-type: decimal;
+}
+
+article ol,
+article ul {
+  padding-left: 20px;
+  margin: 10px 0 35px;
+}
+article p + ul,
+article p + ol {
+  margin-top: -25px;
 }
 
 article a {
+  position: relative;
   white-space: nowrap;
 }
-
-article .link-primary {
-  position: relative;
-}
-article .link-primary:before {
+article a:before {
   content: "";
   position: absolute;
   inset: 0;
@@ -188,7 +207,7 @@ article .link-primary:before {
   height: 1px;
   background: var(--color-primary);
 }
-article .link-primary:hover:before {
+article a:hover:before {
   content: none;
 }
 
