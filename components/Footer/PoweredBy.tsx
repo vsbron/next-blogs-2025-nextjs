@@ -6,7 +6,7 @@ function PoweredBy() {
   // Returned JSX
   return (
     <div>
-      <h4 className="font-poppins mb-2 text-lg">Powered By</h4>
+      <h4 className="mb-2 text-lg">Powered By</h4>
       <div className="flex gap-x-4 sm:gap-x-6">
         {poweredIcons.map(({ title, target, href }) => (
           <Link

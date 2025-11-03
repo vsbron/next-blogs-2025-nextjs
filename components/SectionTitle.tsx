@@ -29,9 +29,7 @@ function SectionTitle({
 }: SectionTitleProps) {
   // Returned JSX
   return (
-    <Tag
-      className={`font-poppins relative ${styles[Tag]} ${className} ${beforeElement}`}
-    >
+    <Tag className={`relative ${styles[Tag]} ${className} ${beforeElement}`}>
       {children}
     </Tag>
   );

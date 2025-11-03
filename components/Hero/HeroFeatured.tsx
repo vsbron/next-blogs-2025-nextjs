@@ -54,7 +54,7 @@ function HeroFeatured() {
             />
           </div>
           <Link href={href} className="hover:text-foreground/75 transition-all">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-poppins xs:mt-2">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xs:mt-2">
               {title}
             </h2>
           </Link>

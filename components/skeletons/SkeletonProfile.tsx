@@ -8,7 +8,7 @@ function SkeletonProfile() {
       <div className="w-22 h-22 relative">
         <Skeleton className="w-22 h-22 rounded-full" />
       </div>
-      <div className="flex flex-col gap-3.5 items-start font-poppins">
+      <div className="flex flex-col gap-3.5 items-start">
         <Skeleton className="w-25 h-6" />
         <Skeleton className="w-40 h-5" />
       </div>

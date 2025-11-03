@@ -37,9 +37,7 @@ function HeroSecondary({
             <PostPreviewStatsProps views={views} likes={likes} date={date} />
           </div>
           <Link href={href} className="hover:text-foreground/75 transition-all">
-            <h2 className="text-lg md:text-xl xl:text-2xl font-poppins xs:mt-1">
-              {title}
-            </h2>
+            <h2 className="text-lg md:text-xl xl:text-2xl xs:mt-1">{title}</h2>
           </Link>
         </CardHeader>
         <CardContent className="px-0">

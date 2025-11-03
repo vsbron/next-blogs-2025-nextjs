@@ -1,9 +1,9 @@
-import { fetchUserStats } from "@/utils/actions/posts";
-import { ProfileDetailLine } from "../ProfileDetails";
+import PostPreviewTile from "@/components/PostPreviewTile";
+import PostsGridLayout from "@/components/PostsGridLayout";
+import ProfileDetailsLine from "@/components/ProfileDetailsLine";
 
+import { fetchUserStats } from "@/utils/actions/posts";
 import { MdArticle, MdRemoveRedEye } from "react-icons/md";
-import PostPreviewTile from "../PostPreviewTile";
-import PostsGridLayout from "../PostsGridLayout";
 
 async function MyProfileStats() {
   // Fetch user's posts
@@ -17,22 +17,28 @@ async function MyProfileStats() {
 
   // Returned JSX
   return (
-    <>
+    <div className="flex flex-col gap-y-1">
       {/* Basic stats */}
-      <ProfileDetailLine icon={<MdArticle />} label="Total posts">
+      <ProfileDetailsLine
+        icon={<MdArticle className="w-5 h-5" />}
+        label="Total posts"
+      >
         {totalPosts}
-      </ProfileDetailLine>
-      <ProfileDetailLine icon={<MdRemoveRedEye />} label="Total views">
+      </ProfileDetailsLine>
+      <ProfileDetailsLine
+        icon={<MdRemoveRedEye className="w-5 h-5" />}
+        label="Total views"
+      >
         {totalViews}
-      </ProfileDetailLine>
+      </ProfileDetailsLine>
       {/* Top posts */}
-      <h2 className="font-poppins text-2xl mt-6 mb-2">Most viewed posts</h2>
+      <h2 className="text-2xl mt-6 mb-2">Most viewed posts</h2>
       <PostsGridLayout>
         {mostViewedPosts.map((post) => (
           <PostPreviewTile key={post.id} post={post} />
         ))}
       </PostsGridLayout>
-    </>
+    </div>
   );
 }
 

@@ -2,7 +2,7 @@ function FooterSocials() {
   // Returned JSX
   return (
     <div>
-      <h3 className="font-poppins text-xl mb-1">Socials</h3>
+      <h3 className="text-xl mb-1">Socials</h3>
       <div className="flex lg:flex-col gap-6 lg:gap-0.5">
         <div>
           <a

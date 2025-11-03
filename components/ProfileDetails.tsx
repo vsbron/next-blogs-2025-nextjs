@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { User } from "@prisma/client";
 
+import ProfileDetailsLine from "@/components/ProfileDetailsLine";
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
 
@@ -30,7 +31,7 @@ function ProfileDetails({ user }: { user: User }) {
 
   // Returned JSX
   return (
-    <>
+    <div className="flex flex-col gap-y-1">
       <div className="flex items-center gap-x-6 mb-6">
         <div className="w-22 h-22 relative">
           <Image
@@ -46,31 +47,30 @@ function ProfileDetails({ user }: { user: User }) {
           <h4 className="text-2xl text-foreground/50">{username}</h4>
         </div>
       </div>
-      <h5 className="text-xl font-medium font-poppins">Details:</h5>
-      <ProfileDetailLine icon={<IoMailSharp />} label="Email">
+      <h5 className="text-xl font-medium">Details:</h5>
+      <ProfileDetailsLine icon={<IoMailSharp />} label="Email">
         {email}
-      </ProfileDetailLine>
-      <ProfileDetailLine
+      </ProfileDetailsLine>
+      <ProfileDetailsLine
         icon={<FaCalendarAlt />}
         label="Date joined"
         className="mb-3"
       >
         {dateJoined}
-      </ProfileDetailLine>
-      <ProfileDetailLine icon={<FaBirthdayCake />} label="Birthday">
+      </ProfileDetailsLine>
+      <ProfileDetailsLine icon={<FaBirthdayCake />} label="Birthday">
         {dateBirth}
-      </ProfileDetailLine>
-      <ProfileDetailLine icon={<BiMaleFemale />} label="Gender">
+      </ProfileDetailsLine>
+      <ProfileDetailsLine icon={<BiMaleFemale />} label="Gender">
         {gender}
-      </ProfileDetailLine>
-      <ProfileDetailLine icon={<FaFlag />} label="Country" className="mb-3">
+      </ProfileDetailsLine>
+      <ProfileDetailsLine icon={<FaFlag />} label="Country" className="mb-3">
         {country || "Unknown"}
-      </ProfileDetailLine>
+      </ProfileDetailsLine>
       <div className="mb-4 max-w-[550px]">
-        <span className="flex gap-1 items-center font-semibold">
-          <FaUser /> About:
-        </span>
-        <span>{bio || "No info on user"}</span>
+        <ProfileDetailsLine icon={<FaUser />} label="About" column={true}>
+          {bio || "No info on user"}
+        </ProfileDetailsLine>
       </div>
       <div>
         <div className="text-xl font-poppins">Social accounts:</div>
@@ -90,31 +90,6 @@ function ProfileDetails({ user }: { user: User }) {
           ))}
         </div>
       </div>
-    </>
-  );
-}
-
-// Helper component props type
-type ProfileDetailLineProps = {
-  label: string;
-  children: React.ReactNode;
-  className?: string;
-  icon: React.ReactNode;
-};
-
-// Helper component
-export function ProfileDetailLine({
-  label,
-  children,
-  className,
-  icon,
-}: ProfileDetailLineProps) {
-  // Returned JSX
-  return (
-    <div className={`flex gap-x-1 items-center ${className}`}>
-      {icon}
-      <span className="w-30 font-semibold">{label}:</span>
-      <span>{children}</span>
     </div>
   );
 }

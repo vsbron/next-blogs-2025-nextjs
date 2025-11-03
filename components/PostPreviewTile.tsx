@@ -34,7 +34,7 @@ function PostPreviewTile({ post }: { post: Post }) {
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
-          <h2 className="xs:text-lg md:text-xl font-poppins">{title}</h2>
+          <h2 className="xs:text-lg md:text-xl">{title}</h2>
         </Link>
         <p className="mb-3 xs:mb-6 text-sm md:text-base">
           {limitPreview(preview, 160)}
