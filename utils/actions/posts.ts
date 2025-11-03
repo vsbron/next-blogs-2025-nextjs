@@ -1,16 +1,27 @@
 "use server";
-import { auth } from "@clerk/nextjs/server";
-import db from "../db";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
+import db from "../db";
+
+// Template for Post fields to select in the database
+const postFields = {
+  id: true,
+  title: true,
+  preview: true,
+  imageUrl: true,
+  published: true,
+  views: true,
+  _count: { select: { likes: true } },
+};
+
+/* GLOBAL POSTS */
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {
   const posts = await db.post.findMany({
-    take: 9,
+    take: 12,
     orderBy: { published: "desc" },
-    include: {
-      _count: { select: { likes: true } },
-    },
+    select: postFields,
   });
 
   return posts;
@@ -46,6 +57,26 @@ export const fetchMostViewedPosts = async () => {
   return posts;
 };
 
+/* USER-RELATED POSTS */
+// Server action that fetched user's posts
+export const fetchUserPosts = async (userId?: string) => {
+  // If no userId provided, get it from auth()
+  if (!userId) {
+    const { userId: authUserId } = await auth();
+    if (!authUserId) return null;
+    userId = authUserId;
+  }
+
+  // Search all user's liked posts
+  const posts = await db.post.findMany({
+    where: { authorId: userId },
+    select: postFields,
+  });
+
+  // Return fetched posts
+  return posts;
+};
+
 // Server action function that fetches user's liked posts
 export const fetchUserLikedPosts = async () => {
   // Get the current user clerkId
@@ -55,13 +86,7 @@ export const fetchUserLikedPosts = async () => {
   // Search all user's liked posts
   const posts = await db.post.findMany({
     where: { likes: { some: { userId } } },
-    select: {
-      id: true,
-      title: true,
-      preview: true,
-      imageUrl: true,
-      published: true,
-    },
+    select: postFields,
   });
 
   return posts;

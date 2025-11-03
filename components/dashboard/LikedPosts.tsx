@@ -4,27 +4,24 @@ import ArticleLayout from "@/components/ArticleLayout";
 import PostPreviewTile from "@/components/PostPreviewTile";
 import PostsGridLayout from "@/components/PostsGridLayout";
 
-import { fetchUserPosts } from "@/utils/actions/posts";
+import { fetchUserLikedPosts } from "@/utils/actions/posts";
 
-async function MyPosts() {
+async function LikePosts() {
   // Fetch user's posts
-  const posts = await fetchUserPosts();
+  const posts = await fetchUserLikedPosts();
 
   // Guard clause
   if (!posts || !posts.length)
     return (
       <ArticleLayout>
-        <h2 className="text-2xl mb-4">No posts yet</h2>
+        <h2 className="text-2xl mb-4">No liked posts yet</h2>
+        <p>Looks like you have not liked any posts yet.</p>
         <p>
-          Sorry! Looks like you do not have any posts yet - or something went
-          wrong while fetching them.
-        </p>
-        <p>
-          Ready to start writing? Create your{" "}
-          <Link href="/dashboard/add-post" className="link-primary">
-            first post
+          Browse through{" "}
+          <Link href="/posts/" className="link-primary">
+            all posts
           </Link>{" "}
-          right now!
+          on NextBlogs and find something you enjoy.
         </p>
       </ArticleLayout>
     );
@@ -39,4 +36,4 @@ async function MyPosts() {
   );
 }
 
-export default MyPosts;
+export default LikePosts;

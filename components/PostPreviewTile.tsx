@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Prisma } from "@prisma/client";
 
 import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { Button } from "@/components/ui/button";
@@ -9,12 +8,18 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { formatDate, limitPreview } from "@/utils/helpers";
 
 // Props type
-type PostWithCount = Prisma.PostGetPayload<{
-  include: { _count: { select: { likes: true } } };
-}>;
+type Post = {
+  id: number;
+  title: string;
+  preview: string;
+  imageUrl: string;
+  published: Date;
+  views: number;
+  _count: { likes: number };
+};
 
 // The component
-function PostPreviewTile({ post }: { post: PostWithCount }) {
+function PostPreviewTile({ post }: { post: Post }) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, _count } = post;
   const href = `/posts/${id}`;
