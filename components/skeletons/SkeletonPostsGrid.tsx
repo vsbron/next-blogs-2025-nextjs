@@ -1,4 +1,4 @@
-import PreviewTilesGrid from "@/components/PreviewTilesGrid";
+import PostsGridLayout from "@/components/PostsGridLayout";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -6,16 +6,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 function SkeletonPostsGrid() {
   // Returned JSX
   return (
-    <PreviewTilesGrid>
-      <ArticlePreviewTileSkeleton />
-      <ArticlePreviewTileSkeleton />
-      <ArticlePreviewTileSkeleton />
-    </PreviewTilesGrid>
+    <PostsGridLayout>
+      <PostPreviewTileSkeleton />
+      <PostPreviewTileSkeleton />
+      <PostPreviewTileSkeleton />
+    </PostsGridLayout>
   );
 }
 
 // Helper component
-function ArticlePreviewTileSkeleton() {
+function PostPreviewTileSkeleton() {
   // Returned JSX
   return (
     <Card className="p-0 gap-4 bg-background">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 
-import ArticlePreviewStats from "../ArticlePreviewStats";
+import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -46,7 +46,7 @@ function HeroFeatured() {
               />{" "}
               Featured<span className="hidden xs:inline"> article</span>
             </div>
-            <ArticlePreviewStats
+            <PostPreviewStatsProps
               views={views}
               likes={likes}
               date={date}

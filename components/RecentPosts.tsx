@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import ArticlePreviewTile from "./ArticlePreviewTile";
-import PreviewTilesGrid from "./PreviewTilesGrid";
-import SectionTitle from "./SectionTitle";
+import PostPreviewTile from "@/components/PostPreviewTile";
+import PostsGridLayout from "@/components/PostsGridLayout";
+import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
 
 import { fetchRecentPosts } from "@/utils/actions/posts";
@@ -25,11 +25,11 @@ async function RecentPosts() {
           </Link>
         </Button>
       </div>
-      <PreviewTilesGrid>
+      <PostsGridLayout>
         {posts.map((post) => (
-          <ArticlePreviewTile post={post} key={post.id} />
+          <PostPreviewTile post={post} key={post.id} />
         ))}
-      </PreviewTilesGrid>
+      </PostsGridLayout>
     </section>
   );
 }

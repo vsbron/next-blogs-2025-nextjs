@@ -1,6 +1,7 @@
+import PostPreviewTile from "@/components/PostPreviewTile";
+import PostsGridLayout from "@/components/PostsGridLayout";
+
 import { fetchRecentPosts } from "@/utils/actions/posts";
-import ArticlePreviewTile from "../ArticlePreviewTile";
-import PreviewTilesGrid from "../PreviewTilesGrid";
 
 async function MyPosts() {
   // Fetch user's post
@@ -8,11 +9,11 @@ async function MyPosts() {
 
   // Returned JSX
   return (
-    <PreviewTilesGrid>
+    <PostsGridLayout>
       {posts.map((post) => {
-        return <ArticlePreviewTile key={post.id} post={post} />;
+        return <PostPreviewTile key={post.id} post={post} />;
       })}
-    </PreviewTilesGrid>
+    </PostsGridLayout>
   );
 }
 

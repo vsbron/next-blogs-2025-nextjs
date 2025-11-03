@@ -1,7 +1,7 @@
 import { Calendar1Icon, EyeIcon, ThumbsUpIcon } from "lucide-react";
 
 // Props type
-type ArticlePreviewStatsProps = {
+type PostPreviewStatsProps = {
   views: number;
   likes: number;
   date: string;
@@ -9,12 +9,12 @@ type ArticlePreviewStatsProps = {
 };
 
 // The component
-function ArticlePreviewStats({
+function PostPreviewStats({
   views,
   likes,
   date,
   reverse = false,
-}: ArticlePreviewStatsProps) {
+}: PostPreviewStatsProps) {
   // Returned JSX
   return (
     <div
@@ -38,4 +38,4 @@ function ArticlePreviewStats({
   );
 }
 
-export default ArticlePreviewStats;
+export default PostPreviewStats;

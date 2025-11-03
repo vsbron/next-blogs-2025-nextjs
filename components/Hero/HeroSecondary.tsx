@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 
-import ArticlePreviewStats from "../ArticlePreviewStats";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { limitPreview } from "@/utils/helpers";
 
 // Props type
@@ -33,7 +34,7 @@ function HeroSecondary({
       <Card className="gap-1 sm:gap-x-3 lg:gap-2 px-0 sm:px-6 pt-2 pb-0 lg:p-3 shadow-none bg-0 border-none">
         <CardHeader className="px-0 gap-1">
           <div className="flex justify-start xs:border-b xs:pb-2 border-foreground/10">
-            <ArticlePreviewStats views={views} likes={likes} date={date} />
+            <PostPreviewStatsProps views={views} likes={likes} date={date} />
           </div>
           <Link href={href} className="hover:text-foreground/75 transition-all">
             <h2 className="text-lg md:text-xl xl:text-2xl font-poppins xs:mt-1">

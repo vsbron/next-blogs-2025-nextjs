@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Prisma } from "@prisma/client";
 
-import ArticlePreviewStats from "./ArticlePreviewStats";
+import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -14,7 +14,7 @@ type PostWithCount = Prisma.PostGetPayload<{
 }>;
 
 // The component
-function ArticlePreviewTile({ post }: { post: PostWithCount }) {
+function PostPreviewTile({ post }: { post: PostWithCount }) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, _count } = post;
   const href = `/posts/${id}`;
@@ -35,7 +35,7 @@ function ArticlePreviewTile({ post }: { post: PostWithCount }) {
         </div>
       </Link>
       <CardHeader className="px-4">
-        <ArticlePreviewStats views={views} likes={_count.likes} date={date} />
+        <PostPreviewStatsProps views={views} likes={_count.likes} date={date} />
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
@@ -52,4 +52,4 @@ function ArticlePreviewTile({ post }: { post: PostWithCount }) {
   );
 }
 
-export default ArticlePreviewTile;
+export default PostPreviewTile;
