@@ -28,18 +28,12 @@ export default function ErrorPage({ error }: ErrorPageProps) {
     <>
       <section>
         <ArticleLayout>
-          <SectionTitle>Error</SectionTitle>
+          <SectionTitle>Post not found</SectionTitle>
           <p>
-            Oops, something went wrong on our end. Looks like the system hit a
-            snag while trying to load this page.
+            Sorry, we could not find the post you were looking for.
             <br />
-            <code className="bg-border px-2 py-1 inline-block my-1">
-              {error.name}
-            </code>
-            <br />
-            Don&apos;t worry - we&apos;re already looking into it. Try
-            refreshing the page, or come back in a bit once things are running
-            smoothly again.
+            It may have been deleted, or the link might be incorrect. Please
+            check the URL or try again.
           </p>
           <p>
             You can try going{" "}

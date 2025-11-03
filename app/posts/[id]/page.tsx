@@ -15,7 +15,11 @@ async function PostPage({ params }: SinglePostPageProps) {
   const { id } = await params;
 
   // Fetch the post using the ID
-  const { title, text, imageUrl } = await fetchPost(id);
+  const post = await fetchPost(id);
+
+  if (!post) throw new Error("Post not found");
+
+  const { title, text, imageUrl } = post;
 
   // Returned JSX
   return (

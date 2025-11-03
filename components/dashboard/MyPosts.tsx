@@ -21,10 +21,7 @@ async function MyPosts() {
         </p>
         <p>
           Ready to start writing? Create your{" "}
-          <Link href="/dashboard/add-post" className="link-primary">
-            first post
-          </Link>{" "}
-          right now!
+          <Link href="/dashboard/add-post">first post</Link> right now!
         </p>
       </ArticleLayout>
     );

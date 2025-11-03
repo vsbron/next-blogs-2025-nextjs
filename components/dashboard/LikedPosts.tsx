@@ -17,11 +17,8 @@ async function LikePosts() {
         <h2 className="text-2xl mb-4">No liked posts yet</h2>
         <p>Looks like you have not liked any posts yet.</p>
         <p>
-          Browse through{" "}
-          <Link href="/posts/" className="link-primary">
-            all posts
-          </Link>{" "}
-          on NextBlogs and find something you enjoy.
+          Browse through <Link href="/posts/">all posts</Link> on NextBlogs and
+          find something you enjoy.
         </p>
       </ArticleLayout>
     );

@@ -194,11 +194,13 @@ article p + ol {
   margin-top: -25px;
 }
 
-article a {
+article a,
+article .link-primary {
   position: relative;
   white-space: nowrap;
 }
-article a:before {
+article a:before,
+article .link-primary:before {
   content: "";
   position: absolute;
   inset: 0;
@@ -207,7 +209,8 @@ article a:before {
   height: 1px;
   background: var(--color-primary);
 }
-article a:hover:before {
+article a:hover:before,
+article .link-primary:hover:before {
   content: none;
 }
 

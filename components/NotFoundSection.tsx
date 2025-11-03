@@ -25,10 +25,7 @@ function NotFoundSection() {
           <span className="link-primary" onClick={() => router.back()}>
             back
           </span>{" "}
-          to where you came from, or head to the{" "}
-          <Link href="/" className="link-primary">
-            homepage
-          </Link>{" "}
+          to where you came from, or head to the <Link href="/">homepage</Link>{" "}
           to explore fresh stories, trending posts, and creative voices from
           across the community.
         </p>

@@ -22,9 +22,6 @@ export const fetchPost = async (postId: string) => {
   // Fetch the post using its ID
   const post = await db.post.findUnique({ where: { id: Number(postId) } });
 
-  // Guard clause
-  if (!post) redirect("/posts");
-
   // Return post
   return post;
 };
