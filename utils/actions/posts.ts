@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
+import { Post } from "../types";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -90,4 +91,45 @@ export const fetchUserLikedPosts = async () => {
   });
 
   return posts;
+};
+
+// Server action function that collects user's stats
+export async function fetchUserStats(
+  userId?: string
+): Promise<UserStats | null> {
+  // Get current user ID if not provided
+  if (!userId) {
+    const { userId: authUserId } = await auth();
+    if (!authUserId) return null;
+    userId = authUserId;
+  }
+
+  // Aggregate counts: posts, total views
+  const postsAggregate = await db.post.aggregate({
+    where: { authorId: userId },
+    _count: { id: true },
+    _sum: { views: true },
+  });
+
+  // Fetch only the top post by views
+  const mostViewedPosts = await db.post.findMany({
+    where: { authorId: userId },
+    take: 3,
+    orderBy: { views: "desc" },
+    select: postFields,
+  });
+
+  // Return total posts, views and most viewed post
+  return {
+    totalPosts: postsAggregate._count.id,
+    totalViews: postsAggregate._sum.views || 0,
+    mostViewedPosts,
+  };
+}
+
+// User's stats action function type
+export type UserStats = {
+  totalPosts: number;
+  totalViews: number;
+  mostViewedPosts: Post[];
 };

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
+
 import SectionTitle from "@/components/SectionTitle";
+import MyProfileStats from "@/components/dashboard/MyProfileStats";
 
 // Metadata
 export const metadata: Metadata = {
@@ -14,6 +16,7 @@ function ProfileStatsPage() {
   return (
     <section>
       <SectionTitle>Profile statistics</SectionTitle>
+      <MyProfileStats />
     </section>
   );
 }

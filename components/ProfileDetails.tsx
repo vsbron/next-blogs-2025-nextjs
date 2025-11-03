@@ -103,7 +103,7 @@ type ProfileDetailLineProps = {
 };
 
 // Helper component
-function ProfileDetailLine({
+export function ProfileDetailLine({
   label,
   children,
   className,

@@ -43,13 +43,13 @@ export const postSchema = z.object({
   preview: z
     .string()
     .min(10, "Post preview should be at least 10 characters")
-    .max(80, "Post preview should be at most 80 characters"),
+    .max(100, "Post preview should be at most 100 characters"),
   text: z.string().refine(
     (text) => {
       const wordCount = text.split(" ").length;
-      return wordCount >= 10 && wordCount <= 1500;
+      return wordCount >= 10 && wordCount <= 2500;
     },
-    { message: "Post text must be between 10 and 1500 words" }
+    { message: "Post text must be between 10 and 2500 words" }
   ),
 });
 

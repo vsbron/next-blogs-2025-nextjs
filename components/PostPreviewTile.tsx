@@ -6,17 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate, limitPreview } from "@/utils/helpers";
-
-// Props type
-type Post = {
-  id: number;
-  title: string;
-  preview: string;
-  imageUrl: string;
-  published: Date;
-  views: number;
-  _count: { likes: number };
-};
+import { Post } from "@/utils/types";
 
 // The component
 function PostPreviewTile({ post }: { post: Post }) {
