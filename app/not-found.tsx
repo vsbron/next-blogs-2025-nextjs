@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import CTASection from "@/components/CTASection";
 import NotFoundSection from "@/components/NotFoundSection";
-import IndexStats from "@/components/PostStats";
+import IndexStats from "@/components/IndexStats";
 
 // Meta data
 export const metadata: Metadata = {

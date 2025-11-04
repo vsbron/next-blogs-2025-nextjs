@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import CTASection from "@/components/CTASection";
-import IndexStats from "@/components/PostStats";
+import IndexStats from "@/components/IndexStats";
 import SectionTitle from "@/components/SectionTitle";
 
 // Props type

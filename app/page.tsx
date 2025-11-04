@@ -1,6 +1,6 @@
 import HeroSection from "@/components/Hero/HeroSection";
 import CTASection from "@/components/CTASection";
-import IndexStats from "@/components/PostStats";
+import IndexStats from "@/components/IndexStats";
 import RecentPosts from "@/components/RecentPosts";
 import SectionSeparator from "@/components/SectionSeparator";
 
