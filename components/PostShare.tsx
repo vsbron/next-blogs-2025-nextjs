@@ -1,4 +1,9 @@
+"use client";
+import { PostSidebarCard, PostSidebarTitle } from "@/components/PostSidebar";
+import { SITE_DOMAIN } from "@/utils/constants";
+
 import {
+  FaCopy,
   FaEnvelope,
   FaFacebookF,
   FaRedditAlien,
@@ -9,12 +14,10 @@ import {
   RiTwitterXFill,
   RiWhatsappFill,
 } from "react-icons/ri";
+import { toast } from "sonner";
 
-import { SITE_DOMAIN } from "@/utils/constants";
-import { PostSidebarCard, PostSidebarTitle } from "@/components/PostSidebar";
-
-function PostShare({ id }: { id: number }) {
-  const url = `${SITE_DOMAIN}/posts/"${id}`;
+function PostShare({ id, title }: { id: number; title: string }) {
+  const url = `${SITE_DOMAIN}/posts/${id}`;
   const iconsClass =
     "w-6 h-6 fill-foreground/80 cursor-pointer transition-colors duration-200";
 
@@ -27,15 +30,75 @@ function PostShare({ id }: { id: number }) {
         the options below:
       </p>
       <div className="flex items-center gap-x-5 mt-3">
-        <FaFacebookF className={`${iconsClass} hover:fill-[#1877F2]`} />
-        <RiTwitterXFill className={`${iconsClass} hover:fill-[#1DA1F2]`} />
-        <FaInstagram className={`${iconsClass} hover:fill-[#E1306C]`} />
-        <FaRedditAlien className={`${iconsClass} hover:fill-[#FF4500]`} />
-        <RiTelegram2Fill className={`${iconsClass} hover:fill-[#0088CC]`} />
-        <RiWhatsappFill className={`${iconsClass} hover:fill-[#25D366]`} />
-        <FaEnvelope className={`${iconsClass} hover:fill-[#D44638]`} />
+        <ExternalLink
+          url={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+        >
+          <FaFacebookF className={`${iconsClass} hover:fill-[#1877F2]`} />
+        </ExternalLink>
+        <ExternalLink
+          url={`https://twitter.com/intent/tweet?url=${url}&text=${title}`}
+        >
+          <RiTwitterXFill className={`${iconsClass} hover:fill-[#1DA1F2]`} />
+        </ExternalLink>
+
+        <ExternalLink url={`https://www.instagram.com/?url=${url}`}>
+          <FaInstagram className={`${iconsClass} hover:fill-[#E1306C]`} />
+        </ExternalLink>
+
+        <ExternalLink
+          url={`https://www.reddit.com/submit?url=${url}&title=${title}`}
+        >
+          <FaRedditAlien className={`${iconsClass} hover:fill-[#FF4500]`} />
+        </ExternalLink>
+
+        <ExternalLink url={`https://t.me/share/url?url=${url}&text=${title}`}>
+          <RiTelegram2Fill className={`${iconsClass} hover:fill-[#0088CC]`} />
+        </ExternalLink>
+
+        <ExternalLink
+          url={`https://api.whatsapp.com/send?text=${title}%20${url}`}
+        >
+          <RiWhatsappFill className={`${iconsClass} hover:fill-[#25D366]`} />
+        </ExternalLink>
+        <a href={`mailto:?subject=${title}&body=Check this out: ${url}`}>
+          <FaEnvelope className={`${iconsClass} hover:fill-[#D44638]`} />
+        </a>
+        <FaCopy
+          className={`${iconsClass}`}
+          onClick={() => {
+            navigator.clipboard
+              .writeText(url)
+              .catch((err) => console.error(err));
+            toast("URL copied to clipboard");
+          }}
+        />
       </div>
     </PostSidebarCard>
+  );
+}
+
+// Helper component props
+type ExternalLinkProps = {
+  url: string;
+  children: React.ReactNode;
+};
+// Helper component
+function ExternalLink({ url, children }: ExternalLinkProps) {
+  // Returned link
+  return (
+    <a
+      href={url}
+      onClick={(e) => {
+        e.preventDefault();
+        window.open(
+          url,
+          "popupWindow",
+          "width=500,height=400,scrollbars=yes,resizable=yes"
+        );
+      }}
+    >
+      {children}
+    </a>
   );
 }
 

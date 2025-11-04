@@ -9,7 +9,7 @@ function PostSidebar({ post }: { post: Post }) {
   return (
     <aside className="flex flex-col gap-y-8">
       <PostStats post={post} />
-      <PostShare id={post.id} />
+      <PostShare id={post.id} title={post.title} />
     </aside>
   );
 }
