@@ -26,7 +26,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
         the options below:
       </p>
       <div className="flex items-center gap-x-5 mt-3">
-        <ExternalLink
+        {/* <ExternalLink
           url={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
         >
           <FaFacebookF className={`${iconsClass} hover:fill-[#1877F2]`} />
@@ -54,7 +54,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
         </ExternalLink>
         <a href={`mailto:?subject=${title}&body=Check this out: ${url}`}>
           <FaEnvelope className={`${iconsClass} hover:fill-[#D44638]`} />
-        </a>
+        </a> */}
         {/* <FaCopy
           className={`${iconsClass}`}
           onClick={() => {
@@ -70,29 +70,29 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
 }
 
 // Helper component props
-type ExternalLinkProps = {
-  url: string;
-  children: React.ReactNode;
-};
+// type ExternalLinkProps = {
+//   url: string;
+//   children: React.ReactNode;
+// };
 // Helper component
-function ExternalLink({ url, children }: ExternalLinkProps) {
-  // Returned link
-  return (
-    <a
-      href={url}
-      onClick={(e) => {
-        e.preventDefault();
-        window.open(
-          url,
-          "popupWindow",
-          "width=500,height=400,scrollbars=yes,resizable=yes"
-        );
-      }}
-      rel="noopener noreferrer"
-    >
-      {children}
-    </a>
-  );
-}
+// function ExternalLink({ url, children }: ExternalLinkProps) {
+//   // Returned link
+//   return (
+//     <a
+//       href={url}
+//       onClick={(e) => {
+//         e.preventDefault();
+//         window.open(
+//           url,
+//           "popupWindow",
+//           "width=500,height=400,scrollbars=yes,resizable=yes"
+//         );
+//       }}
+//       rel="noopener noreferrer"
+//     >
+//       {children}
+//     </a>
+//   );
+// }
 
 export default PostShare;
