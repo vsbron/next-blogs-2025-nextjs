@@ -1,7 +1,9 @@
 import ArticleLayout from "@/components/ArticleLayout";
-import SectionTitle from "@/components/SectionTitle";
-import { fetchPost } from "@/utils/actions/posts";
 import PostSection from "@/components/PostSection";
+import PostSidebar from "@/components/PostSidebar";
+import SectionTitle from "@/components/SectionTitle";
+
+import { fetchPost } from "@/utils/actions/posts";
 
 // Interface for the Post ID
 interface SinglePostPageProps {
@@ -20,10 +22,13 @@ async function PostPage({ params }: SinglePostPageProps) {
 
   // Returned JSX
   return (
-    <ArticleLayout>
-      <SectionTitle>{post.title}</SectionTitle>
-      <PostSection post={post}></PostSection>
-    </ArticleLayout>
+    <>
+      <SectionTitle className="!mb-0">{post.title}</SectionTitle>
+      <ArticleLayout>
+        <PostSection post={post}></PostSection>
+        <PostSidebar post={post}></PostSidebar>
+      </ArticleLayout>
+    </>
   );
 }
 

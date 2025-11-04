@@ -1,14 +1,15 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import parse from "html-react-parser";
 
 import { Post } from "@/utils/types";
-import { useEffect } from "react";
 import { incrementPostView } from "@/utils/actions/post";
+import Link from "next/link";
 
 function PostSection({ post }: { post: Post }) {
   // Destructure the post
-  const { id, title, text, imageUrl } = post;
+  const { id, title, text, imageUrl, author } = post;
 
   // Use Effect function that updates the views on every render
   useEffect(() => {
@@ -17,18 +18,21 @@ function PostSection({ post }: { post: Post }) {
 
   // Returned JSX
   return (
-    <>
+    <article>
       <div className="h-96 relative mb-5">
         <Image
           src={imageUrl}
           fill
           className="object-cover"
           alt={title}
-          sizes="66vw"
+          sizes="(max-width: 991px) 100vw, 66vw"
         />
       </div>
+      <div>
+        <Link href={`/author/${author.username}`}>{author.displayName}</Link>
+      </div>
       {parse(text)}
-    </>
+    </article>
   );
 }
 

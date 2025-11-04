@@ -16,4 +16,6 @@ export type PostPreview = {
 // Post type
 export type Post = PostPreview & {
   text: string;
+  updated: Date;
+  author: { displayName: string; username: string };
 };

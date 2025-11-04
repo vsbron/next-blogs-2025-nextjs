@@ -2,6 +2,13 @@
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
+// Function that return approx. reading time in minutes
+export function getReadingTime(article: string) {
+  const wordCount = article.split(/\s+/).length; // Count the number of words in the article
+  const minutes = Math.ceil(wordCount / 200); // Calculate the time
+  return minutes + ` minute${minutes > 1 ? "s" : ""}`; // Return the time
+}
+
 // Helper function that shortens the preview text
 export function limitPreview(text: string, maxChars: number) {
   // If below the limit - return text

@@ -17,12 +17,14 @@ const postFields = {
 };
 
 /* GLOBAL POSTS */
-
 export const fetchPost = async (postId: string) => {
   // Fetch the post using its ID
   const post = await db.post.findUnique({
     where: { id: Number(postId) },
-    include: { _count: { select: { likes: true } } },
+    include: {
+      _count: { select: { likes: true } },
+      author: { select: { displayName: true, username: true } },
+    },
   });
 
   // Return post

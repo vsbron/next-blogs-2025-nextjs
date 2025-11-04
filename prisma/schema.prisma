@@ -43,7 +43,7 @@ model Post {
   text            String
   imageUrl        String
   published       DateTime      @default(now())
-  updated         DateTime      @updatedAt
+  updated         DateTime      @default(now())
   authorId        String
   author          User          @relation(fields: [authorId], references: [clerkId])
   likes           Like[]

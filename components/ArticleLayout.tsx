@@ -1,6 +1,6 @@
 function ArticleLayout({ children }: { children: React.ReactNode }) {
   // Returned JSX
-  return <article className="max-w-4xl">{children}</article>;
+  return <div className="grid grid-cols-[2fr_1fr] gap-12">{children}</div>;
 }
 
 export default ArticleLayout;
