@@ -3,7 +3,7 @@ export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
 
 // Post type
-export type Post = {
+export type PostPreview = {
   id: number;
   title: string;
   preview: string;
@@ -11,4 +11,9 @@ export type Post = {
   published: Date;
   views: number;
   _count: { likes: number };
+};
+
+// Post type
+export type Post = PostPreview & {
+  text: string;
 };

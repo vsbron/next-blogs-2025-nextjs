@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate, limitPreview } from "@/utils/helpers";
-import { Post } from "@/utils/types";
+import { PostPreview } from "@/utils/types";
 
 // The component
-function PostPreviewTile({ post }: { post: Post }) {
+function PostPreviewTile({ post }: { post: PostPreview }) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, _count } = post;
   const href = `/posts/${id}`;

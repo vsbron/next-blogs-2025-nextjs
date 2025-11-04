@@ -79,12 +79,9 @@ function TermsOfUsePage() {
 
       <SectionTitle as="h2">Privacy</SectionTitle>
       <p>
-        Our{" "}
-        <Link href="/privacy" className="link-primary">
-          Privacy Policy
-        </Link>{" "}
-        explains how we collect, use, and share personal information. By using
-        NextBlogs you consent to that collection and processing.
+        Our <Link href="/privacy">Privacy Policy</Link> explains how we collect,
+        use, and share personal information. By using NextBlogs you consent to
+        that collection and processing.
       </p>
 
       <SectionTitle as="h2">Third-party services</SectionTitle>

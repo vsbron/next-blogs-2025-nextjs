@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
-import { Post } from "../types";
+import { PostPreview } from "../types";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -20,7 +20,10 @@ const postFields = {
 
 export const fetchPost = async (postId: string) => {
   // Fetch the post using its ID
-  const post = await db.post.findUnique({ where: { id: Number(postId) } });
+  const post = await db.post.findUnique({
+    where: { id: Number(postId) },
+    include: { _count: { select: { likes: true } } },
+  });
 
   // Return post
   return post;
@@ -140,5 +143,5 @@ export async function fetchUserStats(
 export type UserStats = {
   totalPosts: number;
   totalViews: number;
-  mostViewedPosts: Post[];
+  mostViewedPosts: PostPreview[];
 };

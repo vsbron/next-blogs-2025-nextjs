@@ -28,12 +28,12 @@ export default function ErrorPage({ error }: ErrorPageProps) {
     <>
       <section>
         <ArticleLayout>
-          <SectionTitle>Post not found</SectionTitle>
+          <SectionTitle>{error.message}</SectionTitle>
           <p>
             Sorry, we could not find the post you were looking for.
             <br />
-            It may have been deleted, or the link might be incorrect. Please
-            check the URL or try again.
+            It may have been deleted, or the link might be incorrect, or
+            something else happened. Please check the URL or try again.
           </p>
           <p>
             You can try going{" "}

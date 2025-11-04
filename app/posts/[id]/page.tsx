@@ -1,9 +1,7 @@
-import Image from "next/image";
-import parse from "html-react-parser";
-
 import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
 import { fetchPost } from "@/utils/actions/posts";
+import PostSection from "@/components/PostSection";
 
 // Interface for the Post ID
 interface SinglePostPageProps {
@@ -17,24 +15,14 @@ async function PostPage({ params }: SinglePostPageProps) {
   // Fetch the post using the ID
   const post = await fetchPost(id);
 
+  // Guard clause
   if (!post) throw new Error("Post not found");
-
-  const { title, text, imageUrl } = post;
 
   // Returned JSX
   return (
     <ArticleLayout>
-      <SectionTitle>{title}</SectionTitle>
-      <div className="h-96 relative mb-5">
-        <Image
-          src={imageUrl}
-          fill
-          className="object-cover"
-          alt={title}
-          sizes="66vw"
-        />
-      </div>
-      {parse(text)}
+      <SectionTitle>{post.title}</SectionTitle>
+      <PostSection post={post}></PostSection>
     </ArticleLayout>
   );
 }

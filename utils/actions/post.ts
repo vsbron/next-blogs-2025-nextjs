@@ -48,3 +48,14 @@ export const createPostAction = async (
     return renderError(err, "creating a post");
   }
 };
+
+// Action function that increases the views count
+export const incrementPostView = async (id: number) => {
+  // Create post in the database
+  await db.post.update({
+    where: { id: id },
+    data: {
+      views: { increment: 1 },
+    },
+  });
+};
