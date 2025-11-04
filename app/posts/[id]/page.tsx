@@ -7,13 +7,17 @@ import { fetchPost } from "@/utils/actions/posts";
 import { SITE_DOMAIN } from "@/utils/constants";
 import { Metadata } from "next";
 
-type Props = {
+// Interface for the Post ID
+interface SinglePostPageProps {
   params: Promise<{ id: string }>;
-};
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+}
 
-  // Fetch the post using the ID
+// Generate metadata function
+export async function generateMetadata({
+  params,
+}: SinglePostPageProps): Promise<Metadata> {
+  // Get the id from params and fetch the post
+  const { id } = await params;
   const post = await fetchPost(id);
 
   // Guard clause
@@ -52,10 +56,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// Interface for the Post ID
-interface SinglePostPageProps {
-  params: Promise<{ id: string }>;
-}
 // The page
 async function PostPage({ params }: SinglePostPageProps) {
   // Get the ID from the params
