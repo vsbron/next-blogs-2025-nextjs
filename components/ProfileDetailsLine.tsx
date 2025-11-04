@@ -18,7 +18,9 @@ function ProfileDetailsLine({
   column = false,
 }: ProfileDetailsLineProps) {
   // Clone the icon and apply a class
-  const styledIcon = icon ? cloneElement(icon, { className: "w-5 h-5" }) : null;
+  const styledIcon = icon
+    ? cloneElement(icon, { className: "w-4.5 h-4.5" })
+    : null;
 
   // Returned JSX
   return (

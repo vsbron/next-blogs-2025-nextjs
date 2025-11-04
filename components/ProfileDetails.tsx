@@ -1,15 +1,13 @@
 import Image from "next/image";
-import { User } from "@prisma/client";
+import { type User as UserType } from "@prisma/client";
 
 import ProfileDetailsLine from "@/components/ProfileDetailsLine";
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
 
-import { FaBirthdayCake, FaFlag, FaCalendarAlt, FaUser } from "react-icons/fa";
-import { BiMaleFemale } from "react-icons/bi";
-import { IoMailSharp } from "react-icons/io5";
+import { VenusAndMars, Mail, Calendar, Flag, User, Cake } from "lucide-react";
 
-function ProfileDetails({ user }: { user: User }) {
+function ProfileDetails({ user }: { user: UserType }) {
   // Destructure the user
   const {
     imageUrl,
@@ -48,27 +46,27 @@ function ProfileDetails({ user }: { user: User }) {
         </div>
       </div>
       <h5 className="text-xl font-medium">Details:</h5>
-      <ProfileDetailsLine icon={<IoMailSharp />} label="Email">
+      <ProfileDetailsLine icon={<Mail />} label="Email">
         {email}
       </ProfileDetailsLine>
       <ProfileDetailsLine
-        icon={<FaCalendarAlt />}
+        icon={<Calendar />}
         label="Date joined"
         className="mb-3"
       >
         {dateJoined}
       </ProfileDetailsLine>
-      <ProfileDetailsLine icon={<FaBirthdayCake />} label="Birthday">
+      <ProfileDetailsLine icon={<Cake />} label="Birthday">
         {dateBirth}
       </ProfileDetailsLine>
-      <ProfileDetailsLine icon={<BiMaleFemale />} label="Gender">
+      <ProfileDetailsLine icon={<VenusAndMars />} label="Gender">
         {gender}
       </ProfileDetailsLine>
-      <ProfileDetailsLine icon={<FaFlag />} label="Country" className="mb-3">
+      <ProfileDetailsLine icon={<Flag />} label="Country" className="mb-3">
         {country || "Unknown"}
       </ProfileDetailsLine>
       <div className="mb-4 max-w-[550px]">
-        <ProfileDetailsLine icon={<FaUser />} label="About" column={true}>
+        <ProfileDetailsLine icon={<User />} label="About" column={true}>
           {bio || "No info on user"}
         </ProfileDetailsLine>
       </div>

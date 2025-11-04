@@ -1,9 +1,9 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
-import { Suspense } from "react";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 import LikePosts from "@/components/dashboard/LikedPosts";
+import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Metadata
 export const metadata: Metadata = {
