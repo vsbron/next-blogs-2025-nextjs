@@ -1,5 +1,6 @@
 import { formatDate, getReadingTime } from "@/utils/helpers";
 import { Post } from "@/utils/types";
+import { Card } from "./ui/card";
 
 function PostSidebar({ post }: { post: Post }) {
   // Destructure post
@@ -8,16 +9,18 @@ function PostSidebar({ post }: { post: Post }) {
   // Returned JSX
   return (
     <aside>
-      <SidebarPreview>{preview}</SidebarPreview>
-      <SidebarLine title="Published">
-        <div>{formatDate(published)}</div>
-      </SidebarLine>
-      <SidebarLine title="Updated">
-        <div>{formatDate(updated)}</div>
-      </SidebarLine>
-      <SidebarLine title="Reading time">
-        <div>{getReadingTime(text)}</div>
-      </SidebarLine>
+      <Card className="pt-5 pb-6 px-7 gap-y-0.5">
+        <SidebarPreview>{preview}</SidebarPreview>
+        <SidebarLine title="Published">
+          <div>{formatDate(published)}</div>
+        </SidebarLine>
+        <SidebarLine title="Updated">
+          <div>{formatDate(updated)}</div>
+        </SidebarLine>
+        <SidebarLine title="Reading time">
+          <div>{getReadingTime(text)}</div>
+        </SidebarLine>
+      </Card>
     </aside>
   );
 }

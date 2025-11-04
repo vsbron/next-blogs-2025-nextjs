@@ -32,7 +32,7 @@ function CTASection({ index = false }: { index?: boolean }) {
             Create a new post and share your story with the community!
           </p>
           <Button size="lg" asChild>
-            <Link href="/profile/add-post">
+            <Link href="/dashboard/add-post">
               <PencilLine />
               <span className="text-lg">Post</span>
             </Link>
