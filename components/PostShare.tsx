@@ -2,13 +2,7 @@
 import { PostSidebarCard, PostSidebarTitle } from "@/components/PostSidebar";
 import { SITE_DOMAIN } from "@/utils/constants";
 
-import {
-  FaCopy,
-  FaEnvelope,
-  FaFacebookF,
-  FaRedditAlien,
-  FaInstagram,
-} from "react-icons/fa";
+import { FaCopy, FaEnvelope, FaFacebookF, FaRedditAlien } from "react-icons/fa";
 import {
   RiTelegram2Fill,
   RiTwitterXFill,
@@ -16,8 +10,10 @@ import {
 } from "react-icons/ri";
 import { toast } from "sonner";
 
-function PostShare({ id, title }: { id: number; title: string }) {
-  const url = `${SITE_DOMAIN}/posts/${id}`;
+function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
+  // Prepare some data
+  const url = encodeURIComponent(`${SITE_DOMAIN}/posts/${id}`);
+  const title = encodeURIComponent(rawTitle);
   const iconsClass =
     "w-6 h-6 fill-foreground/80 cursor-pointer transition-colors duration-200";
 
@@ -39,10 +35,6 @@ function PostShare({ id, title }: { id: number; title: string }) {
           url={`https://twitter.com/intent/tweet?url=${url}&text=${title}`}
         >
           <RiTwitterXFill className={`${iconsClass} hover:fill-[#1DA1F2]`} />
-        </ExternalLink>
-
-        <ExternalLink url={`https://www.instagram.com/?url=${url}`}>
-          <FaInstagram className={`${iconsClass} hover:fill-[#E1306C]`} />
         </ExternalLink>
 
         <ExternalLink
@@ -96,6 +88,7 @@ function ExternalLink({ url, children }: ExternalLinkProps) {
           "width=500,height=400,scrollbars=yes,resizable=yes"
         );
       }}
+      rel="noopener noreferrer"
     >
       {children}
     </a>
