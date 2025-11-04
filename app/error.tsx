@@ -27,8 +27,8 @@ export default function ErrorPage({ error }: ErrorPageProps) {
   return (
     <>
       <section>
+        <SectionTitle>Error</SectionTitle>
         <ArticleLayout>
-          <SectionTitle>Error</SectionTitle>
           <p>
             Oops, something went wrong on our end. Looks like the system hit a
             snag while trying to load this page.

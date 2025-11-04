@@ -18,7 +18,7 @@ function PostSection({ post }: { post: Post }) {
 
   // Returned JSX
   return (
-    <article>
+    <>
       <div className="h-96 relative mb-5">
         <Image
           src={imageUrl}
@@ -32,7 +32,7 @@ function PostSection({ post }: { post: Post }) {
         <Link href={`/author/${author.username}`}>{author.displayName}</Link>
       </div>
       {parse(text)}
-    </article>
+    </>
   );
 }
 

@@ -22,14 +22,14 @@ function PostSidebar({ post }: { post: Post }) {
   );
 }
 
-// Helper components
-function SidebarLine({
-  children,
-  title,
-}: {
+// Helper component prop type
+type SidebarLineProps = {
   children: React.ReactNode;
   title: string;
-}) {
+};
+
+// Helper components
+function SidebarLine({ children, title }: SidebarLineProps) {
   // Returned JSX
   return (
     <div className="grid grid-cols-[125px_1fr] items-end">

@@ -18,9 +18,12 @@ export const metadata: Metadata = {
 function ContactPage() {
   // Returned JSX
   return (
-    <ArticleLayout>
+    <section>
       <SectionTitle>Contact Us</SectionTitle>
-    </ArticleLayout>
+      <ArticleLayout>
+        <div></div>
+      </ArticleLayout>
+    </section>
   );
 }
 

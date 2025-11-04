@@ -14,9 +14,12 @@ export const metadata: Metadata = {
 function SitemapPage() {
   // Returned JSX
   return (
-    <ArticleLayout>
+    <section>
       <SectionTitle>Sitemap</SectionTitle>
-    </ArticleLayout>
+      <ArticleLayout>
+        <div></div>
+      </ArticleLayout>
+    </section>
   );
 }
 

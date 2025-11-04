@@ -12,8 +12,8 @@ function NotFoundSection() {
   // Returned JSX
   return (
     <section>
+      <SectionTitle>Page not found</SectionTitle>
       <ArticleLayout>
-        <SectionTitle>Page not found</SectionTitle>
         <p>
           Seems like this page took a wrong turn somewhere in the digital
           wilderness. Maybe the link you followed is out of date, or the story

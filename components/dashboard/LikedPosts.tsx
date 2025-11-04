@@ -14,9 +14,10 @@ async function LikePosts() {
   if (!posts || !posts.length)
     return (
       <ArticleLayout>
-        <h2 className="text-2xl mb-4">No liked posts yet</h2>
-        <p>Looks like you have not liked any posts yet.</p>
+        <h3 className="mb-2">No liked posts yet</h3>
         <p>
+          Looks like you have not liked any posts yet.
+          <br />
           Browse through <Link href="/posts/">all posts</Link> on NextBlogs and
           find something you enjoy.
         </p>

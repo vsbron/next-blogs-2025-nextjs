@@ -14,9 +14,12 @@ export const metadata: Metadata = {
 function AboutPage() {
   // Returned JSX
   return (
-    <ArticleLayout>
+    <section>
       <SectionTitle>About Us</SectionTitle>
-    </ArticleLayout>
+      <ArticleLayout>
+        <div></div>
+      </ArticleLayout>
+    </section>
   );
 }
 

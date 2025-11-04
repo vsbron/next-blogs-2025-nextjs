@@ -14,12 +14,11 @@ async function MyPosts() {
   if (!posts || !posts.length)
     return (
       <ArticleLayout>
-        <h2 className="text-2xl mb-4">No posts yet</h2>
+        <h3 className="mb-2">No posts yet</h3>
         <p>
           Sorry! Looks like you do not have any posts yet - or something went
           wrong while fetching them.
-        </p>
-        <p>
+          <br />
           Ready to start writing? Create your{" "}
           <Link href="/dashboard/add-post">first post</Link> right now!
         </p>

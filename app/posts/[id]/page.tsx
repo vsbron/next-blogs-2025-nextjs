@@ -22,13 +22,12 @@ async function PostPage({ params }: SinglePostPageProps) {
 
   // Returned JSX
   return (
-    <>
-      <SectionTitle className="!mb-0">{post.title}</SectionTitle>
-      <ArticleLayout>
+    <section>
+      <SectionTitle>{post.title}</SectionTitle>
+      <ArticleLayout sidebar={<PostSidebar post={post}></PostSidebar>}>
         <PostSection post={post}></PostSection>
-        <PostSidebar post={post}></PostSidebar>
       </ArticleLayout>
-    </>
+    </section>
   );
 }
 

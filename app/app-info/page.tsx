@@ -14,9 +14,12 @@ export const metadata: Metadata = {
 function AppInfoPage() {
   // Returned JSX
   return (
-    <ArticleLayout>
+    <section>
       <SectionTitle>App Info</SectionTitle>
-    </ArticleLayout>
+      <ArticleLayout>
+        <div></div>
+      </ArticleLayout>
+    </section>
   );
 }
 

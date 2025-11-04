@@ -27,8 +27,8 @@ export default function ErrorPage({ error }: ErrorPageProps) {
   return (
     <>
       <section>
+        <SectionTitle>{error.message}</SectionTitle>
         <ArticleLayout>
-          <SectionTitle>{error.message}</SectionTitle>
           <p>
             Sorry, we could not find the post you were looking for.
             <br />
