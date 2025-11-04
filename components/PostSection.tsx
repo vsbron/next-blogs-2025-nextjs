@@ -1,17 +1,22 @@
 "use client";
 import { useEffect } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import parse from "html-react-parser";
 
+import PostStats from "@/components/PostStats";
+import { Card, CardContent } from "@/components/ui/card";
+
 import { Post } from "@/utils/types";
 import { incrementPostView } from "@/utils/actions/post";
-import Link from "next/link";
+
 import { Eye, ThumbsUp, User } from "lucide-react";
-import { Card, CardContent } from "./ui/card";
 
 function PostSection({ post }: { post: Post }) {
-  // Destructure the post
+  // Destructure the post and set icons class
   const { id, title, text, imageUrl, author, views, _count } = post;
+  const iconsStatsContainerClass = "flex items-center gap-x-1 xs:gap-x-1.5";
+  const iconsClass = "w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-primary/80";
 
   // Use Effect function that updates the views on every render
   useEffect(() => {
@@ -21,8 +26,8 @@ function PostSection({ post }: { post: Post }) {
   // Returned JSX
   return (
     <>
-      <Card className="p-0 pb-2 gap-y-1.5 mb-6 overflow-hidden">
-        <div className="h-44 xs:h-60 md:h-80 lg:h-96 relative">
+      <Card className="p-0 pb-2 gap-y-1.5 mb-3 md:mb-6 overflow-hidden">
+        <div className="h-44 xs:h-60 md:h-70 lg:h-96 relative">
           <Image
             src={imageUrl}
             fill
@@ -31,27 +36,30 @@ function PostSection({ post }: { post: Post }) {
             sizes="(max-width: 1024px) 100vw, 66vw"
           />
         </div>
-        <CardContent className="px-4">
+        <CardContent className="px-3 xs:px-4 text-sm xs:text-md">
           <div className="flex items-center justify-between text-foreground/50 font-semibold">
             <div className="flex items-center gap-x-1 mr-3">
-              <User className="w-5 h-5 stroke-primary/80" />
+              <User className={iconsClass} />
               <Link href={`/author/${author.username}`} className="before:h-0">
                 {author.displayName}
               </Link>
             </div>
-            <div className="flex items-center gap-x-4">
-              <div className="flex items-center gap-x-1.5">
-                <Eye className="w-5 h-5 stroke-primary/80" />
+            <div className="flex items-center gap-x-3 xs:gap-x-4">
+              <div className={iconsStatsContainerClass}>
+                <Eye className={iconsClass} />
                 {views}
               </div>
-              <div className="flex items-center gap-x-1.5">
-                <ThumbsUp className="w-5 h-5 stroke-primary/80" />
+              <div className={iconsStatsContainerClass}>
+                <ThumbsUp className={iconsClass} />
                 {_count.likes}
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
+      <div className="md:hidden">
+        <PostStats post={post} />
+      </div>
       {parse(text)}
     </>
   );
