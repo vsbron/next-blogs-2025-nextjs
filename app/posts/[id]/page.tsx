@@ -71,7 +71,7 @@ async function PostPage({ params }: SinglePostPageProps) {
   return (
     <section>
       <SectionTitle>{post.title}</SectionTitle>
-      <ArticleLayout sidebar={<PostSidebar post={post}></PostSidebar>}>
+      <ArticleLayout sidebar={<PostSidebar post={post} />}>
         <PostSection post={post}></PostSection>
       </ArticleLayout>
     </section>

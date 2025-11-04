@@ -1,15 +1,16 @@
-// import PostShare from "@/components/PostShare";
+import PostShare from "@/components/PostShare";
 import PostStats from "@/components/PostStats";
 import { Card } from "@/components/ui/card";
 
 import { Post } from "@/utils/types";
 
+// The component
 function PostSidebar({ post }: { post: Post }) {
   // Returned JSX
   return (
     <aside className="flex flex-col gap-y-8">
       <PostStats post={post} />
-      {/* <PostShare id={post.id} title={post.title} /> */}
+      <PostShare id={post.id} title={post.title} />
     </aside>
   );
 }
