@@ -55,7 +55,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
         <a href={`mailto:?subject=${title}&body=Check this out: ${url}`}>
           <FaEnvelope className={`${iconsClass} hover:fill-[#D44638]`} />
         </a>
-        <FaCopy
+        {/* <FaCopy
           className={`${iconsClass}`}
           onClick={() => {
             navigator.clipboard
@@ -63,7 +63,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
               .catch((err) => console.error(err));
             toast("URL copied to clipboard");
           }}
-        />
+        /> */}
       </div>
     </PostSidebarCard>
   );

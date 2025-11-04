@@ -1,4 +1,3 @@
-"use client";
 import PostShare from "@/components/PostShare";
 import PostStats from "@/components/PostStats";
 import { Card } from "@/components/ui/card";
