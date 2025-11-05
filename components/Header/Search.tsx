@@ -90,6 +90,7 @@ function Search() {
           variant="link"
           className="absolute right-0 top-2"
           disabled={!isSearching}
+          aria-label="Search post"
         >
           <SearchIcon className="!w-8 !h-8 stroke-white" />
         </Button>

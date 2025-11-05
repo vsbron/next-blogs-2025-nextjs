@@ -82,7 +82,7 @@ function ArticleImage({ title, href }: { title: string; href: string }) {
             src={LionImg}
             fill
             alt={title}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 640px) 95vw, 50vw"
             className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
             priority
           />

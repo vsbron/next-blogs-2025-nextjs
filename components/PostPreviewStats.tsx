@@ -18,7 +18,7 @@ function PostPreviewStats({
   // Returned JSX
   return (
     <div
-      className={`flex items-center gap-3 lg:gap-4 text-foreground/50 text-sm font-semibold ${
+      className={`flex items-center gap-3 lg:gap-4 text-foreground/60 text-sm font-semibold ${
         reverse ? "flex-row-reverse" : ""
       }`}
     >

@@ -74,7 +74,7 @@ function ArticleImage({
             src={image}
             fill
             alt={title}
-            sizes="(max-width: 768px) 50vw, 30vw"
+            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 50vw, 30vw"
             className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
             priority
           />
