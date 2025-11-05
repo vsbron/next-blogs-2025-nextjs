@@ -76,6 +76,7 @@ function ArticleImage({
             alt={title}
             sizes="(max-width: 768px) 50vw, 30vw"
             className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
+            priority
           />
         </CardContent>
       </Link>

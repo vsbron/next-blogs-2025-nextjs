@@ -37,7 +37,7 @@ function Header() {
 function PostButton() {
   // Returned JSX
   return (
-    <Button size="sm" asChild>
+    <Button size="sm" aria-label="Add a post" asChild>
       <Link href="/dashboard/add-post">
         <PencilLine />
         <span className="hidden xs:inline">Post</span>

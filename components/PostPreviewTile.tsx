@@ -7,9 +7,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate, limitPreview } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
+import { ButtonsContainer } from "./form/Buttons";
+
+// Props type
+type PostPreviewTileProps = {
+  post: PostPreview;
+  editBtn: boolean;
+};
 
 // The component
-function PostPreviewTile({ post }: { post: PostPreview }) {
+function PostPreviewTile({ post, editBtn }: PostPreviewTileProps) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, likes } = post;
   const href = `/posts/${id}`;
@@ -25,7 +32,8 @@ function PostPreviewTile({ post }: { post: PostPreview }) {
             fill
             alt={title}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-            className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
+            className="object-cover rounded-lg sm:group-hover:scale-102 transition-transform duration-300 ease-out"
+            priority
           />
         </div>
       </Link>
@@ -39,9 +47,16 @@ function PostPreviewTile({ post }: { post: PostPreview }) {
         <p className="mb-3 xs:mb-6 text-sm md:text-base">
           {limitPreview(preview, 160)}
         </p>
-        <Button variant="outline" size="sm" className="mt-auto" asChild>
-          <Link href={href}>Read more</Link>
-        </Button>
+        <ButtonsContainer className="mt-auto">
+          <Button variant="outline" size="sm" asChild>
+            <Link href={href}>Read more</Link>
+          </Button>
+          {editBtn && (
+            <Button variant="outline" size="sm" asChild>
+              <Link href={href}>Edit post</Link>
+            </Button>
+          )}
+        </ButtonsContainer>
       </CardContent>
     </Card>
   );

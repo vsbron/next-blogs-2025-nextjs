@@ -51,6 +51,7 @@ function Search() {
         variant="outline"
         size="sm"
         className="p-1.5"
+        aria-label="Search posts"
         onClick={showSearch}
       >
         <SearchIcon />

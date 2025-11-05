@@ -25,7 +25,7 @@ async function Dropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="sm" variant="outline">
+        <Button size="sm" aria-label="Toggle menu" variant="outline">
           <MenuIcon />
         </Button>
       </DropdownMenuTrigger>

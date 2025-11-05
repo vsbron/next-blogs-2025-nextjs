@@ -29,7 +29,7 @@ async function MyPosts() {
   return (
     <PostsGridLayout>
       {posts.map((post) => {
-        return <PostPreviewTile key={post.id} post={post} />;
+        return <PostPreviewTile key={post.id} post={post} editBtn={true} />;
       })}
     </PostsGridLayout>
   );

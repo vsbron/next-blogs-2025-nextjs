@@ -1,12 +1,17 @@
 import { RxReload } from "react-icons/rx";
 
 import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 
 // Button sizes
 type btnSize = "default" | "lg" | "sm";
 
-// Submit button props
+// Container and Submit button props
+type ButtonsContainerProps = {
+  children: React.ReactNode;
+  className?: string;
+};
 type SubmitButtonProps = {
   className?: string;
   text?: string;
@@ -15,9 +20,17 @@ type SubmitButtonProps = {
 };
 
 // Buttons container
-export function ButtonsContainer({ children }: { children: React.ReactNode }) {
+export function ButtonsContainer({
+  children,
+  className,
+}: ButtonsContainerProps) {
   return (
-    <div className="flex flex-col items-start xs:flex-row gap-y-2 gap-x-4 mt-10">
+    <div
+      className={cn(
+        "flex flex-col items-start xs:flex-row gap-y-2 gap-x-4 mt-10",
+        className
+      )}
+    >
       {children}
     </div>
   );

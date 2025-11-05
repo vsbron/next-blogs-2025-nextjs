@@ -35,6 +35,7 @@ function HeroQuick({ articles }: { articles: any[] }) {
                   alt={title}
                   className="rounded-md object-cover"
                   sizes="(max-width: 768px) 50vw, 25vw"
+                  priority
                 />
               </div>
             </Link>

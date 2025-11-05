@@ -30,6 +30,7 @@ function PostSection({ post }: { post: Post }) {
             className="object-cover"
             alt={title}
             sizes="(max-width: 1024px) 100vw, 66vw"
+            priority
           />
         </div>
         <PostSectionStats post={post} />

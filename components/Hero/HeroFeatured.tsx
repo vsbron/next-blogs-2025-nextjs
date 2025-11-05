@@ -31,6 +31,7 @@ function HeroFeatured() {
       <Image
         src={FeaturedBG}
         alt={title}
+        priority
         sizes="(max-width: 768px) 100vw, 50vw"
         className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-8 sm:opacity-10 object-cover"
       />
@@ -83,6 +84,7 @@ function ArticleImage({ title, href }: { title: string; href: string }) {
             alt={title}
             sizes="(max-width: 768px) 100vw, 50vw"
             className="object-cover rounded-lg sm:group-hover:scale-105 transition-transform duration-300 ease-out"
+            priority
           />
         </CardContent>
       </Link>
