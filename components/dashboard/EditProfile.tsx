@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { User } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -11,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { updateUserAction } from "@/utils/actions/users";
 import { handleFormAction } from "@/utils/helpers";
 import { userSchema } from "@/utils/schemas";
+import { User } from "@/utils/types";
 
 // Type for form values
 type FormValues = {
