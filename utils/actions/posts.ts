@@ -24,6 +24,7 @@ export const fetchPost = async (postId: string) => {
     include: {
       _count: { select: { likes: true } },
       author: { select: { displayName: true, username: true } },
+      likes: true,
     },
   });
 

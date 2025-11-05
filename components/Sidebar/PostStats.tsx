@@ -1,4 +1,7 @@
-import { PostSidebarCard, PostSidebarTitle } from "@/components/PostSidebar";
+import {
+  PostSidebarCard,
+  PostSidebarTitle,
+} from "@/components/Sidebar/PostSidebar";
 import { formatDate, getReadingTime } from "@/utils/helpers";
 import { Post } from "@/utils/types";
 

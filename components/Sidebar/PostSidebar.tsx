@@ -1,5 +1,5 @@
-import PostShare from "@/components/PostShare";
-import PostStats from "@/components/PostStats";
+import PostShare from "@/components/Sidebar/PostShare";
+import PostStats from "@/components/Sidebar/PostStats";
 import { Card } from "@/components/ui/card";
 
 import { Post } from "@/utils/types";

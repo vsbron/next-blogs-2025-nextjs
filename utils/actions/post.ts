@@ -59,3 +59,18 @@ export const incrementPostView = async (id: number) => {
     },
   });
 };
+
+// Action function that increases the likes count
+export const togglePostLike = async (postId: number, userId: string) => {
+  const existing = await db.like.findUnique({
+    where: { userId_postId: { userId, postId } },
+  });
+
+  if (existing) {
+    await db.like.delete({ where: { userId_postId: { userId, postId } } });
+    return { liked: false };
+  } else {
+    await db.like.create({ data: { userId, postId } });
+    return { liked: true };
+  }
+};

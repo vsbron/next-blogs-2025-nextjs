@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Type for action function and its return
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
@@ -18,4 +19,5 @@ export type Post = PostPreview & {
   text: string;
   updated: Date;
   author: { displayName: string; username: string };
+  likes: any;
 };

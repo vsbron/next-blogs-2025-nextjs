@@ -1,5 +1,8 @@
 "use client";
-import { PostSidebarCard, PostSidebarTitle } from "@/components/PostSidebar";
+import {
+  PostSidebarCard,
+  PostSidebarTitle,
+} from "@/components/Sidebar/PostSidebar";
 import { SITE_DOMAIN } from "@/utils/constants";
 
 import { FaCopy, FaEnvelope, FaFacebookF, FaRedditAlien } from "react-icons/fa";
