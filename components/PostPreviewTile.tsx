@@ -12,11 +12,11 @@ import { ButtonsContainer } from "./form/Buttons";
 // Props type
 type PostPreviewTileProps = {
   post: PostPreview;
-  editBtn: boolean;
+  editBtn?: boolean;
 };
 
 // The component
-function PostPreviewTile({ post, editBtn }: PostPreviewTileProps) {
+function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, likes } = post;
   const href = `/posts/${id}`;
