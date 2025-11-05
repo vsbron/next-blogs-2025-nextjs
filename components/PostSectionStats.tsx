@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -6,7 +5,7 @@ import { useClerk, useUser } from "@clerk/nextjs";
 
 import { CardContent } from "@/components/ui/card";
 
-import { Post } from "@/utils/types";
+import { Like, Post } from "@/utils/types";
 import { togglePostLike } from "@/utils/actions/post";
 
 import { Eye, ThumbsUp, User } from "lucide-react";
@@ -29,7 +28,7 @@ function PostSectionStats({ post }: { post: Post }) {
   // Use Effect function that updates the likes counter
   useEffect(() => {
     if (currentUserId) {
-      setIsLiked(!!likes.find((like: any) => like.userId === currentUserId));
+      setIsLiked(!!likes.find((like: Like) => like.userId === currentUserId));
     }
   }, [likes, currentUserId]);
 

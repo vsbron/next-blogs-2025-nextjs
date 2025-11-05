@@ -11,7 +11,7 @@ import { PostPreview } from "@/utils/types";
 // The component
 function PostPreviewTile({ post }: { post: PostPreview }) {
   // Destructure props and configure
-  const { id, title, preview, published, views, imageUrl, _count } = post;
+  const { id, title, preview, published, views, imageUrl, likes } = post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 
@@ -30,7 +30,7 @@ function PostPreviewTile({ post }: { post: PostPreview }) {
         </div>
       </Link>
       <CardHeader className="px-4">
-        <PostPreviewStatsProps views={views} likes={_count.likes} date={date} />
+        <PostPreviewStatsProps views={views} likes={likes.length} date={date} />
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">

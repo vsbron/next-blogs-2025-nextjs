@@ -13,7 +13,7 @@ const postFields = {
   imageUrl: true,
   published: true,
   views: true,
-  _count: { select: { likes: true } },
+  likes: { select: { id: true, userId: true, postId: true } },
 };
 
 /* GLOBAL POSTS */
@@ -22,9 +22,8 @@ export const fetchPost = async (postId: string) => {
   const post = await db.post.findUnique({
     where: { id: Number(postId) },
     include: {
-      _count: { select: { likes: true } },
       author: { select: { displayName: true, username: true } },
-      likes: true,
+      likes: { select: { id: true, userId: true, postId: true } },
     },
   });
 
@@ -51,7 +50,7 @@ export const fetchMostLikedPosts = async () => {
     select: {
       id: true,
       title: true,
-      _count: { select: { likes: true } },
+      likes: { select: { id: true } },
     },
   });
 

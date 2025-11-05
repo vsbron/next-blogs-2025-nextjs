@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import ArticleLayout from "@/components/ArticleLayout";
 import PostSection from "@/components/PostSection";
 import PostSidebar from "@/components/Sidebar/PostSidebar";
@@ -5,7 +7,6 @@ import SectionTitle from "@/components/SectionTitle";
 
 import { fetchPost } from "@/utils/actions/posts";
 import { SITE_DOMAIN } from "@/utils/constants";
-import { Metadata } from "next";
 
 // Interface for the Post ID
 interface SinglePostPageProps {
