@@ -1,6 +1,26 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { JsonValue } from "@prisma/client/runtime/library";
+
 // Type for action function and its return
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
+
+// User type
+export type User = {
+  imageUrl: string | null;
+  username: string;
+  displayName: string;
+  email: string;
+  dateCreated: Date;
+  birthday: string | null;
+  gender: Gender;
+  country: string | null;
+  bio: string | null;
+  socials: JsonValue;
+};
+
+type Gender = "Male" | "Female" | "Unknown";
 
 // Post type
 export type PostPreview = {
@@ -23,6 +43,6 @@ export type Post = PostPreview & {
 // Like type
 export type Like = {
   id: number;
-  userId: string;
-  postId: number;
+  userId?: string;
+  postId?: number;
 };

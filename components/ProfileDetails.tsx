@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { type User as UserType } from "@prisma/client";
 
 import ProfileDetailsLine from "@/components/ProfileDetailsLine";
 import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
+import { User as UserType } from "@/utils/types";
 
 import { VenusAndMars, Mail, Calendar, Flag, User, Cake } from "lucide-react";
 

@@ -17,7 +17,22 @@ export async function fetchCurrentUser() {
   if (!userId) return null;
 
   // Fetch the user from database
-  const user = await db.user.findUnique({ where: { clerkId: userId } });
+  // const user = await db.user.findUnique({ where: { clerkId: userId } });
+  const user = await db.user.findUnique({
+    where: { clerkId: userId },
+    select: {
+      imageUrl: true,
+      username: true,
+      displayName: true,
+      email: true,
+      dateCreated: true,
+      birthday: true,
+      gender: true,
+      country: true,
+      bio: true,
+      socials: true,
+    },
+  });
 
   // Return user
   return user;

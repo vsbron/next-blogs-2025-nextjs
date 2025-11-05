@@ -13,7 +13,7 @@ const postFields = {
   imageUrl: true,
   published: true,
   views: true,
-  likes: { select: { id: true, userId: true, postId: true } },
+  likes: { select: { id: true } },
 };
 
 /* GLOBAL POSTS */
