@@ -15,7 +15,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
   const url = encodeURIComponent(`${SITE_DOMAIN}/posts/${id}`);
   const title = encodeURIComponent(rawTitle);
   const iconsClass =
-    "w-5.5 h-5.5 xs:w-6 xs:h-6 fill-foreground/80 cursor-pointer transition-colors duration-200";
+    "w-6 h-6 fill-foreground/80 cursor-pointer transition-colors duration-200";
 
   // Returned JSX
   return (
@@ -25,7 +25,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
         Liked this post? Feel free to share it with your friends using any of
         the options below:
       </p>
-      <div className="flex items-center gap-x-4 gap-y-2 xs:gap-x-5 mt-3 flex-wrap">
+      <div className="flex items-center gap-x-4.5 gap-y-2 xs:gap-x-5 mt-2 md:mt-3 flex-wrap pb-1 md:pb-0">
         <ExternalLink
           url={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
         >
@@ -56,7 +56,7 @@ function PostShare({ id, title: rawTitle }: { id: number; title: string }) {
           <FaEnvelope className={`${iconsClass} hover:fill-[#D44638]`} />
         </a>
         <FaCopy
-          className={`${iconsClass} !w-4.5 !h-4.5 !xs:w-5 !xs:h-5`}
+          className={`${iconsClass} w-5 h-5 hover:fill-primary`}
           onClick={() => {
             navigator.clipboard
               .writeText(url)

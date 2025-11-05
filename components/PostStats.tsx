@@ -40,7 +40,7 @@ function SidebarLine({ children, title }: SidebarLineProps) {
 function SidebarPreview({ children }: { children: React.ReactNode }) {
   // Returned JSX
   return (
-    <div className="mb-3 lg:text-lg">
+    <div className="mb-3 lg:text-lg hidden md:block">
       <PostSidebarTitle title="Preview" />
       {children}
     </div>

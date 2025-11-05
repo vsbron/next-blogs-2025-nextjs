@@ -26,7 +26,7 @@ function PostSection({ post }: { post: Post }) {
   // Returned JSX
   return (
     <>
-      <Card className="p-0 pb-2 gap-y-1.5 mb-3 md:mb-6 overflow-hidden">
+      <Card className="p-0 pb-1.25 md:pb-2 gap-y-1 md:gap-y-1.5 mb-3 md:mb-6 overflow-hidden">
         <div className="h-44 xs:h-60 md:h-70 lg:h-96 relative">
           <Image
             src={imageUrl}
