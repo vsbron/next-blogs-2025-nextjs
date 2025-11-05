@@ -1,9 +1,11 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import PostSection from "@/components/PostSection";
 import PostSidebar from "@/components/Sidebar/PostSidebar";
 import SectionTitle from "@/components/SectionTitle";
+import SkeletonArticle from "@/components/skeletons/SkeletonArticle";
 
 import { fetchPost } from "@/utils/actions/posts";
 import { SITE_DOMAIN } from "@/utils/constants";
@@ -72,9 +74,11 @@ async function PostPage({ params }: SinglePostPageProps) {
   return (
     <section>
       <SectionTitle>{post.title}</SectionTitle>
-      <ArticleLayout sidebar={<PostSidebar post={post} />}>
-        <PostSection post={post} />
-      </ArticleLayout>
+      <Suspense fallback={<SkeletonArticle />}>
+        <ArticleLayout sidebar={<PostSidebar post={post} />}>
+          <PostSection post={post} />
+        </ArticleLayout>
+      </Suspense>
     </section>
   );
 }

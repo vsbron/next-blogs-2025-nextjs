@@ -1,4 +1,6 @@
 "use server";
+
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
@@ -17,7 +19,7 @@ const postFields = {
 };
 
 /* GLOBAL POSTS */
-export const fetchPost = async (postId: string) => {
+export const fetchPost = cache(async (postId: string) => {
   // Fetch the post using its ID
   const post = await db.post.findUnique({
     where: { id: Number(postId) },
@@ -29,7 +31,7 @@ export const fetchPost = async (postId: string) => {
 
   // Return post
   return post;
-};
+});
 
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async () => {

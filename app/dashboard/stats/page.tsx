@@ -1,7 +1,9 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import MyProfileStats from "@/components/dashboard/MyProfileStats";
+import SkeletonProfileStats from "@/components/skeletons/SkeletonProfileStats";
 
 // Metadata
 export const metadata: Metadata = {
@@ -16,7 +18,9 @@ function ProfileStatsPage() {
   return (
     <section>
       <SectionTitle>Profile statistics</SectionTitle>
-      <MyProfileStats />
+      <Suspense fallback={<SkeletonProfileStats />}>
+        <MyProfileStats />
+      </Suspense>
     </section>
   );
 }
