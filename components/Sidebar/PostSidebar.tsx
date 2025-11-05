@@ -1,3 +1,4 @@
+import PostRecentPosts from "@/components/Sidebar/PostRecentPosts";
 import PostShare from "@/components/Sidebar/PostShare";
 import PostStats from "@/components/Sidebar/PostStats";
 import { Card } from "@/components/ui/card";
@@ -13,6 +14,9 @@ function PostSidebar({ post }: { post: Post }) {
       </div>
       <div className="-mt-8 md:mt-0">
         <PostShare id={post.id} title={post.title} />
+      </div>
+      <div className="-mt-8 md:mt-0">
+        <PostRecentPosts />
       </div>
     </aside>
   );
