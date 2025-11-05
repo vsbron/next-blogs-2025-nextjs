@@ -63,7 +63,7 @@ function HeroFeatured() {
         <CardContent className="px-0">
           <p className="!mb-4 sm:!mb-6 text-sm md:text-base">{preview}</p>
           <Button asChild>
-            <Link href={href}>Read more</Link>
+            <Link href={href}>Read post</Link>
           </Button>
         </CardContent>
       </Card>

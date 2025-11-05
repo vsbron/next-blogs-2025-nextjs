@@ -49,7 +49,7 @@ function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
         </p>
         <ButtonsContainer className="mt-auto">
           <Button variant="outline" size="sm" asChild>
-            <Link href={href}>Read more</Link>
+            <Link href={href}>Read post</Link>
           </Button>
           {editBtn && (
             <Button variant="outline" size="sm" asChild>

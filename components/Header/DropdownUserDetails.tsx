@@ -43,7 +43,7 @@ async function DropdownUserDetails() {
         )}
       </div>
       <SignOutButton>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" aria-label="Sign out">
           <LogOut className="stroke-muted-foreground" />
         </Button>
       </SignOutButton>

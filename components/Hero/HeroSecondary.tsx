@@ -44,8 +44,8 @@ function HeroSecondary({
           <p className="!mb-4 text-sm md:text-base">
             {limitPreview(preview, 120)}
           </p>
-          <Button size="sm" asChild>
-            <Link href={href}>Read more</Link>
+          <Button size="sm" className="mt-1" asChild>
+            <Link href={href}>Read post</Link>
           </Button>
         </CardContent>
       </Card>
