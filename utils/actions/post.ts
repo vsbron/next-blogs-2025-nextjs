@@ -10,7 +10,7 @@ import { renderError } from "../helpers";
 import { uploadImage } from "../supabase";
 
 // Action function to create a new post
-export const createPostAction = async (
+export const createEditPostAction = async (
   formData: FormData
 ): actionReturnType => {
   // Get the current user clerkId
@@ -46,6 +46,56 @@ export const createPostAction = async (
     return { success: true, message: "Post successfully created" };
   } catch (err) {
     return renderError(err, "creating a post");
+  }
+};
+
+// Action function to edit a post
+export const editPostAction = async (
+  formData: FormData,
+  postId: number
+): actionReturnType => {
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
+
+  // Fetch the post to check ownership
+  const post = await db.post.findUnique({
+    where: { id: postId },
+    select: { authorId: true },
+  });
+  if (!post) return { success: false, message: "Post not found" };
+  if (post.authorId !== userId)
+    return { success: false, message: "Unauthorized" };
+
+  try {
+    // Get all the form data and validate it
+    const rawData = Object.fromEntries(formData);
+    const validatedFields = validatedWithZodSchema(postSchema, rawData);
+
+    // // Get the image from formData
+    // const file = formData.get("imageUrl") as File;
+
+    // // Validate the image file
+    // const validatedImage = validatedWithZodSchema(imageSchema, {
+    //   imageUrl: file,
+    // });
+
+    // Upload the image and get the full path
+    // const fullPath = await uploadImage(validatedImage.imageUrl);
+
+    // Create post in the database
+    await db.post.update({
+      where: { id: postId },
+      data: {
+        ...validatedFields,
+        // imageUrl: fullPath,
+      },
+    });
+
+    // Return success message
+    return { success: true, message: "Post successfully updated" };
+  } catch (err) {
+    return renderError(err, "editing a post");
   }
 };
 

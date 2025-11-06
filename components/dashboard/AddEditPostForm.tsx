@@ -9,7 +9,7 @@ import FormInput from "@/components/form/FormInput";
 import ImageInput from "@/components/form/ImageInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
 
-import { createPostAction } from "@/utils/actions/post";
+import { createEditPostAction, editPostAction } from "@/utils/actions/post";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
 import { Post } from "@/utils/types";
@@ -46,7 +46,13 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
 
   // On submit handler
   const onSubmit = async (data: FormValues) => {
-    await handleFormAction(createPostAction, data, "/dashboard/my-posts");
+    // Set the correct action for post handling
+    const correctAction = defaultValues
+      ? (formData: FormData) => editPostAction(formData, defaultValues.id)
+      : createEditPostAction;
+
+    // Handle the form submission
+    await handleFormAction(correctAction, data, "/dashboard/my-posts");
   };
 
   // Returned JSX
