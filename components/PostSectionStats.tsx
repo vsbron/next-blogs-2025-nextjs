@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useClerk, useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
 import { CardContent } from "@/components/ui/card";
 
@@ -41,8 +42,9 @@ function PostSectionStats({ post }: { post: Post }) {
     const result = await togglePostLike(id, currentUserId);
     setIsLiked(result.liked);
 
-    // Update the likes count
+    // Update the likes count and trigger toast
     setLikeCount((prev) => (result.liked ? prev + 1 : prev - 1));
+    toast(`Post ${result.liked ? "added to" : "removed from"} Favorites`);
   };
 
   // Returned JSX

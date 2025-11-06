@@ -67,7 +67,7 @@ function ArticleImage({
 }) {
   // Returned JSX
   return (
-    <Card className="p-2 sm:p-3 shadow-sm xs:shadow-md shadow-primary/35 border-0 relative sm:mb-2">
+    <Card className="p-2 sm:p-3 shadow-sm xs:shadow-md shadow-primary/25 border-0 relative sm:mb-2">
       <Link className="group" href={href}>
         <CardContent className="relative h-40 sm:h-50 lg:h-60 overflow-hidden rounded-lg">
           <Image

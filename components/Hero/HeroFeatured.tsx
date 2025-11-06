@@ -75,7 +75,7 @@ function HeroFeatured() {
 function ArticleImage({ title, href }: { title: string; href: string }) {
   // Returned JSX
   return (
-    <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg shadow-primary/35 border-0 relative sm:mb-2">
+    <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg shadow-primary/25 border-0 relative sm:mb-2">
       <Link className="group" href={href}>
         <CardContent className="relative h-44 xs:h-60 sm:h-110 overflow-hidden rounded-lg">
           <Image
