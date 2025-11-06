@@ -31,7 +31,7 @@ function ImageInput({ error, setValue, ...props }: ImageInputProps) {
         }}
         required
       />
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      {error && <span className="text-primary text-sm">{error}</span>}
     </FormGroup>
   );
 }

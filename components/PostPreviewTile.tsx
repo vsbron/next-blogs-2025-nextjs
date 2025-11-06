@@ -24,15 +24,15 @@ function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0">
+    <Card className="p-0 gap-0 overflow-hidden">
       <Link href={href} className="mb-3">
-        <div className="relative h-40 sm:h-60 group overflow-hidden rounded-lg">
+        <div className="relative h-40 sm:h-60 group overflow-hidden rounded-t-lg">
           <Image
             src={imageUrl}
             fill
             alt={title}
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-            className="object-cover rounded-lg sm:group-hover:scale-102 transition-transform duration-300 ease-out"
+            className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
             priority
           />
         </div>

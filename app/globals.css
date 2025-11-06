@@ -232,10 +232,22 @@ article .link-primary:hover:before {
 }
 .ql-toolbar {
   border-radius: 6px 6px 0 0 !important;
+  border-color: var(--border) !important;
+  color: var(--color-foreground) !important;
+}
+.dark .ql-toolbar svg {
+  filter: brightness(300%);
+}
+.ql-snow .ql-picker {
+  color: var(--color-foreground) !important;
+}
+.dark .ql-editor {
+  background: color-mix(in oklab, var(--input) 30%, transparent);
 }
 .ql-container {
   height: 300px !important;
   border-radius: 0 0 6px 6px !important;
   font-size: 1.1rem !important;
   line-height: 1.5rem !important;
+  border-color: var(--border) !important;
 }

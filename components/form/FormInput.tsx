@@ -20,7 +20,7 @@ function FormInput({ error, ...props }: FormInputProps) {
         {label || id}
       </Label>
       <Input {...props} />
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      {error && <span className="text-primary text-sm">{error}</span>}
     </FormGroup>
   );
 }

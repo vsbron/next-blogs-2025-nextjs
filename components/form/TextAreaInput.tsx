@@ -22,7 +22,7 @@ function TextAreaInput({ error, control, ...props }: TextAreaInputProps) {
         {label || id}
       </Label>
       <RichTextEditor control={control} />
-      {error && <span className="text-red-500 text-sm">{error}</span>}
+      {error && <span className="text-primary text-sm">{error}</span>}
     </FormGroup>
   );
 }
