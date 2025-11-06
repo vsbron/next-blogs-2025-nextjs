@@ -53,7 +53,7 @@ function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
           </Button>
           {editBtn && (
             <Button variant="outline" size="sm" asChild>
-              <Link href={href}>Edit post</Link>
+              <Link href={`/dashboard/my-posts/edit/${id}`}>Edit post</Link>
             </Button>
           )}
         </ButtonsContainer>

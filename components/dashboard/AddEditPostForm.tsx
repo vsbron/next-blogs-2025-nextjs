@@ -3,14 +3,16 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SubmitButton } from "../form/Buttons";
-import FormInput from "../form/FormInput";
-import ImageInput from "../form/ImageInput";
-import TextAreaInput from "../form/TextAreaInput";
+import { SubmitButton } from "@/components/form/Buttons";
+import CurrentImage from "@/components/form/CurrentImage";
+import FormInput from "@/components/form/FormInput";
+import ImageInput from "@/components/form/ImageInput";
+import TextAreaInput from "@/components/form/TextAreaInput";
 
 import { createPostAction } from "@/utils/actions/post";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
+import { Post } from "@/utils/types";
 
 // Type for form values
 type FormValues = {
@@ -21,7 +23,7 @@ type FormValues = {
 };
 
 // The component
-function AddNewPost() {
+function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
   // Combine 2 schemas
   const combinedSchema = z.intersection(postSchema, imageSchema);
 
@@ -35,6 +37,11 @@ function AddNewPost() {
   } = useForm<FormValues>({
     resolver: zodResolver(combinedSchema),
     mode: "onBlur",
+    defaultValues: {
+      title: defaultValues?.title || "",
+      preview: defaultValues?.preview || "",
+      text: defaultValues?.text || "",
+    },
   });
 
   // On submit handler
@@ -45,6 +52,7 @@ function AddNewPost() {
   // Returned JSX
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
+      {/* Title field */}
       <FormInput
         id="title"
         label="Post title"
@@ -52,6 +60,8 @@ function AddNewPost() {
         {...register("title")}
         error={errors.title?.message}
       />
+
+      {/* Preview field */}
       <FormInput
         id="preview"
         label="Post preview"
@@ -60,6 +70,7 @@ function AddNewPost() {
         error={errors.preview?.message}
       />
 
+      {/* Text field */}
       <TextAreaInput
         id="text"
         label="Compose your post"
@@ -67,6 +78,8 @@ function AddNewPost() {
         {...register("text")}
         error={errors.text?.message}
       />
+
+      {/* Attach an image */}
       <ImageInput
         {...register("imageUrl")}
         label="Add an image (1MB)"
@@ -74,9 +87,18 @@ function AddNewPost() {
         error={errors.imageUrl?.message}
       />
 
-      <SubmitButton text="Submit post" isPending={isSubmitting} />
+      {/* Display current image */}
+      {defaultValues?.imageUrl && (
+        <CurrentImage imageUrl={defaultValues?.imageUrl} />
+      )}
+
+      {/* Submit button */}
+      <SubmitButton
+        text={defaultValues ? "Edit post" : "Submit post"}
+        isPending={isSubmitting}
+      />
     </form>
   );
 }
 
-export default AddNewPost;
+export default AddEditPostForm;

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import SectionTitle from "@/components/SectionTitle";
-import AddNewPost from "@/components/dashboard/AddNewPost";
+import AddEditPostForm from "@/components/dashboard/AddEditPostForm";
 
 // Metadata
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ function AddPostPage() {
   return (
     <section>
       <SectionTitle>Add a new post</SectionTitle>
-      <AddNewPost />
+      <AddEditPostForm />
     </section>
   );
 }
