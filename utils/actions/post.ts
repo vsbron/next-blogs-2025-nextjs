@@ -3,11 +3,12 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 import db from "../db";
+import { BUCKET_NAME } from "../constants";
+import { renderError } from "../helpers";
+import { actionReturnType } from "../types";
 import { imageSchema, postSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
-import { actionReturnType } from "../types";
-import { renderError } from "../helpers";
-import { uploadImage } from "../supabase";
+import { supabase, uploadImage } from "../supabase";
 
 // Action function to create a new post
 export const createEditPostAction = async (
@@ -61,8 +62,10 @@ export const editPostAction = async (
   // Fetch the post to check ownership
   const post = await db.post.findUnique({
     where: { id: postId },
-    select: { authorId: true },
+    select: { authorId: true, imageUrl: true },
   });
+
+  // Guard clauses
   if (!post) return { success: false, message: "Post not found" };
   if (post.authorId !== userId)
     return { success: false, message: "Unauthorized" };
@@ -72,23 +75,40 @@ export const editPostAction = async (
     const rawData = Object.fromEntries(formData);
     const validatedFields = validatedWithZodSchema(postSchema, rawData);
 
-    // // Get the image from formData
-    // const file = formData.get("imageUrl") as File;
+    // IMAGE REPLACE
+    // Get the image from formData
+    const file = formData.get("imageUrl") as File;
+    let fullPath;
 
-    // // Validate the image file
-    // const validatedImage = validatedWithZodSchema(imageSchema, {
-    //   imageUrl: file,
-    // });
+    if (file) {
+      // Decode URL to get the correct file path
+      const decodedPath = decodeURIComponent(post.imageUrl);
+      const fileName = decodedPath.split("/post-images/")[1];
 
-    // Upload the image and get the full path
-    // const fullPath = await uploadImage(validatedImage.imageUrl);
+      // Remove existing image from the bucket
+      const { error } = await supabase.storage
+        .from(BUCKET_NAME)
+        .remove([fileName]);
+
+      // If fail, log error
+      if (error)
+        return { success: false, message: "Failed to delete existing image" };
+
+      // Validate the image file
+      const validatedImage = validatedWithZodSchema(imageSchema, {
+        imageUrl: file,
+      });
+
+      // Upload the image and get the full path
+      fullPath = await uploadImage(validatedImage.imageUrl);
+    }
 
     // Create post in the database
     await db.post.update({
       where: { id: postId },
       data: {
         ...validatedFields,
-        // imageUrl: fullPath,
+        ...(fullPath ? { imageUrl: fullPath } : {}),
       },
     });
 

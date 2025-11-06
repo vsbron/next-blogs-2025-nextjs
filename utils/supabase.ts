@@ -1,7 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-
-// St the bucket name
-const bucket = "post-images";
+import { BUCKET_NAME } from "./constants";
 
 // Create supabase client
 export const supabase = createClient(
@@ -18,12 +16,13 @@ export const uploadImage = async (image: File) => {
 
   // Upload the image to supabase
   const { data } = await supabase.storage
-    .from(bucket)
+    .from(BUCKET_NAME)
     .upload(newName, image, { cacheControl: "3600" });
 
   // Guard clause
   if (!data) throw new Error("Image upload failed");
 
   // Return image URL
-  return supabase.storage.from(bucket).getPublicUrl(newName).data.publicUrl;
+  return supabase.storage.from(BUCKET_NAME).getPublicUrl(newName).data
+    .publicUrl;
 };
