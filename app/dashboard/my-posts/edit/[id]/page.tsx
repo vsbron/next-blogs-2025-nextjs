@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import SectionTitle from "@/components/SectionTitle";
 import AddEditPostForm from "@/components/dashboard/AddEditPostForm";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonEditPost from "@/components/skeletons/SkeletonEditPost";
 import { fetchPost } from "@/utils/actions/posts";
 
 // Interface for the Post ID
@@ -21,24 +21,38 @@ export const metadata: Metadata = {
 
 // The page
 async function EditPostPage({ params }: SinglePostPageProps) {
-  // Get the ID from the params and fetch the post
+  // Get the ID a nd userId from the params and auth
   const { id } = await params;
   const { userId } = await auth();
-  const post = await fetchPost(id);
+  if (!userId) redirect("/");
+
+  // Returned JSX
+  return (
+    <section>
+      <SectionTitle>Edit published post</SectionTitle>
+      <Suspense fallback={<SkeletonEditPost />}>
+        <PostFormLoader postId={id} userId={userId} />
+      </Suspense>
+    </section>
+  );
+}
+
+// Helper function props type
+interface Props {
+  postId: string;
+  userId: string;
+}
+// Helper function
+async function PostFormLoader({ postId, userId }: Props) {
+  // Fetch the post data
+  const post = await fetchPost(postId);
 
   // Guard clauses
   if (!post) throw new Error("Post not found");
   if (post.authorId !== userId) redirect("/dashboard/my-posts/");
 
   // Returned JSX
-  return (
-    <section>
-      <SectionTitle>Edit published post</SectionTitle>
-      <Suspense fallback={<SkeletonPostsGrid />}>
-        <AddEditPostForm defaultValues={post} />
-      </Suspense>
-    </section>
-  );
+  return <AddEditPostForm defaultValues={post} />;
 }
 
 export default EditPostPage;
