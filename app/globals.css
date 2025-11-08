@@ -151,6 +151,9 @@ body {
   .post-stats-icon {
     @apply w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-primary/80;
   }
+  .share-post-icon {
+    @apply w-6 h-6 fill-foreground/80 cursor-pointer transition-colors duration-200;
+  }
 }
 
 h1,

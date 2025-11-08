@@ -13,7 +13,7 @@ import "./globals.css";
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "600", "800", "900"],
+  weight: ["400", "600"],
 });
 
 const LatoSerif = Lato({
@@ -83,7 +83,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased`}
+          className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased font-lato`}
         >
           <ThemeProvider
             attribute="class"

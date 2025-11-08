@@ -27,7 +27,7 @@ function ProfileDetailsLine({
     <div className={`flex ${column ? "flex-col" : "items-end"}  ${className}`}>
       <div className="flex items-center gap-x-1.5">
         {styledIcon}
-        <span className="w-30 font-semibold">{label}:</span>
+        <span className="w-30 font-bold">{label}:</span>
       </div>
       <span>{children}</span>
     </div>

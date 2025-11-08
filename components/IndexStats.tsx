@@ -182,7 +182,7 @@ function StatsCard({ list, title, className }: StatsCardProps) {
               <Link href={href} className="link-primary single-line-preview">
                 {label}
               </Link>
-              <div className="flex items-center gap-1 text-foreground/60 font-semibold text-sm min-w-11">
+              <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm min-w-11">
                 {views ? <EyeIcon className={iconClassSm} /> : ""}
                 {likes ? <ThumbsUpIcon className={iconClassSm} /> : ""}
                 {posts ? <FilePenLine className={iconClassSm} /> : ""}

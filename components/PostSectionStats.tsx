@@ -13,7 +13,7 @@ function PostSectionStats({ post }: { post: Post }) {
   // Returned JSX
   return (
     <CardContent className="px-3 xs:px-4 text-sm xs:text-md">
-      <div className="flex items-center justify-between text-foreground/50 font-semibold">
+      <div className="flex items-center justify-between text-foreground/50 font-bold">
         <div className="flex items-center gap-x-1 mr-3">
           <User className="post-stats-icon" />
           <Link href={`/author/${author.username}`} className="before:h-0">

@@ -35,7 +35,7 @@ function SidebarLine({ children, title }: SidebarLineProps) {
   // Returned JSX
   return (
     <div className="grid grid-cols-[125px_1fr] md:grid-cols-1 lg:grid-cols-[125px_1fr] items-end mb-0">
-      <div className="font-semibold">{title}:</div>
+      <div className="font-bold">{title}:</div>
       {children}
     </div>
   );
