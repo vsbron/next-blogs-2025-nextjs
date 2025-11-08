@@ -145,6 +145,12 @@ body {
   .basic-form {
     @apply flex flex-col gap-4;
   }
+  .post-stats-icons-container {
+    @apply flex items-center gap-x-1 xs:gap-x-1.5;
+  }
+  .post-stats-icon {
+    @apply w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-primary/80;
+  }
 }
 
 h1,
