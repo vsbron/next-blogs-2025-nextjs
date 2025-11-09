@@ -1,0 +1,95 @@
+.quill {
+  box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
+    rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
+    rgba(0, 0, 0, 0.05) 0 1px 2px 0 !important;
+}
+.ql-toolbar {
+  border-radius: 6px 6px 0 0 !important;
+  border-color: var(--border) !important;
+  color: var(--color-foreground) !important;
+}
+.dark .ql-toolbar svg {
+  filter: brightness(300%);
+}
+.ql-snow .ql-picker {
+  color: var(--color-foreground) !important;
+}
+.dark .ql-editor {
+  background: color-mix(in oklab, var(--input) 30%, transparent);
+}
+.ql-container {
+  height: 300px !important;
+  border-radius: 0 0 6px 6px !important;
+  font-size: 1.1rem !important;
+  line-height: 1.5rem !important;
+  border-color: var(--border) !important;
+}
+
+.ql-editor h2 {
+  font-size: 1.85rem !important;
+  line-height: 1.4 !important;
+  margin-top: 1rem !important;
+}
+.ql-editor h3 {
+  font-size: 1.55rem !important;
+  line-height: 1.4 !important;
+  margin-top: 1rem !important;
+}
+.ql-editor h4 {
+  font-size: 1.3rem !important;
+  margin-top: 1rem !important;
+}
+
+@media screen and (max-width: 480px) {
+  .ql-editor h2 {
+    font-size: 1.6rem !important;
+  }
+  .ql-editor h3 {
+    font-size: 1.4rem !important;
+  }
+}
+
+.ql-editor p {
+  margin: 10px 0 25px !important;
+}
+.ql-editor p + p {
+  margin-top: -15px !important;
+}
+
+.ql-editor ul {
+  list-style-type: disc;
+}
+
+.ql-editor ol {
+  list-style-type: decimal;
+}
+
+.ql-editor ol,
+.ql-editor ul {
+  padding-left: 20px !important;
+  margin: 10px 0 35px !important;
+}
+.ql-editor p + ul,
+.ql-editor p + ol {
+  margin-top: -15px !important;
+}
+
+.ql-editor a,
+.ql-editor .link-primary {
+  position: relative;
+  white-space: nowrap;
+}
+.ql-editor a:before,
+.ql-editor .link-primary:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  top: auto;
+  bottom: 0;
+  height: 1px;
+  background: var(--color-primary);
+}
+.ql-editor a:hover:before,
+.ql-editor .link-primary:hover:before {
+  content: none;
+}

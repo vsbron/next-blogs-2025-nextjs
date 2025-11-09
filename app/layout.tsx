@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
+import "./ql-styles.css";
 
 // Import the fonts
 const PoppinsSerif = Poppins({

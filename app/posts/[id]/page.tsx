@@ -61,10 +61,8 @@ export async function generateMetadata({
 
 // The page
 async function PostPage({ params }: SinglePostPageProps) {
-  // Get the ID from the params
+  // Get the ID from the params and fetch the post
   const { id } = await params;
-
-  // Fetch the post using the ID
   const post = await fetchPost(id);
 
   // Guard clause
