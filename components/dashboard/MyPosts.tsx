@@ -2,9 +2,10 @@ import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import PostPreviewTile from "@/components/PostPreviewTile";
-import PostsGridLayout from "@/components/PostsGridLayout";
+import PostsListLayout from "@/components/PostsListLayout";
 
 import { fetchUserPosts } from "@/utils/actions/posts";
+import PostPreviewLine from "../PostPreviewLine";
 
 async function MyPosts() {
   // Fetch user's posts
@@ -27,11 +28,11 @@ async function MyPosts() {
 
   // Returned JSX
   return (
-    <PostsGridLayout>
+    <PostsListLayout>
       {posts.map((post) => {
-        return <PostPreviewTile key={post.id} post={post} editBtn={true} />;
+        return <PostPreviewLine key={post.id} post={post} />;
       })}
-    </PostsGridLayout>
+    </PostsListLayout>
   );
 }
 

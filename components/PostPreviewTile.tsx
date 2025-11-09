@@ -12,11 +12,10 @@ import { ButtonsContainer } from "./form/Buttons";
 // Props type
 type PostPreviewTileProps = {
   post: PostPreview;
-  editBtn?: boolean;
 };
 
 // The component
-function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
+function PostPreviewTile({ post }: PostPreviewTileProps) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, likes } = post;
   const href = `/posts/${id}`;
@@ -51,11 +50,6 @@ function PostPreviewTile({ post, editBtn = false }: PostPreviewTileProps) {
           <Button variant="outline" size="sm" asChild>
             <Link href={href}>Read post</Link>
           </Button>
-          {editBtn && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/dashboard/my-posts/edit/${id}`}>Edit post</Link>
-            </Button>
-          )}
         </ButtonsContainer>
       </CardContent>
     </Card>

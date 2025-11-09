@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import MyPosts from "@/components/dashboard/MyPosts";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
 
 // Metadata
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ async function ProfilePostsPage() {
   return (
     <section>
       <SectionTitle>List of my posts</SectionTitle>
-      <Suspense fallback={<SkeletonPostsGrid />}>
+      <Suspense fallback={<SkeletonPostsList />}>
         <MyPosts />
       </Suspense>
     </section>
