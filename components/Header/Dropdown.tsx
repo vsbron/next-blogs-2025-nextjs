@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { MenuIcon } from "lucide-react";
 import { auth } from "@clerk/nextjs/server";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 
-import Authentication from "./Authentication";
-import DropdownUserDetails from "./DropdownUserDetails";
+import Authentication from "@/components/Header/Authentication";
+import DropdownUserDetails from "@/components/Header/DropdownUserDetails";
+import SkeletonDropdownUserDetails from "@/components/skeletons/SkeletonDropdownUserDetails";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -38,7 +40,9 @@ async function Dropdown() {
       >
         {/* USER DETAILS */}
         <SignedIn>
-          <DropdownUserDetails />
+          <Suspense fallback={<SkeletonDropdownUserDetails />}>
+            <DropdownUserDetails />
+          </Suspense>
           <DropdownMenuSeparator />
         </SignedIn>
 
