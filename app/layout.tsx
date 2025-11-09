@@ -14,12 +14,16 @@ const PoppinsSerif = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "600"],
+  display: "swap",
+  preload: false,
 });
 
 const LatoSerif = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
   weight: ["400", "700"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -83,7 +87,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${PoppinsSerif.variable} ${LatoSerif.variable} antialiased font-lato`}
+          className={`${PoppinsSerif.variable} ${LatoSerif.variable} ${LatoSerif.className} antialiased tracking-[0.02em]`}
         >
           <ThemeProvider
             attribute="class"
