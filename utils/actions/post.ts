@@ -119,6 +119,50 @@ export const editPostAction = async (
   }
 };
 
+// Action function to delete a post
+export const deletePostAction = async (postId: number): actionReturnType => {
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
+
+  // Fetch the post to check ownership
+  const post = await db.post.findUnique({
+    where: { id: postId },
+    select: { authorId: true, imageUrl: true },
+  });
+
+  // Guard clauses
+  if (!post) return { success: false, message: "Post not found" };
+  if (post.authorId !== userId)
+    return { success: false, message: "Unauthorized" };
+
+  try {
+    // Delete post from the database
+    await db.post.delete({
+      where: { id: postId },
+    });
+
+    // IMAGE DELETE
+    // Decode URL to get the correct file path
+    const decodedPath = decodeURIComponent(post.imageUrl);
+    const fileName = decodedPath.split("/post-images/")[1];
+
+    // Remove existing image from the bucket
+    const { error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .remove([fileName]);
+
+    // If fail, log error
+    if (error)
+      return { success: false, message: "Failed to delete existing image" };
+
+    // Return success message
+    return { success: true, message: "Post successfully deleted" };
+  } catch (err) {
+    return renderError(err, "deleting a post");
+  }
+};
+
 // Action function that increases the views count
 export const incrementPostView = async (id: number) => {
   // Create post in the database

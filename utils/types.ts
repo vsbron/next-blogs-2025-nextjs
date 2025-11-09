@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { JsonValue } from "@prisma/client/runtime/library";
 
 // Type for action function and its return
