@@ -2,9 +2,9 @@ import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import PostsListLayout from "@/components/PostsListLayout";
+import PostPreviewLine from "@/components/PostPreviewLine";
 
 import { fetchUserPosts } from "@/utils/actions/posts";
-import PostPreviewLine from "../PostPreviewLine";
 
 async function MyPosts() {
   // Fetch user's posts

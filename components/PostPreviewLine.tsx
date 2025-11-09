@@ -20,7 +20,7 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 overflow-hidden grid grid-cols-[1fr_min-content] md:grid-cols-[120px_1fr_min-content]">
+    <Card className="p-0 gap-0 grid grid-cols-[1fr_min-content] md:grid-cols-[120px_1fr_min-content]">
       <div className="relative w-full min-h-30 h-full hidden md:block">
         <Image
           src={imageUrl}

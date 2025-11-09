@@ -24,6 +24,8 @@ async function EditPostPage({ params }: SinglePostPageProps) {
   // Get the ID a nd userId from the params and auth
   const { id } = await params;
   const { userId } = await auth();
+
+  // Guard clause
   if (!userId) redirect("/");
 
   // Returned JSX
@@ -38,12 +40,12 @@ async function EditPostPage({ params }: SinglePostPageProps) {
 }
 
 // Helper function props type
-interface Props {
+interface PostFormLoaderProps {
   postId: string;
   userId: string;
 }
 // Helper function
-async function PostFormLoader({ postId, userId }: Props) {
+async function PostFormLoader({ postId, userId }: PostFormLoaderProps) {
   // Fetch the post data
   const post = await fetchPost(postId);
 
