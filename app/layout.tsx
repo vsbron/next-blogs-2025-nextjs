@@ -10,6 +10,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
 
+// Import the fonts
 const PoppinsSerif = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -17,7 +18,6 @@ const PoppinsSerif = Poppins({
   display: "swap",
   preload: false,
 });
-
 const LatoSerif = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
@@ -26,6 +26,7 @@ const LatoSerif = Lato({
   preload: false,
 });
 
+// Set the main meta data
 export const metadata: Metadata = {
   metadataBase: new URL("https://next-blogs-2025.vercel.app/"),
   title: {
@@ -78,6 +79,7 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
 };
 
+// The Main Layout
 export default function RootLayout({
   children,
 }: Readonly<{

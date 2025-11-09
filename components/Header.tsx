@@ -38,7 +38,7 @@ function PostButton() {
   // Returned JSX
   return (
     <Button size="sm" aria-label="Add a post" asChild>
-      <Link href="/dashboard/add-post">
+      <Link href="/dashboard/add-post" prefetch={false}>
         <PencilLine />
         <span className="hidden xs:inline">Post</span>
       </Link>

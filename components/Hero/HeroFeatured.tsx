@@ -17,7 +17,7 @@ const featuredArticle = {
   date: "Oct 19, 2025",
   views: 53,
   likes: 12,
-  href: "/",
+  href: "posts/26",
 };
 
 // The component

@@ -14,7 +14,7 @@ const dummyArticles = [
     date: "Oct 18, 2025",
     views: 12,
     likes: 3,
-    href: "/1",
+    href: "/posts/26",
   },
   {
     title: "AI solved another major problem",
@@ -23,7 +23,7 @@ const dummyArticles = [
     date: "Oct 05, 2025",
     views: 39,
     likes: 10,
-    href: "/2",
+    href: "/posts/26",
   },
   {
     title: "Eat HEALTHY!",
@@ -32,7 +32,7 @@ const dummyArticles = [
     date: "Sep 16, 2025",
     views: 42,
     likes: 5,
-    href: "/3",
+    href: "/posts/26",
   },
   {
     title: "AI solved another major problem",
@@ -41,7 +41,7 @@ const dummyArticles = [
     date: "Oct 05, 2025",
     views: 39,
     likes: 10,
-    href: "/4",
+    href: "/posts/26",
   },
   {
     title: "How to survive in a huge city",
@@ -50,7 +50,7 @@ const dummyArticles = [
     date: "Oct 18, 2025",
     views: 12,
     likes: 3,
-    href: "/5",
+    href: "/posts/26",
   },
 ];
 

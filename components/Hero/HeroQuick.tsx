@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import SectionTitle from "../SectionTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { limitPreview } from "@/utils/helpers";
@@ -18,10 +18,10 @@ function HeroQuick({ articles }: { articles: any[] }) {
         </SectionTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
-        {articles.map(({ title, href, preview }, i) => (
-          <div key={href}>
+        {articles.map(({ title, preview }, i) => (
+          <div key={i}>
             <Link
-              href={href}
+              href="/posts/26"
               className="grid grid-cols-[1fr_100px] justify-between items-center gap-2"
             >
               <div>
