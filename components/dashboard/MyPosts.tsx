@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import PostPreviewTile from "@/components/PostPreviewTile";
 import PostsListLayout from "@/components/PostsListLayout";
 
 import { fetchUserPosts } from "@/utils/actions/posts";

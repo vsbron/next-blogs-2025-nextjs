@@ -4,7 +4,7 @@ import Image from "next/image";
 import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { formatDate, limitPreview } from "@/utils/helpers";
+import { formatDate } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
 import { EditIcon, EyeIcon, Trash2Icon } from "lucide-react";
 import { Button } from "./ui/button";
@@ -22,8 +22,8 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 overflow-hidden flex flex-row">
-      <div className="relative w-30 h-30">
+    <Card className="p-0 gap-0 overflow-hidden grid grid-cols-[1fr_min-content] md:grid-cols-[120px_1fr_min-content]">
+      <div className="relative w-full h-full hidden md:block">
         <Image
           src={imageUrl}
           fill
@@ -42,13 +42,11 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
           />
         </CardHeader>
         <CardContent className="px-4 flex flex-col items-start">
-          <h2 className="xs:text-lg md:text-xl">{title}</h2>
-          <p className="mb-3 xs:mb-6 text-sm md:text-base">
-            {limitPreview(preview, 160)}
-          </p>
+          <h2 className="md:text-xl leading-snug">{title}</h2>
+          <p className="text-sm md:text-base leading-snug pb-3">{preview}</p>
         </CardContent>
       </div>
-      <div className="flex flex-col gap-y-1 ml-auto px-3 self-center">
+      <div className="flex flex-col gap-y-1 ml-auto p-3 self-center w-15">
         <Button variant="outline" size="xs" aria-label="View post">
           <Link href={`/posts/${id}`}>
             <EyeIcon className="post-stats-icon" />
