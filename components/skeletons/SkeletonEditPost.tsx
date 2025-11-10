@@ -6,11 +6,11 @@ function SkeletonEditPost() {
     <div className="basic-form">
       <div>
         <Skeleton className="h-4 w-16 mb-1.5" />
-        <Skeleton className="h-9 w-96" />
+        <Skeleton className="h-9 w-full sm:w-96" />
       </div>
       <div>
         <Skeleton className="h-4 w-16 mb-1.5" />
-        <Skeleton className="h-9 w-96" />
+        <Skeleton className="h-9 w-full sm:w-96" />
       </div>
       <div>
         <Skeleton className="h-4 w-16 mb-1.5" />

@@ -44,8 +44,12 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
           <div className="bg-primary/90 text-white font-bold pt-0.15 pb-0.25 px-1.5 text-[11px] leading-4 rounded-md mb-0.5">
             {category}
           </div>
-          <h2 className="md:text-xl leading-snug">{title}</h2>
-          <p className="text-sm md:text-base leading-snug pb-3">{preview}</p>
+          <h2 className=" md:text-lg lg:text-xl leading-snug line-clamp-1">
+            {title}
+          </h2>
+          <p className="text-sm md:text-base leading-snug line-clamp-1">
+            {preview}
+          </p>
         </CardContent>
       </div>
       <PostPreviewButtons postId={id} />
