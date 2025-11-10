@@ -1,5 +1,4 @@
 "use server";
-
 import { cache } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
@@ -41,6 +40,7 @@ export const fetchRecentPosts = async () => {
     select: postFields,
   });
 
+  // Return recent posts
   return posts;
 };
 
@@ -71,6 +71,7 @@ export const fetchMostViewedPosts = async () => {
     },
   });
 
+  // Return most viewed posts
   return posts;
 };
 
@@ -87,6 +88,7 @@ export const fetchUserPosts = async (userId?: string) => {
   // Search all user's liked posts
   const posts = await db.post.findMany({
     where: { authorId: userId },
+    orderBy: { published: "desc" },
     select: postFields,
   });
 
@@ -100,12 +102,17 @@ export const fetchUserLikedPosts = async () => {
   const { userId } = await auth();
   if (!userId) redirect("/");
 
-  // Search all user's liked posts
-  const posts = await db.post.findMany({
-    where: { likes: { some: { userId } } },
-    select: postFields,
+  // Search all user's likes
+  const likes = await db.like.findMany({
+    where: { userId },
+    orderBy: { likedTime: "desc" },
+    select: { post: { select: postFields } },
   });
 
+  // Take the posts from likes
+  const posts = likes.map((like) => like.post);
+
+  // Return liked posts
   return posts;
 };
 
