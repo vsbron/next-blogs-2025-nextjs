@@ -42,6 +42,7 @@ model Post {
   preview         String
   text            String
   imageUrl        String
+  category        String
   published       DateTime      @default(now())
   updated         DateTime      @default(now())
   authorId        String
