@@ -8,14 +8,14 @@ import { Post } from "@/utils/types";
 function PostSidebar({ post }: { post: Post }) {
   // Returned JSX
   return (
-    <aside className="flex flex-col gap-y-6 lg:gap-y-8">
+    <aside className="flex flex-col gap-y-6 lg:gap-y-8 md:sticky md:top-24">
       <div className="hidden md:block">
         <PostStats post={post} />
       </div>
       <div className="-mt-8 md:mt-0">
         <PostShare id={post.id} title={post.title} />
       </div>
-      <div className="-mt-8 md:mt-0">
+      <div className="-mt-4 md:mt-0">
         <PostRecentPosts />
       </div>
     </aside>
