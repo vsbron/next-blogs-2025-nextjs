@@ -7,9 +7,11 @@ import { SubmitButton } from "@/components/form/Buttons";
 import CurrentImage from "@/components/form/CurrentImage";
 import FormInput from "@/components/form/FormInput";
 import ImageInput from "@/components/form/ImageInput";
+import SelectInput from "@/components/form/SelectInput";
 import TextAreaInput from "@/components/form/TextAreaInput";
 
 import { createEditPostAction, editPostAction } from "@/utils/actions/post";
+import { POST_CATEGORIES } from "@/utils/constants";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
 import { Post } from "@/utils/types";
@@ -19,6 +21,7 @@ type FormValues = {
   title: string;
   preview: string;
   text: string;
+  category: string;
   imageUrl: File;
 };
 
@@ -41,6 +44,7 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
       title: defaultValues?.title || "",
       preview: defaultValues?.preview || "",
       text: defaultValues?.text || "",
+      category: defaultValues?.category || "",
     },
   });
 
@@ -50,7 +54,6 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
     const correctAction = defaultValues
       ? (formData: FormData) => editPostAction(formData, defaultValues.id)
       : createEditPostAction;
-
     // Handle the form submission
     await handleFormAction(correctAction, data, "/dashboard/my-posts");
   };
@@ -58,6 +61,14 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
   // Returned JSX
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
+      {/* Category */}
+      <SelectInput
+        id="category"
+        options={POST_CATEGORIES}
+        control={control}
+        error={errors.category?.message}
+      />
+
       {/* Title field */}
       <FormInput
         id="title"

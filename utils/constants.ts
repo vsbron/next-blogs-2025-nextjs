@@ -19,4 +19,5 @@ export const POST_CATEGORIES = [
   "Sports",
   "Technology",
   "Travel",
-] as const;
+  "Other",
+];

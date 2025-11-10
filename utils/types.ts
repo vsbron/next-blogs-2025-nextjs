@@ -28,6 +28,7 @@ export type PostPreview = {
   imageUrl: string;
   published: Date;
   views: number;
+  category: string;
   likes: Like[];
 };
 

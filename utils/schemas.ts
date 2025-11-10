@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_IMAGE_FILE_SIZE } from "./constants";
+import { MAX_IMAGE_FILE_SIZE, POST_CATEGORIES } from "./constants";
 
 export const userSchema = z.object({
   username: z
@@ -51,6 +51,7 @@ export const postSchema = z.object({
     },
     { message: "Post text must be between 10 and 2500 words" }
   ),
+  category: z.enum(POST_CATEGORIES, { message: "Please select a category" }),
 });
 
 export const imageSchema = z.object({
