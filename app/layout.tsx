@@ -51,7 +51,6 @@ export const metadata: Metadata = {
     title: "NextBlogs - Read, Create, and Share your stories",
     description:
       "Modern multi-user blogging platform to discover and enjoy articles on a variety of topics with a clean, user-friendly experience.",
-
     siteName: "NextBlogs",
     images: [
       {
