@@ -14,6 +14,7 @@ const postFields = {
   imageUrl: true,
   published: true,
   views: true,
+  category: true,
   likes: { select: { id: true } },
 };
 

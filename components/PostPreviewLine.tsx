@@ -15,7 +15,8 @@ type PostPreviewLineProps = {
 // The component
 function PostPreviewLine({ post }: PostPreviewLineProps) {
   // Destructure props and configure
-  const { id, title, preview, published, views, imageUrl, likes } = post;
+  const { id, title, preview, published, views, imageUrl, likes, category } =
+    post;
   const date = formatDate(published);
 
   // Returned JSX
@@ -32,7 +33,7 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
         />
       </div>
       <div className="pt-3">
-        <CardHeader className="px-4 -mb-1">
+        <CardHeader className="px-4 mb-0.1">
           <PostPreviewStatsProps
             views={views}
             likes={likes.length}
@@ -40,6 +41,9 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
           />
         </CardHeader>
         <CardContent className="px-4 flex flex-col items-start">
+          <div className="bg-primary/90 text-white font-bold pt-0.15 pb-0.25 px-1.5 text-[11px] leading-4 rounded-md mb-0.5">
+            {category}
+          </div>
           <h2 className="md:text-xl leading-snug">{title}</h2>
           <p className="text-sm md:text-base leading-snug pb-3">{preview}</p>
         </CardContent>

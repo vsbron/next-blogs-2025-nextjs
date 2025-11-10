@@ -7,11 +7,14 @@ import { Post } from "@/utils/types";
 
 function PostStats({ post }: { post: Post }) {
   // Destructure post
-  const { text, preview, published, updated } = post;
+  const { text, preview, published, updated, category } = post;
   // Returned JSX
   return (
     <PostSidebarCard>
       <SidebarPreview>{preview}</SidebarPreview>
+      <SidebarLine title="Category">
+        <div>{category}</div>
+      </SidebarLine>
       <SidebarLine title="Published">
         <div>{formatDate(published)}</div>
       </SidebarLine>

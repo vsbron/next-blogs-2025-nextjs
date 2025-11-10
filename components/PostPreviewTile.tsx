@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 import PostPreviewStatsProps from "@/components/PostPreviewStats";
+import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate, limitPreview } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
-import { ButtonsContainer } from "./form/Buttons";
 
 // Props type
 type PostPreviewTileProps = {
@@ -17,7 +17,8 @@ type PostPreviewTileProps = {
 // The component
 function PostPreviewTile({ post }: PostPreviewTileProps) {
   // Destructure props and configure
-  const { id, title, preview, published, views, imageUrl, likes } = post;
+  const { id, title, preview, published, views, imageUrl, likes, category } =
+    post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 
@@ -34,6 +35,9 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
             className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
             priority
           />
+          <div className="absolute bottom-2 left-4 z-20 bg-primary shadow border border-border text-white font-bold pt-0.25 pb-0.5 px-2.5 text-xs tracking-0 rounded-md">
+            {category}
+          </div>
         </div>
       </Link>
       <CardHeader className="px-4">
