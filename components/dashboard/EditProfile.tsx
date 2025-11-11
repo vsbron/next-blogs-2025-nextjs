@@ -11,24 +11,29 @@ import { updateUserAction } from "@/utils/actions/users";
 import { handleFormAction } from "@/utils/helpers";
 import { userSchema } from "@/utils/schemas";
 import { User } from "@/utils/types";
+import SelectInput from "../form/SelectInput";
+import { GENDERS } from "@/utils/constants";
+import RadioInput from "../form/RadioInput";
 
 // Type for form values
 type FormValues = {
   username: string;
   displayName: string;
-  bio?: string;
+  gender: string;
   country?: string;
+  bio?: string;
 };
 
 // The component
 function EditProfile({ user }: { user: User }) {
   // Destructure user object
-  const { username, displayName, bio, country } = user;
+  const { username, displayName, bio, country, gender } = user;
 
   // Get the form values from React-Hook-Form
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(userSchema),
@@ -36,6 +41,7 @@ function EditProfile({ user }: { user: User }) {
     defaultValues: {
       username,
       displayName,
+      gender,
       bio: bio || "",
       country: country || "",
     },
@@ -63,6 +69,12 @@ function EditProfile({ user }: { user: User }) {
           {...register("displayName")}
           error={errors.displayName?.message}
         />
+        <RadioInput
+          id="gender"
+          options={GENDERS}
+          control={control}
+          error={errors.gender?.message}
+        />
         <FormInput
           id="country"
           type="text"
@@ -76,6 +88,7 @@ function EditProfile({ user }: { user: User }) {
           {...register("bio")}
           error={errors.bio?.message}
         />
+
         <ButtonsContainer>
           <Button variant="outline" asChild>
             <Link href="/dashboard/profile/">Go Back</Link>

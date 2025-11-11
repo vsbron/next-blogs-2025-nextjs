@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_IMAGE_FILE_SIZE, POST_CATEGORIES } from "./constants";
+import { GENDERS, MAX_IMAGE_FILE_SIZE, POST_CATEGORIES } from "./constants";
 
 export const userSchema = z.object({
   username: z
@@ -13,7 +13,7 @@ export const userSchema = z.object({
     .string()
     .min(3, "Display name should be at least 3 characters")
     .max(30, "Display name should be at most 30 characters"),
-  // gender: z.enum(["Male", "Female", "Unknown"]),
+  gender: z.enum(GENDERS, { message: "Please select a gender" }),
   country: z
     .string()
     .max(30, "Country name should be at most 30 characters")

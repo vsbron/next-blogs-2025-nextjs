@@ -12,13 +12,11 @@ export type User = {
   email: string;
   dateCreated: Date;
   birthday: string | null;
-  gender: Gender;
+  gender: string;
   country: string | null;
   bio: string | null;
   socials: JsonValue;
 };
-
-type Gender = "Male" | "Female" | "Unknown";
 
 // Post type
 export type PostPreview = {

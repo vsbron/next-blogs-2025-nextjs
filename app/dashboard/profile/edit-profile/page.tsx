@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import SectionTitle from "@/components/SectionTitle";
 import EditProfile from "@/components/dashboard/EditProfile";
@@ -16,11 +17,14 @@ async function EditProfilePage() {
   // Get current user
   const user = await fetchCurrentUser();
 
+  // Guard clause
+  if(!user) return redirect("/")
+
   // Returned JSX
   return (
     <>
       <SectionTitle>Edit profile details</SectionTitle>
-      {!user ? <div>Loading</div> : <EditProfile user={user} />}
+      <EditProfile user={user} />
     </>
   );
 }

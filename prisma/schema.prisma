@@ -9,13 +9,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// ENUMS
-enum Gender {
-  Male
-  Female
-  Unknown
-}
-
 // MODELS
 model User {
   clerkId         String        @id
@@ -26,7 +19,7 @@ model User {
   
   displayName     String
   birthday        String?
-  gender          Gender        @default(Unknown)
+  gender          String        @default("Unknown")
   country         String?
   bio             String?
   socials         Json 
