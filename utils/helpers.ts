@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { redirect } from "next/navigation";
 import { toast } from "sonner";
 
 // Function that return approx. reading time in minutes
@@ -44,8 +43,7 @@ export async function handleFormAction(
   action: (
     formData: FormData
   ) => Promise<{ success: boolean; message: string }>,
-  data: Record<string, any>,
-  redirectTo?: string
+  data: Record<string, any>
 ) {
   // Handle the form data
   const formData = new FormData();
@@ -58,9 +56,6 @@ export async function handleFormAction(
 
   // Handle the outcome
   toast("", { description: result.message });
-  if (result.success && redirectTo) {
-    redirect(redirectTo);
-  }
 
   // Return the result
   return result;

@@ -1,6 +1,7 @@
 "use client";
 import z from "zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { SubmitButton } from "@/components/form/Buttons";
@@ -48,6 +49,9 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
     },
   });
 
+  // Get the router
+  const router = useRouter();
+
   // On submit handler
   const onSubmit = async (data: FormValues) => {
     // Set the correct action for post handling
@@ -55,7 +59,8 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
       ? (formData: FormData) => editPostAction(formData, defaultValues.id)
       : createEditPostAction;
     // Handle the form submission
-    await handleFormAction(correctAction, data, "/dashboard/my-posts");
+    const result = await handleFormAction(correctAction, data);
+    if (result.success) router.push("/dashboard/my-posts");
   };
 
   // Returned JSX

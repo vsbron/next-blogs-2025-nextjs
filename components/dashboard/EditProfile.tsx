@@ -1,24 +1,26 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { ButtonsContainer, SubmitButton } from "@/components/form/Buttons";
+import DateInput from "@/components/form/DateInput";
 import FormInput from "@/components/form/FormInput";
+import RadioInput from "@/components/form/RadioInput";
 import { Button } from "@/components/ui/button";
 
 import { updateUserAction } from "@/utils/actions/users";
 import { handleFormAction } from "@/utils/helpers";
+import { GENDERS } from "@/utils/constants";
 import { userSchema } from "@/utils/schemas";
 import { User } from "@/utils/types";
-import SelectInput from "../form/SelectInput";
-import { GENDERS } from "@/utils/constants";
-import RadioInput from "../form/RadioInput";
 
 // Type for form values
 type FormValues = {
   username: string;
   displayName: string;
+  birthday?: string;
   gender: string;
   country?: string;
   bio?: string;
@@ -27,7 +29,7 @@ type FormValues = {
 // The component
 function EditProfile({ user }: { user: User }) {
   // Destructure user object
-  const { username, displayName, bio, country, gender } = user;
+  const { username, displayName, bio, country, gender, birthday } = user;
 
   // Get the form values from React-Hook-Form
   const {
@@ -41,15 +43,21 @@ function EditProfile({ user }: { user: User }) {
     defaultValues: {
       username,
       displayName,
+      birthday: birthday || "",
       gender,
       bio: bio || "",
       country: country || "",
     },
   });
 
+  // Get the router
+  const router = useRouter();
+
   // Form submit handler
   const onSubmit = async (data: FormValues) => {
-    await handleFormAction(updateUserAction, data, "/dashboard/profile");
+    // Handle the form submission and redirect user if successful
+    const result = await handleFormAction(updateUserAction, data);
+    if (result.success) router.push("/dashboard/profile");
   };
 
   // Returned JSX
@@ -68,6 +76,12 @@ function EditProfile({ user }: { user: User }) {
           type="text"
           {...register("displayName")}
           error={errors.displayName?.message}
+        />
+
+        <DateInput
+          id="birthday"
+          control={control}
+          error={errors.birthday?.message}
         />
         <RadioInput
           id="gender"
