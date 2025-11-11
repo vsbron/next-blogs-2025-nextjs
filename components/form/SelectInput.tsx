@@ -36,7 +36,7 @@ function SelectInput({ id, label, options, control, error }: SelectInputProps) {
             <SelectTrigger>
               <SelectValue placeholder={`Select ${label || id}`} />
             </SelectTrigger>
-            <SelectContent align="start">
+            <SelectContent align="start" className="max-h-80 overflow-y-auto">
               {options.map((option) => (
                 <SelectItem key={option} value={option}>
                   {option}

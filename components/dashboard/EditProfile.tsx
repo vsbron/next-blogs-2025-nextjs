@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { countries } from "countries-list";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -8,6 +9,7 @@ import { ButtonsContainer, SubmitButton } from "@/components/form/Buttons";
 import DateInput from "@/components/form/DateInput";
 import FormInput from "@/components/form/FormInput";
 import RadioInput from "@/components/form/RadioInput";
+import SelectInput from "@/components/form/SelectInput";
 import { Button } from "@/components/ui/button";
 
 import { updateUserAction } from "@/utils/actions/users";
@@ -28,8 +30,11 @@ type FormValues = {
 
 // The component
 function EditProfile({ user }: { user: User }) {
-  // Destructure user object
+  // Destructure user object and set the countries list
   const { username, displayName, bio, country, gender, birthday } = user;
+  const countryNames = Object.values(countries)
+    .map((c) => c.name)
+    .concat("Unknown");
 
   // Get the form values from React-Hook-Form
   const {
@@ -77,7 +82,6 @@ function EditProfile({ user }: { user: User }) {
           {...register("displayName")}
           error={errors.displayName?.message}
         />
-
         <DateInput
           id="birthday"
           control={control}
@@ -89,10 +93,10 @@ function EditProfile({ user }: { user: User }) {
           control={control}
           error={errors.gender?.message}
         />
-        <FormInput
+        <SelectInput
           id="country"
-          type="text"
-          {...register("country")}
+          options={countryNames}
+          control={control}
           error={errors.country?.message}
         />
         <FormInput
