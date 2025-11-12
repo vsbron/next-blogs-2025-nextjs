@@ -5,6 +5,7 @@ import ArticleLayout from "@/components/ArticleLayout";
 import PostSection from "@/components/PostSection";
 import PostSidebar from "@/components/Sidebar/PostSidebar";
 import SectionTitle from "@/components/SectionTitle";
+import BreadCrumbsPostPage from "@/components/breadcrumbs/BreadCrumbsPostPage";
 import SkeletonArticle from "@/components/skeletons/SkeletonArticle";
 
 import { fetchPost } from "@/utils/actions/posts";
@@ -70,14 +71,17 @@ async function PostPage({ params }: SinglePostPageProps) {
 
   // Returned JSX
   return (
-    <section>
-      <SectionTitle>{post.title}</SectionTitle>
-      <Suspense fallback={<SkeletonArticle />}>
-        <ArticleLayout sidebar={<PostSidebar post={post} />}>
-          <PostSection post={post} />
-        </ArticleLayout>
-      </Suspense>
-    </section>
+    <>
+      <BreadCrumbsPostPage category={post.category} />
+      <section>
+        <SectionTitle>{post.title}</SectionTitle>
+        <Suspense fallback={<SkeletonArticle />}>
+          <ArticleLayout sidebar={<PostSidebar post={post} />}>
+            <PostSection post={post} />
+          </ArticleLayout>
+        </Suspense>
+      </section>
+    </>
   );
 }
 
