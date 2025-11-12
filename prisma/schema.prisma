@@ -22,7 +22,12 @@ model User {
   gender          String        @default("Unknown")
   country         String?
   bio             String?
-  socials         Json 
+  
+  website         String?
+  facebook        String?
+  x               String?
+  instagram       String?
+  reddit          String?
 
   posts           Post[]
   likes           Like[]

@@ -26,12 +26,29 @@ type FormValues = {
   gender: string;
   country?: string;
   bio?: string;
+  website: string;
+  facebook: string;
+  x: string;
+  instagram: string;
+  reddit: string;
 };
 
 // The component
 function EditProfile({ user }: { user: User }) {
   // Destructure user object and set the countries list
-  const { username, displayName, bio, country, gender, birthday } = user;
+  const {
+    username,
+    displayName,
+    bio,
+    country,
+    gender,
+    birthday,
+    website,
+    facebook,
+    x,
+    instagram,
+    reddit,
+  } = user;
   const countryNames = Object.values(countries)
     .map((c) => c.name)
     .concat("Unknown");
@@ -52,6 +69,11 @@ function EditProfile({ user }: { user: User }) {
       gender,
       bio: bio || "",
       country: country || "",
+      website: website || "",
+      facebook: facebook || "",
+      x: x || "",
+      instagram: instagram || "",
+      reddit: reddit || "",
     },
   });
 
@@ -105,6 +127,41 @@ function EditProfile({ user }: { user: User }) {
           type="text"
           {...register("bio")}
           error={errors.bio?.message}
+        />
+        <FormInput
+          id="website"
+          label="Website link"
+          type="text"
+          {...register("website")}
+          error={errors.website?.message}
+        />
+        <FormInput
+          id="facebook"
+          label="Facebook Username"
+          type="text"
+          {...register("facebook")}
+          error={errors.facebook?.message}
+        />
+        <FormInput
+          id="x"
+          label="X (Twitter) Username"
+          type="text"
+          {...register("x")}
+          error={errors.x?.message}
+        />
+        <FormInput
+          id="instagram"
+          label="Instagram Username"
+          type="text"
+          {...register("instagram")}
+          error={errors.instagram?.message}
+        />
+        <FormInput
+          id="reddit"
+          label="Reddit Username"
+          type="text"
+          {...register("reddit")}
+          error={errors.reddit?.message}
         />
 
         <ButtonsContainer>

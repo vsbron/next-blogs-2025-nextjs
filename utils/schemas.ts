@@ -23,13 +23,11 @@ export const userSchema = z.object({
     .string()
     .max(300, "About text should be at most 300 characters")
     .optional(),
-  // socials: z.object({
-  //   website: z.string().optional(),
-  //   facebook: z.string().optional(),
-  //   x: z.string().optional(),
-  //   instagram: z.string().optional(),
-  //   reddit: z.string().optional(),
-  // }),
+  website: z.string(),
+  facebook: z.string(),
+  x: z.string(),
+  instagram: z.string(),
+  reddit: z.string(),
 });
 
 export type UserSchema = z.infer<typeof userSchema>;

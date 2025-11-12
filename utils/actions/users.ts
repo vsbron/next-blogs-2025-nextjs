@@ -30,7 +30,11 @@ export async function fetchCurrentUser() {
       gender: true,
       country: true,
       bio: true,
-      socials: true,
+      website: true,
+      facebook: true,
+      x: true,
+      instagram: true,
+      reddit: true,
     },
   });
 

@@ -1,5 +1,3 @@
-import { JsonValue } from "@prisma/client/runtime/library";
-
 // Type for action function and its return
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
@@ -15,7 +13,11 @@ export type User = {
   gender: string;
   country: string | null;
   bio: string | null;
-  socials: JsonValue;
+  website: string | null;
+  facebook: string | null;
+  x: string | null;
+  instagram: string | null;
+  reddit: string | null;
 };
 
 // Post type
