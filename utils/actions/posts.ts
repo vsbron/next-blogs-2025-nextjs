@@ -4,11 +4,9 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
-import { PostPreview } from "../types";
 
 // Template for Post fields to select in the database
 const postFields = {
-  id: true,
   title: true,
   preview: true,
   imageUrl: true,
@@ -34,45 +32,14 @@ export const fetchPost = cache(async (postId: string) => {
 });
 
 // Server action function that fetches recent posts with author info and likes
-export const fetchRecentPosts = async () => {
+export const fetchRecentPosts = async (amount: number = 12) => {
   const posts = await db.post.findMany({
-    take: 12,
+    take: amount,
     orderBy: { published: "desc" },
     select: postFields,
   });
 
   // Return recent posts
-  return posts;
-};
-
-// Server action function that fetches most liked posts
-export const fetchMostLikedPosts = async () => {
-  const posts = await db.post.findMany({
-    take: 10,
-    orderBy: { likes: { _count: "desc" } },
-    select: {
-      id: true,
-      title: true,
-      likes: { select: { id: true } },
-    },
-  });
-
-  return posts;
-};
-
-// Server action function that fetches most viewed posts
-export const fetchMostViewedPosts = async () => {
-  const posts = await db.post.findMany({
-    take: 10,
-    orderBy: { views: "desc" },
-    select: {
-      id: true,
-      title: true,
-      views: true,
-    },
-  });
-
-  // Return most viewed posts
   return posts;
 };
 
@@ -117,46 +84,48 @@ export const fetchUserLikedPosts = async () => {
   return posts;
 };
 
-// Server action function that collects user's stats
-export async function fetchUserStats(
-  userId?: string
-): Promise<UserStats | null> {
-  // Get current user ID if not provided
-  if (!userId) {
-    const { userId: authUserId } = await auth();
-    if (!authUserId) return null;
-    userId = authUserId;
-  }
-
-  // Aggregate counts: posts, total views
-  const postsAggregate = await db.post.aggregate({
-    where: { authorId: userId },
-    _count: { id: true },
-    _sum: { views: true },
-  });
-
-  // Fetch only the top post by views
-  const mostPopularPost = await db.post.findFirst({
-    where: { authorId: userId },
-    orderBy: {
-      likes: {
-        _count: "desc",
-      },
+/* POSTS STATS */
+// Server action function that fetches most liked posts
+export const fetchMostLikedPosts = async () => {
+  const posts = await db.post.findMany({
+    take: 10,
+    orderBy: { likes: { _count: "desc" } },
+    select: {
+      id: true,
+      title: true,
+      likes: { select: { id: true } },
     },
-    select: postFields,
   });
 
-  // Return total posts, views and most viewed post
-  return {
-    totalPosts: postsAggregate._count.id,
-    totalViews: postsAggregate._sum.views || 0,
-    mostPopularPost,
-  };
-}
+  return posts;
+};
 
-// User's stats action function type
-export type UserStats = {
-  totalPosts: number;
-  totalViews: number;
-  mostPopularPost: PostPreview | null;
+// Server action function that fetches most viewed posts
+export const fetchMostViewedPosts = async () => {
+  const posts = await db.post.findMany({
+    take: 10,
+    orderBy: { views: "desc" },
+    select: {
+      id: true,
+      title: true,
+      views: true,
+    },
+  });
+
+  // Return most viewed posts
+  return posts;
+};
+// Server action function that fetches users with most posts
+export const fetchUsersWithMostPosts = async () => {
+  const authors = await db.user.findMany({
+    take: 10,
+    orderBy: { posts: { _count: "desc" } },
+    select: {
+      displayName: true,
+      username: true,
+      _count: { select: { posts: true } },
+    },
+  });
+
+  return authors;
 };

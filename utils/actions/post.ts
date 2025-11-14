@@ -1,6 +1,6 @@
 "use server";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
 import { BUCKET_NAME } from "../constants";
@@ -176,10 +176,12 @@ export const incrementPostView = async (id: number) => {
 
 // Action function that increases the likes count
 export const togglePostLike = async (postId: number, userId: string) => {
+  // Check if pos twas already liked
   const existing = await db.like.findUnique({
     where: { userId_postId: { userId, postId } },
   });
 
+  // Add/Delete like depending on the result
   if (existing) {
     await db.like.delete({ where: { userId_postId: { userId, postId } } });
     return { liked: false };

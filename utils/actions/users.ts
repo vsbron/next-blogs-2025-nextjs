@@ -8,6 +8,7 @@ import db from "../db";
 import { userSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
 import { renderError } from "../helpers";
+import { PostPreview } from "../types";
 
 // Server action function that returns user based on clerkID
 export async function fetchCurrentUser() {
@@ -18,7 +19,6 @@ export async function fetchCurrentUser() {
   if (!userId) return null;
 
   // Fetch the user from database
-  // const user = await db.user.findUnique({ where: { clerkId: userId } });
   const user = await db.user.findUnique({
     where: { clerkId: userId },
     select: {
@@ -43,21 +43,6 @@ export async function fetchCurrentUser() {
   // Return user
   return user;
 }
-
-// Server action function that fetches users with most posts
-export const fetchUsersWithMostPosts = async () => {
-  const authors = await db.user.findMany({
-    take: 10,
-    orderBy: { posts: { _count: "desc" } },
-    select: {
-      displayName: true,
-      username: true,
-      _count: { select: { posts: true } },
-    },
-  });
-
-  return authors;
-};
 
 // Action function for updating the user
 export async function updateUserAction(formData: FormData) {
@@ -95,3 +80,56 @@ export const fetchUser = cache(async (username: string) => {
   // Return user
   return user;
 });
+
+// User's stats action function type
+export type UserStats = {
+  totalPosts: number;
+  totalViews: number;
+  mostPopularPost: PostPreview | null;
+};
+
+// Server action function that collects user's stats
+export async function fetchUserStats(
+  userId?: string
+): Promise<UserStats | null> {
+  // Get current user ID if not provided
+  if (!userId) {
+    const { userId: authUserId } = await auth();
+    if (!authUserId) return null;
+    userId = authUserId;
+  }
+
+  // Aggregate counts: posts, total views
+  const postsAggregate = await db.post.aggregate({
+    where: { authorId: userId },
+    _count: { id: true },
+    _sum: { views: true },
+  });
+
+  // Fetch only the top post by views
+  const mostPopularPost = await db.post.findFirst({
+    where: { authorId: userId },
+    orderBy: {
+      likes: {
+        _count: "desc",
+      },
+    },
+    select: {
+      id: true,
+      title: true,
+      preview: true,
+      imageUrl: true,
+      published: true,
+      views: true,
+      category: true,
+      likes: { select: { id: true } },
+    },
+  });
+
+  // Return total posts, views and most viewed post
+  return {
+    totalPosts: postsAggregate._count.id,
+    totalViews: postsAggregate._sum.views || 0,
+    mostPopularPost,
+  };
+}

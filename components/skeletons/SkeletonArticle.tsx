@@ -1,5 +1,5 @@
-import ArticleLayout from "../ArticleLayout";
-import { Skeleton } from "../ui/skeleton";
+import ArticleLayout from "@/components/ArticleLayout";
+import { Skeleton } from "@/components/ui/skeleton";
 
 function SkeletonArticle() {
   // Returned JSX
