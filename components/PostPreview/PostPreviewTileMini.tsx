@@ -6,7 +6,7 @@ import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { formatDate, limitPreview } from "@/utils/helpers";
+import { formatDate } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
 
 // Props type

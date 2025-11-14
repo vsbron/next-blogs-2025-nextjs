@@ -99,15 +99,22 @@ function BreadcrumbEllipsis({
   );
 }
 
-function BreadcrumbHome({
-  asChild,
-  className,
-  ...props
-}: React.ComponentProps<"a"> & {
-  asChild?: boolean;
-}) {
-  const Comp = asChild ? Slot : "a";
+// function BreadcrumbHome({
+//   asChild,
+//   className,
+//   ...props
+// }: React.ComponentProps<"a"> & {
+//   asChild?: boolean;
+// }) {
+//   const Comp = asChild ? Slot : "a";
 
+//   return (
+//     <BreadcrumbLink href="/">
+//       <AiFillHome className="mt-0.5" />
+//     </BreadcrumbLink>
+//   );
+// }
+function BreadcrumbHome() {
   return (
     <BreadcrumbLink href="/">
       <AiFillHome className="mt-0.5" />

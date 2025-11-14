@@ -7,6 +7,7 @@ import db from "../db";
 
 // Template for Post fields to select in the database
 const postFields = {
+  id: true,
   title: true,
   preview: true,
   imageUrl: true,
