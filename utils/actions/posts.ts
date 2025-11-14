@@ -50,7 +50,7 @@ export const fetchUserPosts = async (userId?: string) => {
   // If no userId provided, get it from auth()
   if (!userId) {
     const { userId: authUserId } = await auth();
-    if (!authUserId) return null;
+    if (!authUserId) redirect("/");
     userId = authUserId;
   }
 

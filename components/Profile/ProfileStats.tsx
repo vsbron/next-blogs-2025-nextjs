@@ -4,7 +4,7 @@ import { fetchUserStats } from "@/utils/actions/users";
 
 import { MdArticle, MdRemoveRedEye } from "react-icons/md";
 
-async function UserProfileStats({ userId }: { userId: string }) {
+async function ProfileStats({ userId }: { userId: string }) {
   // Fetch user's posts
   const data = await fetchUserStats(userId);
 
@@ -33,14 +33,14 @@ async function UserProfileStats({ userId }: { userId: string }) {
       </ProfileDetailsLine>
 
       {/* Popular post */}
-      {mostPopularPost && (
-        <>
-          <h2 className="text-2xl mt-6 mb-2">Most popular post</h2>
-          <PostPreviewTileMini post={mostPopularPost} />
-        </>
+      <h2 className="text-2xl mt-6 mb-2">Most popular post</h2>
+      {mostPopularPost ? (
+        <PostPreviewTileMini post={mostPopularPost} />
+      ) : (
+        <p>This author does not have popular post yet</p>
       )}
     </div>
   );
 }
 
-export default UserProfileStats;
+export default ProfileStats;

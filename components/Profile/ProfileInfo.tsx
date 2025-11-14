@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import UserProfileStats from "@/components/dashboard/UserProfileStats";
+import ProfileStats from "@/components/Profile/ProfileStats";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import ProfileDetails from "@/components/Profile/ProfileDetails";
 import { Button } from "@/components/ui/button";
@@ -57,7 +57,7 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
             </ButtonsContainer>
           )}
         </div>
-        <UserProfileStats userId={clerkId} />
+        <ProfileStats userId={clerkId} />
       </div>
     </>
   );
