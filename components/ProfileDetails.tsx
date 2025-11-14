@@ -29,7 +29,7 @@ function ProfileDetails({ user }: { user: UserType }) {
   // Returned JSX
   return (
     <div className="flex flex-col gap-y-1">
-      <div className="flex items-center gap-x-6 mb-6">
+      <div className="flex items-center gap-x-6 mt-2 mb-4">
         <div className="w-22 h-22 relative">
           <Image
             src={imageUrl || defaultAvatar}

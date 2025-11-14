@@ -7,6 +7,9 @@ import SkeletonArticle from "@/components/skeletons/SkeletonArticle";
 
 import { fetchUser } from "@/utils/actions/users";
 import { SITE_DOMAIN } from "@/utils/constants";
+import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
+import DashboardProfile from "@/components/dashboard/DashboardProfile";
+import ProfileDetails from "@/components/ProfileDetails";
 
 // Interface for the User ID
 interface UserPageProps {
@@ -56,8 +59,10 @@ async function UserPage({ params }: UserPageProps) {
   return (
     <section>
       <BreadCrumbsAuthorPage />
-      <SectionTitle>{user.displayName}</SectionTitle>
-      <Suspense fallback={<SkeletonArticle />}>{user.displayName}</Suspense>
+      <SectionTitle>Author profile of {user.displayName}</SectionTitle>
+      <Suspense fallback={<SkeletonProfile />}>
+        <ProfileDetails user={user} />
+      </Suspense>
     </section>
   );
 }
