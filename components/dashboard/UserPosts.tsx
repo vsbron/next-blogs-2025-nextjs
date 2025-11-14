@@ -1,23 +1,36 @@
+"use client";
 import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import PostsListLayout from "@/components/PostPreview/PostsListLayout";
 import PostPreviewLine from "@/components/PostPreview/PostPreviewLine";
 
-import { fetchUserPosts } from "@/utils/actions/posts";
+import useUserPosts from "@/hooks/useUserPosts";
+import SkeletonPostsList from "../skeletons/SkeletonPostsList";
 
-async function UserPosts() {
-  // Fetch user's posts
-  const posts = await fetchUserPosts();
+function UserPosts() {
+  // Get the posts from database
+  const { data: posts, isLoading, error } = useUserPosts();
 
-  // Guard clause
-  if (!posts || !posts.length)
+  // Show skeleton while data is being loaded
+  if (isLoading) return <SkeletonPostsList />;
+
+  // Guard clause - error
+  if (error)
+    return (
+      <ArticleLayout>
+        <h3 className="mb-2">Something went wrong</h3>
+        <p>{error.message}</p>
+      </ArticleLayout>
+    );
+
+  // Guard clause - no posts
+  if (!posts?.length)
     return (
       <ArticleLayout>
         <h3 className="mb-2">No posts yet</h3>
         <p>
-          Sorry! Looks like you do not have any posts yet - or something went
-          wrong while fetching them.
+          Sorry! Looks like you do not have any posts yet.
           <br />
           Ready to start writing? Create your{" "}
           <Link href="/dashboard/add-post">first post</Link> right now!

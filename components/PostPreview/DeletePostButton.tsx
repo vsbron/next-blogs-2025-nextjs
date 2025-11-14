@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
@@ -14,11 +15,15 @@ function DeletePostButton({ postId }: { postId: number }) {
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
 
+  // Get the query client
+  const queryClient = useQueryClient();
+
   // Delete post handler
   const deletePostHandler = async () => {
-    // Delete the post and display the message
+    // Delete the post, display the message invalidate query
     const result = await deletePostAction(postId);
     toast(result.message);
+    queryClient.invalidateQueries({ queryKey: ["user-posts"] });
     setIsDeleting(false);
   };
 

@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Lato, Poppins } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/components/Providers";
 import { Toaster } from "@/components/ui/sonner";
 
 import "./globals.css";
@@ -80,13 +78,6 @@ export const metadata: Metadata = {
   referrer: "origin-when-cross-origin",
 };
 
-// Create a client for React Query with some options
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { staleTime: 60 * 1000 },
-  },
-});
-
 // The Main Layout
 export default function RootLayout({
   children,
@@ -94,30 +85,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <QueryClientProvider client={queryClient}>
-        <html lang="en" suppressHydrationWarning>
-          <body
-            className={`${PoppinsSerif.variable} ${LatoSerif.variable} ${LatoSerif.className} antialiased tracking-[0.02em]`}
-          >
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <Header />
-              <main>
-                <Container className="pt-9 md:pt-10 lg:pt-12 pb-12 flex flex-col gap-8">
-                  {children}
-                </Container>
-              </main>
-              <Footer />
-              <Toaster />
-            </ThemeProvider>
-          </body>
-        </html>
-      </QueryClientProvider>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${PoppinsSerif.variable} ${LatoSerif.variable} ${LatoSerif.className} antialiased tracking-[0.02em]`}
+      >
+        <Providers>
+          <Header />
+          <main>
+            <Container className="pt-9 md:pt-10 lg:pt-12 pb-12 flex flex-col gap-8">
+              {children}
+            </Container>
+          </main>
+          <Footer />
+          <Toaster />
+        </Providers>
+      </body>
+    </html>
   );
 }

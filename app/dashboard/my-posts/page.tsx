@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import UserPosts from "@/components/dashboard/UserPosts";
-import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
 
 // Metadata
 export const metadata: Metadata = {
@@ -13,14 +11,12 @@ export const metadata: Metadata = {
 };
 
 // The page
-async function ProfilePostsPage() {
+function ProfilePostsPage() {
   // Returned JSX
   return (
     <section>
       <SectionTitle>List of my posts</SectionTitle>
-      <Suspense fallback={<SkeletonPostsList />}>
-        <UserPosts />
-      </Suspense>
+      <UserPosts />
     </section>
   );
 }

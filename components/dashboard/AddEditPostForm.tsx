@@ -3,6 +3,7 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { SubmitButton } from "@/components/form/Buttons";
 import CurrentImage from "@/components/form/CurrentImage";
@@ -28,6 +29,9 @@ type FormValues = {
 
 // The component
 function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
+  // Get the query client
+  const queryClient = useQueryClient();
+
   // Combine 2 schemas
   const combinedSchema = z.intersection(postSchema, imageSchema);
 
@@ -60,7 +64,10 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
       : createEditPostAction;
     // Handle the form submission
     const result = await handleFormAction(correctAction, data);
+
+    // If success, trigger a message and invalidate query
     if (result.success) router.push("/dashboard/my-posts");
+    queryClient.invalidateQueries({ queryKey: ["user-posts"] });
   };
 
   // Returned JSX
