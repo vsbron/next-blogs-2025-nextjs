@@ -1,4 +1,4 @@
-import PostsListLayout from "@/components/PostsListLayout";
+import PostsListLayout from "@/components/PostPreview/PostsListLayout";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 

@@ -1,8 +1,9 @@
 import Link from "next/link";
 
+import DeletePostButton from "@/components/PostPreview/DeletePostButton";
 import { Button } from "@/components/ui/button";
+
 import { EditIcon, EyeIcon } from "lucide-react";
-import DeletePostButton from "./DeletePostButton";
 
 function PostPreviewButtons({ postId }: { postId: number }) {
   // Returned JSX

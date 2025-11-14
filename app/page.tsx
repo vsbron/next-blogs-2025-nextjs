@@ -1,7 +1,7 @@
-import HeroSection from "@/components/Hero/HeroSection";
+import HeroSection from "@/components/Index/HeroSection";
 import CTASection from "@/components/CTASection";
 import IndexStats from "@/components/IndexStats";
-import RecentPosts from "@/components/RecentPosts";
+import RecentPosts from "@/components/Index/RecentPosts";
 import SectionSeparator from "@/components/SectionSeparator";
 
 function Home() {

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PencilLine } from "lucide-react";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
 
+import { PencilLine } from "lucide-react";
 import CTAImg from "@/assets/ctaImg.png";
 
 function CTASection({ index = false }: { index?: boolean }) {

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import PostPreviewStatsProps from "@/components/PostPreviewStats";
 import { ButtonsContainer } from "@/components/form/Buttons";
+import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 

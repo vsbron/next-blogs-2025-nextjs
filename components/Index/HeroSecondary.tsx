@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 
-import PostPreviewStatsProps from "@/components/PostPreviewStats";
+import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 

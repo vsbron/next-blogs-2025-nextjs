@@ -1,11 +1,11 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-import ProfileDetails from "@/components/ProfileDetails";
+import ProfileDetails from "@/components/Profile/ProfileDetails";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 
 import { fetchCurrentUser } from "@/utils/actions/users";
-import { redirect } from "next/navigation";
 
 async function DashboardProfile() {
   // Get current user

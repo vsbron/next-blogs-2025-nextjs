@@ -1,9 +1,10 @@
 import Link from "next/link";
 
-import PostSectionStatsLike from "@/components/PostSectionStatsLike";
+import PostSectionStatsLike from "@/components/Post/PostSectionStatsLike";
 import { CardContent } from "@/components/ui/card";
 
 import { Post } from "@/utils/types";
+
 import { Eye, User } from "lucide-react";
 
 function PostSectionStats({ post }: { post: Post }) {

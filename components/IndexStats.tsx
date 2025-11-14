@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { EyeIcon, FilePenLine, ThumbsUpIcon } from "lucide-react";
 
-import SectionTitle from "./SectionTitle";
+import SectionTitle from "@/components/SectionTitle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+import { EyeIcon, FilePenLine, ThumbsUpIcon } from "lucide-react";
 
 // Dummy data
 const viewsList = [
@@ -142,7 +143,7 @@ function IndexStats() {
   );
 }
 
-// Props type
+// Helper Props type
 type StatsCardProps = {
   list: {
     label: string;

@@ -6,6 +6,7 @@ import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 
 import { deletePostAction } from "@/utils/actions/post";
+
 import { Trash2Icon, XIcon } from "lucide-react";
 
 function DeletePostButton({ postId }: { postId: number }) {

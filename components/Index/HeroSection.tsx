@@ -1,6 +1,6 @@
-import HeroFeatured from "./HeroFeatured";
-import HeroSecondary from "./HeroSecondary";
-import HeroQuick from "./HeroQuick";
+import HeroFeatured from "@/components/Index/HeroFeatured";
+import HeroSecondary from "@/components/Index/HeroSecondary";
+import HeroQuick from "@/components/Index/HeroQuick";
 
 import CityImg from "@/assets/article-city.jpg";
 import AIImg from "@/assets/article-ai.jpg";

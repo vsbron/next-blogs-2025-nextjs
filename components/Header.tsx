@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { PencilLine } from "lucide-react";
 
-import Container from "./Container";
-import ThemeToggle from "./ThemeToggle";
-import HeaderNavbar from "./Header/HeaderNavbar";
-import HeaderSeparator from "./Header/HeaderSeparator";
-import Dropdown from "./Header/Dropdown";
-import Logo from "./Header/Logo";
-import Search from "./Header/Search";
+import Container from "@/components/Container";
+import ThemeToggle from "@/components/ThemeToggle";
+import HeaderNavbar from "@/components/Header/HeaderNavbar";
+import HeaderSeparator from "@/components/Header/HeaderSeparator";
+import Dropdown from "@/components/Header/Dropdown";
+import Logo from "@/components/Header/Logo";
+import Search from "@/components/Header/Search";
 import { Button } from "@/components/ui/button";
+
+import { PencilLine } from "lucide-react";
 
 function Header() {
   // Returned JSX

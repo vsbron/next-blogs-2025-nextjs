@@ -1,6 +1,6 @@
-import PostPreviewTile from "@/components/PostPreviewTile";
-import PostsGridLayout from "@/components/PostsGridLayout";
-import ProfileDetailsLine from "@/components/ProfileDetailsLine";
+import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
+import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
+import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
 
 import { fetchUserStats } from "@/utils/actions/posts";
 import { MdArticle, MdRemoveRedEye } from "react-icons/md";

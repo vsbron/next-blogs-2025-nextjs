@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
-import PostPreviewTile from "@/components/PostPreviewTile";
-import PostsGridLayout from "@/components/PostsGridLayout";
 import SectionTitle from "@/components/SectionTitle";
+import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
+import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import { Button } from "@/components/ui/button";
 
 import { fetchRecentPosts } from "@/utils/actions/posts";
+
+import { ArrowRight } from "lucide-react";
 
 async function RecentPosts() {
   // Fetch recent posts

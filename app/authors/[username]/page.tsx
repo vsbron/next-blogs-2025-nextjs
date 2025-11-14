@@ -3,13 +3,11 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import BreadCrumbsAuthorPage from "@/components/breadcrumbs/BreadCrumbsAuthorPage";
-import SkeletonArticle from "@/components/skeletons/SkeletonArticle";
+import ProfileDetails from "@/components/Profile/ProfileDetails";
+import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 
 import { fetchUser } from "@/utils/actions/users";
 import { SITE_DOMAIN } from "@/utils/constants";
-import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
-import DashboardProfile from "@/components/dashboard/DashboardProfile";
-import ProfileDetails from "@/components/ProfileDetails";
 
 // Interface for the User ID
 interface UserPageProps {

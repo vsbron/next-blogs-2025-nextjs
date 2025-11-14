@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import PostsListLayout from "@/components/PostsListLayout";
-import PostPreviewLine from "@/components/PostPreviewLine";
+import PostsListLayout from "@/components/PostPreview/PostsListLayout";
+import PostPreviewLine from "@/components/PostPreview/PostPreviewLine";
 
 import { fetchUserPosts } from "@/utils/actions/posts";
 

@@ -1,6 +1,6 @@
 "use client";
-import { FaCopy } from "react-icons/fa";
 import { toast } from "sonner";
+import { FaCopy } from "react-icons/fa";
 
 function CopyUrlLink({ url }: { url: string }) {
   // Returned JSX

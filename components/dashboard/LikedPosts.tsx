@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import PostPreviewTile from "@/components/PostPreviewTile";
-import PostsGridLayout from "@/components/PostsGridLayout";
+import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
+import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 
 import { fetchUserLikedPosts } from "@/utils/actions/posts";
 

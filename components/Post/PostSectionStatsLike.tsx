@@ -6,6 +6,7 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { togglePostLike } from "@/utils/actions/post";
 import { Like } from "@/utils/types";
+
 import { ThumbsUp } from "lucide-react";
 
 // Props type

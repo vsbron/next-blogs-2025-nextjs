@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import PostSection from "@/components/PostSection";
+import PostSection from "@/components/Post/PostSection";
 import PostSidebar from "@/components/Sidebar/PostSidebar";
 import SectionTitle from "@/components/SectionTitle";
 import BreadCrumbsPostPage from "@/components/breadcrumbs/BreadCrumbsPostPage";

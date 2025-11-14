@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { StarIcon } from "lucide-react";
 
-import PostPreviewStatsProps from "@/components/PostPreviewStats";
+import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 

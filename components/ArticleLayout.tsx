@@ -1,8 +1,10 @@
+// Prop types
 type ArticleLAyoutProps = {
   children: React.ReactNode;
   sidebar?: React.ReactNode;
 };
 
+// The Component
 function ArticleLayout({ children, sidebar }: ArticleLAyoutProps) {
   // Returned JSX
   return (

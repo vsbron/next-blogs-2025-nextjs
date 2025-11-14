@@ -1,8 +1,8 @@
 import Image from "next/image";
 import parse from "html-react-parser";
 
-import ViewTracker from "@/components/ViewTracker";
-import PostSectionStats from "@/components/PostSectionStats";
+import PostSectionStats from "@/components/Post/PostSectionStats";
+import ViewTracker from "@/components/Post/ViewTracker";
 import PostStats from "@/components/Sidebar/PostStats";
 import { Card } from "@/components/ui/card";
 

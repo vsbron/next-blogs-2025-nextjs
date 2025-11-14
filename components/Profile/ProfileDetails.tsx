@@ -1,12 +1,13 @@
 import Image from "next/image";
 
-import ProfileDetailsLine from "@/components/ProfileDetailsLine";
-import defaultAvatar from "@/assets/defaultUser.png";
+import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
+import ProfileSocials from "@/components/Profile/ProfileSocials";
+
 import { formatDate } from "@/utils/helpers";
 import { User as UserType } from "@/utils/types";
 
 import { VenusAndMars, Mail, Calendar, Flag, User, Cake } from "lucide-react";
-import ProfileSocials from "./ProfileSocials";
+import defaultAvatar from "@/assets/defaultUser.png";
 
 function ProfileDetails({ user }: { user: UserType }) {
   // Destructure the user

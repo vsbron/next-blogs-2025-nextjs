@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import PostPreviewButtons from "@/components/PostPreviewButtons";
-import PostPreviewStatsProps from "@/components/PostPreviewStats";
+import PostPreviewButtons from "@/components/PostPreview/PostPreviewButtons";
+import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate } from "@/utils/helpers";
