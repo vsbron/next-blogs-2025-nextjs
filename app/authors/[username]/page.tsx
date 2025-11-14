@@ -8,6 +8,7 @@ import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 
 import { fetchUser } from "@/utils/actions/users";
 import { SITE_DOMAIN } from "@/utils/constants";
+import SectionSeparator from "@/components/SectionSeparator";
 
 // Interface for the User ID
 interface UserPageProps {
@@ -55,13 +56,20 @@ async function UserPage({ params }: UserPageProps) {
 
   // Returned JSX
   return (
-    <section>
-      <BreadCrumbsAuthorPage />
-      <SectionTitle>Author profile of {user.displayName}</SectionTitle>
-      <Suspense fallback={<SkeletonProfile />}>
-        <ProfileInfo user={user} />
-      </Suspense>
-    </section>
+    <>
+      <section>
+        <BreadCrumbsAuthorPage />
+        <SectionTitle>Author profile of {user.displayName}</SectionTitle>
+        <Suspense fallback={<SkeletonProfile />}>
+          <ProfileInfo user={user} />
+        </Suspense>
+      </section>
+      <SectionSeparator />
+      <section>
+        <SectionTitle as="h2">Author posts</SectionTitle>
+        <p>Under construction</p>
+      </section>
+    </>
   );
 }
 

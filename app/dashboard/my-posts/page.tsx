@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 import SectionTitle from "@/components/SectionTitle";
-import UserPosts from "@/components/dashboard/UserPosts";
+import UserPosts from "@/components/dashboard/MyPosts";
 
 // Metadata
 export const metadata: Metadata = {

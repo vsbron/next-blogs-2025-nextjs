@@ -8,7 +8,7 @@ import PostPreviewLine from "@/components/PostPreview/PostPreviewLine";
 import useUserPosts from "@/hooks/useUserPosts";
 import SkeletonPostsList from "../skeletons/SkeletonPostsList";
 
-function UserPosts() {
+function MyPosts() {
   // Get the posts from database
   const { data: posts, isLoading, error } = useUserPosts();
 
@@ -48,4 +48,4 @@ function UserPosts() {
   );
 }
 
-export default UserPosts;
+export default MyPosts;
