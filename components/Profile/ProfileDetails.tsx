@@ -1,7 +1,7 @@
 import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
 import ProfileSocials from "@/components/Profile/ProfileSocials";
 
-import { formatDate } from "@/utils/helpers";
+import { calculateAge, countDays, formatDate } from "@/utils/helpers";
 
 import { VenusAndMars, Mail, Calendar, Flag, User, Cake } from "lucide-react";
 import { User as UserType } from "@/utils/types";
@@ -26,10 +26,18 @@ async function ProfileDetails({ user }: { user: UserType }) {
         label="Date joined"
         className="mb-3"
       >
-        {dateJoined}
+        {dateJoined}{" "}
+        <span className="text-sm hidden xs:inline-block">
+          ({countDays(dateJoined)} days ago)
+        </span>
       </ProfileDetailsLine>
       <ProfileDetailsLine icon={<Cake />} label="Birthday">
-        {dateBirth}
+        {dateBirth}{" "}
+        {birthday && (
+          <span className="text-sm hidden xs:inline-block">
+            ({calculateAge(dateBirth)} years)
+          </span>
+        )}
       </ProfileDetailsLine>
       <ProfileDetailsLine icon={<VenusAndMars />} label="Gender">
         {gender}

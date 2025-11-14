@@ -17,21 +17,20 @@ type PostPreviewTileMiniProps = {
 // The component
 function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
   // Destructure props and configure
-  const { id, title, preview, published, views, imageUrl, likes, category } =
-    post;
+  const { id, title, published, views, imageUrl, likes, category } = post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 overflow-hidden max-w-80">
+    <Card className="p-0 gap-0 overflow-hidden max-w-70">
       <Link href={href} className="mb-3">
-        <div className="relative h-30 sm:h-40 group overflow-hidden rounded-t-lg">
+        <div className="relative h-20 sm:h-30 group overflow-hidden rounded-t-lg">
           <Image
             src={imageUrl}
             fill
             alt={title}
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
             className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
             priority
           />
@@ -40,15 +39,15 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
           </div>
         </div>
       </Link>
-      <CardHeader className="px-4">
+      <CardHeader className="px-4 p">
         <PostPreviewStatsProps views={views} likes={likes.length} date={date} />
       </CardHeader>
-      <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
+      <CardContent className="pb-4 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
-          <h3 className="md:text-lg">{title}</h3>
+          <h3 className="md:text-md">{title}</h3>
         </Link>
         <ButtonsContainer className="mt-2">
-          <Button variant="outline" size="sm" asChild>
+          <Button variant="outline" size="xs" asChild>
             <Link href={href}>Read post</Link>
           </Button>
         </ButtonsContainer>
