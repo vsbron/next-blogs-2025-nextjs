@@ -6,7 +6,7 @@ import PostPreviewLine from "@/components/PostPreview/PostPreviewLine";
 
 import { fetchUserPosts } from "@/utils/actions/posts";
 
-async function MyPosts() {
+async function UserPosts() {
   // Fetch user's posts
   const posts = await fetchUserPosts();
 
@@ -35,4 +35,4 @@ async function MyPosts() {
   );
 }
 
-export default MyPosts;
+export default UserPosts;

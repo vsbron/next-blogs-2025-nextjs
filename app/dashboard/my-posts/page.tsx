@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
-import MyPosts from "@/components/dashboard/MyPosts";
+import UserPosts from "@/components/dashboard/UserPosts";
 import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
 
 // Metadata
@@ -19,7 +19,7 @@ async function ProfilePostsPage() {
     <section>
       <SectionTitle>List of my posts</SectionTitle>
       <Suspense fallback={<SkeletonPostsList />}>
-        <MyPosts />
+        <UserPosts />
       </Suspense>
     </section>
   );

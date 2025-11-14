@@ -1,10 +1,10 @@
 import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
 import PostPreviewTileMini from "@/components/PostPreview/PostPreviewTileMini";
+import { fetchUserStats } from "@/utils/actions/users";
 
-import { fetchUserStats } from "@/utils/actions/posts";
 import { MdArticle, MdRemoveRedEye } from "react-icons/md";
 
-async function MyProfileStats({ userId }: { userId: string }) {
+async function UserProfileStats({ userId }: { userId: string }) {
   // Fetch user's posts
   const data = await fetchUserStats(userId);
 
@@ -43,4 +43,4 @@ async function MyProfileStats({ userId }: { userId: string }) {
   );
 }
 
-export default MyProfileStats;
+export default UserProfileStats;
