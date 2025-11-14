@@ -1,9 +1,12 @@
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { redirect } from "next/navigation";
 
+import ProfileInfo from "@/components/Profile/ProfileInfo";
 import SectionTitle from "@/components/SectionTitle";
-import DashboardProfile from "@/components/dashboard/DashboardProfile";
 import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
+
+import { fetchCurrentUser } from "@/utils/actions/users";
 
 // Metadata
 export const metadata: Metadata = {
@@ -14,14 +17,20 @@ export const metadata: Metadata = {
 
 // The page
 async function ProfilePage() {
+  // Get current user
+  const user = await fetchCurrentUser();
+
+  // Guard clause
+  if (!user) redirect("/");
+
   // Returned JSX
   return (
-    <>
+    <section>
       <SectionTitle>Manage profile</SectionTitle>
       <Suspense fallback={<SkeletonProfile />}>
-        <DashboardProfile />
+        <ProfileInfo user={user} editBtns={true} />
       </Suspense>
-    </>
+    </section>
   );
 }
 
