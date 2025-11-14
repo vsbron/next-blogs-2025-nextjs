@@ -24,10 +24,11 @@ export function ButtonsContainer({
   children,
   className,
 }: ButtonsContainerProps) {
+  // Returned JSX
   return (
     <div
       className={cn(
-        "flex flex-col items-start xs:flex-row gap-y-2 gap-x-4 mt-10",
+        "flex flex-col items-start xs:flex-row gap-y-2 gap-x-4 mt-8",
         className
       )}
     >

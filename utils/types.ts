@@ -4,6 +4,7 @@ export type actionReturnType = Promise<{ success: boolean; message: string }>;
 
 // User type
 export type User = {
+  clerkId: string;
   imageUrl: string | null;
   username: string;
   displayName: string;

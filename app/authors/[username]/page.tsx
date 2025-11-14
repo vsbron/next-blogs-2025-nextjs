@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import BreadCrumbsAuthorPage from "@/components/breadcrumbs/BreadCrumbsAuthorPage";
-import ProfileDetails from "@/components/Profile/ProfileDetails";
+import ProfileInfo from "@/components/Profile/ProfileInfo";
 import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 
 import { fetchUser } from "@/utils/actions/users";
@@ -59,7 +59,7 @@ async function UserPage({ params }: UserPageProps) {
       <BreadCrumbsAuthorPage />
       <SectionTitle>Author profile of {user.displayName}</SectionTitle>
       <Suspense fallback={<SkeletonProfile />}>
-        <ProfileDetails user={user} />
+        <ProfileInfo user={user} />
       </Suspense>
     </section>
   );

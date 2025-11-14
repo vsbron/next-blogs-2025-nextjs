@@ -22,6 +22,7 @@ export async function fetchCurrentUser() {
   const user = await db.user.findUnique({
     where: { clerkId: userId },
     select: {
+      clerkId: true,
       imageUrl: true,
       username: true,
       displayName: true,

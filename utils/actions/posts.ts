@@ -136,10 +136,13 @@ export async function fetchUserStats(
   });
 
   // Fetch only the top post by views
-  const mostViewedPosts = await db.post.findMany({
+  const mostPopularPost = await db.post.findFirst({
     where: { authorId: userId },
-    take: 3,
-    orderBy: { views: "desc" },
+    orderBy: {
+      likes: {
+        _count: "desc",
+      },
+    },
     select: postFields,
   });
 
@@ -147,7 +150,7 @@ export async function fetchUserStats(
   return {
     totalPosts: postsAggregate._count.id,
     totalViews: postsAggregate._sum.views || 0,
-    mostViewedPosts,
+    mostPopularPost,
   };
 }
 
@@ -155,5 +158,5 @@ export async function fetchUserStats(
 export type UserStats = {
   totalPosts: number;
   totalViews: number;
-  mostViewedPosts: PostPreview[];
+  mostPopularPost: PostPreview | null;
 };

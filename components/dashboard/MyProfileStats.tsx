@@ -1,23 +1,23 @@
-import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
-import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
+import PostPreviewTileMini from "@/components/PostPreview/PostPreviewTileMini";
 
 import { fetchUserStats } from "@/utils/actions/posts";
 import { MdArticle, MdRemoveRedEye } from "react-icons/md";
 
-async function MyProfileStats() {
+async function MyProfileStats({ userId }: { userId: string }) {
   // Fetch user's posts
-  const data = await fetchUserStats();
+  const data = await fetchUserStats(userId);
 
   // Guard clause
   if (!data) return <p>There was some error. Please try again later</p>;
 
   // Destructure fetched data
-  const { totalPosts, totalViews, mostViewedPosts } = data;
+  const { totalPosts, totalViews, mostPopularPost } = data;
 
   // Returned JSX
   return (
     <div className="flex flex-col gap-y-1">
+      <h5 className="text-xl font-medium">Stats:</h5>
       {/* Basic stats */}
       <ProfileDetailsLine
         icon={<MdArticle className="w-5 h-5" />}
@@ -31,13 +31,14 @@ async function MyProfileStats() {
       >
         {totalViews}
       </ProfileDetailsLine>
-      {/* Top posts */}
-      <h2 className="text-2xl mt-6 mb-2">Most viewed posts</h2>
-      <PostsGridLayout>
-        {mostViewedPosts.map((post) => (
-          <PostPreviewTile key={post.id} post={post} />
-        ))}
-      </PostsGridLayout>
+
+      {/* Popular post */}
+      {mostPopularPost && (
+        <>
+          <h2 className="text-2xl mt-6 mb-2">Most popular post</h2>
+          <PostPreviewTileMini post={mostPopularPost} />
+        </>
+      )}
     </div>
   );
 }
