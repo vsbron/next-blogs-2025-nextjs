@@ -71,17 +71,15 @@ async function PostPage({ params }: SinglePostPageProps) {
 
   // Returned JSX
   return (
-    <>
+    <section>
       <BreadCrumbsPostPage category={post.category} />
-      <section>
-        <SectionTitle>{post.title}</SectionTitle>
-        <Suspense fallback={<SkeletonArticle />}>
-          <ArticleLayout sidebar={<PostSidebar post={post} />}>
-            <PostSection post={post} />
-          </ArticleLayout>
-        </Suspense>
-      </section>
-    </>
+      <SectionTitle>{post.title}</SectionTitle>
+      <Suspense fallback={<SkeletonArticle />}>
+        <ArticleLayout sidebar={<PostSidebar post={post} />}>
+          <PostSection post={post} />
+        </ArticleLayout>
+      </Suspense>
+    </section>
   );
 }
 

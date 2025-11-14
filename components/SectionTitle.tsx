@@ -1,9 +1,9 @@
 // Classes for BEFORE element
-const beforeElement = `before:content-[""] before:absolute before:bg-accent before:rounded-md before:sm:rounded-lg before:left-0 before:top-1.75 before:xs:top-1.75`;
+const beforeElement = `before:content-[""] before:absolute before:bg-accent before:rounded-md before:sm:rounded-lg before:left-0 before:top-1.5 before:xs:top-1.75`;
 
 // Map of main styles
 const mainHeaderStyles =
-  "text-2xl xs:text-3xl sm:text-4xl mb-5 pl-7 xs:pl-9 sm:pl-10 before:h-5 before:w-5 before:xs:h-6.5 before:xs:w-6.5 before:sm:h-6.75 before:sm:w-6.75 tracking-normal";
+  "text-2xl xs:text-3xl sm:text-4xl mb-5 pl-7 xs:pl-9 sm:pl-10 before:h-5 before:w-5 before:xs:h-6 before:xs:w-6.5 before:sm:h-6.75 before:sm:w-6.75 tracking-normal";
 const styles = {
   h1: mainHeaderStyles,
   h2: "text-[22px] xs:text-2xl sm:text-3xl mb-4 pl-7 xs:pl-7.5 sm:pl-9 before:h-5 before:w-5 before:xs:h-5.5 before:xs:w-5.5 before:sm:h-6.5 before:sm:w-6.5",

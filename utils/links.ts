@@ -1,8 +1,13 @@
-export const primaryLinks = [
-  { label: "Home page", href: "/" },
+export const headerLinks = [
   { label: "Hot posts", href: "/hot-posts" },
   { label: "Categories", href: "/categories" },
   { label: "Browse all", href: "/posts" },
+];
+
+export const primaryLinks = [
+  { label: "Home page", href: "/" },
+  ...headerLinks,
+  { label: "Authors", href: "/authors" },
 ];
 
 export const secondaryLinks = [

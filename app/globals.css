@@ -163,6 +163,9 @@ h6 {
   font-family: "Poppins";
   letter-spacing: normal;
 }
+section {
+  position: relative;
+}
 
 article h2 {
   font-size: 1.85rem;

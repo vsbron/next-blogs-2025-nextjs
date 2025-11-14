@@ -54,13 +54,11 @@ async function UserPage({ params }: UserPageProps) {
 
   // Returned JSX
   return (
-    <>
+    <section>
       <BreadCrumbsAuthorPage />
-      <section>
-        <SectionTitle>{user.displayName}</SectionTitle>
-        <Suspense fallback={<SkeletonArticle />}>{user.displayName}</Suspense>
-      </section>
-    </>
+      <SectionTitle>{user.displayName}</SectionTitle>
+      <Suspense fallback={<SkeletonArticle />}>{user.displayName}</Suspense>
+    </section>
   );
 }
 

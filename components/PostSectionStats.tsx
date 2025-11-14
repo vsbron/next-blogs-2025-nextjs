@@ -16,7 +16,7 @@ function PostSectionStats({ post }: { post: Post }) {
       <div className="flex items-center justify-between text-foreground/50 font-bold">
         <div className="flex items-center gap-x-1 mr-3">
           <User className="post-stats-icon" />
-          <Link href={`/author/${author.username}`} className="before:h-0">
+          <Link href={`/authors/${author.username}`} className="before:h-0">
             {author.displayName}
           </Link>
         </div>

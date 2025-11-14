@@ -99,7 +99,7 @@ export default function RootLayout({
           >
             <Header />
             <main>
-              <Container className="pt-6 xs:pt-8 lg:pt-12 pb-12 flex flex-col gap-8">
+              <Container className="pt-9 md:pt-10 lg:pt-12 pb-12 flex flex-col gap-8">
                 {children}
               </Container>
             </main>
