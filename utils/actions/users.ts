@@ -1,4 +1,5 @@
 "use server";
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
@@ -82,3 +83,14 @@ export async function updateUserAction(formData: FormData) {
     return renderError(err, "updating the user");
   }
 }
+
+// Fetch user by his username
+export const fetchUser = cache(async (username: string) => {
+  // Fetch the user using its ID
+  const user = await db.user.findUnique({
+    where: { username: username },
+  });
+
+  // Return user
+  return user;
+});
