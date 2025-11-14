@@ -33,6 +33,17 @@ export const fetchPost = cache(async (postId: string) => {
 });
 
 // Server action function that fetches recent posts with author info and likes
+export const fetchAllPosts = async () => {
+  const posts = await db.post.findMany({
+    orderBy: { published: "desc" },
+    select: postFields,
+  });
+
+  // Return recent posts
+  return posts;
+};
+
+// Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async (amount: number = 12) => {
   const posts = await db.post.findMany({
     take: amount,
