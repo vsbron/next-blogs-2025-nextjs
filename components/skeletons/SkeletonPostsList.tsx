@@ -1,4 +1,4 @@
-import PostsListLayout from "@/components/PostPreview/PostsListLayout";
+import MyPostsLayout from "@/components/dashboard/MyPostsLayout";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -6,16 +6,16 @@ import { Skeleton } from "@/components/ui/skeleton";
 function SkeletonPostsList() {
   // Returned JSX
   return (
-    <PostsListLayout>
-      <PostPreviewLineSkeleton />
-      <PostPreviewLineSkeleton />
-      <PostPreviewLineSkeleton />
-    </PostsListLayout>
+    <MyPostsLayout>
+      <MyPostPreview />
+      <MyPostPreview />
+      <MyPostPreview />
+    </MyPostsLayout>
   );
 }
 
 // Helper component
-function PostPreviewLineSkeleton() {
+function MyPostPreview() {
   // Returned JSX
   return (
     <Card className="p-0 gap-0 grid grid-cols-1 md:grid-cols-[120px_1fr]">

@@ -17,6 +17,7 @@ import { handleFormAction } from "@/utils/helpers";
 import { GENDERS } from "@/utils/constants";
 import { userSchema } from "@/utils/schemas";
 import { User } from "@/utils/types";
+import { Card } from "../ui/card";
 
 // Type for form values
 type FormValues = {
@@ -90,87 +91,89 @@ function EditProfile({ user }: { user: User }) {
   // Returned JSX
   return (
     <section>
-      <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
-        <FormInput
-          id="username"
-          type="text"
-          {...register("username")}
-          error={errors.username?.message}
-        />
-        <FormInput
-          id="displayName"
-          label="Display Name"
-          type="text"
-          {...register("displayName")}
-          error={errors.displayName?.message}
-        />
-        <DateInput
-          id="birthday"
-          control={control}
-          error={errors.birthday?.message}
-        />
-        <RadioInput
-          id="gender"
-          options={GENDERS}
-          control={control}
-          error={errors.gender?.message}
-        />
-        <SelectInput
-          id="country"
-          options={countryNames}
-          control={control}
-          error={errors.country?.message}
-        />
-        <FormInput
-          id="bio"
-          label="About"
-          type="text"
-          {...register("bio")}
-          error={errors.bio?.message}
-        />
-        <FormInput
-          id="website"
-          label="Website link"
-          type="text"
-          {...register("website")}
-          error={errors.website?.message}
-        />
-        <FormInput
-          id="facebook"
-          label="Facebook Username"
-          type="text"
-          {...register("facebook")}
-          error={errors.facebook?.message}
-        />
-        <FormInput
-          id="x"
-          label="X (Twitter) Username"
-          type="text"
-          {...register("x")}
-          error={errors.x?.message}
-        />
-        <FormInput
-          id="instagram"
-          label="Instagram Username"
-          type="text"
-          {...register("instagram")}
-          error={errors.instagram?.message}
-        />
-        <FormInput
-          id="reddit"
-          label="Reddit Username"
-          type="text"
-          {...register("reddit")}
-          error={errors.reddit?.message}
-        />
+      <Card className="px-8 py-6 max-w-[450px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
+          <FormInput
+            id="username"
+            type="text"
+            {...register("username")}
+            error={errors.username?.message}
+          />
+          <FormInput
+            id="displayName"
+            label="Display Name"
+            type="text"
+            {...register("displayName")}
+            error={errors.displayName?.message}
+          />
+          <DateInput
+            id="birthday"
+            control={control}
+            error={errors.birthday?.message}
+          />
+          <RadioInput
+            id="gender"
+            options={GENDERS}
+            control={control}
+            error={errors.gender?.message}
+          />
+          <SelectInput
+            id="country"
+            options={countryNames}
+            control={control}
+            error={errors.country?.message}
+          />
+          <FormInput
+            id="bio"
+            label="About"
+            type="text"
+            {...register("bio")}
+            error={errors.bio?.message}
+          />
+          <FormInput
+            id="website"
+            label="Website link"
+            type="text"
+            {...register("website")}
+            error={errors.website?.message}
+          />
+          <FormInput
+            id="facebook"
+            label="Facebook Username"
+            type="text"
+            {...register("facebook")}
+            error={errors.facebook?.message}
+          />
+          <FormInput
+            id="x"
+            label="X (Twitter) Username"
+            type="text"
+            {...register("x")}
+            error={errors.x?.message}
+          />
+          <FormInput
+            id="instagram"
+            label="Instagram Username"
+            type="text"
+            {...register("instagram")}
+            error={errors.instagram?.message}
+          />
+          <FormInput
+            id="reddit"
+            label="Reddit Username"
+            type="text"
+            {...register("reddit")}
+            error={errors.reddit?.message}
+          />
 
-        <ButtonsContainer>
-          <Button variant="outline" asChild>
-            <Link href="/dashboard/profile/">Go Back</Link>
-          </Button>
-          <SubmitButton text="Update user" isPending={isSubmitting} />
-        </ButtonsContainer>
-      </form>
+          <ButtonsContainer>
+            <Button variant="outline" asChild>
+              <Link href="/dashboard/profile/">Go Back</Link>
+            </Button>
+            <SubmitButton text="Update user" isPending={isSubmitting} />
+          </ButtonsContainer>
+        </form>
+      </Card>
     </section>
   );
 }

@@ -17,6 +17,7 @@ import { POST_CATEGORIES } from "@/utils/constants";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
 import { Post } from "@/utils/types";
+import { Card } from "../ui/card";
 
 // Type for form values
 type FormValues = {
@@ -72,61 +73,65 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
 
   // Returned JSX
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
-      {/* Category */}
-      <SelectInput
-        id="category"
-        options={POST_CATEGORIES}
-        control={control}
-        error={errors.category?.message}
-      />
+    <section>
+      <Card className="px-8 py-6 max-w-[800px]">
+        <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
+          {/* Category */}
+          <SelectInput
+            id="category"
+            options={POST_CATEGORIES}
+            control={control}
+            error={errors.category?.message}
+          />
 
-      {/* Title field */}
-      <FormInput
-        id="title"
-        label="Post title"
-        type="text"
-        {...register("title")}
-        error={errors.title?.message}
-      />
+          {/* Title field */}
+          <FormInput
+            id="title"
+            label="Post title"
+            type="text"
+            {...register("title")}
+            error={errors.title?.message}
+          />
 
-      {/* Preview field */}
-      <FormInput
-        id="preview"
-        label="Post preview"
-        type="text"
-        {...register("preview")}
-        error={errors.preview?.message}
-      />
+          {/* Preview field */}
+          <FormInput
+            id="preview"
+            label="Post preview"
+            type="text"
+            {...register("preview")}
+            error={errors.preview?.message}
+          />
 
-      {/* Text field */}
-      <TextAreaInput
-        id="text"
-        label="Compose your post"
-        control={control}
-        {...register("text")}
-        error={errors.text?.message}
-      />
+          {/* Text field */}
+          <TextAreaInput
+            id="text"
+            label="Compose your post"
+            control={control}
+            {...register("text")}
+            error={errors.text?.message}
+          />
 
-      {/* Attach an image */}
-      <ImageInput
-        {...register("imageUrl")}
-        label="Add an image (1MB)"
-        setValue={setValue}
-        error={errors.imageUrl?.message}
-      />
+          {/* Attach an image */}
+          <ImageInput
+            {...register("imageUrl")}
+            label="Add an image (1MB)"
+            setValue={setValue}
+            error={errors.imageUrl?.message}
+          />
 
-      {/* Display current image */}
-      {defaultValues?.imageUrl && (
-        <CurrentImage imageUrl={defaultValues?.imageUrl} />
-      )}
+          {/* Display current image */}
+          {defaultValues?.imageUrl && (
+            <CurrentImage imageUrl={defaultValues?.imageUrl} />
+          )}
 
-      {/* Submit button */}
-      <SubmitButton
-        text={defaultValues ? "Edit post" : "Submit post"}
-        isPending={isSubmitting}
-      />
-    </form>
+          {/* Submit button */}
+          <SubmitButton
+            text={defaultValues ? "Edit post" : "Submit post"}
+            isPending={isSubmitting}
+          />
+        </form>
+      </Card>
+    </section>
   );
 }
 

@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import MyPostPreview from "@/components/dashboard/MyPostPreview";
+import MyPostsLayout from "@/components/dashboard/MyPostsLayout";
+import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
 
 import useUserPosts from "@/hooks/useUserPosts";
-import SkeletonPostsList from "../skeletons/SkeletonPostsList";
 
 function MyPosts() {
   // Get the posts from database
@@ -39,11 +40,11 @@ function MyPosts() {
 
   // Returned JSX
   return (
-    <div className="flex flex-col gap-y-4">
+    <MyPostsLayout>
       {posts.map((post) => {
         return <MyPostPreview key={post.id} post={post} />;
       })}
-    </div>
+    </MyPostsLayout>
   );
 }
 
