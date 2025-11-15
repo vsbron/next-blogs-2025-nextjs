@@ -4,7 +4,7 @@ import { User } from "@/utils/types";
 function ProfileSocials({ user }: { user: User }) {
   // Returned JSX
   return (
-    <div className="flex items-center gap-x-4 mt-2">
+    <div className="flex items-center gap-x-4 mt-2 mb-1">
       {SOCIALS.map(({ key, prefix }) => {
         // Prepare value
         const value = user[key] as string;

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "@/utils/types";
 
 import defaultAvatar from "@/assets/defaultUser.png";
+import { Card } from "../ui/card";
 
 // Props type
 type ProfileInfoProps = {
@@ -40,10 +41,10 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
         </div>
       </div>
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 max-w-[900px]">
-        <div>
+        <Card className="px-6 py-4">
           <ProfileDetails user={user} />
           {editBtns && (
-            <ButtonsContainer>
+            <ButtonsContainer className="mt-2">
               <Button asChild>
                 <Link href="/dashboard/profile/edit-credentials/">
                   Change username/password
@@ -56,7 +57,7 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
               </Button>
             </ButtonsContainer>
           )}
-        </div>
+        </Card>
         <ProfileStats userId={clerkId} />
       </div>
     </>

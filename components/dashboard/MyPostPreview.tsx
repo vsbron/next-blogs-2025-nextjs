@@ -8,12 +8,12 @@ import { formatDate } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
 
 // Props type
-type PostPreviewLineProps = {
+type MyPostPreviewProps = {
   post: PostPreview;
 };
 
 // The component
-function PostPreviewLine({ post }: PostPreviewLineProps) {
+function MyPostPreview({ post }: MyPostPreviewProps) {
   // Destructure props and configure
   const { id, title, preview, published, views, imageUrl, likes, category } =
     post;
@@ -57,4 +57,4 @@ function PostPreviewLine({ post }: PostPreviewLineProps) {
   );
 }
 
-export default PostPreviewLine;
+export default MyPostPreview;
