@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "@/utils/types";
 
 import defaultAvatar from "@/assets/defaultUser.png";
-import { Card } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
 
 // Props type
 type ProfileInfoProps = {
@@ -41,22 +41,24 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
         </div>
       </div>
       <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 max-w-[900px]">
-        <Card className="px-6 py-4">
-          <ProfileDetails user={user} />
-          {editBtns && (
-            <ButtonsContainer className="mt-2">
-              <Button asChild>
-                <Link href="/dashboard/profile/edit-credentials/">
-                  Change username/password
-                </Link>
-              </Button>
-              <Button asChild>
-                <Link href="/dashboard/profile/edit-profile/">
-                  Edit profile details
-                </Link>
-              </Button>
-            </ButtonsContainer>
-          )}
+        <Card>
+          <CardContent>
+            <ProfileDetails user={user} />
+            {editBtns && (
+              <ButtonsContainer>
+                <Button asChild>
+                  <Link href="/dashboard/profile/edit-credentials/">
+                    Change username/password
+                  </Link>
+                </Button>
+                <Button asChild>
+                  <Link href="/dashboard/profile/edit-profile/">
+                    Edit profile details
+                  </Link>
+                </Button>
+              </ButtonsContainer>
+            )}
+          </CardContent>
         </Card>
         <ProfileStats userId={clerkId} />
       </div>
