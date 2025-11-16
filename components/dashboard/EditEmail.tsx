@@ -22,6 +22,9 @@ function EditEmail({ user }: { user: ClerkUser }) {
   const addNewEmail = useReverification((email: string) =>
     user?.createEmailAddress({ email })
   );
+  const setPrimaryMail = useReverification(async (emailId: string) => {
+    await user?.update({ primaryEmailAddressId: emailId });
+  });
   const removeEmail = useReverification(async (emailId: string) => {
     // Find the email in user's addresses (if exists) and delete it
     const emailObj = user?.emailAddresses.find((e) => e.id === emailId);
@@ -50,6 +53,20 @@ function EditEmail({ user }: { user: ClerkUser }) {
       );
     }
   };
+  const handlePrimaryEmail = async (id: string) => {
+    // Changing primary mail - not working in dev mode
+    // try {
+    //   await setPrimaryMail(id);
+    //   toast("Email set as primary");
+    // /* ALSO NEED TO UPDATE EMAIL IN PRISMA*/
+    // } catch (err) {
+    //   setErrorMessage(
+    //     err instanceof Error ? err.message : "There was some error"
+    //   );
+    // }
+    console.log(id);
+    toast("Setting primary email not available in dev mode");
+  };
   // Remove email handler
   const handleDelete = async (id: string) => {
     try {
@@ -72,6 +89,7 @@ function EditEmail({ user }: { user: ClerkUser }) {
             key={email.emailAddress}
             email={email}
             deleteHandler={() => handleDelete(email.id)}
+            setPrimaryEmail={() => handlePrimaryEmail(email.id)}
             isPrimary={email.id === user.primaryEmailAddressId}
           />
         ))}
@@ -94,10 +112,12 @@ function EditEmail({ user }: { user: ClerkUser }) {
 // Helper components
 function EmailLine({
   email,
+  setPrimaryEmail,
   deleteHandler,
   isPrimary,
 }: {
   email: EmailAddressResource;
+  setPrimaryEmail: () => Promise<void>;
   deleteHandler: () => Promise<void>;
   isPrimary: boolean;
 }) {
@@ -111,7 +131,12 @@ function EmailLine({
       {email.emailAddress}{" "}
       {!isPrimary ? (
         <div className="flex gap-2">
-          <Button variant="outline" size="xs" className="text-xs">
+          <Button
+            variant="outline"
+            size="xs"
+            className="text-xs"
+            onClick={setPrimaryEmail}
+          >
             Set as primary
           </Button>
           <Button
