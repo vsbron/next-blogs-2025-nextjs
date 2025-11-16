@@ -22,9 +22,9 @@ function EditEmail({ user }: { user: ClerkUser }) {
   const addNewEmail = useReverification((email: string) =>
     user?.createEmailAddress({ email })
   );
-  const setPrimaryMail = useReverification(async (emailId: string) => {
-    await user?.update({ primaryEmailAddressId: emailId });
-  });
+  // const setPrimaryMail = useReverification(async (emailId: string) => {
+  //   await user?.update({ primaryEmailAddressId: emailId });
+  // });
   const removeEmail = useReverification(async (emailId: string) => {
     // Find the email in user's addresses (if exists) and delete it
     const emailObj = user?.emailAddresses.find((e) => e.id === emailId);
@@ -128,13 +128,13 @@ function EmailLine({
         isPrimary && "font-bold"
       }`}
     >
-      {email.emailAddress}{" "}
+      <span className="truncate">{email.emailAddress}</span>
       {!isPrimary ? (
         <div className="flex gap-2">
           <Button
             variant="outline"
             size="xs"
-            className="text-xs"
+            className="text-xs hidden xs:block"
             onClick={setPrimaryEmail}
           >
             Set as primary
@@ -149,7 +149,7 @@ function EmailLine({
           </Button>
         </div>
       ) : (
-        <span className="text-sm font-normal">(Primary)</span>
+        <span className="text-sm font-normal hidden xs:inline">(Primary)</span>
       )}
     </div>
   );
@@ -166,13 +166,16 @@ function AddEmailForm({
 }) {
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex items-center gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col xs:flex-row items-start xs:items-center gap-1 xs:gap-4"
+      >
         <Input
           id="email"
           name="email"
           type="email"
           placeholder="Enter your email"
-          className="max-w-50"
+          className="xs:max-w-50"
         />
         <div className="flex gap-2">
           <Button size="xs" type="submit">
