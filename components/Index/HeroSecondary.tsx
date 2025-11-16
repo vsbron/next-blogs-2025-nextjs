@@ -1,39 +1,30 @@
 import Link from "next/link";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 
 import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import { limitPreview } from "@/utils/helpers";
+import { formatDate, limitPreview } from "@/utils/helpers";
+import { PostPreview } from "@/utils/types";
 
-// Props type
-type HeroSecondaryProps = {
-  title: string;
-  preview: string;
-  date: string;
-  views: number;
-  likes: number;
-};
-
-// The component
-function HeroSecondary({
-  article,
-  image,
-}: {
-  article: HeroSecondaryProps;
-  image: StaticImageData;
-}) {
+function HeroSecondary({ post }: { post: PostPreview }) {
   // Destructure the post data
-  const { title, preview, date, views, likes } = article;
+  const { title, preview, published, views, likes, imageUrl } = post;
+  const date = formatDate(published);
+
   // Returned JSX
   return (
     <section className="grid sm:grid-cols-[.75fr_1fr] items-start gap-y-1 gap-x-3 lg:gap-x-4 relative">
-      <ArticleImage title={title} href="/posts/26" image={image} />
+      <ArticleImage title={title} href="/posts/26" image={imageUrl} />
       <Card className="gap-1 sm:gap-x-3 lg:gap-2 px-0 sm:px-6 pt-2 pb-0 lg:p-3 shadow-none bg-0 border-none">
         <CardHeader className="px-0 gap-1">
           <div className="flex justify-start xs:border-b xs:pb-2 border-foreground/10">
-            <PostPreviewStatsProps views={views} likes={likes} date={date} />
+            <PostPreviewStatsProps
+              views={views}
+              likes={likes.length}
+              date={date}
+            />
           </div>
           <Link
             href="/posts/26"
@@ -65,7 +56,7 @@ function ArticleImage({
 }: {
   title: string;
   href: string;
-  image: StaticImageData;
+  image: string;
 }) {
   // Returned JSX
   return (

@@ -6,24 +6,16 @@ import PostPreviewStatsProps from "@/components/PostPreview/PostPreviewStats";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-import LionImg from "@/assets/article-lion.jpg";
+import { formatDate } from "@/utils/helpers";
+import { PostPreview } from "@/utils/types";
+
 import FeaturedBG from "@/assets/featuredBG.png";
 
-// Dummy article
-const featuredArticle = {
-  title: "Why Lions are Awesome? We have 101 Reasons that prove it!",
-  preview:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, accusantium voluptatum! Ipsum, consectetur itaque totam illo fuga hic iure eum neque eaque ab? Minus atque alias dicta ex tempore, iure libero quos. Maxime obcaecati nesciunt similique aut praesentium harum perspiciatis.",
-  date: "Oct 19, 2025",
-  views: 53,
-  likes: 12,
-  href: "posts/26",
-};
-
 // The component
-function HeroFeatured() {
+function HeroFeatured({ post }: { post: PostPreview }) {
   // Destructure the post data
-  const { title, preview, date, views, likes, href } = featuredArticle;
+  const { title, preview, published, views, likes, id, imageUrl } = post;
+  const date = formatDate(published);
 
   // Returned JSX
   return (
@@ -35,7 +27,7 @@ function HeroFeatured() {
         sizes="(max-width: 768px) 100vw, 50vw"
         className="absolute top-1/2 -translate-y-3/7 xs:-translate-y-1/4 sm:-translate-y-7/13 right-0 sm:-right-5 2xl:-right-20 -z-1 opacity-8 sm:opacity-10 object-cover"
       />
-      <ArticleImage title={title} href={href} />
+      <ArticleImage title={title} href={`/posts/${id}`} image={imageUrl} />
       <Card className="gap-1 sm:gap-3 px-0 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
           <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
@@ -49,12 +41,15 @@ function HeroFeatured() {
             </div>
             <PostPreviewStatsProps
               views={views}
-              likes={likes}
+              likes={likes.length}
               date={date}
               reverse={true}
             />
           </div>
-          <Link href={href} className="hover:text-foreground/75 transition-all">
+          <Link
+            href={`/posts/${id}`}
+            className="hover:text-foreground/75 transition-all"
+          >
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xs:mt-2">
               {title}
             </h2>
@@ -63,7 +58,7 @@ function HeroFeatured() {
         <CardContent className="px-0">
           <p className="!mb-4 sm:!mb-6 text-sm md:text-base">{preview}</p>
           <Button asChild>
-            <Link href={href}>Read post</Link>
+            <Link href={`/posts/${id}`}>Read post</Link>
           </Button>
         </CardContent>
       </Card>
@@ -72,14 +67,22 @@ function HeroFeatured() {
 }
 
 // Helper component
-function ArticleImage({ title, href }: { title: string; href: string }) {
+function ArticleImage({
+  title,
+  href,
+  image,
+}: {
+  title: string;
+  href: string;
+  image: string;
+}) {
   // Returned JSX
   return (
     <Card className="p-3 sm:p-5 shadow-md sm:shadow-lg shadow-primary/25 border-0 relative sm:mb-2">
       <Link className="group" href={href}>
         <CardContent className="relative h-44 xs:h-60 sm:h-110 overflow-hidden rounded-lg">
           <Image
-            src={LionImg}
+            src={image}
             fill
             alt={title}
             sizes="(max-width: 640px) 95vw, 50vw"

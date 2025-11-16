@@ -115,7 +115,7 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
             {/* Attach an image */}
             <ImageInput
               {...register("imageUrl")}
-              label="Add an image (1MB)"
+              label="Add an image (≤1MB, 21:9 ratio)"
               setValue={setValue}
               error={errors.imageUrl?.message}
             />

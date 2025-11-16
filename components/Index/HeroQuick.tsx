@@ -6,31 +6,31 @@ import SectionTitle from "@/components/SectionTitle";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { limitPreview } from "@/utils/helpers";
-import UFOImg from "@/assets/article-ufo.jpg";
+import { PostPreview } from "@/utils/types";
 
-function HeroQuick({ articles }: { articles: any[] }) {
+function HeroQuick({ posts }: { posts: PostPreview[] }) {
   // Returned JSX
   return (
-    <Card className="gap-0 py-0 bg-0 border-0 rounded-none shadow-none">
+    <Card className="gap-0">
       <CardHeader>
         <SectionTitle as="h4" className="mb-0">
           Quick links
         </SectionTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        {articles.map(({ title, preview }, i) => (
+      <CardContent className="flex flex-col gap-3.5">
+        {posts.map(({ title, preview, imageUrl }, i) => (
           <div key={i}>
             <Link
               href="/posts/26"
-              className="grid grid-cols-[1fr_100px] justify-between items-center gap-2"
+              className="grid grid-cols-[1fr_100px] justify-between items-center gap-4 hover:text-foreground/70 transition-colors duration-200"
             >
               <div>
-                <h2 className="text-lg">{limitPreview(title, 31)}</h2>
+                <h2 className="text-lg">{limitPreview(title, 27)}</h2>
                 <p className="text-sm">{limitPreview(preview, 80)}</p>
               </div>
               <div className="relative w-full h-16">
                 <Image
-                  src={UFOImg}
+                  src={imageUrl}
                   fill
                   alt={title}
                   className="rounded-md object-cover"
@@ -39,8 +39,8 @@ function HeroQuick({ articles }: { articles: any[] }) {
                 />
               </div>
             </Link>
-            {i !== articles.length - 1 && (
-              <div className="border-b border-border/50 mt-4" />
+            {i !== posts.length - 1 && (
+              <div className="border-b border-border/50 mt-3.5" />
             )}
           </div>
         ))}

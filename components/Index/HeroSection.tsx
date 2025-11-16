@@ -1,72 +1,31 @@
+"use client";
 import HeroFeatured from "@/components/Index/HeroFeatured";
 import HeroSecondary from "@/components/Index/HeroSecondary";
 import HeroQuick from "@/components/Index/HeroQuick";
+import SkeletonHeroSection from "@/components/skeletons/SkeletonHeroSection";
 
-import CityImg from "@/assets/article-city.jpg";
-import AIImg from "@/assets/article-ai.jpg";
-
-// Dummy articles
-const dummyArticles = [
-  {
-    title: "How to survive in a huge city",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa doloribus consequuntur autem non temporibus sit magnam rerum omnis aperiam.",
-    date: "Oct 18, 2025",
-    views: 12,
-    likes: 3,
-    href: "/posts/26",
-  },
-  {
-    title: "AI solved another major problem",
-    preview:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo error consequatur, quis nisi illum ullam fugiat voluptatum molestiae debitis.",
-    date: "Oct 05, 2025",
-    views: 39,
-    likes: 10,
-    href: "/posts/26",
-  },
-  {
-    title: "Eat HEALTHY!",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa doloribus consequuntur autem non temporibus sit magnam rerum omnis aperiam.",
-    date: "Sep 16, 2025",
-    views: 42,
-    likes: 5,
-    href: "/posts/26",
-  },
-  {
-    title: "AI solved another major problem",
-    preview:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo error consequatur, quis nisi illum ullam fugiat voluptatum molestiae debitis.",
-    date: "Oct 05, 2025",
-    views: 39,
-    likes: 10,
-    href: "/posts/26",
-  },
-  {
-    title: "How to survive in a huge city",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa doloribus consequuntur autem non temporibus sit magnam rerum omnis aperiam.",
-    date: "Oct 18, 2025",
-    views: 12,
-    likes: 3,
-    href: "/posts/26",
-  },
-];
+import useFeaturedPosts from "@/hooks/useFeaturedPosts";
 
 function HeroSection() {
+  // Get the featured posts
+  const { data: posts, isLoading, error } = useFeaturedPosts();
+
+  // Guard clauses
+  if (isLoading) return <SkeletonHeroSection />;
+  if (error || !posts) return <section>There was an error</section>;
+
   // Returned JSX
   return (
     <>
-      <HeroFeatured />
+      <HeroFeatured post={posts[0]} />
       <section>
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-2 xs:gap-6 items-start">
           <div className="flex flex-col gap-8">
-            <HeroSecondary article={dummyArticles[0]} image={CityImg} />
-            <HeroSecondary article={dummyArticles[1]} image={AIImg} />
+            <HeroSecondary post={posts[1]} />
+            <HeroSecondary post={posts[2]} />
           </div>
           <div className="hidden lg:block">
-            <HeroQuick articles={dummyArticles} />
+            <HeroQuick posts={posts.slice(3, posts.length)} />
           </div>
         </div>
       </section>

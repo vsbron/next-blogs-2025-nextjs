@@ -55,6 +55,18 @@ export const fetchRecentPosts = async (amount: number = 12) => {
   return posts;
 };
 
+// Server action function that fetches recent posts with author info and likes
+export const fetchFeaturedPosts = async () => {
+  const posts = await db.post.findMany({
+    take: 8,
+    orderBy: { likes: { _count: "desc" } },
+    select: postFields,
+  });
+
+  // Return recent posts
+  return posts;
+};
+
 /* USER-RELATED POSTS */
 // Server action that fetched user's posts
 export const fetchUserPosts = async (userId?: string) => {
