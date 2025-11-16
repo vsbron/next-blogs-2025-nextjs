@@ -1,0 +1,166 @@
+import { FormEvent, useState } from "react";
+import { EmailAddressResource } from "@clerk/types";
+import { useReverification, type useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { XIcon } from "lucide-react";
+
+// Props type
+type ClerkUser = ReturnType<typeof useUser>["user"];
+
+// The component
+function EditEmail({ user }: { user: ClerkUser }) {
+  // Set state for error, adding an email and setters
+  const [error, setErrorMessage] = useState<string | null>(null);
+  const [addEmailLine, setAddEmailLine] = useState<boolean>(false);
+  const openEmailLine = () => setAddEmailLine(true);
+  const closeEmailLine = () => setAddEmailLine(false);
+
+  // Verification functions
+  const addNewEmail = useReverification((email: string) =>
+    user?.createEmailAddress({ email })
+  );
+  const removeEmail = useReverification(async (emailId: string) => {
+    // Find the email in user's addresses (if exists) and delete it
+    const emailObj = user?.emailAddresses.find((e) => e.id === emailId);
+    if (!emailObj) return;
+    await emailObj.destroy();
+  });
+
+  // Add email handler
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    // Prevent default behavior and guard clause
+    e.preventDefault();
+
+    // Get the form data and the email
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+
+    try {
+      // Add email, display message and reset error
+      await addNewEmail(email);
+      closeEmailLine();
+      setErrorMessage("");
+      toast("Check your inbox to verify");
+    } catch (err: unknown) {
+      setErrorMessage(
+        err instanceof Error ? err.message : "There was some error"
+      );
+    }
+  };
+  // Remove email handler
+  const handleDelete = async (id: string) => {
+    try {
+      await removeEmail(id);
+      toast("Email removed");
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error ? err.message : "There was some error"
+      );
+    }
+  };
+
+  // Returned JSX
+  return (
+    <div>
+      <h3 className="mb-1">Current emails:</h3>
+      <div className="flex flex-col-reverse gap-0.5 mb-3">
+        {user?.emailAddresses.map((email) => (
+          <EmailLine
+            key={email.emailAddress}
+            email={email}
+            deleteHandler={() => handleDelete(email.id)}
+            isPrimary={email.id === user.primaryEmailAddressId}
+          />
+        ))}
+      </div>
+      {addEmailLine ? (
+        <AddEmailForm
+          handleSubmit={handleSubmit}
+          error={error}
+          close={closeEmailLine}
+        />
+      ) : (
+        <Button size="xs" onClick={openEmailLine}>
+          Add email
+        </Button>
+      )}
+    </div>
+  );
+}
+
+// Helper components
+function EmailLine({
+  email,
+  deleteHandler,
+  isPrimary,
+}: {
+  email: EmailAddressResource;
+  deleteHandler: () => Promise<void>;
+  isPrimary: boolean;
+}) {
+  // Returned JSX
+  return (
+    <div
+      className={`flex items-center justify-between gap-4 ${
+        isPrimary && "font-bold"
+      }`}
+    >
+      {email.emailAddress}{" "}
+      {!isPrimary ? (
+        <div className="flex gap-2">
+          <Button variant="outline" size="xs" className="text-xs">
+            Set as primary
+          </Button>
+          <Button
+            variant="destructive"
+            size="xs"
+            className="text-xs"
+            onClick={deleteHandler}
+          >
+            <XIcon />
+          </Button>
+        </div>
+      ) : (
+        <span className="text-sm font-normal">(Primary)</span>
+      )}
+    </div>
+  );
+}
+
+function AddEmailForm({
+  handleSubmit,
+  error,
+  close,
+}: {
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
+  error: string | null;
+  close: () => void;
+}) {
+  return (
+    <>
+      <form onSubmit={handleSubmit} className="flex items-center gap-4">
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          className="max-w-50"
+        />
+        <div className="flex gap-2">
+          <Button size="xs" type="submit">
+            Add
+          </Button>
+          <Button variant="outline" size="xs" onClick={close}>
+            Cancel
+          </Button>
+        </div>
+      </form>
+      <span className="text-destructive text-sm">{error}</span>
+    </>
+  );
+}
+
+export default EditEmail;

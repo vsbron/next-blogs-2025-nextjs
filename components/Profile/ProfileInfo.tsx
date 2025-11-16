@@ -48,7 +48,7 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
               <ButtonsContainer>
                 <Button asChild>
                   <Link href="/dashboard/profile/edit-credentials/">
-                    Change username/password
+                    Change credentials/avatar
                   </Link>
                 </Button>
                 <Button asChild>
