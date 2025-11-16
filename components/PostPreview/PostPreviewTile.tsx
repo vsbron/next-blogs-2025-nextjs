@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate, limitPreview } from "@/utils/helpers";
 import { PostPreview } from "@/utils/types";
+import CategoryTag from "../CategoryTag";
 
 // Props type
 type PostPreviewTileProps = {
@@ -35,9 +36,7 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
             className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
             priority
           />
-          <div className="absolute bottom-2 left-4 z-20 bg-primary shadow border border-border text-white font-bold pt-0.25 pb-0.5 px-2.5 text-xs tracking-0 rounded-md">
-            {category}
-          </div>
+          <CategoryTag className="bottom-2 left-4">{category}</CategoryTag>
         </div>
       </Link>
       <CardHeader className="px-4">
