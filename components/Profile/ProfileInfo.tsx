@@ -22,6 +22,9 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
   // Destructure user
   const { clerkId, imageUrl, displayName, username } = user;
 
+  console.log(displayName);
+  console.log(imageUrl);
+
   // Returned JSX
   return (
     <>

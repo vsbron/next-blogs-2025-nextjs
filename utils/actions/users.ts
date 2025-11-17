@@ -133,3 +133,19 @@ export async function fetchUserStats(
     mostPopularPost,
   };
 }
+
+// Small server action function for avatar update in DB
+export async function updateUserAvatar(
+  userId: string,
+  imageUrl: string
+): Promise<void> {
+  try {
+    await db.user.update({
+      where: { clerkId: userId },
+      data: { imageUrl: imageUrl },
+    });
+  } catch (err) {
+    console.log(err);
+    throw new Error("There was some error while updating the avatar");
+  }
+}

@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "vhukmaifwzujizxenajc.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "images.clerk.dev",
+      },
     ],
   },
   productionBrowserSourceMaps: false,

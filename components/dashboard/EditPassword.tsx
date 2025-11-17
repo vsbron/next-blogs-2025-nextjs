@@ -46,7 +46,7 @@ function EditPassword({ user }: { user: ClerkUser }) {
       await setPassword(password, newPassword);
 
       // Display the message, reset the error and form
-      toast("Password update successfully");
+      toast("Password successfully updated");
       setErrorMessage("");
       form.reset();
     } catch (err: unknown) {
