@@ -14,7 +14,8 @@ type ClerkUser = ReturnType<typeof useUser>["user"];
 
 // The component
 function EditAvatar({ user }: { user: ClerkUser }) {
-  // Set state variables for error
+  // Set state variables for error & isLoading
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Get the router
@@ -29,6 +30,9 @@ function EditAvatar({ user }: { user: ClerkUser }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     // Prevent default behavior
     e.preventDefault();
+
+    // Enable loading state
+    setIsLoading(true);
 
     // Get the form data and the file
     const formData = new FormData(e.currentTarget);
@@ -53,6 +57,9 @@ function EditAvatar({ user }: { user: ClerkUser }) {
           ? err.message
           : "There was some error while updating the avatar"
       );
+    } finally {
+      // Disable loading state
+      setIsLoading(false);
     }
   };
 
@@ -71,8 +78,8 @@ function EditAvatar({ user }: { user: ClerkUser }) {
             className="xs:max-w-50"
           />
         </FormGroup>
-        <Button size="xs" type="submit">
-          Save avatar
+        <Button size="xs" type="submit" disabled={isLoading}>
+          {isLoading ? "Updating..." : "Save avatar"}
         </Button>
       </form>
       <span className="text-destructive text-sm">{errorMessage}</span>

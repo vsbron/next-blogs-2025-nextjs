@@ -12,7 +12,8 @@ type ClerkUser = ReturnType<typeof useUser>["user"];
 
 // The component
 function EditEmail({ user }: { user: ClerkUser }) {
-  // Set state for error, adding an email and setters
+  // Set state for isLoading, error, adding an email and setters
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setErrorMessage] = useState<string | null>(null);
   const [addEmailLine, setAddEmailLine] = useState<boolean>(false);
   const openEmailLine = () => setAddEmailLine(true);
@@ -37,6 +38,9 @@ function EditEmail({ user }: { user: ClerkUser }) {
     // Prevent default behavior
     e.preventDefault();
 
+    // Enable loading state
+    setIsLoading(true);
+
     // Get the form data and the email
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
@@ -53,6 +57,9 @@ function EditEmail({ user }: { user: ClerkUser }) {
           ? err.message
           : "There was some error while adding an email"
       );
+    } finally {
+      // Disable loading state
+      setIsLoading(false);
     }
   };
   const handlePrimaryEmail = async (id: string) => {
@@ -71,13 +78,20 @@ function EditEmail({ user }: { user: ClerkUser }) {
   };
   // Remove email handler
   const handleDelete = async (id: string) => {
+    // Enable loading state
+    setIsLoading(true);
+
     try {
+      // Remove email, display message
       await removeEmail(id);
       toast("Email removed");
     } catch (err) {
       setErrorMessage(
         err instanceof Error ? err.message : "There was some error"
       );
+    } finally {
+      // Disable loading state
+      setIsLoading(false);
     }
   };
 
@@ -101,6 +115,7 @@ function EditEmail({ user }: { user: ClerkUser }) {
           handleSubmit={handleSubmit}
           error={error}
           close={closeEmailLine}
+          isDisabled={isLoading}
         />
       ) : (
         <Button size="xs" onClick={openEmailLine}>
@@ -161,10 +176,12 @@ function AddEmailForm({
   handleSubmit,
   error,
   close,
+  isDisabled,
 }: {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => Promise<void>;
   error: string | null;
   close: () => void;
+  isDisabled: boolean;
 }) {
   return (
     <>
@@ -180,8 +197,8 @@ function AddEmailForm({
           className="xs:max-w-50"
         />
         <div className="flex gap-2">
-          <Button size="xs" type="submit">
-            Add
+          <Button size="xs" type="submit" disabled={isDisabled}>
+            {isDisabled ? "Updating..." : "Add"}
           </Button>
           <Button variant="outline" size="xs" onClick={close}>
             Cancel

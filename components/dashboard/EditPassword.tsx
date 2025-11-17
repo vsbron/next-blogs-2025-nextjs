@@ -12,7 +12,8 @@ type ClerkUser = ReturnType<typeof useUser>["user"];
 
 // The component
 function EditPassword({ user }: { user: ClerkUser }) {
-  // Set state variables for error
+  // Set state variables for isLoading & error
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Verification function
@@ -26,8 +27,13 @@ function EditPassword({ user }: { user: ClerkUser }) {
 
   // Form submit handler
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    // Prevent default behavior and get the form
+    // Prevent default behavior
     e.preventDefault();
+
+    // Enable loading state
+    setIsLoading(true);
+
+    // Get the form
     const form = e.currentTarget as HTMLFormElement;
 
     // Get the form data and the passwords
@@ -55,6 +61,9 @@ function EditPassword({ user }: { user: ClerkUser }) {
           ? err.message
           : "There was some error while updating a password"
       );
+    } finally {
+      // Disable loading state
+      setIsLoading(false);
     }
   };
 
@@ -100,8 +109,8 @@ function EditPassword({ user }: { user: ClerkUser }) {
             className="xs:max-w-50"
           />
         </FormGroup>
-        <Button size="xs" type="submit">
-          Save password
+        <Button size="xs" type="submit" disabled={isLoading}>
+          {isLoading ? "Updating..." : "Save password"}
         </Button>
       </form>
       <span className="text-destructive text-sm">{errorMessage}</span>
