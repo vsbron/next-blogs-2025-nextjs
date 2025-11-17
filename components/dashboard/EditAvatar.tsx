@@ -62,7 +62,7 @@ function EditAvatar({ user }: { user: ClerkUser }) {
       <form onSubmit={handleSubmit} className="flex flex-col items-start gap-4">
         <FormGroup>
           <Label htmlFor="avatar" className="capitalize">
-            Add new avatar
+            Add new avatar (1:1)
           </Label>
           <Input
             id="avatar"

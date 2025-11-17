@@ -21,13 +21,15 @@ async function DropdownUserDetails() {
   return (
     <div className="pt-2 pb-4 pl-8 pr-4 flex justify-between items-center gap-x-8">
       <div className="flex items-center gap-x-3">
-        <Image
-          src={imageUrl ?? defaultAvatar}
-          width={40}
-          height={40}
-          className="rounded-full"
-          alt={username ?? "Unknown user"}
-        />
+        <div className="relative w-10 h-10">
+          <Image
+            src={imageUrl ?? defaultAvatar}
+            fill
+            className="rounded-full object-cover"
+            sizes="40px"
+            alt={username ?? "Unknown user"}
+          />
+        </div>
         <div className="text-sm">
           <div>{displayName ?? "Unknown user"}</div>
           <div className="text-muted-foreground/75 text-sm">
