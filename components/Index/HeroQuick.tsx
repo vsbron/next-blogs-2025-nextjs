@@ -17,10 +17,10 @@ function HeroQuick({ posts }: { posts: PostPreview[] }) {
         </SectionTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-3.5">
-        {posts.map(({ title, preview, imageUrl }, i) => (
-          <div key={i}>
+        {posts.map(({ title, preview, imageUrl, id }, i) => (
+          <div key={id}>
             <Link
-              href="/posts/26"
+              href={`/posts/${id}`}
               className="grid grid-cols-[1fr_100px] justify-between items-center gap-4 hover:text-foreground/70 transition-colors duration-200"
             >
               <div>
