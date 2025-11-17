@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 
 import SectionTitle from "@/components/SectionTitle";
 import EditProfile from "@/components/dashboard/EditProfile";
+
 import { fetchCurrentUser } from "@/utils/actions/users";
 
 // Metadata
@@ -18,7 +19,7 @@ async function EditProfilePage() {
   const user = await fetchCurrentUser();
 
   // Guard clause
-  if(!user) return redirect("/")
+  if (!user) redirect("/");
 
   // Returned JSX
   return (

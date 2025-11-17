@@ -13,7 +13,7 @@ function HeroQuick({ posts }: { posts: PostPreview[] }) {
     <Card className="gap-0">
       <CardHeader>
         <SectionTitle as="h4" className="mb-0">
-          Quick links
+          Other Highlights
         </SectionTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-3.5">

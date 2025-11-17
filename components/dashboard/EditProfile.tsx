@@ -91,7 +91,7 @@ function EditProfile({ user }: { user: User }) {
   // Returned JSX
   return (
     <section>
-      <Card className="px-8 py-6 max-w-[450px]">
+      <Card className="max-w-[450px]">
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="basic-form">
             <FormInput
