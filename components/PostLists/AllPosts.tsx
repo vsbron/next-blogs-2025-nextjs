@@ -1,14 +1,16 @@
 "use client";
+import { useState } from "react";
+
 import ArticleLayout from "@/components/ArticleLayout";
+import { ButtonsContainer } from "@/components/form/Buttons";
+import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import useAllPosts from "@/hooks/useAllPosts";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { useState } from "react";
-import { Button } from "../ui/button";
-import { ButtonsContainer } from "../form/Buttons";
 
 function AllPosts() {
   // Get the posts from database
@@ -57,6 +59,8 @@ function AllPosts() {
           return <PostPreviewTile key={post.id} post={post} />;
         })}
       </PostsGridLayout>
+
+      <PaginationLine count={24} />
     </>
   );
 }
