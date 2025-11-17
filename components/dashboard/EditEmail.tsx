@@ -34,7 +34,7 @@ function EditEmail({ user }: { user: ClerkUser }) {
 
   // Add email handler
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    // Prevent default behavior and guard clause
+    // Prevent default behavior
     e.preventDefault();
 
     // Get the form data and the email
@@ -49,7 +49,9 @@ function EditEmail({ user }: { user: ClerkUser }) {
       toast("Check your inbox to verify");
     } catch (err: unknown) {
       setErrorMessage(
-        err instanceof Error ? err.message : "There was some error"
+        err instanceof Error
+          ? err.message
+          : "There was some error while adding an email"
       );
     }
   };

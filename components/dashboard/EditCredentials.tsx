@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
 
+import SectionSeparator from "@/components/SectionSeparator";
 import EditEmail from "@/components/dashboard/EditEmail";
 import EditPassword from "@/components/dashboard/EditPassword";
 import EditAvatar from "@/components/dashboard/EditAvatar";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import SectionSeparator from "../SectionSeparator";
 
 // The component
 function EditCredentials() {
