@@ -109,47 +109,29 @@ export const fetchUserLikedPosts = async () => {
 };
 
 /* GENERAL STATS */
-// Server action function that fetches most liked posts
-export const fetchMostLikedPosts = async () => {
-  const posts = await db.post.findMany({
-    take: 10,
-    orderBy: { likes: { _count: "desc" } },
-    select: {
-      id: true,
-      title: true,
-      _count: { select: { likes: true } },
-    },
-  });
+// Server action function that fetches general stats data
+export const fetchGeneralStats = async () => {
+  const [likedPosts, viewedPosts, mostPosts] = await Promise.all([
+    db.post.findMany({
+      take: 10,
+      orderBy: { likes: { _count: "desc" } },
+      select: { id: true, title: true, _count: { select: { likes: true } } },
+    }),
+    db.post.findMany({
+      take: 10,
+      orderBy: { views: "desc" },
+      select: { id: true, title: true, views: true },
+    }),
+    db.user.findMany({
+      take: 10,
+      orderBy: { posts: { _count: "desc" } },
+      select: {
+        username: true,
+        displayName: true,
+        _count: { select: { posts: true } },
+      },
+    }),
+  ]);
 
-  return posts;
-};
-
-// Server action function that fetches most viewed posts
-export const fetchMostViewedPosts = async () => {
-  const posts = await db.post.findMany({
-    take: 10,
-    orderBy: { views: "desc" },
-    select: {
-      id: true,
-      title: true,
-      views: true,
-    },
-  });
-
-  // Return most viewed posts
-  return posts;
-};
-// Server action function that fetches users with most posts
-export const fetchUsersWithMostPosts = async () => {
-  const authors = await db.user.findMany({
-    take: 10,
-    orderBy: { posts: { _count: "desc" } },
-    select: {
-      displayName: true,
-      username: true,
-      _count: { select: { posts: true } },
-    },
-  });
-
-  return authors;
+  return { likedPosts, viewedPosts, mostPosts };
 };
