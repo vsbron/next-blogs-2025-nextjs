@@ -6,7 +6,7 @@ import SkeletonGeneralStats from "@/components/skeletons/SkeletonGeneralStats";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import useGeneralStats from "@/hooks/useGeneralStats";
-import { EyeIcon, FilePenLine, ThumbsUp } from "lucide-react";
+import { EyeIcon, FilePenLine, ThumbsUp, User } from "lucide-react";
 
 function GeneralStats() {
   // Get the featured posts
@@ -31,7 +31,7 @@ function GeneralStats() {
               title="Most liked posts"
               className="md:hidden lg:block"
             />
-            <StatsCard list={data.mostPosts} title="User with most posts" />
+            <StatsCard list={data.mostPosts} title="Users with most posts" />
           </>
         )}
       </div>
@@ -62,23 +62,20 @@ function StatsCard({ list, title, className }: StatsCardProps) {
       <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
         {list[0].views ? <EyeIcon className={iconClass} /> : ""}
         {list[0]._count?.likes ? <ThumbsUp className={iconClass} /> : ""}
-        {list[0]._count?.posts ? <FilePenLine className={iconClass} /> : ""}
+        {list[0]._count?.posts ? <User className={iconClass} /> : ""}
         {title}
       </CardHeader>
       <CardContent className="px-0">
-        <ul className="!pl-0 flex flex-col gap-1 text-sm lg:text-base">
+        <ul className="!pl-0 text-sm lg:text-base grid grid-cols-[1fr_min-content] items-center gap-y-1 gap-x-4">
           {list.map(({ id, title, views, _count, username, displayName }) => (
-            <li
-              key={isUser ? username : id}
-              className="flex justify-between items-center gap-x-4"
-            >
+            <li key={isUser ? username : id} className="contents">
               <Link
                 href={isUser ? `/authors/${username}` : `/posts/${id}`}
                 className="link-primary single-line-preview"
               >
                 {isUser ? displayName : title}
               </Link>
-              <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm min-w-12">
+              <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm">
                 {views ? <EyeIcon className={iconClassSm} /> : ""}
                 {_count?.likes ? <ThumbsUp className={iconClassSm} /> : ""}
                 {_count?.posts ? <FilePenLine className={iconClassSm} /> : ""}
