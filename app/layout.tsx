@@ -16,7 +16,7 @@ const PoppinsSerif = Poppins({
   subsets: ["latin"],
   weight: ["400", "600"],
   display: "swap",
-  preload: false,
+  preload: true,
 });
 const LatoSerif = Lato({
   variable: "--font-lato",
@@ -86,6 +86,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link
+          rel="preconnect"
+          href="https://vhukmaifwzujizxenajc.supabase.co"
+        />
+      </head>
       <body
         className={`${PoppinsSerif.variable} ${LatoSerif.variable} ${LatoSerif.className} antialiased tracking-[0.02em]`}
       >

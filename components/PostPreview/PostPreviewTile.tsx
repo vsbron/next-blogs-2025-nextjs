@@ -32,8 +32,9 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
             src={imageUrl}
             fill
             alt={title}
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            sizes="(max-width: 640px) 90vw, (max-width: 768px) 50vw, 33vw"
             className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
+            quality={80}
             priority
           />
           <CategoryTag className="bottom-2 left-4">{category}</CategoryTag>
