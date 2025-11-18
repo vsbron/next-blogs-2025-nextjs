@@ -4,12 +4,12 @@ import { SignOutButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 
-import { fetchCurrentUserWithID } from "@/utils/actions/users";
+import { fetchCurrentUser } from "@/utils/actions/users";
 import defaultAvatar from "@/assets/defaultUser.png";
 
-async function DropdownUserDetails({ id }: { id: string }) {
-  // Fetch current user
-  const user = await fetchCurrentUserWithID(id);
+async function DropdownUserDetails() {
+  // Get current user
+  const user = await fetchCurrentUser();
 
   // Guard clause
   if (!user) return;
