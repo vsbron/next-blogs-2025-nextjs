@@ -44,6 +44,33 @@ export async function fetchCurrentUser() {
   return user;
 }
 
+export async function fetchCurrentUserWithID(id: string) {
+  // Fetch the user from database
+  const user = await db.user.findUnique({
+    where: { clerkId: id },
+    select: {
+      clerkId: true,
+      imageUrl: true,
+      username: true,
+      displayName: true,
+      email: true,
+      dateCreated: true,
+      birthday: true,
+      gender: true,
+      country: true,
+      bio: true,
+      website: true,
+      facebook: true,
+      x: true,
+      instagram: true,
+      reddit: true,
+    },
+  });
+
+  // Return user
+  return user;
+}
+
 // Action function for updating the user
 export async function updateUserAction(formData: FormData) {
   // Get the current user clerkId
