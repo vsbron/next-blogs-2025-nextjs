@@ -31,7 +31,9 @@ async function DropdownUserDetails() {
           />
         </div>
         <div className="text-sm">
-          <div>{displayName ?? "Unknown user"}</div>
+          <div className="max-w-27 truncate">
+            {displayName ?? "Unknown user"}
+          </div>
           <div className="text-muted-foreground/75 text-sm">
             {username ?? "No username"}
           </div>
