@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import CTASection from "@/components/CTASection";
-import IndexStats from "@/components/IndexStats";
+import GeneralStats from "@/components/GeneralStats";
 import SectionTitle from "@/components/SectionTitle";
 
 // Props type
@@ -53,7 +53,7 @@ export default function ErrorPage({ error }: ErrorPageProps) {
         </ArticleLayout>
       </section>
       <CTASection />
-      <IndexStats />
+      <GeneralStats />
     </>
   );
 }

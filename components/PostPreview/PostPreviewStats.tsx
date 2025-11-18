@@ -1,4 +1,4 @@
-import { Calendar1Icon, EyeIcon, ThumbsUpIcon } from "lucide-react";
+import { Calendar1Icon, EyeIcon, ThumbsUp } from "lucide-react";
 
 // Props type
 type PostPreviewStatsProps = {
@@ -27,7 +27,7 @@ function PostPreviewStats({
         {date}
       </div>
       <div className="flex items-center gap-x-1">
-        <ThumbsUpIcon className="w-4 h-4 stroke-primary/80" />
+        <ThumbsUp className="w-4 h-4 stroke-primary/80" />
         {likes}
       </div>
       <div className="flex items-center gap-x-1">

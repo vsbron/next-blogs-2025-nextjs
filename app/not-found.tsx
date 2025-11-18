@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import CTASection from "@/components/CTASection";
 import NotFoundSection from "@/components/NotFoundSection";
-import IndexStats from "@/components/IndexStats";
+import GeneralStats from "@/components/GeneralStats";
 
 // Meta data
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ function NotFoundPage() {
     <>
       <NotFoundSection />
       <CTASection />
-      <IndexStats />
+      <GeneralStats />
     </>
   );
 }

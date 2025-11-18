@@ -1,0 +1,90 @@
+"use client";
+import Link from "next/link";
+
+import SectionTitle from "@/components/SectionTitle";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
+import useGeneralStats from "@/hooks/useGeneralStats";
+import { EyeIcon, FilePenLine, ThumbsUp } from "lucide-react";
+
+function GeneralStats() {
+  // Get the featured posts
+  const { viewedPosts, likedPosts, mostPosts, isLoading, error } =
+    useGeneralStats();
+
+  // Guard clauses
+  if (isLoading) return <p>Loading</p>;
+  if (error) return;
+
+  // Returned JSX
+  return (
+    <section className="pb-8">
+      <SectionTitle as="h2">Top Posts & Users</SectionTitle>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-4 lg:gap-x-6 gap-y-6">
+        <StatsCard list={viewedPosts!} title="Most viewed posts" />
+        <StatsCard
+          list={likedPosts!}
+          title="Most liked posts"
+          className="md:hidden lg:block"
+        />
+        <StatsCard list={mostPosts!} title="User with most posts" />
+      </div>
+    </section>
+  );
+}
+
+// Helper Props type
+type StatsCardProps = {
+  list: any[];
+  title: string;
+  className?: string;
+};
+
+// Helper component
+function StatsCard({ list, title, className }: StatsCardProps) {
+  // Classes for icons
+  const iconClass = "!w-5 !h-5 stroke-primary";
+  const iconClassSm = "!w-4 !h-4 stroke-primary";
+  const isUser = list[0]._count?.posts;
+
+  // Returned JSX
+  return (
+    <Card
+      className={`gap-0 py-4 xs:py-6 px-6 truncate max-w-[450px] ${className}`}
+    >
+      <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
+        {list[0].views ? <EyeIcon className={iconClass} /> : ""}
+        {list[0].likes ? <ThumbsUp className={iconClass} /> : ""}
+        {list[0].posts ? <FilePenLine className={iconClass} /> : ""}
+        {title}
+      </CardHeader>
+      <CardContent className="px-0">
+        <ul className="!pl-0 flex flex-col gap-1 text-sm lg:text-base">
+          {list.map(({ id, title, views, _count, username, displayName }) => {
+            return (
+              <li
+                key={isUser ? username : id}
+                className="flex justify-between items-center gap-x-4"
+              >
+                <Link
+                  href={isUser ? `/authors/${username}` : `/posts/${id}`}
+                  className="link-primary single-line-preview"
+                >
+                  {isUser ? displayName : title}
+                </Link>
+                <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm min-w-12">
+                  {views ? <EyeIcon className={iconClassSm} /> : ""}
+                  {_count?.likes ? <ThumbsUp className={iconClassSm} /> : ""}
+                  {_count?.posts ? <FilePenLine className={iconClassSm} /> : ""}
+                  {views || _count.likes || _count.posts || 0}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </CardContent>
+    </Card>
+  );
+}
+
+export default GeneralStats;

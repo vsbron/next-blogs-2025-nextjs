@@ -108,7 +108,7 @@ export const fetchUserLikedPosts = async () => {
   return posts;
 };
 
-/* POSTS STATS */
+/* GENERAL STATS */
 // Server action function that fetches most liked posts
 export const fetchMostLikedPosts = async () => {
   const posts = await db.post.findMany({
@@ -117,7 +117,7 @@ export const fetchMostLikedPosts = async () => {
     select: {
       id: true,
       title: true,
-      likes: { select: { id: true } },
+      _count: { select: { likes: true } },
     },
   });
 
