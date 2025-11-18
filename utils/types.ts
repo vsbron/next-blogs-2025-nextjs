@@ -37,7 +37,7 @@ export type PostPreview = {
 export type Post = PostPreview & {
   text: string;
   updated: Date;
-  author: { displayName: string; username: string };
+  author: { displayName: string; username: string; imageUrl: string | null };
 };
 
 // Like type

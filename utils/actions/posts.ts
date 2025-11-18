@@ -23,7 +23,7 @@ export const fetchPost = cache(async (postId: string) => {
   const post = await db.post.findUnique({
     where: { id: Number(postId) },
     include: {
-      author: { select: { displayName: true, username: true } },
+      author: { select: { displayName: true, username: true, imageUrl: true } },
       likes: { select: { id: true, userId: true, postId: true } },
     },
   });

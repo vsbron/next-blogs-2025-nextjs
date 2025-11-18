@@ -10,12 +10,12 @@ import { fetchRecentPosts } from "@/utils/actions/posts";
 
 async function PostRecentPosts() {
   // Get the recent posts
-  const posts = await fetchRecentPosts();
+  const posts = await fetchRecentPosts(5);
 
   // Returned JSX
   return (
     <PostSidebarCard>
-      <PostSidebarTitle title="Recent posts" />
+      <PostSidebarTitle title="Most recent posts" />
       <div className="flex flex-col gap-y-2">
         {posts.map(({ id, title, published }) => (
           <div

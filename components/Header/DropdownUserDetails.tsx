@@ -4,8 +4,8 @@ import { SignOutButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 
-import defaultAvatar from "@/assets/defaultUser.png";
 import { fetchCurrentUser } from "@/utils/actions/users";
+import defaultAvatar from "@/assets/defaultUser.png";
 
 async function DropdownUserDetails() {
   // Get current user
