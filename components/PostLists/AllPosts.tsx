@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
+import { Filter, FilterX } from "lucide-react";
 
 function AllPosts() {
   // Create state value for showing filters
@@ -41,29 +42,30 @@ function AllPosts() {
   // Returned JSX
   return (
     <>
-      {showFilters && (
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl">Filters</h2>
-          </CardHeader>
-          <CardContent></CardContent>
-        </Card>
-      )}
-      <div className="flex justify-between items-center">
-        <div>
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-foreground/50 text-sm md:text-md">
           Showing {range} posts out of {total}
-        </div>
-        <ButtonsContainer className="mt-2 mb-4">
+        </span>
+        <ButtonsContainer className="m-0">
           <Button
             variant="outline"
             size="xs"
             className="ml-auto"
             onClick={toggleFilters}
           >
-            {showFilters ? "Hide" : "Show"} filters
+            {showFilters ? <FilterX /> : <Filter />}
           </Button>
         </ButtonsContainer>
       </div>
+
+      {showFilters && (
+        <Card className="mb-8">
+          <CardHeader>
+            <h2 className="text-xl">Filters</h2>
+          </CardHeader>
+          <CardContent></CardContent>
+        </Card>
+      )}
 
       <PostsGridLayout>
         {posts!.map((post) => {

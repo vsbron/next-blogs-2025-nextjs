@@ -35,9 +35,10 @@ function PaginationLine({ total, page }: PaginationLineProps) {
 
   // Returned JSX
   return (
-    <div className="flex justify-end gap-1 mt-4">
+    <div className="flex justify-center md:justify-end gap-1 md:gap-2 mt-6">
       {/* First and Prev buttons */}
       <Button
+        size="sm"
         variant="outline"
         onClick={() => goToPage(1)}
         disabled={page === 1}
@@ -45,6 +46,7 @@ function PaginationLine({ total, page }: PaginationLineProps) {
         <ChevronFirst />
       </Button>
       <Button
+        size="sm"
         variant="outline"
         onClick={() => goToPage(page - 1)}
         disabled={page === 1}
@@ -58,6 +60,7 @@ function PaginationLine({ total, page }: PaginationLineProps) {
       {/* Middle pages */}
       {pages.map((p) => (
         <Button
+          size="sm"
           key={p}
           onClick={() => goToPage(p)}
           variant={p === page ? "default" : "outline"}
@@ -73,6 +76,7 @@ function PaginationLine({ total, page }: PaginationLineProps) {
 
       {/* Next and Last buttons */}
       <Button
+        size="sm"
         variant="outline"
         onClick={() => goToPage(page + 1)}
         disabled={page === pageCount}
@@ -80,6 +84,7 @@ function PaginationLine({ total, page }: PaginationLineProps) {
         <ChevronRight />
       </Button>
       <Button
+        size="sm"
         variant="outline"
         onClick={() => goToPage(pageCount)}
         disabled={page === pageCount}
@@ -95,8 +100,9 @@ function getPagesToShow(currentPage: number, pageCount: number) {
   const pages: number[] = [];
 
   // Get the first and last pages that should be visible
-  const start = Math.max(currentPage - 2, 1);
-  const end = Math.min(currentPage + 2, pageCount);
+  const pagesToShow = window.innerWidth < 640 ? 2 : 3;
+  const start = Math.max(currentPage - pagesToShow, 1);
+  const end = Math.min(currentPage + pagesToShow, pageCount);
 
   // Fill the pages array
   for (let i = start; i <= end; i++) {
