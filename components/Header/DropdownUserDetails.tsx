@@ -2,17 +2,18 @@ import Image from "next/image";
 import { LogOut } from "lucide-react";
 import { SignOutButton } from "@clerk/nextjs";
 
+import SkeletonDropdownUserDetails from "@/components/skeletons/SkeletonDropdownUserDetails";
 import { Button } from "@/components/ui/button";
 
-import { fetchCurrentUser } from "@/utils/actions/users";
+import useGetUser from "@/hooks/useGetUser";
 import defaultAvatar from "@/assets/defaultUser.png";
 
-async function DropdownUserDetails() {
-  // Get current user
-  const user = await fetchCurrentUser();
+function DropdownUserDetails({ userId }: { userId?: string }) {
+  // Get current user by the ID
+  const { user, isLoading } = useGetUser(userId);
 
   // Guard clause
-  if (!user) return;
+  if (isLoading || !user) return <SkeletonDropdownUserDetails />;
 
   // Destructure user data
   const { imageUrl, username, displayName } = user;

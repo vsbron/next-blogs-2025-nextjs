@@ -1,12 +1,10 @@
+"use client";
 import Link from "next/link";
-import { Suspense } from "react";
 import { MenuIcon } from "lucide-react";
-import { auth } from "@clerk/nextjs/server";
-import { SignedIn, SignedOut } from "@clerk/nextjs";
+import { SignedIn, SignedOut, useUser } from "@clerk/nextjs";
 
 import Authentication from "@/components/Header/Authentication";
 import DropdownUserDetails from "@/components/Header/DropdownUserDetails";
-import SkeletonDropdownUserDetails from "@/components/skeletons/SkeletonDropdownUserDetails";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -18,10 +16,9 @@ import {
 
 import { personalAreaLinks, primaryLinks } from "@/utils/links";
 
-async function Dropdown() {
-  // Get the isSignedIn state
-  const { userId } = await auth();
-  const isSignedIn = !!userId;
+function Dropdown() {
+  // Get the user and isSignedIn state
+  const { user, isSignedIn } = useUser();
 
   // Returned JSX
   return (
@@ -40,9 +37,7 @@ async function Dropdown() {
       >
         {/* USER DETAILS */}
         <SignedIn>
-          <Suspense fallback={<SkeletonDropdownUserDetails />}>
-            <DropdownUserDetails />
-          </Suspense>
+          <DropdownUserDetails userId={user?.id} />
           <DropdownMenuSeparator />
         </SignedIn>
 

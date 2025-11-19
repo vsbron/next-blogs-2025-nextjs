@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
         hostname: "images.clerk.dev",
       },
     ],
+    qualities: [80, 100],
   },
   productionBrowserSourceMaps: false,
 };

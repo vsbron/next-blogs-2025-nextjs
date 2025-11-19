@@ -71,6 +71,7 @@ function CTABackground() {
         alt="NextBlogs"
         fill
         className="object-cover xs:rounded-xl"
+        sizes="(max-width: 1200px) 90vw, 50vw"
         priority
       />
       <div className="absolute inset-0 right-0 bg-gradient-to-r from-background/100 via-background/100 via-[20%] to-background/70 xs:to-background/0" />
