@@ -13,14 +13,21 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
 import { Filter, FilterX } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 
 function AllPosts() {
   // Create state value for showing filters
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const toggleFilters = () => setShowFilters((sF) => !sF);
 
+  // Getting the state from URL
+  const searchParams = useSearchParams();
+
+  // Getting the current page number
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+
   // Get the posts from database
-  const { data, isLoading, error, page } = useAllPosts();
+  const { data, isLoading, error } = useAllPosts(page);
 
   // Guard clauses
   if (isLoading) return <SkeletonPostsGrid />;
