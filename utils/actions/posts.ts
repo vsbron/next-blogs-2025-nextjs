@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
+import { ARTICLES_PER_PAGE } from "../constants";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -33,14 +34,23 @@ export const fetchPost = cache(async (postId: string) => {
 });
 
 // Server action function that fetches recent posts with author info and likes
-export const fetchAllPosts = async () => {
+export const fetchAllPosts = async (page: number) => {
+  // Skip pages
+  const skip = (page - 1) * ARTICLES_PER_PAGE;
+
+  // Total posts count
+  const total = await db.post.count();
+
+  // Fetch data
   const posts = await db.post.findMany({
     orderBy: { published: "desc" },
     select: postFields,
+    skip,
+    take: ARTICLES_PER_PAGE,
   });
 
-  // Return recent posts
-  return posts;
+  // Return posts
+  return { posts, total };
 };
 
 // Server action function that fetches recent posts with author info and likes

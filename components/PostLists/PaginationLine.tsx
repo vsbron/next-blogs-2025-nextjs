@@ -1,12 +1,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-} from "@/components/ui/pagination";
+import { Button } from "@/components/ui/button";
 
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
 import {
@@ -18,81 +12,99 @@ import {
 
 // Props type
 type PaginationLineProps = {
-  count: number;
+  total: number;
+  page: number;
 };
 
 // The component
-function PaginationLine({ count }: PaginationLineProps) {
-  // Getting the state from URL using hook and get the page
-  const searchParams = useSearchParams();
+function PaginationLine({ total, page }: PaginationLineProps) {
+  // Get the router, search params, and params object
   const router = useRouter();
-  const page = searchParams.get("page");
-
+  const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
 
-  // Getting the current page number
-  const currentPage = !page ? 1 : Number(page);
+  // Get the pages number, and generate pagination for current pages
+  const pageCount = Math.ceil(total / ARTICLES_PER_PAGE);
+  const pages = getPagesToShow(page, pageCount);
 
-  // Getting the max amount of pages
-  const pageCount = Math.ceil(count / ARTICLES_PER_PAGE);
-
-  // Click handlers from the pagination buttons
-  function nextPage() {
-    // Calculating the next page
-    const next = currentPage === pageCount ? currentPage : currentPage + 1;
-
-    // Setting the new state in URL
-    params.set("page", String(next));
+  // Switch page handler
+  const goToPage = (page: number) => {
+    params.set("page", String(page));
     router.push(`?${params.toString()}`);
-  }
-
-  function prevPage() {
-    // Calculating the prev page
-    const prev = currentPage === 1 ? currentPage : currentPage - 1;
-
-    // Setting the new state in URL
-    params.set("page", String(prev));
-    router.push(`?${params.toString()}`);
-  }
+  };
 
   // Returned JSX
   return (
-    <Pagination className="flex justify-end mt-7">
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationLink href="#">
-            <ChevronFirst />
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem onClick={prevPage}>
-          <ChevronLeft />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">5</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">6</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">7</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem onClick={nextPage}>
-          <ChevronRight />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            <ChevronLast />
-          </PaginationLink>
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
+    <div className="flex justify-end gap-1 mt-4">
+      {/* First and Prev buttons */}
+      <Button
+        variant="outline"
+        onClick={() => goToPage(1)}
+        disabled={page === 1}
+      >
+        <ChevronFirst />
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => goToPage(page - 1)}
+        disabled={page === 1}
+      >
+        <ChevronLeft />
+      </Button>
+
+      {/* Left ellipsis */}
+      {pages[0] > 2 && <span className="px-2">...</span>}
+
+      {/* Middle pages */}
+      {pages.map((p) => (
+        <Button
+          key={p}
+          onClick={() => goToPage(p)}
+          variant={p === page ? "default" : "outline"}
+        >
+          {p}
+        </Button>
+      ))}
+
+      {/* Right ellipsis */}
+      {pages[pages.length - 1] < pageCount - 1 && (
+        <span className="px-2">...</span>
+      )}
+
+      {/* Next and Last buttons */}
+      <Button
+        variant="outline"
+        onClick={() => goToPage(page + 1)}
+        disabled={page === pageCount}
+      >
+        <ChevronRight />
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() => goToPage(pageCount)}
+        disabled={page === pageCount}
+      >
+        <ChevronLast />
+      </Button>
+    </div>
   );
+}
+
+// Helper function to fill the current pages on pagination
+function getPagesToShow(currentPage: number, pageCount: number) {
+  const pages: number[] = [];
+
+  // Get the first and last pages that should be visible
+  const start = Math.max(currentPage - 2, 1);
+  const end = Math.min(currentPage + 2, pageCount);
+
+  // Fill the pages array
+  for (let i = start; i <= end; i++) {
+    pages.push(i);
+  }
+
+  // Return pages
+  return pages;
 }
 
 export default PaginationLine;
