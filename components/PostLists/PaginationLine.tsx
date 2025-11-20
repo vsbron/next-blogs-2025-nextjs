@@ -56,7 +56,7 @@ function PaginationLine({ total, page }: PaginationLineProps) {
       </Button>
 
       {/* Left ellipsis */}
-      {pages[0] > 2 && <span className="px-2">...</span>}
+      {pages[0] > 1 && <span className="px-2 mt-2">...</span>}
 
       {/* Middle pages */}
       {pages.map((p) => (
@@ -71,8 +71,8 @@ function PaginationLine({ total, page }: PaginationLineProps) {
       ))}
 
       {/* Right ellipsis */}
-      {pages[pages.length - 1] < pageCount - 1 && (
-        <span className="px-2">...</span>
+      {pages[pages.length - 1] < pageCount && (
+        <span className="px-2 mt-2">...</span>
       )}
 
       {/* Next and Last buttons */}
@@ -101,7 +101,7 @@ function getPagesToShow(currentPage: number, pageCount: number) {
   const pages: number[] = [];
 
   // Get the first and last pages that should be visible
-  const pagesToShow = window.innerWidth < 640 ? 2 : 3;
+  const pagesToShow = window.innerWidth < 640 ? 1 : 2;
   const start = Math.max(currentPage - pagesToShow, 1);
   const end = Math.min(currentPage + pagesToShow, pageCount);
 
