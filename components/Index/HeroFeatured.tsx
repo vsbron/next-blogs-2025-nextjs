@@ -46,7 +46,6 @@ function HeroFeatured({ post }: { post: PostPreview }) {
               views={views}
               likes={likes.length}
               date={date}
-              reverse={true}
             />
           </div>
           <Link
