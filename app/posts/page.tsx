@@ -1,8 +1,8 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import AllPosts from "@/components/PostLists/AllPosts";
-import { Suspense } from "react";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Meta data

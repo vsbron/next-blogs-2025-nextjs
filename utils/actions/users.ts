@@ -71,7 +71,18 @@ export async function updateUserAction(formData: FormData) {
 }
 
 // Fetch user by his username
-export const fetchUser = cache(async (userId: string) => {
+export const fetchUser = cache(async (username: string) => {
+  // Fetch the user using its username
+  const user = await db.user.findUnique({
+    where: { username: username },
+  });
+
+  // Return user
+  return user;
+});
+
+// Fetch user by his username
+export const fetchUserWithID = cache(async (userId: string) => {
   // Fetch the user using its ID
   const user = await db.user.findUnique({
     where: { clerkId: userId },
