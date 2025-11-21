@@ -3,10 +3,12 @@ import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import PaginationLine from "@/components/PostLists/PaginationLine";
-import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
-import { USERS_PER_PAGE } from "@/utils/constants";
+
 import useAllAuthors from "@/hooks/useAllAuthors";
+import { USERS_PER_PAGE } from "@/utils/constants";
+import AuthorsGridLayout from "../AuthorPreview/AuthorsGridLayout";
+import AuthorPreviewTile from "../AuthorPreview/AuthorPreviewTile";
 
 function AllAuthors() {
   // Getting the state from URL
@@ -41,6 +43,8 @@ function AllAuthors() {
   const rangeEnd = Math.min(rangeStart + USERS_PER_PAGE - 1, total);
   const range = `${rangeStart}-${rangeEnd}`;
 
+  console.log(users);
+
   // Returned JSX
   return (
     <>
@@ -55,17 +59,20 @@ function AllAuthors() {
 
       {/* User list */}
       {users.length > 0 ? (
-        <PostsGridLayout>
-          {users!.map((user) => {
-            return <div key={user.username}>{user.username}</div>;
+        <AuthorsGridLayout>
+          {users!.map((author) => {
+            return <AuthorPreviewTile key={author.username} author={author} />;
           })}
-        </PostsGridLayout>
+        </AuthorsGridLayout>
       ) : (
-        <p>
-          No posts match your current filters. <br />
-          Try adjusting the category, or removing &quot;Popular posts&quot;
-          filters to see more posts.
-        </p>
+        <>
+          <p>
+            We could not find any users...
+            <br />
+            Which is weird, because we are sure we have some.
+          </p>
+          <p>Please try again later!</p>
+        </>
       )}
 
       {/* Pagination */}

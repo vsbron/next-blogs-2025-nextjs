@@ -1,18 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Type for action function and its return
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
 
-// User type
-export type User = {
-  clerkId: string;
-  imageUrl: string | null;
+// Post type
+export type UserPreview = {
   username: string;
   displayName: string;
-  email: string;
+  imageUrl: string | null;
   dateCreated: Date;
+  country: string | null;
+  _count: { posts: number };
+};
+
+// User type
+export type User = UserPreview & {
+  clerkId: string;
+  email: string;
   birthday: string | null;
   gender: string;
-  country: string | null;
   bio: string | null;
   website: string | null;
   facebook: string | null;
