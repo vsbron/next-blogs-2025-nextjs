@@ -95,7 +95,12 @@ function AllPosts() {
       )}
 
       {/* Pagination */}
-      {posts.length > 0 && <PaginationLine total={total} page={page} />}
+      {posts.length > 0 && (
+        <PaginationLine
+          pageCount={Math.ceil(total / ARTICLES_PER_PAGE)}
+          page={page}
+        />
+      )}
     </>
   );
 }

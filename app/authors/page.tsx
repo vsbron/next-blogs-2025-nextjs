@@ -1,6 +1,8 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
+import AllAuthors from "@/components/AuthorList/AllAuthors";
 
 // Meta data
 export const metadata: Metadata = {
@@ -14,6 +16,9 @@ function AllAuthorsPage() {
   return (
     <section>
       <SectionTitle>All Authors</SectionTitle>
+      <Suspense fallback={<p>Loading...</p>}>
+        <AllAuthors />
+      </Suspense>
     </section>
   );
 }

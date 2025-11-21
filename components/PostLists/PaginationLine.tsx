@@ -3,7 +3,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 
-import { ARTICLES_PER_PAGE } from "@/utils/constants";
 import {
   ChevronFirst,
   ChevronLast,
@@ -13,19 +12,18 @@ import {
 
 // Props type
 type PaginationLineProps = {
-  total: number;
   page: number;
+  pageCount: number;
 };
 
 // The component
-function PaginationLine({ total, page }: PaginationLineProps) {
+function PaginationLine({ page, pageCount }: PaginationLineProps) {
   // Get the router, search params, and params object
   const router = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
 
   // Get the pages number, and generate pagination for current pages
-  const pageCount = Math.ceil(total / ARTICLES_PER_PAGE);
   const pages = getPagesToShow(page, pageCount);
 
   // Switch page handler

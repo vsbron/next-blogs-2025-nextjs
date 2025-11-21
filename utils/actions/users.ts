@@ -9,6 +9,7 @@ import { userSchema } from "../schemas";
 import { validatedWithZodSchema } from "../schemaFunctions";
 import { renderError } from "../helpers";
 import { PostPreview } from "../types";
+import { USERS_PER_PAGE } from "../constants";
 
 // Server action function that returns user based on clerkID
 export async function fetchCurrentUser() {
@@ -42,6 +43,32 @@ export async function fetchCurrentUser() {
 
   // Return user
   return user;
+}
+
+// Server action function that returns user based on clerkID
+export async function fetchAllUsers(page: number) {
+  // Skip pages
+  const skip = (page - 1) * USERS_PER_PAGE;
+
+  // Fetch all users from database
+  const users = await db.user.findMany({
+    orderBy: { dateCreated: "desc" },
+    select: {
+      imageUrl: true,
+      username: true,
+      displayName: true,
+      country: true,
+      posts: { select: { _count: true } },
+    },
+    skip,
+    take: USERS_PER_PAGE,
+  });
+
+  // Total users count
+  const total = await db.user.count();
+
+  // Return user
+  return { users, total };
 }
 
 // Action function for updating the user
