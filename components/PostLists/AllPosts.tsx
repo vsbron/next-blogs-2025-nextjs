@@ -46,7 +46,7 @@ function AllPosts() {
       </ArticleLayout>
     );
 
-  // Destructure the posts data and count showing posts
+  // Destructure the posts data and calculate range
   const { posts, total } = data;
   const rangeStart = (page - 1) * ARTICLES_PER_PAGE + 1;
   const rangeEnd = Math.min(rangeStart + ARTICLES_PER_PAGE - 1, total);
@@ -58,7 +58,9 @@ function AllPosts() {
       {/* Top UI */}
       <div className="flex justify-between items-center mb-2">
         <span className="text-foreground/50 text-sm md:text-md">
-          Showing {range} posts out of {total}
+          {posts.length > 0
+            ? `Showing ${range} posts out of ${total}`
+            : "Showing 0 posts"}
         </span>
         <ButtonsContainer className="m-0">
           <Button
@@ -76,14 +78,22 @@ function AllPosts() {
       {showFilters && <Filters searchParams={searchParams} />}
 
       {/* Post list */}
-      <PostsGridLayout>
-        {posts!.map((post) => {
-          return <PostPreviewTile key={post.id} post={post} />;
-        })}
-      </PostsGridLayout>
+      {posts.length > 0 ? (
+        <PostsGridLayout>
+          {posts!.map((post) => {
+            return <PostPreviewTile key={post.id} post={post} />;
+          })}
+        </PostsGridLayout>
+      ) : (
+        <p>
+          No posts match your current filters. <br />
+          Try adjusting the category, or removing &quot;Popular posts&quot;
+          filters to see more posts.
+        </p>
+      )}
 
       {/* Pagination */}
-      <PaginationLine total={total} page={page} />
+      {posts.length > 0 && <PaginationLine total={total} page={page} />}
     </>
   );
 }

@@ -42,9 +42,10 @@ export const fetchAllPosts = async (
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
 
-  // Get the category
-  const where: Record<string, string> = {};
+  // Get the category and if popular
+  const where: Prisma.PostWhereInput = {};
   if (filters.category) where.category = filters.category;
+  if (filters.popular) where.views = { gte: 100 };
 
   // Get the order
   let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };

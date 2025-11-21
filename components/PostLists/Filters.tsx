@@ -24,6 +24,7 @@ import { POST_CATEGORIES } from "@/utils/constants";
 type FilterFormValues = {
   category: string;
   sort: string;
+  popular: boolean;
 };
 
 // The Component
@@ -37,6 +38,7 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
     defaultValues: {
       category: searchParams.get("category") || "",
       sort: searchParams.get("sort") || "date_desc",
+      popular: !!searchParams.get("popular"),
     },
   });
 
@@ -50,6 +52,8 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
     else params.delete("category");
     if (data.sort) params.set("sort", data.sort);
     else params.delete("sort");
+    if (data.popular) params.set("popular", "1");
+    else params.delete("popular");
     params.set("page", "1");
 
     // Redirect user
@@ -64,10 +68,97 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
   // Returned JSX
   return (
     <Card className="mb-8 py-4">
-      <CardContent>
+      <CardContent className="px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-between items-center mb-3">
-            <h2 className="text-xl">Filters</h2>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              {/* Category Filter */}
+              <FormGroup>
+                <Controller
+                  name="category"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      value={field.value}
+                      onValueChange={(val) => field.onChange(val)}
+                    >
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                      <SelectContent
+                        align="start"
+                        className="max-h-80 overflow-y-auto"
+                      >
+                        <SelectGroup>
+                          {POST_CATEGORIES.map((cat) => (
+                            <SelectItem key={cat} value={cat}>
+                              {cat}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </FormGroup>
+
+              {/* Sort Filter */}
+              <FormGroup>
+                <Controller
+                  name="sort"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Sort By" />
+                      </SelectTrigger>
+                      <SelectContent align="start">
+                        <SelectGroup>
+                          <SelectItem value="date_desc">
+                            Date (Newest)
+                          </SelectItem>
+                          <SelectItem value="date_asc">
+                            Date (Oldest)
+                          </SelectItem>
+                          <SelectItem value="likes_desc">
+                            Likes (Most)
+                          </SelectItem>
+                          <SelectItem value="likes_asc">
+                            Likes (Least)
+                          </SelectItem>
+                          <SelectItem value="views_desc">
+                            Views (Most)
+                          </SelectItem>
+                          <SelectItem value="views_asc">
+                            Views (Least)
+                          </SelectItem>
+                          <SelectItem value="title_asc">Title (A-Z)</SelectItem>
+                          <SelectItem value="title_desc">
+                            Title (Z-A)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Controller
+                  name="popular"
+                  control={control}
+                  render={({ field }) => (
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                      />
+                      Popular posts
+                    </label>
+                  )}
+                />
+              </FormGroup>
+            </div>
             <div className="flex gap-2">
               <Button size="xs" type="submit">
                 Apply
@@ -76,65 +167,6 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
                 Clear
               </Button>
             </div>
-          </div>
-
-          <div className="flex gap-6">
-            {/* Category Filter */}
-            <FormGroup>
-              <Controller
-                name="category"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    value={field.value}
-                    onValueChange={(val) => field.onChange(val)}
-                  >
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Select a category" />
-                    </SelectTrigger>
-                    <SelectContent
-                      align="start"
-                      className="max-h-80 overflow-y-auto"
-                    >
-                      <SelectGroup>
-                        {POST_CATEGORIES.map((cat) => (
-                          <SelectItem key={cat} value={cat}>
-                            {cat}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </FormGroup>
-
-            {/* Sort Filter */}
-            <FormGroup>
-              <Controller
-                name="sort"
-                control={control}
-                render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger className="w-[180px]">
-                      <SelectValue placeholder="Sort By" />
-                    </SelectTrigger>
-                    <SelectContent align="start">
-                      <SelectGroup>
-                        <SelectItem value="date_desc">Date (Newest)</SelectItem>
-                        <SelectItem value="date_asc">Date (Oldest)</SelectItem>
-                        <SelectItem value="likes_desc">Likes (Most)</SelectItem>
-                        <SelectItem value="likes_asc">Likes (Least)</SelectItem>
-                        <SelectItem value="views_desc">Views (Most)</SelectItem>
-                        <SelectItem value="views_asc">Views (Least)</SelectItem>
-                        <SelectItem value="title_asc">Title (A-Z)</SelectItem>
-                        <SelectItem value="title_desc">Title (Z-A)</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                )}
-              />
-            </FormGroup>
           </div>
         </form>
       </CardContent>
