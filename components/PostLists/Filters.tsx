@@ -45,11 +45,12 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
     // Get the actual params
     const params = new URLSearchParams(searchParams.toString());
 
-    // Get the filters
+    // Get the filters, reset the page
     if (data.category) params.set("category", data.category);
     else params.delete("category");
     if (data.sort) params.set("sort", data.sort);
     else params.delete("sort");
+    params.set("page", "1");
 
     // Redirect user
     router.replace(`${pathname}?${params.toString()}`);
@@ -126,6 +127,8 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
                         <SelectItem value="likes_asc">Likes (Least)</SelectItem>
                         <SelectItem value="views_desc">Views (Most)</SelectItem>
                         <SelectItem value="views_asc">Views (Least)</SelectItem>
+                        <SelectItem value="title_asc">Title (A-Z)</SelectItem>
+                        <SelectItem value="title_desc">Title (Z-A)</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>

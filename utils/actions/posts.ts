@@ -65,6 +65,12 @@ export const fetchAllPosts = async (
       case "views_asc":
         orderBy = { views: "asc" };
         break;
+      case "title_asc":
+        orderBy = { title: "asc" };
+        break;
+      case "title_desc":
+        orderBy = { title: "desc" };
+        break;
       case "date_desc":
       default:
         orderBy = { published: "desc" };
