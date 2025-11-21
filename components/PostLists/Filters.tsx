@@ -70,8 +70,8 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
     <Card className="mb-8 py-4">
       <CardContent className="px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
+          <div className="flex justify-between flex-col md:flex-row items-stretch md:items-center gap-y-4">
+            <div className="flex items-center flex-wrap gap-x-6 gap-y-2">
               {/* Category Filter */}
               <FormGroup>
                 <Controller
@@ -159,7 +159,7 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
                 />
               </FormGroup>
             </div>
-            <div className="flex gap-2">
+            <div className="flex justify-end gap-2">
               <Button size="xs" type="submit">
                 Apply
               </Button>

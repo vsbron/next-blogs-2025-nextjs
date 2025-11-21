@@ -69,7 +69,7 @@ function AllPosts() {
             className="ml-auto"
             onClick={toggleFilters}
           >
-            {showFilters ? <FilterX /> : <Filter />}
+            {showFilters ? <FilterX /> : <Filter />} Filters
           </Button>
         </ButtonsContainer>
       </div>
