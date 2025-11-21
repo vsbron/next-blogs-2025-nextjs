@@ -1,5 +1,6 @@
 "use server";
 import { cache } from "react";
+import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
@@ -33,21 +34,54 @@ export const fetchPost = cache(async (postId: string) => {
   return post;
 });
 
-// Server action function that fetches recent posts with author info and likes
-export const fetchAllPosts = async (page: number) => {
+// Server action function that fetches all posts with filters
+export const fetchAllPosts = async (
+  filters: Record<string, string>,
+  page: number
+) => {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
 
-  // Total posts count
-  const total = await db.post.count();
+  // Get the category
+  const where: Record<string, string> = {};
+  if (filters.category) where.category = filters.category;
+
+  // Get the order
+  let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };
+  if (filters.sort) {
+    switch (filters.sort) {
+      case "date_asc":
+        orderBy = { published: "asc" };
+        break;
+      case "likes_desc":
+        orderBy = { likes: { _count: "desc" } };
+        break;
+      case "likes_asc":
+        orderBy = { likes: { _count: "asc" } };
+        break;
+      case "views_desc":
+        orderBy = { views: "desc" };
+        break;
+      case "views_asc":
+        orderBy = { views: "asc" };
+        break;
+      case "date_desc":
+      default:
+        orderBy = { published: "desc" };
+    }
+  }
 
   // Fetch data
   const posts = await db.post.findMany({
-    orderBy: { published: "desc" },
+    where,
+    orderBy,
     select: postFields,
     skip,
     take: ARTICLES_PER_PAGE,
   });
+
+  // Total posts count
+  const total = await db.post.count({ where });
 
   // Return posts
   return { posts, total };

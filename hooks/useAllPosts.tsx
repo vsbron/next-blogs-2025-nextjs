@@ -1,10 +1,10 @@
-import { fetchAllPosts } from "@/utils/actions/posts";
 import { useQuery } from "@tanstack/react-query";
+import { fetchAllPosts } from "@/utils/actions/posts";
 
-function useAllPosts(page: number) {
+function useAllPosts(filters: Record<string, string>, page: number) {
   const { data, isLoading, error } = useQuery({
-    queryKey: ["all-posts", page],
-    queryFn: () => fetchAllPosts(page),
+    queryKey: ["all-posts", filters, page],
+    queryFn: () => fetchAllPosts(filters, page),
   });
 
   // Returned data

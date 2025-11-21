@@ -1,19 +1,19 @@
 "use client";
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import { ButtonsContainer } from "@/components/form/Buttons";
+import Filters from "@/components/PostLists/Filters";
 import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
 import { Filter, FilterX } from "lucide-react";
-import { useSearchParams } from "next/navigation";
 
 function AllPosts() {
   // Create state value for showing filters
@@ -23,11 +23,17 @@ function AllPosts() {
   // Getting the state from URL
   const searchParams = useSearchParams();
 
+  // Convert all params into an object
+  const filters: Record<string, string> = {};
+  searchParams.forEach((value, key) => {
+    filters[key] = value;
+  });
+
   // Getting the current page number
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   // Get the posts from database
-  const { data, isLoading, error } = useAllPosts(page);
+  const { data, isLoading, error } = useAllPosts(filters, page);
 
   // Guard clauses
   if (isLoading) return <SkeletonPostsGrid />;
@@ -49,6 +55,7 @@ function AllPosts() {
   // Returned JSX
   return (
     <>
+      {/* Top UI */}
       <div className="flex justify-between items-center mb-2">
         <span className="text-foreground/50 text-sm md:text-md">
           Showing {range} posts out of {total}
@@ -65,15 +72,10 @@ function AllPosts() {
         </ButtonsContainer>
       </div>
 
-      {showFilters && (
-        <Card className="mb-8">
-          <CardHeader>
-            <h2 className="text-xl">Filters</h2>
-          </CardHeader>
-          <CardContent></CardContent>
-        </Card>
-      )}
+      {/* Filters */}
+      {showFilters && <Filters searchParams={searchParams} />}
 
+      {/* Post list */}
       <PostsGridLayout>
         {posts!.map((post) => {
           return <PostPreviewTile key={post.id} post={post} />;
