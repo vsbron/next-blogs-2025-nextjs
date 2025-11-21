@@ -27,8 +27,13 @@ type FilterFormValues = {
   popular: boolean;
 };
 
+type FilterProps = {
+  searchParams: ReadonlyURLSearchParams;
+  closeFn: () => void;
+};
+
 // The Component
-function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
+function Filters({ searchParams, closeFn }: FilterProps) {
   // Get the router, pathname and searchParams
   const router = useRouter();
   const pathname = usePathname();
@@ -57,11 +62,14 @@ function Filters({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
     params.set("page", "1");
 
     // Redirect user
+
+    closeFn();
     router.replace(`${pathname}?${params.toString()}`);
   };
   // Clear handler
   const clearFilters = () => {
-    reset({ category: "", sort: "" });
+    reset({ category: "", sort: "", popular: false });
+    closeFn();
     router.push("/posts");
   };
 

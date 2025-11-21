@@ -75,7 +75,9 @@ function AllPosts() {
       </div>
 
       {/* Filters */}
-      {showFilters && <Filters searchParams={searchParams} />}
+      {showFilters && (
+        <Filters searchParams={searchParams} closeFn={toggleFilters} />
+      )}
 
       {/* Post list */}
       {posts.length > 0 ? (
