@@ -36,6 +36,7 @@ export type PostPreview = {
   views: number;
   category: string;
   likes: Like[];
+  likesCount: number;
 };
 
 // Post type

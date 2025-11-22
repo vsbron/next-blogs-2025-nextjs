@@ -7,6 +7,7 @@ export const MAX_IMAGE_FILE_SIZE = 1048576;
 export const BUCKET_NAME = "post-images";
 export const ARTICLES_PER_PAGE = 12;
 export const USERS_PER_PAGE = 6;
+export const POPULAR_POST_LIKES_COUNT = 5;
 
 export const GENDERS = ["Male", "Female", "Unknown"];
 export const POST_CATEGORIES = [

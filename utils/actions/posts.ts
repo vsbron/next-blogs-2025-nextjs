@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
-import { ARTICLES_PER_PAGE } from "../constants";
+import { ARTICLES_PER_PAGE, POPULAR_POST_LIKES_COUNT } from "../constants";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -17,6 +17,7 @@ const postFields = {
   views: true,
   category: true,
   likes: { select: { id: true } },
+  likesCount: true,
 };
 
 /* GLOBAL POSTS */
@@ -46,7 +47,8 @@ export const fetchAllPosts = async (
   const where: Prisma.PostWhereInput = {};
   if (filters.category && filters.category !== "all")
     where.category = filters.category;
-  if (filters.popular) where.views = { gte: 100 };
+  // if (filters.popular) where.views = { gte: 100 };
+  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
 
   // Get the order
   let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };

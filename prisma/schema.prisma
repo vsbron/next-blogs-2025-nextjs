@@ -46,6 +46,7 @@ model Post {
   authorId        String
   author          User          @relation(fields: [authorId], references: [clerkId])
   likes           Like[]
+  likesCount      Int           @default(0)
   views           Int           @default(0)
 } 
 

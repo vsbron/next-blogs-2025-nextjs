@@ -18,7 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { POST_CATEGORIES } from "@/utils/constants";
+import { POPULAR_POST_LIKES_COUNT, POST_CATEGORIES } from "@/utils/constants";
 
 // Filter type
 type FilterFormValues = {
@@ -161,7 +161,10 @@ function PostsFilters({ searchParams, closeFn }: PostsFiltersProps) {
                         checked={field.value}
                         onChange={(e) => field.onChange(e.target.checked)}
                       />
-                      Popular posts
+                      Popular posts{" "}
+                      <span className="text-sm mt-0.5">
+                        ({POPULAR_POST_LIKES_COUNT}+ Likes)
+                      </span>
                     </label>
                   )}
                 />

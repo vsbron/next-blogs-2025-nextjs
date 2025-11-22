@@ -181,12 +181,25 @@ export const togglePostLike = async (postId: number, userId: string) => {
     where: { userId_postId: { userId, postId } },
   });
 
-  // Add/Delete like depending on the result
   if (existing) {
-    await db.like.delete({ where: { userId_postId: { userId, postId } } });
+    // Delete like and decrement likesCount
+    await Promise.all([
+      db.like.delete({ where: { userId_postId: { userId, postId } } }),
+      db.post.update({
+        where: { id: postId },
+        data: { likesCount: { decrement: 1 } },
+      }),
+    ]);
     return { liked: false };
   } else {
-    await db.like.create({ data: { userId, postId } });
+    // Create like and increment likesCount
+    await Promise.all([
+      db.like.create({ data: { userId, postId } }),
+      db.post.update({
+        where: { id: postId },
+        data: { likesCount: { increment: 1 } },
+      }),
+    ]);
     return { liked: true };
   }
 };
