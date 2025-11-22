@@ -61,28 +61,38 @@ function StatsCard({ list, title, className }: StatsCardProps) {
     >
       <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
         {list[0].views ? <EyeIcon className={iconClass} /> : ""}
-        {list[0]._count?.likes ? <ThumbsUp className={iconClass} /> : ""}
-        {list[0]._count?.posts ? <User className={iconClass} /> : ""}
+        {list[0].likesCount ? <ThumbsUp className={iconClass} /> : ""}
+        {list[0]._count ? <User className={iconClass} /> : ""}
         {title}
       </CardHeader>
       <CardContent className="px-0">
         <ul className="!pl-0 text-sm lg:text-base grid grid-cols-[1fr_min-content] items-center gap-y-1 gap-x-4">
-          {list.map(({ id, title, views, _count, username, displayName }) => (
-            <li key={isUser ? username : id} className="contents">
-              <Link
-                href={isUser ? `/authors/${username}` : `/posts/${id}`}
-                className="link-primary single-line-preview"
-              >
-                {isUser ? displayName : title}
-              </Link>
-              <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm">
-                {views ? <EyeIcon className={iconClassSm} /> : ""}
-                {_count?.likes ? <ThumbsUp className={iconClassSm} /> : ""}
-                {_count?.posts ? <FilePenLine className={iconClassSm} /> : ""}
-                {views || _count.likes || _count.posts || 0}
-              </div>
-            </li>
-          ))}
+          {list.map(
+            ({
+              id,
+              title,
+              views,
+              _count,
+              likesCount,
+              username,
+              displayName,
+            }) => (
+              <li key={isUser ? username : id} className="contents">
+                <Link
+                  href={isUser ? `/authors/${username}` : `/posts/${id}`}
+                  className="link-primary single-line-preview"
+                >
+                  {isUser ? displayName : title}
+                </Link>
+                <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm">
+                  {views ? <EyeIcon className={iconClassSm} /> : ""}
+                  {likesCount ? <ThumbsUp className={iconClassSm} /> : ""}
+                  {_count ? <FilePenLine className={iconClassSm} /> : ""}
+                  {views || likesCount || _count.posts || 0}
+                </div>
+              </li>
+            )
+          )}
         </ul>
       </CardContent>
     </Card>

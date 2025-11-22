@@ -168,8 +168,12 @@ export const fetchGeneralStats = async () => {
   const [likedPosts, viewedPosts, mostPosts] = await Promise.all([
     db.post.findMany({
       take: 10,
-      orderBy: { likes: { _count: "desc" } },
-      select: { id: true, title: true, _count: { select: { likes: true } } },
+      orderBy: { likesCount: "desc" },
+      select: {
+        id: true,
+        title: true,
+        likesCount: true,
+      },
     }),
     db.post.findMany({
       take: 10,
