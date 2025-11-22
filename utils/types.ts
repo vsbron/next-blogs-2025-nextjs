@@ -35,7 +35,6 @@ export type PostPreview = {
   published: Date;
   views: number;
   category: string;
-  likes: Like[];
   likesCount: number;
 };
 
@@ -44,6 +43,7 @@ export type Post = PostPreview & {
   text: string;
   updated: Date;
   author: { displayName: string; username: string; imageUrl: string | null };
+  likes: Like[];
 };
 
 // Like type

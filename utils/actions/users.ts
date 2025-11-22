@@ -191,11 +191,7 @@ export async function fetchUserStats(
   // Fetch only the top post by views
   const mostPopularPost = await db.post.findFirst({
     where: { authorId: userId },
-    orderBy: {
-      likes: {
-        _count: "desc",
-      },
-    },
+    orderBy: { likesCount: "desc" },
     select: {
       id: true,
       title: true,
@@ -204,7 +200,7 @@ export async function fetchUserStats(
       published: true,
       views: true,
       category: true,
-      likes: { select: { id: true } },
+      likesCount: true,
     },
   });
 

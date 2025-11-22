@@ -78,7 +78,7 @@ function AllAuthors() {
       ) : (
         <p>
           No authors match your current filters. <br />
-          Try adjusting the country or gender filters to see more authors.
+          Try adjusting the country, gender filters to see more authors.
         </p>
       )}
 
