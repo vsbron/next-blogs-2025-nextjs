@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // Type for action function and its return
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
@@ -10,7 +9,7 @@ export type UserPreview = {
   imageUrl: string | null;
   dateCreated: Date;
   country: string | null;
-  _count: { posts: number };
+  _count?: { posts: number };
 };
 
 // User type
