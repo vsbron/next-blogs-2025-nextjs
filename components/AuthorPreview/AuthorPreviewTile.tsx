@@ -50,8 +50,12 @@ function AuthorPreviewTile({ author }: AuthorPreviewTileProps) {
             {country && `From ${country}`}
             <br />
             Registered: {date}
-            <br />
-            Total posts: {_count.posts}
+            {_count && (
+              <>
+                <br />
+                Total posts: {_count.posts}
+              </>
+            )}
           </div>
         </Link>
       </CardContent>
