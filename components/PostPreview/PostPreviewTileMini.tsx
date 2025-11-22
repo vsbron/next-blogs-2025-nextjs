@@ -17,7 +17,7 @@ type PostPreviewTileMiniProps = {
 // The component
 function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
   // Destructure props and configure
-  const { id, title, published, views, imageUrl, likes, category } = post;
+  const { id, title, published, views, imageUrl, likesCount, category } = post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 
@@ -40,7 +40,7 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
         </div>
       </Link>
       <CardHeader className="px-4 p">
-        <PostPreviewStatsProps views={views} likes={likes.length} date={date} />
+        <PostPreviewStatsProps views={views} likes={likesCount} date={date} />
       </CardHeader>
       <CardContent className="pb-4 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">

@@ -15,8 +15,16 @@ import CategoryTag from "../CategoryTag";
 // The component
 function HeroFeatured({ post }: { post: PostPreview }) {
   // Destructure the post data
-  const { title, preview, published, views, likes, id, imageUrl, category } =
-    post;
+  const {
+    title,
+    preview,
+    published,
+    views,
+    likesCount,
+    id,
+    imageUrl,
+    category,
+  } = post;
   const date = formatDate(published);
 
   // Returned JSX
@@ -44,7 +52,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
             </div>
             <PostPreviewStatsProps
               views={views}
-              likes={likes.length}
+              likes={likesCount}
               date={date}
             />
           </div>

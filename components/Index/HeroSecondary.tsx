@@ -11,8 +11,16 @@ import CategoryTag from "../CategoryTag";
 
 function HeroSecondary({ post }: { post: PostPreview }) {
   // Destructure the post data
-  const { title, preview, published, views, likes, imageUrl, id, category } =
-    post;
+  const {
+    title,
+    preview,
+    published,
+    views,
+    likesCount,
+    imageUrl,
+    id,
+    category,
+  } = post;
   const date = formatDate(published);
 
   // Returned JSX
@@ -31,7 +39,7 @@ function HeroSecondary({ post }: { post: PostPreview }) {
           <div className="flex justify-start xs:border-b xs:pb-2 border-foreground/10">
             <PostPreviewStatsProps
               views={views}
-              likes={likes.length}
+              likes={likesCount}
               date={date}
             />
           </div>

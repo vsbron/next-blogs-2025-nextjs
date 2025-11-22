@@ -15,8 +15,16 @@ type MyPostPreviewProps = {
 // The component
 function MyPostPreview({ post }: MyPostPreviewProps) {
   // Destructure props and configure
-  const { id, title, preview, published, views, imageUrl, likes, category } =
-    post;
+  const {
+    id,
+    title,
+    preview,
+    published,
+    views,
+    imageUrl,
+    likesCount,
+    category,
+  } = post;
   const date = formatDate(published);
 
   // Returned JSX
@@ -37,11 +45,7 @@ function MyPostPreview({ post }: MyPostPreviewProps) {
           <div className="bg-primary/90 text-white font-bold pt-0.15 pb-0.25 px-1.5 text-[11px] leading-4 rounded-md">
             {category}
           </div>
-          <PostPreviewStatsProps
-            views={views}
-            likes={likes.length}
-            date={date}
-          />
+          <PostPreviewStatsProps views={views} likes={likesCount} date={date} />
         </CardHeader>
         <CardContent className="px-4 flex flex-col items-start">
           <h2 className=" md:text-lg lg:text-xl leading-snug line-clamp-1 mt-0.5 xs:mt-1">

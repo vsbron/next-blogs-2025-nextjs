@@ -11,7 +11,7 @@ import { ThumbsUp } from "lucide-react";
 
 // Props type
 type PostSectionStatsLikeProps = {
-  likes: Like[];
+  likesCount: Like[];
   postId: number;
 };
 
@@ -24,7 +24,7 @@ function PostSectionStatsLike({ likes, postId }: PostSectionStatsLikeProps) {
 
   // Create state value for liked post and likes count
   const [isLiked, setIsLiked] = useState<boolean>(false);
-  const [likeCount, setLikeCount] = useState<number>(likes.length);
+  const [likeCount, setLikeCount] = useState<number>(likesCount);
 
   // Use Effect function that updates the likes counter
   useEffect(() => {
