@@ -44,7 +44,8 @@ export const fetchAllPosts = async (
 
   // Get the category and if popular
   const where: Prisma.PostWhereInput = {};
-  if (filters.category) where.category = filters.category;
+  if (filters.category && filters.category !== "all")
+    where.category = filters.category;
   if (filters.popular) where.views = { gte: 100 };
 
   // Get the order

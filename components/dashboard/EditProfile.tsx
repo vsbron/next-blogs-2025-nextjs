@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { updateUserAction } from "@/utils/actions/users";
 import { handleFormAction } from "@/utils/helpers";
-import { GENDERS } from "@/utils/constants";
+import { COUNTRIES, GENDERS } from "@/utils/constants";
 import { userSchema } from "@/utils/schemas";
 import { User } from "@/utils/types";
 
@@ -50,9 +50,6 @@ function EditProfile({ user }: { user: User }) {
     instagram,
     reddit,
   } = user;
-  const countryNames = Object.values(countries)
-    .map((c) => c.name)
-    .concat("Unknown");
 
   // Get the form values from React-Hook-Form
   const {
@@ -120,7 +117,7 @@ function EditProfile({ user }: { user: User }) {
             />
             <SelectInput
               id="country"
-              options={countryNames}
+              options={COUNTRIES}
               control={control}
               error={errors.country?.message}
             />

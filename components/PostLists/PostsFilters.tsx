@@ -27,13 +27,13 @@ type FilterFormValues = {
   popular: boolean;
 };
 
-type FilterProps = {
+type PostsFiltersProps = {
   searchParams: ReadonlyURLSearchParams;
   closeFn: () => void;
 };
 
 // The Component
-function Filters({ searchParams, closeFn }: FilterProps) {
+function PostsFilters({ searchParams, closeFn }: PostsFiltersProps) {
   // Get the router, pathname and searchParams
   const router = useRouter();
   const pathname = usePathname();
@@ -61,8 +61,7 @@ function Filters({ searchParams, closeFn }: FilterProps) {
     else params.delete("popular");
     params.set("page", "1");
 
-    // Redirect user
-
+    // Close Filters, redirect user
     closeFn();
     router.replace(`${pathname}?${params.toString()}`);
   };
@@ -98,6 +97,7 @@ function Filters({ searchParams, closeFn }: FilterProps) {
                         className="max-h-80 overflow-y-auto"
                       >
                         <SelectGroup>
+                          <SelectItem value={"all"}>All</SelectItem>
                           {POST_CATEGORIES.map((cat) => (
                             <SelectItem key={cat} value={cat}>
                               {cat}
@@ -117,28 +117,28 @@ function Filters({ searchParams, closeFn }: FilterProps) {
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-[180px]">
+                      <SelectTrigger className="w-50">
                         <SelectValue placeholder="Sort By" />
                       </SelectTrigger>
                       <SelectContent align="start">
                         <SelectGroup>
                           <SelectItem value="date_desc">
-                            Date (Newest)
+                            Sort by Date (Newest)
                           </SelectItem>
                           <SelectItem value="date_asc">
-                            Date (Oldest)
+                            Sort by Date (Oldest)
                           </SelectItem>
                           <SelectItem value="likes_desc">
-                            Likes (Most)
+                            Sort by Likes (Desc)
                           </SelectItem>
                           <SelectItem value="likes_asc">
-                            Likes (Least)
+                            Sort by Likes (Asc)
                           </SelectItem>
                           <SelectItem value="views_desc">
-                            Views (Most)
+                            Sort by Views (Desc)
                           </SelectItem>
                           <SelectItem value="views_asc">
-                            Views (Least)
+                            Sort by Views (Asc)
                           </SelectItem>
                           <SelectItem value="title_asc">Title (A-Z)</SelectItem>
                           <SelectItem value="title_desc">
@@ -182,4 +182,4 @@ function Filters({ searchParams, closeFn }: FilterProps) {
   );
 }
 
-export default Filters;
+export default PostsFilters;

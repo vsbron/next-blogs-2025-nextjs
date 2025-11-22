@@ -1,5 +1,6 @@
 "use server";
 import { cache } from "react";
+import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
@@ -46,13 +47,55 @@ export async function fetchCurrentUser() {
 }
 
 // Server action function that returns user based on clerkID
-export async function fetchAllUsers(page: number) {
+export async function fetchAllUsers(
+  filters: Record<string, string>,
+  page: number
+) {
   // Skip pages
   const skip = (page - 1) * USERS_PER_PAGE;
 
+  // Get the country, gender and if popular
+  const where: Prisma.UserWhereInput = {};
+  if (filters.country && filters.gender !== "all")
+    where.country = filters.country;
+  if (filters.gender && filters.gender !== "all") where.gender = filters.gender;
+  // if (filters.popular) where.views = { gte: 100 };
+
+  // Get the order
+  let orderBy: Prisma.UserOrderByWithRelationInput = { dateCreated: "desc" };
+  if (filters.sort) {
+    switch (filters.sort) {
+      case "name_asc":
+        orderBy = { displayName: "asc" };
+        break;
+      case "name_desc":
+        orderBy = { displayName: "desc" };
+        break;
+      case "username_asc":
+        orderBy = { username: "asc" };
+        break;
+      case "username_desc":
+        orderBy = { username: "desc" };
+        break;
+      case "date_asc":
+        orderBy = { dateCreated: "asc" };
+        break;
+      case "posts_desc":
+        orderBy = { posts: { _count: "desc" } };
+        break;
+      case "posts_asc":
+        orderBy = { posts: { _count: "asc" } };
+        break;
+      case "date_desc":
+      default:
+        orderBy = { dateCreated: "desc" };
+    }
+  }
+
   // Fetch all users from database
   const users = await db.user.findMany({
-    orderBy: { dateCreated: "desc" },
+    where,
+    orderBy,
     select: {
       imageUrl: true,
       username: true,
@@ -66,7 +109,7 @@ export async function fetchAllUsers(page: number) {
   });
 
   // Total users count
-  const total = await db.user.count();
+  const total = await db.user.count({ where });
 
   // Return user
   return { users, total };

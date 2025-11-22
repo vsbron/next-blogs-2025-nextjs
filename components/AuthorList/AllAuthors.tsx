@@ -1,17 +1,23 @@
 "use client";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
+import FiltersTrigger from "@/components/FiltersTrigger";
+import AuthorsFilters from "@/components/AuthorList/AuthorsFilters";
+import AuthorsGridLayout from "@/components/AuthorPreview/AuthorsGridLayout";
+import AuthorPreviewTile from "@/components/AuthorPreview/AuthorPreviewTile";
 import PaginationLine from "@/components/PostLists/PaginationLine";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonAuthorList from "@/components/skeletons/SkeletonAuthorList";
 
 import useAllAuthors from "@/hooks/useAllAuthors";
 import { USERS_PER_PAGE } from "@/utils/constants";
-import AuthorsGridLayout from "../AuthorPreview/AuthorsGridLayout";
-import AuthorPreviewTile from "../AuthorPreview/AuthorPreviewTile";
-import SkeletonAuthorList from "../skeletons/SkeletonAuthorList";
 
 function AllAuthors() {
+  // Create state value for showing filters
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const toggleFilters = () => setShowFilters((sF) => !sF);
+
   // Getting the state from URL
   const searchParams = useSearchParams();
 
@@ -25,7 +31,7 @@ function AllAuthors() {
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   // Get the posts from database
-  const { data, isLoading, error } = useAllAuthors(page);
+  const { data, isLoading, error } = useAllAuthors(filters, page);
 
   // Guard clauses
   if (isLoading) return <SkeletonAuthorList />;
@@ -54,7 +60,13 @@ function AllAuthors() {
             ? `Showing ${range} authors out of ${total}`
             : "Showing 0 authors"}
         </span>
+        <FiltersTrigger closeFn={toggleFilters} isOpen={showFilters} />
       </div>
+
+      {/* Filters */}
+      {showFilters && (
+        <AuthorsFilters searchParams={searchParams} closeFn={toggleFilters} />
+      )}
 
       {/* User list */}
       {users.length > 0 ? (

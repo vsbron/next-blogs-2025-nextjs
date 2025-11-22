@@ -1,3 +1,4 @@
+import { countries } from "countries-list";
 import { User } from "./types";
 
 export const SITE_DOMAIN = "https://next-blogs-2025.vercel.app";
@@ -42,3 +43,8 @@ export const SOCIALS: { key: keyof User; prefix?: string }[] = [
   { key: "instagram", prefix: "https://instagram.com/" },
   { key: "reddit", prefix: "https://www.reddit.com/user/" },
 ];
+
+export const COUNTRIES = Object.values(countries)
+  .map((c) => c.name)
+  .sort()
+  .concat("Unknown");

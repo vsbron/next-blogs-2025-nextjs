@@ -3,17 +3,15 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import { ButtonsContainer } from "@/components/form/Buttons";
-import Filters from "@/components/PostLists/Filters";
+import PostsFilters from "@/components/PostLists/PostsFilters";
 import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
-import { Button } from "@/components/ui/button";
 
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
-import { Filter, FilterX } from "lucide-react";
+import FiltersTrigger from "../FiltersTrigger";
 
 function AllPosts() {
   // Create state value for showing filters
@@ -62,21 +60,12 @@ function AllPosts() {
             ? `Showing ${range} posts out of ${total}`
             : "Showing 0 posts"}
         </span>
-        <ButtonsContainer className="m-0">
-          <Button
-            variant="outline"
-            size="xs"
-            className="ml-auto"
-            onClick={toggleFilters}
-          >
-            {showFilters ? <FilterX /> : <Filter />} Filters
-          </Button>
-        </ButtonsContainer>
+        <FiltersTrigger closeFn={toggleFilters} isOpen={showFilters} />
       </div>
 
       {/* Filters */}
       {showFilters && (
-        <Filters searchParams={searchParams} closeFn={toggleFilters} />
+        <PostsFilters searchParams={searchParams} closeFn={toggleFilters} />
       )}
 
       {/* Post list */}
