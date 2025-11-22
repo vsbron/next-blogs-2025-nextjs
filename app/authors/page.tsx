@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import AllAuthors from "@/components/AuthorList/AllAuthors";
+import SkeletonAuthorList from "@/components/skeletons/SkeletonAuthorList";
 
 // Meta data
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ function AllAuthorsPage() {
   return (
     <section>
       <SectionTitle>All Authors</SectionTitle>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<SkeletonAuthorList />}>
         <AllAuthors />
       </Suspense>
     </section>

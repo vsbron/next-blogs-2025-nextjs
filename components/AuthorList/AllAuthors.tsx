@@ -9,6 +9,7 @@ import useAllAuthors from "@/hooks/useAllAuthors";
 import { USERS_PER_PAGE } from "@/utils/constants";
 import AuthorsGridLayout from "../AuthorPreview/AuthorsGridLayout";
 import AuthorPreviewTile from "../AuthorPreview/AuthorPreviewTile";
+import SkeletonAuthorList from "../skeletons/SkeletonAuthorList";
 
 function AllAuthors() {
   // Getting the state from URL
@@ -27,7 +28,7 @@ function AllAuthors() {
   const { data, isLoading, error } = useAllAuthors(page);
 
   // Guard clauses
-  if (isLoading) return <SkeletonPostsGrid />;
+  if (isLoading) return <SkeletonAuthorList />;
   if (!data || error)
     return (
       <ArticleLayout>
@@ -42,8 +43,6 @@ function AllAuthors() {
   const rangeStart = (page - 1) * USERS_PER_PAGE + 1;
   const rangeEnd = Math.min(rangeStart + USERS_PER_PAGE - 1, total);
   const range = `${rangeStart}-${rangeEnd}`;
-
-  console.log(users);
 
   // Returned JSX
   return (
@@ -65,14 +64,10 @@ function AllAuthors() {
           })}
         </AuthorsGridLayout>
       ) : (
-        <>
-          <p>
-            We could not find any users...
-            <br />
-            Which is weird, because we are sure we have some.
-          </p>
-          <p>Please try again later!</p>
-        </>
+        <p>
+          No authors match your current filters. <br />
+          Try adjusting the country or gender filters to see more authors.
+        </p>
       )}
 
       {/* Pagination */}

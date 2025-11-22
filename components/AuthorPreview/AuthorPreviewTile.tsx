@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { cloneElement, ReactElement, ReactNode } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 
-import { UserPreview } from "@/utils/types";
-
-import defaultAvatar from "@/assets/defaultUser.png";
 import { formatDate } from "@/utils/helpers";
+import { UserPreview } from "@/utils/types";
+import { Calendar, Flag, FilePenLine } from "lucide-react";
+import defaultAvatar from "@/assets/defaultUser.png";
 
 // Props type
 type AuthorPreviewTileProps = {
@@ -20,46 +21,74 @@ function AuthorPreviewTile({ author }: AuthorPreviewTileProps) {
     author;
   const href = `/authors/${username}`;
   const date = formatDate(dateCreated);
-  console.log(author);
 
   // Returned JSX
   return (
-    <Card className="overflow-hidden">
-      <CardContent className="text-center">
-        <Link href={href} className="mb-3">
-          <div className="relative h-30 sm:h-40 sm:w-40 mx-auto rounded-full group overflow-hidden mb-2">
-            <Image
-              src={imageUrl || defaultAvatar}
-              fill
-              alt={displayName}
-              sizes="(max-width: 640px) 90vw, (max-width: 768px) 50vw, 33vw"
-              className="object-cover sm:group-hover:scale-102 transition-transform duration-300 ease-out"
-              quality={80}
-              priority
-            />
-          </div>
-          <div className="text-center flex flex-col gap-0 mb-2">
-            <h2 className="xs:text-lg md:text-xl leading-snug">
+    <Card className="overflow-hidden max-w-90 sm:max-w-full py-3 sm:py-6">
+      <CardContent className="grid grid-cols-[100px_1fr] xl:grid-cols-[120px_1fr] items-center gap-4 px-4 sm:px-6">
+        <Link
+          href={href}
+          className="relative h-25 w-25 xl:h-30 xl:w-30 rounded-2xl sm:rounded-3xl overflow-hidden group"
+        >
+          <Image
+            src={imageUrl || defaultAvatar}
+            fill
+            alt={displayName}
+            sizes="(max-width: 640px) 90vw, (max-width: 768px) 50vw, 33vw"
+            className="object-cover sm:group-hover:scale-105 transition-transform duration-200"
+            quality={80}
+            priority
+          />
+        </Link>
+        <div className="flex flex-col justify-between gap-1 truncate">
+          <Link
+            href={href}
+            className="hover:opacity-70 transition-opacity duration-200"
+          >
+            <h2 className="xs:text-lg xl:text-xl leading-snug truncate">
               {displayName}
             </h2>
-            <h3 className="text-foreground/50 xs:text-md md:text-lg leading-snug">
+            <h3 className="text-foreground/60 xs:text-md xl:text-lg leading-snug truncate">
               {username}
             </h3>
-          </div>
-          <div className="text-sm text-foreground/50">
-            {country && `From ${country}`}
-            <br />
-            Registered: {date}
+          </Link>
+          <div className="text-sm flex flex-col text-foreground/60">
+            <AuthorPreviewStat icon={<Flag />}>
+              {country || "Unknown"}
+            </AuthorPreviewStat>
+
+            <AuthorPreviewStat icon={<Calendar />}>{date}</AuthorPreviewStat>
             {_count && (
-              <>
-                <br />
-                Total posts: {_count.posts}
-              </>
+              <AuthorPreviewStat icon={<FilePenLine />}>
+                {_count.posts}
+              </AuthorPreviewStat>
             )}
           </div>
-        </Link>
+        </div>
       </CardContent>
     </Card>
+  );
+}
+
+// Helper component props type
+type AuthorPreviewStatProps = {
+  icon: ReactElement<{ className?: string }>;
+  children: ReactNode;
+};
+
+// Helper component
+function AuthorPreviewStat({ icon, children }: AuthorPreviewStatProps) {
+  // Clone the icon and apply a class
+  const styledIcon = icon
+    ? cloneElement(icon, { className: "w-3.5 h-3.5 stroke-primary" })
+    : null;
+
+  // Returned JSX
+  return (
+    <div className="flex items-center gap-2">
+      {styledIcon}
+      {children}
+    </div>
   );
 }
 
