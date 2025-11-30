@@ -1,8 +1,8 @@
-"use client";
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
+import FiltersTrigger from "@/components/FiltersTrigger";
 import PostsFilters from "@/components/PostLists/PostsFilters";
 import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
@@ -11,15 +11,11 @@ import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
-import FiltersTrigger from "../FiltersTrigger";
 
-function AllPosts() {
+function AllPosts({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
   // Create state value for showing filters
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const toggleFilters = () => setShowFilters((sF) => !sF);
-
-  // Getting the state from URL
-  const searchParams = useSearchParams();
 
   // Convert all params into an object
   const filters: Record<string, string> = {};
