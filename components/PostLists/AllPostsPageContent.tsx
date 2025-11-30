@@ -1,10 +1,10 @@
 "use client";
 import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 import SectionTitle from "@/components/SectionTitle";
 import AllPosts from "@/components/PostLists/AllPosts";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
-import { useSearchParams } from "next/navigation";
 
 function AllPostsPageContent() {
   // Getting the state from URL
