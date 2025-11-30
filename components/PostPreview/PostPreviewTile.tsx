@@ -55,7 +55,7 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
         <Link href={href} className="hover:text-foreground/75 transition-all">
           <h2 className="xs:text-lg md:text-xl">{title}</h2>
         </Link>
-        <p className="mb-3 xs:mb-6 text-sm md:text-base">
+        <p className="mb-3 xs:mb-6 text-sm md:text-[15px]">
           {limitPreview(preview, 160)}
         </p>
         <ButtonsContainer className="mt-auto">

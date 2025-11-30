@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lato, Poppins } from "next/font/google";
+import { Roboto, Poppins } from "next/font/google";
 
 import Container from "@/components/Container";
 import Header from "@/components/Header";
@@ -18,8 +18,8 @@ const PoppinsSerif = Poppins({
   display: "swap",
   preload: true,
 });
-const LatoSerif = Lato({
-  variable: "--font-lato",
+const RobotoSerif = Roboto({
+  variable: "--font-roboto",
   subsets: ["latin"],
   weight: ["400", "700"],
   display: "swap",
@@ -93,7 +93,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${PoppinsSerif.variable} ${LatoSerif.variable} ${LatoSerif.className} antialiased tracking-[0.02em]`}
+        className={`${PoppinsSerif.variable} ${RobotoSerif.variable} ${RobotoSerif.className} antialiased tracking-[0.02em]`}
       >
         <Providers>
           <Header />
