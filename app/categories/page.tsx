@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import SectionTitle from "@/components/SectionTitle";
+import CategoriesPageList from "@/components/CategoriesPageList";
 
 // Meta data
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ function CategoriesPage() {
   return (
     <section>
       <SectionTitle>Explore Categories</SectionTitle>
+      <CategoriesPageList />
     </section>
   );
 }

@@ -21,7 +21,9 @@ function BreadCrumbsPostPage({ category }: { category: string }) {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/categories/${category}`}>
+          <BreadcrumbLink
+            href={`/posts?category=${encodeURIComponent(category)}`}
+          >
             {category}
           </BreadcrumbLink>
         </BreadcrumbItem>
