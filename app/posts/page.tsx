@@ -1,5 +1,9 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
+
 import AllPostsPageContent from "@/components/PostLists/AllPostsPageContent";
+import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SectionTitle from "@/components/SectionTitle";
 
 // Meta data
 export const metadata: Metadata = {
@@ -10,7 +14,18 @@ export const metadata: Metadata = {
 
 function AllPostsPage() {
   // Returned JSX
-  return <AllPostsPageContent />;
+  return (
+    <Suspense
+      fallback={
+        <>
+          <SectionTitle>All Posts</SectionTitle>
+          <SkeletonPostsGrid />
+        </>
+      }
+    >
+      <AllPostsPageContent />
+    </Suspense>
+  );
 }
 
 export default AllPostsPage;

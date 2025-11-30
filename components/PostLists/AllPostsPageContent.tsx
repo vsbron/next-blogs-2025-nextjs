@@ -1,10 +1,8 @@
 "use client";
-import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 import SectionTitle from "@/components/SectionTitle";
 import AllPosts from "@/components/PostLists/AllPosts";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 function AllPostsPageContent() {
   // Getting the state from URL
@@ -17,9 +15,7 @@ function AllPostsPageContent() {
   return (
     <section>
       <SectionTitle>All Posts{cat ? ` in ${cat}` : ""}</SectionTitle>
-      <Suspense fallback={<SkeletonPostsGrid />}>
-        <AllPosts searchParams={searchParams} />
-      </Suspense>
+      <AllPosts searchParams={searchParams} />
     </section>
   );
 }
