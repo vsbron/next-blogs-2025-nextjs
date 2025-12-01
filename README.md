@@ -1,7 +1,8 @@
 # NextBlogs
 
-NextBlogs is a modern, multi-user blogging platform built with **Next.js**, **Clerk**, **Prisma**, and **Supabase**.  
-It provides a clean, responsive environment for writing, exploring, and reading blogs — with full authentication, user profiles, and post management.
+NextBlogs is a multi-user blogging platform built with **Next.js**, **Clerk**, **Prisma**, and **Supabase**.  
+It offers a clean, responsive environment for reading, writing, and discovering content, with full authentication, profiles, and post management tools.  
+The platform focuses on clarity, modular design, and a smooth reading and writing experience.
 
 ---
 
@@ -16,91 +17,103 @@ It provides a clean, responsive environment for writing, exploring, and reading 
    - [Dashboard](#dashboard)
    - [Additional Pages](#additional-pages)
 4. [Technical Details](#technical-details)
+5. [Live Version](#live-version)
 
 ---
 
-## Project Overview
+## Project Core principles
 
-NextBlogs allows users to browse, read, and publish blog posts while managing their personal profiles and activity data.  
-The app focuses on a smooth UI, consistent design, and modern architecture.
-
-**Core principles:**
-
-- Clean and minimal design
-- Modular components
-- Secure authentication and database integration
-- Clear separation between public and private (dashboard) routes
+- Simple and clean interface
+- Reusable, modular components
+- Secure authentication
+- Clear separation between public routes and dashboard features
 
 ---
 
-## Features
+### UI / UX Features
 
-- 🧭 **Home Page** with featured and recent posts
-- 🧑‍💻 **User Authentication** via **Clerk**; users are created in Prisma/Supabase and linked through `clerkId`
-- ✍️ **Add Post** feature using **Quill WYSIWYG editor**
-- 🗂️ **Dashboard** with user details, Add Post, My Posts, Liked Posts, and Stats
-- 💾 **Data Storage** handled by **Supabase (Postgres)** via **Prisma ORM**
-- 🧩 **Reusable UI Components** (ShadCN, Tailwind CSS)
+- 🏠 **Home Page** with featured posts, recent posts, stats, and CTA
+- 🔥 **Trending Posts** page based on recent activity
+- 🗂️ **Full Post Filtering & Pagination** (category, popularity, views, date)
+- ❤️ **Like and Share Buttons** for posts with real-time updates
+- 🧑‍🤝‍🧑 **Author List Page** with filters & pagination
+- 🔍 **Search Bar** placeholder (UI done, logic pending)
 - 🌙 **Light/Dark Theme Toggle**
-- 🔍 **Search Bar** for finding posts
+- 📱 **Fully Responsive Layout**
+
+### Backend / Logic Features
+
+- 👤 **User Authentication** via Clerk (accounts stored in Prisma/Supabase and linked by `clerkId`)
+- 📊 **Dashboard**: profile settings, user posts, liked posts, and basic stats
+- ✏️ **Editable User Profile** (avatar, bio, socials, country, gender)
+- ✍️ **Add, Edit, Delete Posts** with a Quill WYSIWYG editor
+- 🔒 **Secure Data Storage** in Supabase Postgres, managed through Prisma
+- 🔄 **Server Actions** + **React Query** for fetching dynamic lists
+- 📦 **Metadata** including dynamic OpenGraph tags
 
 ---
 
 ## Page Descriptions
 
-### **Home Page**
+### Home Page
 
-- Hero featured post
-- Secondary posts
-- Grid of recent posts
-- CTA inviting users to write a post
-- Sections for popular authors, most-viewed and top-liked post
+- Featured post section
+- Recent posts grid
+- Call-to-action banner
+- Stats: most viewed, most liked, and most active author
+- Global header (logo, nav, search, theme toggle, user menu)
+- Footer with links, small navigation, and copyright
 
-### **Post Page**
+### Post Page
 
-- Full post view with author info, date, and reading time
-- Tag display and meta details
+- Full post view with title, image, content, and metadata
+- Author info and reading time
+- Tags and category
+- Like button + social sharing options
 
-### **Author Page**
+### Author Page
 
-- Public author profile: avatar, bio, join date, social links
-- List of author's posts
+- Public author profile
+- Avatar, bio, join date, social links, and basic info
+- Paginated list of posts with filters
 
-### **Dashboard**
+### Dashboard
 
-Private area accessible only to logged-in users.
+Accessible only to signed-in users.
 
-- **Manage Profile**: View and edit user details (avatar, display name, bio, etc.)
-- **Add Post**: Minimal editor for creating new posts
-- **My Posts**: All user's posts with edit/delete options
-- **Stats**: Engagement overview (planned)
+- **Profile Settings**: avatar, display name, username, about, DOB, social links, country, gender
+- **Add Post** with full editor
+- **My Posts**: edit/delete
+- **Liked Posts**
+- **User Stats**
 
-> Dashboard routes are non-indexed (`robots: noindex, nofollow`).
+> Dashboard pages are `noindex` for search engines.
 
----
+### Additional Pages
 
-## **Additional Pages**
-
-- About, Contact, 404
-- Terms of Use and Privacy Policy
-- Footer includes navigation + legal info
+- Category pages (same layout as "All Posts" with filters pre-applied)
+- Trending Posts (recent posts sorted by popularity)
+- List of all authors with filters and pagination
+- 404, About, Contact
+- Legal pages: Terms of Use, Privacy Policy
 
 ---
 
 ## Technical Details
 
 - **Framework**: Next.js (App Router, TypeScript)
-- **Auth**: Clerk (sign-in, sign-up, protected routes)
+- **Auth**: Clerk
 - **Database**: Supabase (PostgreSQL)
-- **ORM**: Prisma (models for users, posts, likes, comments)
-- **Editor**: Quill WYSIWYG for adding posts
-- **Styling**: Tailwind CSS + ShadCN UI
-- **State & Data**: React Query for fetching and caching
-- **Themes**: NextThemes for dark/light mode
+- **ORM**: Prisma
+- **Editor**: Quill
+- **Styling**: Tailwind CSS + ShadCN
+- **State & Data**: React Query with custom hooks
+- **Meta / SEO**: static + dynamic metadata
+- **Image Uploads**: Stored in Supabase Storage
 - **Deployment**: Vercel
 
 ---
 
 ## Live Version
 
-https://next-blogs-2025.vercel.app/
+[https://next-blogs-2025.vercel.app/](https://next-blogs-2025.vercel.app/)

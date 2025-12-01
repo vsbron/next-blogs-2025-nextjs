@@ -19,6 +19,7 @@ type SectionTitleProps = {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "div";
   children: React.ReactNode;
   className?: string;
+  id?: string;
 };
 
 // The component
@@ -26,10 +27,14 @@ function SectionTitle({
   as: Tag = "h1",
   children,
   className,
+  id,
 }: SectionTitleProps) {
   // Returned JSX
   return (
-    <Tag className={`relative ${styles[Tag]} ${className} ${beforeElement}`}>
+    <Tag
+      className={`relative ${styles[Tag]} ${className} ${beforeElement}`}
+      id={id}
+    >
       {children}
     </Tag>
   );
