@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import FiltersTrigger from "@/components/FiltersTrigger";
+import ListTopBar from "@/components/ListTopBar";
 import PostsFilters from "@/components/PostLists/PostsFilters";
 import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
@@ -11,20 +11,15 @@ import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 import useAllPosts from "@/hooks/useAllPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
+import { useListParams } from "@/hooks/useFilterListParams";
 
 function AllPosts({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
   // Create state value for showing filters
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const toggleFilters = () => setShowFilters((sF) => !sF);
 
-  // Convert all params into an object
-  const filters: Record<string, string> = {};
-  searchParams.forEach((value, key) => {
-    filters[key] = value;
-  });
-
-  // Getting the current page number
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  // Get the filters and current page
+  const { filters, page } = useListParams(searchParams);
 
   // Get the posts from database
   const { data, isLoading, error } = useAllPosts(filters, page);
@@ -40,24 +35,19 @@ function AllPosts({ searchParams }: { searchParams: ReadonlyURLSearchParams }) {
       </ArticleLayout>
     );
 
-  // Destructure the posts data and calculate range
+  // Destructure the posts data
   const { posts, total } = data;
-  const rangeStart = (page - 1) * ARTICLES_PER_PAGE + 1;
-  const rangeEnd = Math.min(rangeStart + ARTICLES_PER_PAGE - 1, total);
-  const range = `${rangeStart}-${rangeEnd}`;
 
   // Returned JSX
   return (
     <>
       {/* Top UI */}
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-foreground/50 text-sm md:text-md">
-          {posts.length > 0
-            ? `Showing ${range} posts out of ${total}`
-            : "Showing 0 posts"}
-        </span>
-        <FiltersTrigger closeFn={toggleFilters} isOpen={showFilters} />
-      </div>
+      <ListTopBar
+        units="posts"
+        countData={{ count: posts.length, total, page }}
+        showFilters={showFilters}
+        toggleFilters={toggleFilters}
+      />
 
       {/* Filters */}
       {showFilters && (

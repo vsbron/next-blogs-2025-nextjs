@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import FiltersTrigger from "@/components/FiltersTrigger";
+import ListTopBar from "@/components/ListTopBar";
 import AuthorsFilters from "@/components/AuthorList/AuthorsFilters";
 import AuthorsGridLayout from "@/components/AuthorPreview/AuthorsGridLayout";
 import AuthorPreviewTile from "@/components/AuthorPreview/AuthorPreviewTile";
@@ -12,23 +12,16 @@ import SkeletonAuthorList from "@/components/skeletons/SkeletonAuthorList";
 
 import useAllAuthors from "@/hooks/useAllAuthors";
 import { USERS_PER_PAGE } from "@/utils/constants";
+import { useListParams } from "@/hooks/useFilterListParams";
 
 function AllAuthors() {
   // Create state value for showing filters
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const toggleFilters = () => setShowFilters((sF) => !sF);
 
-  // Getting the state from URL
+  // Getting the search params from URL and use it to get filters and page
   const searchParams = useSearchParams();
-
-  // Convert all params into an object
-  const filters: Record<string, string> = {};
-  searchParams.forEach((value, key) => {
-    filters[key] = value;
-  });
-
-  // Getting the current page number
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  const { filters, page } = useListParams(searchParams);
 
   // Get the posts from database
   const { data, isLoading, error } = useAllAuthors(filters, page);
@@ -44,24 +37,19 @@ function AllAuthors() {
       </ArticleLayout>
     );
 
-  // Destructure the posts data and calculate range
+  // Destructure the posts data
   const { users, total } = data;
-  const rangeStart = (page - 1) * USERS_PER_PAGE + 1;
-  const rangeEnd = Math.min(rangeStart + USERS_PER_PAGE - 1, total);
-  const range = `${rangeStart}-${rangeEnd}`;
 
   // Returned JSX
   return (
     <>
       {/* Top UI */}
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-foreground/50 text-sm md:text-md">
-          {users.length > 0
-            ? `Showing ${range} authors out of ${total}`
-            : "Showing 0 authors"}
-        </span>
-        <FiltersTrigger closeFn={toggleFilters} isOpen={showFilters} />
-      </div>
+      <ListTopBar
+        units="authors"
+        countData={{ count: users.length, total, page }}
+        showFilters={showFilters}
+        toggleFilters={toggleFilters}
+      />
 
       {/* Filters */}
       {showFilters && (

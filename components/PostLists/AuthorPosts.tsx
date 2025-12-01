@@ -1,35 +1,28 @@
 "use client";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
+import ArticleLayout from "@/components/ArticleLayout";
+import ListTopBar from "@/components/ListTopBar";
+import PaginationLine from "@/components/PostLists/PaginationLine";
+import PostsFilters from "@/components/PostLists/PostsFilters";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
+import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 import useAuthorPosts from "@/hooks/useAuthorPosts";
-import { User } from "@/utils/types";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import SkeletonPostsGrid from "../skeletons/SkeletonPostsGrid";
-import ArticleLayout from "../ArticleLayout";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
-import FiltersTrigger from "../FiltersTrigger";
-import PostsFilters from "./PostsFilters";
-import PaginationLine from "./PaginationLine";
+import { User } from "@/utils/types";
+import { useListParams } from "@/hooks/useFilterListParams";
 
 function AuthorPosts({ user }: { user: User }) {
   // Create state value for showing filters
   const [showFilters, setShowFilters] = useState<boolean>(false);
   const toggleFilters = () => setShowFilters((sF) => !sF);
 
-  // Get the search params
+  // Getting the search params from URL and use it to get filters and page
   const searchParams = useSearchParams();
-
-  // Convert all params into an object
-  const filters: Record<string, string> = {};
-  searchParams.forEach((value, key) => {
-    filters[key] = value;
-  });
-
-  // Getting the current page number
-  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
+  const { filters, page } = useListParams(searchParams);
 
   // Fetch the user's posts
   const { data, isLoading, error } = useAuthorPosts(
@@ -49,24 +42,19 @@ function AuthorPosts({ user }: { user: User }) {
       </ArticleLayout>
     );
 
-  // Destructure the posts data and calculate range
+  // Destructure the posts data
   const { posts, total } = data;
-  const rangeStart = (page - 1) * ARTICLES_PER_PAGE + 1;
-  const rangeEnd = Math.min(rangeStart + ARTICLES_PER_PAGE - 1, total);
-  const range = `${rangeStart}-${rangeEnd}`;
 
   // Returned JSX
   return (
     <>
       {/* Top UI */}
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-foreground/50 text-sm md:text-md">
-          {posts.length > 0
-            ? `Showing ${range} posts out of ${total}`
-            : "Showing 0 posts"}
-        </span>
-        <FiltersTrigger closeFn={toggleFilters} isOpen={showFilters} />
-      </div>
+      <ListTopBar
+        units="posts"
+        countData={{ count: posts.length, total, page }}
+        showFilters={showFilters}
+        toggleFilters={toggleFilters}
+      />
 
       {/* Filters */}
       {showFilters && (
