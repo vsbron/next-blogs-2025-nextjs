@@ -8,7 +8,7 @@ function useAllAuthors(filters: Record<string, string>, page: number) {
   });
 
   // Returned data
-  return { data, isLoading, error, page };
+  return { data, isLoading, error };
 }
 
 export default useAllAuthors;

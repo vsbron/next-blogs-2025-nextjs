@@ -154,6 +154,12 @@ export const fetchFeaturedPosts = async () => {
     select: postFields,
   });
 
+  /*
+  Here, same as Trending posts we need to add more logic based on a published date,
+  to display the featured posts from recent period, but because we have no real
+  activity, we just fetch most liked posts
+  */
+
   // Return recent posts
   return posts;
 };
