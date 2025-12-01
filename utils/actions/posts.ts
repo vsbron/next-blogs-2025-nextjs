@@ -122,6 +122,7 @@ export const fetchTrendingPosts = async (page: number) => {
   const posts = await db.post.findMany({
     where,
     select: postFields,
+    orderBy: { published: "desc" },
     skip,
     take: ARTICLES_PER_PAGE,
   });
