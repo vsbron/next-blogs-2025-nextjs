@@ -97,6 +97,42 @@ export const fetchAllPosts = async (
   return { posts, total };
 };
 
+// Server action function that fetches all posts with filters
+export const fetchTrendingPosts = async (page: number) => {
+  // Skip pages
+  const skip = (page - 1) * ARTICLES_PER_PAGE;
+
+  // Get the category and if popular
+  const where: Prisma.PostWhereInput = {};
+  where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+
+  /*
+  The idea here is to add a filter that fetches only posts from last 10 days,
+  so it would show only recent trending posts based on likes number.
+  But because it's a portfolio project with no real activity, so the list will
+  quickly become empty, so I'm commenting this out
+
+  const today = new Date();
+  const tenDaysAgo = new Date();
+  tenDaysAgo.setDate(today.getDate() - TRENDING_POST_DATE_EXPIRY);
+  where.published = { gte: tenDaysAgo, lte: today };
+  */
+
+  // Fetch data
+  const posts = await db.post.findMany({
+    where,
+    select: postFields,
+    skip,
+    take: ARTICLES_PER_PAGE,
+  });
+
+  // Total posts count
+  const total = await db.post.count({ where });
+
+  // Return posts
+  return { posts, total };
+};
+
 // Server action function that fetches recent posts with author info and likes
 export const fetchRecentPosts = async (amount: number = 12) => {
   const posts = await db.post.findMany({

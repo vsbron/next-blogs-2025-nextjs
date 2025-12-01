@@ -31,7 +31,7 @@ function AuthorPosts({ user }: { user: User }) {
     page
   );
 
-  // Guard clauses (temp)
+  // Guard clauses
   if (isLoading) return <SkeletonPostsGrid />;
   if (!data || error)
     return (
