@@ -9,6 +9,7 @@ import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 import { fetchUser } from "@/utils/actions/users";
 import { SITE_DOMAIN } from "@/utils/constants";
 import SectionSeparator from "@/components/SectionSeparator";
+import AuthorPosts from "@/components/PostLists/AuthorPosts";
 
 // Interface for the User ID
 interface UserPageProps {
@@ -67,7 +68,7 @@ async function UserPage({ params }: UserPageProps) {
       <SectionSeparator />
       <section>
         <SectionTitle as="h2">Author posts</SectionTitle>
-        <p>Under construction</p>
+        <AuthorPosts user={user} />
       </section>
     </>
   );

@@ -142,6 +142,69 @@ export const fetchUserPosts = async (userId?: string) => {
   return posts;
 };
 
+// Server action function that returns user based on clerkID
+export async function fetchAuthorPosts(
+  userId: string,
+  filters: Record<string, string>,
+  page: number
+) {
+  // Skip pages
+  const skip = (page - 1) * ARTICLES_PER_PAGE;
+
+  // Get the category and if popular
+  const where: Prisma.PostWhereInput = {};
+  if (filters.category && filters.category !== "all")
+    where.category = filters.category;
+  where.authorId = userId;
+  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+
+  // Get the order
+  let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };
+  if (filters.sort) {
+    switch (filters.sort) {
+      case "date_asc":
+        orderBy = { published: "asc" };
+        break;
+      case "likes_desc":
+        orderBy = { likes: { _count: "desc" } };
+        break;
+      case "likes_asc":
+        orderBy = { likes: { _count: "asc" } };
+        break;
+      case "views_desc":
+        orderBy = { views: "desc" };
+        break;
+      case "views_asc":
+        orderBy = { views: "asc" };
+        break;
+      case "title_asc":
+        orderBy = { title: "asc" };
+        break;
+      case "title_desc":
+        orderBy = { title: "desc" };
+        break;
+      case "date_desc":
+      default:
+        orderBy = { published: "desc" };
+    }
+  }
+
+  // Fetch all posts from database
+  const posts = await db.post.findMany({
+    where,
+    orderBy,
+    select: postFields,
+    skip,
+    take: ARTICLES_PER_PAGE,
+  });
+
+  // Total posts count
+  const total = await db.post.count({ where });
+
+  // Return user
+  return { posts, total };
+}
+
 // Server action function that fetches user's liked posts
 export const fetchUserLikedPosts = async () => {
   // Get the current user clerkId

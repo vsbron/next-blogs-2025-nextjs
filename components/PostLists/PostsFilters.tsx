@@ -30,10 +30,15 @@ type FilterFormValues = {
 type PostsFiltersProps = {
   searchParams: ReadonlyURLSearchParams;
   closeFn: () => void;
+  url?: string;
 };
 
 // The Component
-function PostsFilters({ searchParams, closeFn }: PostsFiltersProps) {
+function PostsFilters({
+  searchParams,
+  closeFn,
+  url = "/posts",
+}: PostsFiltersProps) {
   // Get the router, pathname and searchParams
   const router = useRouter();
   const pathname = usePathname();
@@ -69,7 +74,7 @@ function PostsFilters({ searchParams, closeFn }: PostsFiltersProps) {
   const clearFilters = () => {
     reset({ category: "", sort: "", popular: false });
     closeFn();
-    router.push("/posts");
+    router.push(url);
   };
 
   // Returned JSX
