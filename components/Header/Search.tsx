@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 function Search() {
-  // Create state variable for search term, searching state and referrer for input field
+  // Create state variable for search term, error, searching state, referrer for input field and router
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   // Toggle search field functions
   const showSearch = () => {
@@ -17,6 +20,7 @@ function Search() {
   const hideSearch = () => {
     setIsSearching(false);
     setSearchTerm("");
+    setError("");
   };
 
   // useEffect function with key events
@@ -42,6 +46,19 @@ function Search() {
   useEffect(() => {
     if (isSearching) inputRef.current?.focus();
   }, [isSearching]);
+
+  // Submit handler
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    // Prevent default behavior
+    e.preventDefault();
+
+    // Guard clause
+    if (!searchTerm.trim()) return setError("Please fill the search field");
+
+    // Close search and redirect user to search page
+    hideSearch();
+    router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
+  };
 
   // Returned JSX
   return (
@@ -69,6 +86,7 @@ function Search() {
         />
       </div>
       <form
+        onSubmit={handleSubmit}
         className={`fixed top-20 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
           isSearching
             ? "opacity-100 translate-y-0 pointer-events-auto delay-150"
@@ -94,6 +112,7 @@ function Search() {
         >
           <SearchIcon className="!w-8 !h-8 stroke-white" />
         </Button>
+        <div className="text-white text-sm text-center mt-3">{error}</div>
       </form>
     </>
   );
