@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import SearchResults from "@/components/Search/SearchResults";
-import SkeletonSearch from "@/components/skeletons/SkeletonSearch";
+import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Interface for the User ID
 interface SearchPageProps {
@@ -27,11 +27,23 @@ function SearchPage({ searchParams }: SearchPageProps) {
   // Get the query from search params
   const query = searchParams.query ?? "";
 
+  if (!query)
+    return (
+      <section>
+        <SectionTitle>Search Results</SectionTitle>
+        <p>
+          No search query was provided.
+          <br />
+          Please try to search again
+        </p>
+      </section>
+    );
+
   // Returned JSX
   return (
     <section>
       <SectionTitle>{query ? query + " - " : ""} Search Results</SectionTitle>
-      <Suspense fallback={<SkeletonSearch />}>
+      <Suspense fallback={<SkeletonPostsGrid />}>
         <SearchResults />
       </Suspense>
     </section>

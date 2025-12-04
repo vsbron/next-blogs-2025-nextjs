@@ -98,6 +98,75 @@ export const fetchAllPosts = async (
 };
 
 // Server action function that fetches all posts with filters
+export const fetchSearchPosts = async (
+  query: string,
+  filters: Record<string, string>,
+  page: number
+) => {
+  // Skip pages
+  const skip = (page - 1) * ARTICLES_PER_PAGE;
+
+  // Get the category, title or preview that fit the query and if popular
+  const where: Prisma.PostWhereInput = {};
+  if (filters.category && filters.category !== "all")
+    where.category = filters.category;
+  if (query) {
+    where.OR = [
+      { title: { contains: query, mode: "insensitive" } },
+      { preview: { contains: query, mode: "insensitive" } },
+    ];
+  }
+  // if (filters.popular) where.views = { gte: 100 };
+  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+
+  // Get the order
+  let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };
+  if (filters.sort) {
+    switch (filters.sort) {
+      case "date_asc":
+        orderBy = { published: "asc" };
+        break;
+      case "likes_desc":
+        orderBy = { likes: { _count: "desc" } };
+        break;
+      case "likes_asc":
+        orderBy = { likes: { _count: "asc" } };
+        break;
+      case "views_desc":
+        orderBy = { views: "desc" };
+        break;
+      case "views_asc":
+        orderBy = { views: "asc" };
+        break;
+      case "title_asc":
+        orderBy = { title: "asc" };
+        break;
+      case "title_desc":
+        orderBy = { title: "desc" };
+        break;
+      case "date_desc":
+      default:
+        orderBy = { published: "desc" };
+    }
+  }
+
+  // Fetch data
+  const posts = await db.post.findMany({
+    where,
+    orderBy,
+    select: postFields,
+    skip,
+    take: ARTICLES_PER_PAGE,
+  });
+
+  // Total posts count
+  const total = await db.post.count({ where });
+
+  // Return posts
+  return { posts, total };
+};
+
+// Server action function that fetches all posts with filters
 export const fetchTrendingPosts = async (page: number) => {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
