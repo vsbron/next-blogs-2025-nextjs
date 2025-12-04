@@ -111,10 +111,15 @@ export const fetchSearchPosts = async (
   if (filters.category && filters.category !== "all")
     where.category = filters.category;
   if (query) {
-    where.OR = [
-      { title: { contains: query, mode: "insensitive" } },
-      { preview: { contains: query, mode: "insensitive" } },
-    ];
+    const words = query.trim().split(/\s+/);
+
+    // Each word must match either title or preview
+    where.AND = words.map((word) => ({
+      OR: [
+        { title: { contains: word, mode: "insensitive" } },
+        { preview: { contains: word, mode: "insensitive" } },
+      ],
+    }));
   }
   // if (filters.popular) where.views = { gte: 100 };
   if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
