@@ -7,13 +7,15 @@ import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Interface for the User ID
 interface SearchPageProps {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ query: string }>;
 }
 
 // Generate metadata function
-export function generateMetadata({ searchParams }: SearchPageProps): Metadata {
+export async function generateMetadata({
+  searchParams,
+}: SearchPageProps): Promise<Metadata> {
   // Get the query from search params
-  const query = searchParams.query ?? "";
+  const { query } = await searchParams;
 
   // Returned Metadata
   return {
@@ -23,9 +25,9 @@ export function generateMetadata({ searchParams }: SearchPageProps): Metadata {
   };
 }
 
-function SearchPage({ searchParams }: SearchPageProps) {
+async function SearchPage({ searchParams }: SearchPageProps) {
   // Get the query from search params
-  const query = searchParams.query ?? "";
+  const { query } = await searchParams;
 
   if (!query)
     return (
