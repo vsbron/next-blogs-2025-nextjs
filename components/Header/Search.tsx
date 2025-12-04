@@ -1,9 +1,9 @@
 "use client";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { SearchIcon, XIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { SearchIcon, XIcon } from "lucide-react";
 
 function Search() {
   // Create state variable for search term, error, searching state, referrer for input field and router
@@ -17,11 +17,11 @@ function Search() {
   const showSearch = () => {
     setIsSearching(true);
   };
-  const hideSearch = () => {
+  const hideSearch = useCallback(() => {
     setIsSearching(false);
     setSearchTerm("");
     setError("");
-  };
+  }, []);
 
   // useEffect function with key events
   useEffect(() => {
@@ -40,7 +40,7 @@ function Search() {
 
     // Clear function
     return () => document.removeEventListener("keydown", toggleSearch);
-  }, []);
+  }, [hideSearch]);
 
   // useEffect function that puts focus on the input
   useEffect(() => {
@@ -112,7 +112,9 @@ function Search() {
         >
           <SearchIcon className="!w-8 !h-8 stroke-white" />
         </Button>
-        <div className="text-white text-sm text-center mt-3">{error}</div>
+        {error && (
+          <div className="text-white text-sm text-center mt-3">{error}</div>
+        )}
       </form>
     </>
   );
