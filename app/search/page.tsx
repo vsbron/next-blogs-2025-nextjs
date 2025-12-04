@@ -7,7 +7,7 @@ import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 // Interface for the User ID
 interface SearchPageProps {
-  searchParams: { query: string };
+  searchParams: { [key: string]: string | undefined };
 }
 
 // Generate metadata function
