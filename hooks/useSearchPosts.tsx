@@ -8,7 +8,10 @@ function useSearchPosts(
 ) {
   const { data, isLoading, error } = useQuery({
     queryKey: ["search-posts", query, filters, page],
-    queryFn: () => fetchSearchPosts(query, filters, page),
+    queryFn:
+      query === ""
+        ? async () => ({ posts: [], total: 0 })
+        : () => fetchSearchPosts(query, filters, page),
   });
 
   // Returned data

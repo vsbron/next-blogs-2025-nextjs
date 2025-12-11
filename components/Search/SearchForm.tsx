@@ -36,7 +36,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
   const pathname = usePathname();
 
   // Initiate form
-  const { handleSubmit, control, watch } = useForm<FilterFormValues>({
+  const { handleSubmit, control, watch, reset } = useForm<FilterFormValues>({
     defaultValues: {
       query,
       category: searchParams.get("category")?.split(",") || [],
@@ -66,6 +66,12 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
 
     // Redirect user
     router.replace(`${pathname}?${params.toString()}`);
+  };
+
+  // Clear form handler (Resets fields and redirects user)
+  const clearSearchForm = () => {
+    reset({ category: [], sort: "", popular: false, query: "" });
+    router.push("/search");
   };
 
   // Watch the categories value
@@ -130,7 +136,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => router.push("/search")}
+                  onClick={clearSearchForm}
                 >
                   Clear
                 </Button>
