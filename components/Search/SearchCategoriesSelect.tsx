@@ -8,13 +8,16 @@ import { Label } from "@/components/ui/label";
 import { POST_CATEGORIES } from "@/utils/constants";
 
 // Props type
-type CategoriesSelectProps = {
+type SearchCategoriesSelectProps = {
   control: Control<FilterFormValues, any, FilterFormValues>;
   selectedCats: string[];
 };
 
 // The Component
-function CategoriesSelect({ control, selectedCats }: CategoriesSelectProps) {
+function SearchCategoriesSelect({
+  control,
+  selectedCats,
+}: SearchCategoriesSelectProps) {
   // Returned JSX
   return (
     <FormGroup className="max-w-full">
@@ -54,4 +57,4 @@ function CategoriesSelect({ control, selectedCats }: CategoriesSelectProps) {
   );
 }
 
-export default CategoriesSelect;
+export default SearchCategoriesSelect;

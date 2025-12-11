@@ -5,23 +5,16 @@ import {
   ReadonlyURLSearchParams,
 } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
 import FormInput from "@/components/form/FormInput";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import FormGroup from "@/components/form/FormGroup";
-import { Label } from "@/components/ui/label";
+import SearchCategoriesSelect from "@/components/Search/SearchCategoriesSelect";
+import SearchPostsSort from "@/components/Search/SearchPostsSort";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 import { POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import CategoriesSelect from "./CategoriesSelect";
 
 // Filter type
 export type FilterFormValues = {
@@ -83,7 +76,10 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
           {/* Left side */}
           <div className="grid grid-cols-[1.25fr_2fr] gap-x-8">
             {/* Categories */}
-            <CategoriesSelect control={control} selectedCats={selectedCats} />
+            <SearchCategoriesSelect
+              control={control}
+              selectedCats={selectedCats}
+            />
 
             {/* Right side */}
             <div className="flex flex-col gap-y-6">
@@ -103,46 +99,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
               />
 
               {/* Sorting */}
-              <FormGroup>
-                <Label>Sort results</Label>
-                <Controller
-                  name="sort"
-                  control={control}
-                  render={({ field }) => (
-                    <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="w-50">
-                        <SelectValue placeholder="Sort By" />
-                      </SelectTrigger>
-                      <SelectContent align="start">
-                        <SelectGroup>
-                          <SelectItem value="date_desc">
-                            Sort by Date (Newest)
-                          </SelectItem>
-                          <SelectItem value="date_asc">
-                            Sort by Date (Oldest)
-                          </SelectItem>
-                          <SelectItem value="likes_desc">
-                            Sort by Likes (Desc)
-                          </SelectItem>
-                          <SelectItem value="likes_asc">
-                            Sort by Likes (Asc)
-                          </SelectItem>
-                          <SelectItem value="views_desc">
-                            Sort by Views (Desc)
-                          </SelectItem>
-                          <SelectItem value="views_asc">
-                            Sort by Views (Asc)
-                          </SelectItem>
-                          <SelectItem value="title_asc">Title (A-Z)</SelectItem>
-                          <SelectItem value="title_desc">
-                            Title (Z-A)
-                          </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  )}
-                />
-              </FormGroup>
+              <SearchPostsSort control={control} />
 
               {/* Popular */}
               <FormGroup>
