@@ -1,13 +1,11 @@
 "use client";
-import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import ListTopBar from "@/components/ListTopBar";
-import PostsFilters from "@/components/PostLists/PostsFilters";
 import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
+import SearchForm from "@/components/Search/SearchForm";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 import { useListParams } from "@/hooks/useFilterListParams";
@@ -15,10 +13,6 @@ import useSearchPosts from "@/hooks/useSearchPosts";
 import { ARTICLES_PER_PAGE } from "@/utils/constants";
 
 function SearchResults() {
-  // Create state value for showing filters
-  const [showFilters, setShowFilters] = useState<boolean>(false);
-  const toggleFilters = () => setShowFilters((sF) => !sF);
-
   // Get the search params
   const searchParams = useSearchParams();
 
@@ -43,22 +37,24 @@ function SearchResults() {
   // Destructure the posts data
   const { posts, total } = data;
 
+  // Calculate range and set up the label
+  const rangeStart = (page - 1) * ARTICLES_PER_PAGE + 1;
+  const rangeEnd = Math.min(rangeStart + ARTICLES_PER_PAGE - 1, total);
+  const range = `${rangeStart}-${rangeEnd}`;
+  const label = posts.length > 0 ? `${range} of ${total}` : "0";
+
   // Returned JSX
   return (
     <>
       {/* Top UI */}
-      <ListTopBar
-        units="posts"
-        countData={{ count: posts.length, total, page }}
-        showFilters={showFilters}
-        toggleFilters={toggleFilters}
-      />
-      {/* Filters */}
-      {showFilters && (
-        <PostsFilters searchParams={searchParams} closeFn={toggleFilters} />
-      )}
+      <SearchForm searchParams={searchParams} query={query} />
 
       {/* Post list */}
+      <div className="flex justify-between items-center mb-2">
+        <span className="text-foreground/50 text-sm md:text-md">
+          Showing {label} results
+        </span>
+      </div>
       {posts.length > 0 ? (
         <PostsGridLayout>
           {posts!.map((post) => {
