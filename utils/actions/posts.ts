@@ -111,7 +111,7 @@ export const fetchSearchPosts = async (
 
   // Get the categories, title or preview that fit the query and if popular
   const where: Prisma.PostWhereInput = {};
-  if (filters.category && filters.category !== "all")
+  if (filters.category && filters.category !== "All")
     where.category = { in: categoryFilter };
   if (query) {
     const words = query.trim().split(/\s+/);

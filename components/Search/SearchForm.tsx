@@ -53,9 +53,11 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
     // Apply query, categories, sorting, popular filter and page
     if (data.query?.trim()) params.set("query", data.query.trim());
     else params.delete("query");
-    if (data.category.length > 0)
+    if (!data.category.includes("All") && data.category.length > 0) {
       params.set("category", data.category.join(","));
-    else params.delete("category");
+    } else {
+      params.delete("category");
+    }
     if (data.sort) params.set("sort", data.sort);
     else params.delete("sort");
     if (data.popular) params.set("popular", "1");
