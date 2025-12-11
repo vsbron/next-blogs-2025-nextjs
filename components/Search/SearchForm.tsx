@@ -1,14 +1,18 @@
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
+import {
+  useRouter,
+  usePathname,
+  ReadonlyURLSearchParams,
+} from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+import FormInput from "@/components/form/FormInput";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import FormGroup from "@/components/form/FormGroup";
-import FormInput from "@/components/form/FormInput";
-import CategorySelect from "@/components/Search/CategorySelect";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+
+import { POST_CATEGORIES, POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
 import {
   Select,
   SelectContent,
@@ -16,13 +20,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-
-import { POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
+} from "../ui/select";
 
 // Filter type
 type FilterFormValues = {
-  category: string;
+  query: string;
+  category: string[];
   sort: string;
   popular: boolean;
 };
@@ -33,104 +36,181 @@ type SearchFormProps = {
   query: string;
 };
 
-// The component
 function SearchForm({ searchParams, query }: SearchFormProps) {
-  // Create state value for search field and selected categories
-  const [searchField, setSearchField] = useState<string>(query);
-  const [selectedCats, setSelectedCats] = useState<string[]>([]);
+  // Get the router and the pathname
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Initiate form
-  const { handleSubmit, control, reset } = useForm<FilterFormValues>({
+  const { handleSubmit, control, watch } = useForm<FilterFormValues>({
     defaultValues: {
-      category: searchParams.get("category") || "",
-      sort: searchParams.get("sort") || "date_desc",
+      query,
+      category: searchParams.get("category")?.split(",") || [],
+      sort: searchParams.get("sort") || "",
       popular: !!searchParams.get("popular"),
     },
   });
 
-  // Returned JSX
+  // Submit handler
+  const onSubmit = (data: FilterFormValues) => {
+    // Get the actual params
+    const params = new URLSearchParams(searchParams.toString());
+
+    // Apply query, categories, sorting, popular filter and page
+    if (data.query?.trim()) params.set("query", data.query.trim());
+    else params.delete("query");
+    if (data.category.length > 0)
+      params.set("category", data.category.join(","));
+    else params.delete("category");
+    if (data.sort) params.set("sort", data.sort);
+    else params.delete("sort");
+    if (data.popular) params.set("popular", "1");
+    else params.delete("popular");
+    params.set("page", "1");
+
+    // Redirect user
+    router.replace(`${pathname}?${params.toString()}`);
+  };
+
+  // Watch the categories value
+  const selectedCats = watch("category");
+
   return (
     <Card className="mb-6">
       <CardContent>
-        <div className="grid grid-cols-[1.25fr_2fr] gap-x-8">
-          <div>
-            <CategorySelect
-              selected={selectedCats}
-              onChange={setSelectedCats}
-            />
-          </div>
-          <div className="flex flex-col gap-y-6">
-            <FormInput
-              id="searchQuery"
-              label="Search query"
-              value={searchField}
-              onChange={(e) => setSearchField(e.target.value)}
-            />
-
-            <FormGroup>
-              <Label>Sort results</Label>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Left side */}
+          <div className="grid grid-cols-[1.25fr_2fr] gap-x-8">
+            {/* Categories */}
+            <FormGroup className="max-w-full">
+              <Label>Categories</Label>
               <Controller
-                name="sort"
+                name="category"
                 control={control}
                 render={({ field }) => (
-                  <Select value={field.value} onValueChange={field.onChange}>
-                    <SelectTrigger className="w-50">
-                      <SelectValue placeholder="Sort By" />
-                    </SelectTrigger>
-                    <SelectContent align="start">
-                      <SelectGroup>
-                        <SelectItem value="date_desc">
-                          Sort by Date (Newest)
-                        </SelectItem>
-                        <SelectItem value="date_asc">
-                          Sort by Date (Oldest)
-                        </SelectItem>
-                        <SelectItem value="likes_desc">
-                          Sort by Likes (Desc)
-                        </SelectItem>
-                        <SelectItem value="likes_asc">
-                          Sort by Likes (Asc)
-                        </SelectItem>
-                        <SelectItem value="views_desc">
-                          Sort by Views (Desc)
-                        </SelectItem>
-                        <SelectItem value="views_asc">
-                          Sort by Views (Asc)
-                        </SelectItem>
-                        <SelectItem value="title_asc">Title (A-Z)</SelectItem>
-                        <SelectItem value="title_desc">Title (Z-A)</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <div className="flex flex-col border rounded-md w-full h-62 overflow-scroll py-0.5">
+                    {POST_CATEGORIES.map((item) => (
+                      <button
+                        key={item}
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          if (e.ctrlKey) {
+                            field.onChange(
+                              field.value.includes(item)
+                                ? field.value.filter((c) => c !== item)
+                                : [...field.value, item]
+                            );
+                          } else {
+                            field.onChange([item]);
+                          }
+                        }}
+                        className={`text-left py-0.25 px-2 cursor-pointer ${
+                          selectedCats.includes(item) ? "bg-primary/20" : ""
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
                 )}
               />
             </FormGroup>
 
-            <FormGroup>
-              <Label>Popular posts only?</Label>
+            {/* Right side */}
+            <div className="flex flex-col gap-y-6">
+              {/* Query */}
               <Controller
-                name="popular"
+                name="query"
                 control={control}
                 render={({ field }) => (
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={field.value}
-                      onChange={(e) => field.onChange(e.target.checked)}
-                    />
-                    <span className="text-sm mt-0.5">
-                      ({POPULAR_POST_LIKES_COUNT}+ Likes)
-                    </span>
-                  </label>
+                  <FormInput
+                    id="searchQuery"
+                    label="Search query"
+                    placeholder="Search for articles"
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
                 )}
               />
-            </FormGroup>
-            <ButtonsContainer className="m-0">
-              <Button type="submit">Search</Button>
-              <Button variant="outline">Clear</Button>
-            </ButtonsContainer>
+
+              {/* Sorting */}
+              <FormGroup>
+                <Label>Sort results</Label>
+                <Controller
+                  name="sort"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="w-50">
+                        <SelectValue placeholder="Sort By" />
+                      </SelectTrigger>
+                      <SelectContent align="start">
+                        <SelectGroup>
+                          <SelectItem value="date_desc">
+                            Sort by Date (Newest)
+                          </SelectItem>
+                          <SelectItem value="date_asc">
+                            Sort by Date (Oldest)
+                          </SelectItem>
+                          <SelectItem value="likes_desc">
+                            Sort by Likes (Desc)
+                          </SelectItem>
+                          <SelectItem value="likes_asc">
+                            Sort by Likes (Asc)
+                          </SelectItem>
+                          <SelectItem value="views_desc">
+                            Sort by Views (Desc)
+                          </SelectItem>
+                          <SelectItem value="views_asc">
+                            Sort by Views (Asc)
+                          </SelectItem>
+                          <SelectItem value="title_asc">Title (A-Z)</SelectItem>
+                          <SelectItem value="title_desc">
+                            Title (Z-A)
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+              </FormGroup>
+
+              {/* Popular */}
+              <FormGroup>
+                <Label>Popular posts only?</Label>
+                <Controller
+                  name="popular"
+                  control={control}
+                  render={({ field }) => (
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={field.value}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                      />
+                      <span className="text-sm mt-0.5">
+                        ({POPULAR_POST_LIKES_COUNT}+ Likes)
+                      </span>
+                    </label>
+                  )}
+                />
+              </FormGroup>
+
+              {/* Buttons */}
+              <ButtonsContainer className="m-0">
+                <Button type="submit">Search</Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => router.push("/search")}
+                >
+                  Clear
+                </Button>
+              </ButtonsContainer>
+            </div>
           </div>
-        </div>
+        </form>
       </CardContent>
     </Card>
   );

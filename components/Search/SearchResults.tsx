@@ -49,32 +49,41 @@ function SearchResults() {
       {/* Top UI */}
       <SearchForm searchParams={searchParams} query={query} />
 
-      {/* Post list */}
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-foreground/50 text-sm md:text-md">
-          Showing {label} results
-        </span>
-      </div>
-      {posts.length > 0 ? (
-        <PostsGridLayout>
-          {posts!.map((post) => {
-            return <PostPreviewTile key={post.id} post={post} />;
-          })}
-        </PostsGridLayout>
-      ) : (
+      {query === "" ? (
         <p>
-          No posts match your current filters. <br />
-          Try adjusting the category, or removing &quot;Popular posts&quot;
-          filters to see more posts.
+          Your search field is empty. Please type a keyword or phrase to find
+          posts.
         </p>
-      )}
+      ) : (
+        <>
+          {/* Post list */}
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-foreground/50 text-sm md:text-md">
+              Showing {label} results
+            </span>
+          </div>
+          {posts.length > 0 ? (
+            <PostsGridLayout>
+              {posts!.map((post) => {
+                return <PostPreviewTile key={post.id} post={post} />;
+              })}
+            </PostsGridLayout>
+          ) : (
+            <p>
+              No posts match your current filters. <br />
+              Try adjusting the category, or removing &quot;Popular posts&quot;
+              filters to see more posts.
+            </p>
+          )}
 
-      {/* Pagination */}
-      {posts.length > 0 && (
-        <PaginationLine
-          pageCount={Math.ceil(total / ARTICLES_PER_PAGE)}
-          page={page}
-        />
+          {/* Pagination */}
+          {posts.length > 0 && (
+            <PaginationLine
+              pageCount={Math.ceil(total / ARTICLES_PER_PAGE)}
+              page={page}
+            />
+          )}
+        </>
       )}
     </>
   );

@@ -106,10 +106,13 @@ export const fetchSearchPosts = async (
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
 
-  // Get the category, title or preview that fit the query and if popular
+  // Get all selected categories
+  const categoryFilter = filters.category ? filters.category.split(",") : [];
+
+  // Get the categories, title or preview that fit the query and if popular
   const where: Prisma.PostWhereInput = {};
   if (filters.category && filters.category !== "all")
-    where.category = filters.category;
+    where.category = { in: categoryFilter };
   if (query) {
     const words = query.trim().split(/\s+/);
 

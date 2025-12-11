@@ -29,18 +29,6 @@ async function SearchPage({ searchParams }: SearchPageProps) {
   // Get the query from search params
   const { query } = await searchParams;
 
-  if (!query)
-    return (
-      <section>
-        <SectionTitle>Search Results</SectionTitle>
-        <p>
-          No search query was provided.
-          <br />
-          Please try to search again
-        </p>
-      </section>
-    );
-
   // Returned JSX
   return (
     <section>
