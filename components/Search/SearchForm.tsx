@@ -12,7 +12,7 @@ import FormGroup from "@/components/form/FormGroup";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { POST_CATEGORIES, POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
+import { POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
 import {
   Select,
   SelectContent,
@@ -21,9 +21,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import CategoriesSelect from "./CategoriesSelect";
 
 // Filter type
-type FilterFormValues = {
+export type FilterFormValues = {
   query: string;
   category: string[];
   sort: string;
@@ -82,40 +83,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
           {/* Left side */}
           <div className="grid grid-cols-[1.25fr_2fr] gap-x-8">
             {/* Categories */}
-            <FormGroup className="max-w-full">
-              <Label>Categories</Label>
-              <Controller
-                name="category"
-                control={control}
-                render={({ field }) => (
-                  <div className="flex flex-col border rounded-md w-full h-62 overflow-scroll py-0.5">
-                    {POST_CATEGORIES.map((item) => (
-                      <button
-                        key={item}
-                        type="button"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          if (e.ctrlKey) {
-                            field.onChange(
-                              field.value.includes(item)
-                                ? field.value.filter((c) => c !== item)
-                                : [...field.value, item]
-                            );
-                          } else {
-                            field.onChange([item]);
-                          }
-                        }}
-                        className={`text-left py-0.25 px-2 cursor-pointer ${
-                          selectedCats.includes(item) ? "bg-primary/20" : ""
-                        }`}
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              />
-            </FormGroup>
+            <CategoriesSelect control={control} selectedCats={selectedCats} />
 
             {/* Right side */}
             <div className="flex flex-col gap-y-6">
