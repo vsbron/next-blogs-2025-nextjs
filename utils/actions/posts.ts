@@ -121,6 +121,8 @@ export const fetchSearchPosts = async (
       OR: [
         { title: { contains: word, mode: "insensitive" } },
         { preview: { contains: word, mode: "insensitive" } },
+        { author: { displayName: { contains: word, mode: "insensitive" } } },
+        { author: { username: { contains: word, mode: "insensitive" } } },
       ],
     }));
   }
