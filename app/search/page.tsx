@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import SearchResults from "@/components/Search/SearchResults";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonSearch from "@/components/skeletons/SkeletonSearch";
 
 // Interface for the User ID
 interface SearchPageProps {
@@ -33,7 +33,7 @@ async function SearchPage({ searchParams }: SearchPageProps) {
   return (
     <section>
       <SectionTitle>{query ? query + " - " : ""} Search Results</SectionTitle>
-      <Suspense fallback={<SkeletonPostsGrid />}>
+      <Suspense fallback={<SkeletonSearch />}>
         <SearchResults />
       </Suspense>
     </section>

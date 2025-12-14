@@ -6,7 +6,7 @@ import PaginationLine from "@/components/PostLists/PaginationLine";
 import PostsGridLayout from "@/components/PostPreview/PostsGridLayout";
 import PostPreviewTile from "@/components/PostPreview/PostPreviewTile";
 import SearchForm from "@/components/Search/SearchForm";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonSearch from "@/components/skeletons/SkeletonSearch";
 
 import { useListParams } from "@/hooks/useFilterListParams";
 import useSearchPosts from "@/hooks/useSearchPosts";
@@ -24,7 +24,7 @@ function SearchResults() {
   const { data, isLoading, error } = useSearchPosts(query, filters, page);
 
   // Guard clauses
-  if (isLoading) return <SkeletonPostsGrid />;
+  if (isLoading) return <SkeletonSearch />;
   if (!data || error)
     return (
       <ArticleLayout>
