@@ -99,7 +99,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
                   render={({ field }) => (
                     <FormInput
                       id="searchQuery"
-                      label="Search query"
+                      label="Search query (In title or preview)"
                       placeholder="Search for articles"
                       value={field.value}
                       onChange={field.onChange}

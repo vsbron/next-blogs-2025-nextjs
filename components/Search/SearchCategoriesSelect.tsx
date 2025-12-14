@@ -21,12 +21,17 @@ function SearchCategoriesSelect({
   // Returned JSX
   return (
     <FormGroup className="max-w-full">
-      <Label>Categories</Label>
+      <Label>
+        Categories{" "}
+        <span className="hidden lg:inline-block">
+          (select multiple with Ctrl key)
+        </span>
+      </Label>
       <Controller
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="flex flex-col border rounded-md w-full h-32 xs:h-40 sm:h-50 md:h-62 overflow-scroll py-0.5">
+          <div className="flex flex-col border rounded-md w-full h-28 xs:h-40 sm:h-50 md:h-62 overflow-scroll py-0.5">
             {["All", ...POST_CATEGORIES].map((item) => (
               <button
                 key={item}
