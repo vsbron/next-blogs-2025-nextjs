@@ -21,7 +21,7 @@ function SearchCategoriesSelect({
   // Returned JSX
   return (
     <FormGroup className="max-w-full">
-      <Label>
+      <Label className="gap-1">
         Categories{" "}
         <span className="hidden lg:inline-block">
           (select multiple with Ctrl key)
