@@ -26,7 +26,7 @@ function SearchCategoriesSelect({
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="flex flex-col border rounded-md w-full h-62 overflow-scroll py-0.5">
+          <div className="flex flex-col border rounded-md w-full h-32 xs:h-40 sm:h-50 md:h-62 overflow-scroll py-0.5">
             {["All", ...POST_CATEGORIES].map((item) => (
               <button
                 key={item}
@@ -43,7 +43,7 @@ function SearchCategoriesSelect({
                     field.onChange([item]);
                   }
                 }}
-                className={`text-left py-0.25 px-2 cursor-pointer ${
+                className={`text-left py-0.75 px-1.5 sm:py-0.25 sm:px-2 cursor-pointer text-sm sm:text-base ${
                   selectedCats.includes(item) ? "bg-primary/20" : ""
                 }`}
               >

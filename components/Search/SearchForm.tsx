@@ -78,11 +78,11 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
   const selectedCats = watch("category");
 
   return (
-    <Card className="mb-6">
-      <CardContent>
+    <Card className="mb-6 max-xs:py-4">
+      <CardContent className="max-xs:px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Left side */}
-          <div className="grid grid-cols-[1.25fr_2fr] gap-x-8">
+          <div className="grid grid-cols-1 gap-y-4 xs:gap-y-2 xs:grid-cols-[1.5fr_2fr] sm:grid-cols-[1.25fr_2fr] gap-x-4 xs:gap-x-8">
             {/* Categories */}
             <SearchCategoriesSelect
               control={control}
@@ -90,21 +90,23 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
             />
 
             {/* Right side */}
-            <div className="flex flex-col gap-y-6">
+            <div className="contents xs:flex flex-col gap-y-6">
               {/* Query */}
-              <Controller
-                name="query"
-                control={control}
-                render={({ field }) => (
-                  <FormInput
-                    id="searchQuery"
-                    label="Search query"
-                    placeholder="Search for articles"
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
-                )}
-              />
+              <div className="-order-1">
+                <Controller
+                  name="query"
+                  control={control}
+                  render={({ field }) => (
+                    <FormInput
+                      id="searchQuery"
+                      label="Search query"
+                      placeholder="Search for articles"
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  )}
+                />
+              </div>
 
               {/* Sorting */}
               <SearchPostsSort control={control} />
@@ -131,7 +133,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
               </FormGroup>
 
               {/* Buttons */}
-              <ButtonsContainer className="m-0">
+              <ButtonsContainer className="m-0 flex-row">
                 <Button type="submit">Search</Button>
                 <Button
                   type="button"
