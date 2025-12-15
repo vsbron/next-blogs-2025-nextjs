@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { fetchSearchPosts } from "@/utils/actions/posts";
 
 import { PostPreview } from "@/utils/types";
 
-function useSearchPreview({ searchTerm }: { searchTerm: string }) {
+function useSearchPreview({
+  searchTerm,
+  setError,
+}: {
+  searchTerm: string;
+  setError: Dispatch<SetStateAction<string>>;
+}) {
   const [results, setResults] = useState<PostPreview[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -17,6 +23,7 @@ function useSearchPreview({ searchTerm }: { searchTerm: string }) {
     // Fetch the data
     const handler = setTimeout(async () => {
       setLoading(true);
+      setError("");
       try {
         const data = await fetchSearchPosts(searchTerm, {}, 1, 2);
         setResults(data.posts);
@@ -28,7 +35,7 @@ function useSearchPreview({ searchTerm }: { searchTerm: string }) {
     }, 300); // debounce 0.3s
 
     return () => clearTimeout(handler);
-  }, [searchTerm]);
+  }, [searchTerm, setError]);
 
   return { results, loading };
 }

@@ -64,7 +64,7 @@ function Search() {
   };
 
   // Get the search results preview
-  const { results, loading } = useSearchPreview({ searchTerm });
+  const { results, loading } = useSearchPreview({ searchTerm, setError });
 
   // Returned JSX
   return (
