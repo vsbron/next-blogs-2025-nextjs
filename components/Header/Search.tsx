@@ -3,10 +3,13 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import useSearchPreview from "@/hooks/useSearchPreview";
 import { SearchIcon, XIcon } from "lucide-react";
+import Link from "next/link";
+import SearchPostPreview from "./SearchPostPreview";
 
 function Search() {
-  // Create state variable for search term, error, searching state, referrer for input field and router
+  // Create state variable for search term, error, searching state, results, loading state, referrer for input field and router
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -60,6 +63,9 @@ function Search() {
     router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
   };
 
+  // Get the search results preview
+  const { results, loading } = useSearchPreview({ searchTerm });
+
   // Returned JSX
   return (
     <>
@@ -112,9 +118,46 @@ function Search() {
         >
           <SearchIcon className="!w-8 !h-8 stroke-white" />
         </Button>
-        {error && (
-          <div className="text-white text-sm text-center mt-3">{error}</div>
-        )}
+        <div className="mt-4 text-white">
+          {error && <div className="text-sm">{error}</div>}
+
+          {!error && searchTerm.trim().length < 3 && (
+            <div className="text-sm">
+              Type at least 3 characters to start searching
+            </div>
+          )}
+
+          {!error && searchTerm.trim().length >= 3 && loading && (
+            <div className="loader"></div>
+          )}
+          {!error &&
+            searchTerm.trim().length >= 3 &&
+            !loading &&
+            results.length > 0 && (
+              <>
+                <h2 className="text-lg text-white mb-2">Quick results:</h2>
+                <div className="flex flex-col gap-6">
+                  {results.map((post) => (
+                    <Link key={post.id} href={`/posts/${post.id}`}>
+                      <SearchPostPreview post={post} />
+                    </Link>
+                  ))}
+                  <a
+                    href={`/search?query=${encodeURIComponent(searchTerm)}`}
+                    className="block px-3 py-2 font-bold text-center"
+                  >
+                    See all results
+                  </a>
+                </div>
+              </>
+            )}
+          {!error &&
+            searchTerm.trim().length >= 3 &&
+            !loading &&
+            results.length === 0 && (
+              <div className="text-sm">No posts found matching your query.</div>
+            )}
+        </div>
       </form>
     </>
   );

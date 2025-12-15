@@ -101,7 +101,8 @@ export const fetchAllPosts = async (
 export const fetchSearchPosts = async (
   query: string,
   filters: Record<string, string>,
-  page: number
+  page: number,
+  limit?: number
 ) => {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
@@ -166,7 +167,7 @@ export const fetchSearchPosts = async (
     orderBy,
     select: postFields,
     skip,
-    take: ARTICLES_PER_PAGE,
+    take: limit || ARTICLES_PER_PAGE,
   });
 
   // Total posts count

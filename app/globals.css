@@ -153,6 +153,16 @@ body {
     @apply w-6 h-6 fill-foreground/80 cursor-pointer transition-colors duration-200;
   }
 }
+@layer utilities {
+  .loader {
+    @apply w-12 p-2 aspect-square rounded-full bg-[#fff] animate-spin mx-auto;
+    --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+  }
+}
 
 h1,
 h2,
