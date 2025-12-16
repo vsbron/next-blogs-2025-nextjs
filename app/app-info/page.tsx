@@ -191,20 +191,17 @@ function AppInfoPage() {
         <p>Accessible only to signed-in users.</p>
         <ul>
           <li>
-            <strong>Profile Settings</strong>: avatar, display name, username,
-            about, DOB, social links, country, gender
+            <strong>Profile Settings</strong>: manage avatar, display name,
+            username, bio, date of birth, social links, country, and gender
           </li>
           <li>
-            <strong>Add Post</strong> with full editor
+            <strong>Add Post</strong>: create new posts with a full editor
           </li>
           <li>
-            <strong>My Posts</strong>: edit/delete
+            <strong>My Posts</strong>: view, edit, or delete your posts
           </li>
           <li>
-            <strong>Liked Posts</strong>
-          </li>
-          <li>
-            <strong>User Stats</strong>
+            <strong>Liked Posts</strong>: see posts you have liked
           </li>
         </ul>
         <p>

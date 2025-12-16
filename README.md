@@ -90,11 +90,10 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 
 Accessible only to signed-in users.
 
-- **Profile Settings**: avatar, display name, username, about, DOB, social links, country, gender
-- **Add Post** with full editor
-- **My Posts**: edit/delete
-- **Liked Posts**
-- **User Stats**
+- **Profile Settings**: manage avatar, display name, username, bio, date of birth, social links, country, and gender
+- **Add Post**: create new posts with a full editor
+- **My Posts**: view, edit, or delete your posts
+- **Liked Posts**: see posts you've liked
 
 > Dashboard pages are `noindex` for search engines.
 
