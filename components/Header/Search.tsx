@@ -1,7 +1,13 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  FormEvent,
+  startTransition,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
 import SearchPostPreview from "@/components/Header/SearchPostPreview";
 import { Button } from "@/components/ui/button";
@@ -61,6 +67,20 @@ function Search() {
     // Close search and redirect user to search page
     hideSearch();
     router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
+  };
+
+  // Click Handlers on the article and See all option
+  const handleLinkClick = (id: number) => {
+    startTransition(() => {
+      router.push(`/posts/${id}`);
+      hideSearch();
+    });
+  };
+  const handleSeeAll = () => {
+    startTransition(() => {
+      router.push(`/search?query=${searchTerm}`);
+      hideSearch();
+    });
   };
 
   // Get the search results preview
@@ -142,18 +162,22 @@ function Search() {
                 <div className="flex flex-col gap-4 sm:gap-8">
                   {results.map((post) => (
                     <>
-                      <Link key={post.id} href={`/posts/${post.id}`}>
+                      <div
+                        key={post.id}
+                        onClick={() => handleLinkClick(post.id)}
+                        className="cursor-pointer"
+                      >
                         <SearchPostPreview post={post} />
-                      </Link>
+                      </div>
                       <div className="bg-white h-0.25 opacity-50 mb-1" />
                     </>
                   ))}
-                  <Link
-                    href={`/search?query=${encodeURIComponent(searchTerm)}`}
-                    className="font-bold text-center self-center"
+                  <div
+                    className="font-bold text-center self-center cursor-pointer"
+                    onClick={handleSeeAll}
                   >
                     See all results
-                  </Link>
+                  </div>
                 </div>
               </>
             )}
