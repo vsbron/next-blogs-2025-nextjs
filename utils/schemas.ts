@@ -65,10 +65,12 @@ function validateImageFile() {
   return (
     z
       .instanceof(File)
+      .optional()
       // Check the size
-      .refine((file) => {
-        return !file || file.size <= maxUploadSize;
-      }, "File size must be less than 1MB")
+      .refine(
+        (file) => !file || file.size <= maxUploadSize,
+        "File size must be less than 1MB"
+      )
       // Check the file type
       .refine((file) => {
         return (

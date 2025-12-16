@@ -29,7 +29,6 @@ function ImageInput({ error, setValue, ...props }: ImageInputProps) {
           const file = e.target.files?.[0];
           if (file) setValue("imageUrl", file, { shouldValidate: true });
         }}
-        required
       />
       {error && <span className="text-primary text-sm">{error}</span>}
     </FormGroup>

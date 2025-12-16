@@ -32,7 +32,7 @@ export const createEditPostAction = async (
     });
 
     // Upload the image and get the full path
-    const fullPath = await uploadImage(validatedImage.imageUrl);
+    const fullPath = await uploadImage(validatedImage!.imageUrl!);
 
     // Create post in the database
     await db.post.create({
@@ -77,10 +77,10 @@ export const editPostAction = async (
 
     // IMAGE REPLACE
     // Get the image from formData
-    const file = formData.get("imageUrl") as File;
-    let fullPath;
+    const file = formData.get("imageUrl") as File | null; // file can be null
+    let fullPath: string | undefined;
 
-    if (file) {
+    if (file && file.size > 0) {
       // Decode URL to get the correct file path
       const decodedPath = decodeURIComponent(post.imageUrl);
       const fileName = decodedPath.split("/post-images/")[1];
@@ -100,7 +100,7 @@ export const editPostAction = async (
       });
 
       // Upload the image and get the full path
-      fullPath = await uploadImage(validatedImage.imageUrl);
+      fullPath = await uploadImage(validatedImage!.imageUrl!);
     }
 
     // Create post in the database

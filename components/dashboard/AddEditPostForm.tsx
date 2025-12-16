@@ -25,7 +25,7 @@ type FormValues = {
   preview: string;
   text: string;
   category: string;
-  imageUrl: File;
+  imageUrl?: File;
 };
 
 // The component
@@ -59,17 +59,31 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
 
   // On submit handler
   const onSubmit = async (data: FormValues) => {
+    // Preparing the post image
+    let imageToUpload: File | string | undefined = undefined;
+
+    if (data.imageUrl) {
+      // User attached a new file
+      imageToUpload = data.imageUrl;
+    } else if (defaultValues?.imageUrl) {
+      // keep existing URL
+      imageToUpload = defaultValues.imageUrl;
+    }
+
     // Set the correct action for post handling
     const correctAction = defaultValues
       ? (formData: FormData) => editPostAction(formData, defaultValues.id)
       : createEditPostAction;
 
-    // Guard cause for big images
-    if (data.imageUrl.size > MAX_IMAGE_FILE_SIZE)
-      throw new Error("Image is too big");
+    // // Guard cause for big images
+    // if (data.imageUrl.size > MAX_IMAGE_FILE_SIZE)
+    //   throw new Error("Image is too big");
 
     // Handle the form submission
-    const result = await handleFormAction(correctAction, data);
+    const result = await handleFormAction(correctAction, {
+      ...data,
+      imageUrl: imageToUpload,
+    });
 
     // If success, trigger a message and invalidate query
     if (result.success) router.push("/dashboard/my-posts");
