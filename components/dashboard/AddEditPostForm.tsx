@@ -75,9 +75,12 @@ function AddEditPostForm({ defaultValues }: { defaultValues?: Post }) {
       ? (formData: FormData) => editPostAction(formData, defaultValues.id)
       : createEditPostAction;
 
-    // // Guard cause for big images
-    // if (data.imageUrl.size > MAX_IMAGE_FILE_SIZE)
-    //   throw new Error("Image is too big");
+    // Guard cause for big images
+    if (
+      imageToUpload instanceof File &&
+      imageToUpload.size > MAX_IMAGE_FILE_SIZE
+    )
+      throw new Error("Image is too big");
 
     // Handle the form submission
     const result = await handleFormAction(correctAction, {
