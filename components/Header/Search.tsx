@@ -1,12 +1,12 @@
 "use client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
+import SearchPostPreview from "@/components/Header/SearchPostPreview";
 import { Button } from "@/components/ui/button";
 import useSearchPreview from "@/hooks/useSearchPreview";
 import { SearchIcon, XIcon } from "lucide-react";
-import Link from "next/link";
-import SearchPostPreview from "./SearchPostPreview";
 
 function Search() {
   // Create state variable for search term, error, searching state, results, loading state, referrer for input field and router
@@ -93,7 +93,7 @@ function Search() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className={`fixed top-20 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
+        className={`fixed top-15 sm:top-20 left-0 right-0 mx-auto z-150 w-80 xs:w-96 transition-all duration-300 ease-out transform ${
           isSearching
             ? "opacity-100 translate-y-0 pointer-events-auto delay-150"
             : "opacity-0 translate-y-6 pointer-events-none"
@@ -102,7 +102,7 @@ function Search() {
         <input
           type="search"
           name="search"
-          className="border rounded-3xl border-white/50 pt-6 pb-7 pl-5 pr-13 bg-transparent text-white h-10 w-full text-2xl outline-0 shadow-primary/60 shadow-[0_0_70px_5px]"
+          className="border rounded-3xl border-white/50 py-4 pl-3 pr-11 sm:pt-6 sm:pb-7 sm:pl-5 sm:pr-13 bg-transparent text-white h-8 sm:h-10 w-full text-lg sm:text-2xl outline-0 shadow-primary/60 shadow-[0_0_70px_5px]"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search posts..."
@@ -112,42 +112,48 @@ function Search() {
         <Button
           type="submit"
           variant="link"
-          className="absolute right-0 top-2"
+          className="absolute right-0 -top-0.5 sm:top-2"
           disabled={!isSearching}
           aria-label="Search post"
         >
-          <SearchIcon className="!w-8 !h-8 stroke-white" />
+          <SearchIcon className="!w-5 !h-5 !sm:w-8 !sm:h-8 stroke-white" />
         </Button>
-        <div className="mt-4 text-white">
+        <div className="mt-3 sm:mt-4 text-white">
+          {/* Messages, alerts and loaders */}
           {error && <div className="text-sm">{error}</div>}
-
           {!error && searchTerm.trim().length < 3 && (
             <div className="text-sm">
               Type at least 3 characters to start searching
             </div>
           )}
-
           {!error && searchTerm.trim().length >= 3 && loading && (
             <div className="loader"></div>
           )}
+
+          {/* Previews */}
           {!error &&
             searchTerm.trim().length >= 3 &&
             !loading &&
             results.length > 0 && (
               <>
-                <h2 className="text-lg text-white mb-2">Quick results:</h2>
-                <div className="flex flex-col gap-6">
+                <h2 className="text-md sm:text-lg text-white mb-2">
+                  Quick results:
+                </h2>
+                <div className="flex flex-col gap-4 sm:gap-8">
                   {results.map((post) => (
-                    <Link key={post.id} href={`/posts/${post.id}`}>
-                      <SearchPostPreview post={post} />
-                    </Link>
+                    <>
+                      <Link key={post.id} href={`/posts/${post.id}`}>
+                        <SearchPostPreview post={post} />
+                      </Link>
+                      <div className="bg-white h-0.25 opacity-50 mb-1" />
+                    </>
                   ))}
-                  <a
+                  <Link
                     href={`/search?query=${encodeURIComponent(searchTerm)}`}
-                    className="block px-3 py-2 font-bold text-center"
+                    className="font-bold text-center self-center"
                   >
                     See all results
-                  </a>
+                  </Link>
                 </div>
               </>
             )}
