@@ -14,6 +14,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
    - [Home Page](#home-page)
    - [Post Page](#post-page)
    - [Author Page](#author-page)
+   - [Search Page](#search-page)
    - [Dashboard](#dashboard)
    - [Additional Pages](#additional-pages)
 4. [Technical Details](#technical-details)
@@ -37,7 +38,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - 🗂️ **Full Post Filtering & Pagination** (category, popularity, views, date)
 - ❤️ **Like and Share Buttons** for posts with real-time updates
 - 🧑‍🤝‍🧑 **Author List Page** with filters & pagination
-- 🔍 **Search Bar** placeholder (UI done, logic pending)
+- 🔍 **Global Search Bar** available on any page, with live result previews
 - 🌙 **Light/Dark Theme Toggle**
 - 📱 **Fully Responsive Layout**
 
@@ -76,6 +77,14 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - Public author profile
 - Avatar, bio, join date, social links, and basic info
 - Paginated list of posts with filters
+
+### Search Page
+
+- Dedicated page for discovering articles
+- Search across title, preview text, and author names
+- Category-based filtering
+- Sorting and additional filters (e.g. popular posts)
+- Paginated results with clear empty-state messaging
 
 ### Dashboard
 

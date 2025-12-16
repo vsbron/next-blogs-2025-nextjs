@@ -52,6 +52,9 @@ function AppInfoPage() {
                 <a href="#author-page">Author Page</a>
               </li>
               <li>
+                <a href="#search-page">Search Page</a>
+              </li>
+              <li>
                 <a href="#dashboard">Dashboard</a>
               </li>
               <li>
@@ -102,7 +105,8 @@ function AppInfoPage() {
             🧑‍🤝‍🧑 <strong>Author List Page</strong> with filters & pagination
           </li>
           <li>
-            🔍 <strong>Search Bar</strong> placeholder (UI done, logic pending)
+            🔍 <strong>Global Search Bar</strong> available on any page, with
+            live result previews
           </li>
           <li>
             🌙 <strong>Light/Dark Theme Toggle</strong>
@@ -172,6 +176,15 @@ function AppInfoPage() {
           <li>Public author profile</li>
           <li>Avatar, bio, join date, social links, and basic info</li>
           <li>Paginated list of posts with filters</li>
+        </ul>
+
+        <h3 id="search-page">Search Page</h3>
+        <ul>
+          <li>Dedicated page for discovering articles</li>
+          <li>Search across title, preview text, and author names</li>
+          <li>Category-based filtering</li>
+          <li>Sorting and additional filters (e.g. popular posts)</li>
+          <li>Paginated results with clear empty-state messaging</li>
         </ul>
 
         <h3 id="dashboard">Dashboard</h3>
