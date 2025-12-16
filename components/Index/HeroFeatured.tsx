@@ -68,7 +68,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
         <CardContent className="px-0">
           <p className="!mb-4 sm:!mb-6 text-sm md:text-base">{preview}</p>
           <Button asChild>
-            <Link href={`/posts/${id}`}>Read post</Link>
+            <Link href={`/posts/${id}`}>Read posts</Link>
           </Button>
         </CardContent>
       </Card>

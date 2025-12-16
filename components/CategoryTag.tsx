@@ -12,7 +12,7 @@ function CategoryTag({ children, className }: CategoryTag) {
   return (
     <div
       className={cn(
-        "absolute z-20 bg-primary shadow border border-border text-white font-bold pt-0.25 pb-0.5 px-2.5 text-xs tracking-0 rounded-md",
+        "absolute z-20 bg-primary shadow border border-border text-white font-bold py-0.5 px-2.5 text-xs tracking-0 rounded-md",
         className
       )}
     >
