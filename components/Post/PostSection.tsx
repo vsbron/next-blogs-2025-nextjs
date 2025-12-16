@@ -16,7 +16,7 @@ function PostSection({ post }: { post: Post }) {
   return (
     <>
       <ViewTracker id={id} />
-      <Card className="p-0 pb-1.25 md:pb-1.5 gap-y-1 mb-3 md:mb-6 overflow-hidden -mt-2 xs:mt-0">
+      <Card className="p-0 pb-1 gap-y-1 mb-3 md:mb-6 overflow-hidden -mt-2 xs:mt-0">
         <div className="h-44 xs:h-60 md:h-70 lg:h-96 relative">
           <Image
             src={imageUrl}

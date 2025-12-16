@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import {
   FormEvent,
+  Fragment,
   startTransition,
   useCallback,
   useEffect,
@@ -161,16 +162,15 @@ function Search() {
                 </h2>
                 <div className="flex flex-col gap-4 sm:gap-8">
                   {results.map((post) => (
-                    <>
+                    <Fragment key={post.id}>
                       <div
-                        key={post.id}
                         onClick={() => handleLinkClick(post.id)}
                         className="cursor-pointer"
                       >
                         <SearchPostPreview post={post} />
                       </div>
                       <div className="bg-white h-0.25 opacity-50 mb-1" />
-                    </>
+                    </Fragment>
                   ))}
                   <div
                     className="font-bold text-center self-center cursor-pointer"
