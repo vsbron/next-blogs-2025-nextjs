@@ -61,7 +61,7 @@ function ContactUsForm() {
   // Returned JSX
   return (
     <form onSubmit={handleSubmit(onSubmit)} id="contact-form">
-      <div className="flex flex-col gap-y-6 !w-160">
+      <div className="flex flex-col gap-y-6">
         <FormInput
           id="name"
           placeholder="Enter your name"
@@ -94,7 +94,7 @@ function ContactUsForm() {
             </span>
           )}
         </FormGroup>
-        <ButtonsContainer className="mt-0">
+        <ButtonsContainer className="mt-0 flex-row">
           <Button type="submit" size="lg" className="self-start">
             Send
           </Button>
