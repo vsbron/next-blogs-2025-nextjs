@@ -147,3 +147,5 @@ export const COUNTRIES = Object.values(countries)
   .map((c) => c.name)
   .sort()
   .concat("Unknown");
+
+export const EMAILJS_PUBLIC_KEY = "Z6SWDyMbtxfzu4GzU";

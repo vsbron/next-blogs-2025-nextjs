@@ -1,5 +1,7 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import emailjs from "@emailjs/browser";
 
 import { ButtonsContainer } from "@/components/form/Buttons";
 import FormInput from "@/components/form/FormInput";
@@ -12,12 +14,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contactUsSchema } from "@/utils/schemas";
 import { toast } from "sonner";
 
+import { EMAILJS_PUBLIC_KEY } from "@/utils/constants";
+
+// Form values type
 type ContactUsFormValues = {
   name: string;
   email: string;
   message: string;
 };
 
+// The component
 function ContactUsForm() {
   // Initiate form
   const {
@@ -34,14 +40,27 @@ function ContactUsForm() {
     },
   });
 
+  // Get the router
+  const router = useRouter();
+
   // Form submit handler
   const onSubmit = (data: ContactUsFormValues) => {
-    toast("Message sent");
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_VSCONTACT_SERVICE_ID as string,
+        process.env.NEXT_PUBLIC_EMAILJS_VSCONTACT_TEMPLATE_ID as string,
+        { name: data.name, email: data.email, message: data.message },
+        EMAILJS_PUBLIC_KEY
+      )
+      .then(
+        () => router.push("/success"), // Redirect user to success page
+        () => toast("Form was not sent due to error")
+      );
   };
 
   // Returned JSX
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} id="contact-form">
       <div className="flex flex-col gap-y-6 !w-160">
         <FormInput
           id="name"
