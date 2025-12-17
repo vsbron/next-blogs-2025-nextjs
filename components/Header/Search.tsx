@@ -66,8 +66,10 @@ function Search() {
     if (!searchTerm.trim()) return setError("Please fill the search field");
 
     // Close search and redirect user to search page
-    hideSearch();
-    router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
+    startTransition(() => {
+      router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
+      hideSearch();
+    });
   };
 
   // Click Handlers on the article and See all option
@@ -79,7 +81,7 @@ function Search() {
   };
   const handleSeeAll = () => {
     startTransition(() => {
-      router.push(`/search?query=${searchTerm}`);
+      router.push(`/search?query=${encodeURIComponent(searchTerm)}`);
       hideSearch();
     });
   };
