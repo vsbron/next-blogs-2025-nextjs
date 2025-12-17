@@ -267,6 +267,9 @@ function AppInfoPage() {
             <strong>Image Uploads</strong>: Stored in Supabase Storage
           </li>
           <li>
+            <strong>EmailJS</strong>: Sending messages from the Contact Us form
+          </li>
+          <li>
             <strong>Deployment</strong>: Vercel
           </li>
         </ul>

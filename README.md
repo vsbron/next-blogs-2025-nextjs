@@ -119,6 +119,7 @@ Accessible only to signed-in users.
 - **State & Data**: React Query with custom hooks
 - **Meta / SEO**: static + dynamic metadata
 - **Image Uploads**: Stored in Supabase Storage
+- **EmailJS**: Sending messages from the Contact Us form
 - **Deployment**: Vercel
 
 ---
