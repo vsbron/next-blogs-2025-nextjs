@@ -99,11 +99,12 @@ Accessible only to signed-in users.
 
 ### Additional Pages
 
-- Category pages (same layout as "All Posts" with filters pre-applied)
-- Trending Posts (recent posts sorted by popularity)
-- List of all authors with filters and pagination
-- 404, About, Contact
-- Legal pages: Terms of Use, Privacy Policy
+- Category pages - Lists all available categories. Selecting one opens the All Posts page with the corresponding filters pre-applied
+- Trending Posts - Shows the latest popular posts that meet the defined conditions
+- Authors list - Similar to posts, but showcases authors, complete with filters and pagination
+- App Info, About Us, Contact Us, Site Map - Technical pages providing information about the platform and ways to get in touch
+- Custom error pages - 404 and other error pages for various situations
+- Legal pages - Terms of Use and Privacy Policy
 
 ---
 

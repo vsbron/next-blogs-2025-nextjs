@@ -211,13 +211,26 @@ function AppInfoPage() {
         <h3 id="additional-pages">Additional Pages</h3>
         <ul>
           <li>
-            Category pages (same layout as &quot;All Posts&quot; with filters
-            pre-applied)
+            Category pages - Lists all available categories. Selecting one opens
+            the All Posts page with the corresponding filters pre-applied
           </li>
-          <li>Trending Posts (recent posts sorted by popularity)</li>
-          <li>List of all authors with filters and pagination</li>
-          <li>404, About, Contact</li>
-          <li>Legal pages: Terms of Use, Privacy Policy</li>
+          <li>
+            Trending Posts - Shows the latest popular posts that meet the
+            defined conditions
+          </li>
+          <li>
+            Authors list - Similar to posts, but showcases authors, complete
+            with filters and pagination
+          </li>
+          <li>
+            App Info, About Us, Contact Us, Site Map - Technical pages providing
+            information about the platform and ways to get in touch
+          </li>
+          <li>
+            Custom error pages - 404 and other error pages for various
+            situations
+          </li>
+          <li>Legal pages - Terms of Use and Privacy Policy</li>
         </ul>
 
         <hr />
