@@ -2,6 +2,7 @@ import { Metadata } from "next";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
+import ContactUsForm from "@/components/ContactUsForm";
 
 // Meta data
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ function ContactPage() {
           Thanks for your time, interest, and support - it is genuinely
           appreciated.
         </p>
+        <ContactUsForm />
       </ArticleLayout>
     </section>
   );

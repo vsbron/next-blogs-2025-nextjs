@@ -79,3 +79,14 @@ function validateImageFile() {
       }, "File must be an image")
   );
 }
+
+/**********************************/
+
+export const contactUsSchema = z.object({
+  name: z
+    .string()
+    .min(3, "Name should be at least 3 characters")
+    .max(20, "Name should be at most 20 characters"),
+  email: z.email(),
+  message: z.string().max(300, "Message should be at most 300 characters"),
+});
