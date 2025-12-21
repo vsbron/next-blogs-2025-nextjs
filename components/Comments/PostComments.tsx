@@ -1,14 +1,21 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
+
 import SectionTitle from "@/components/SectionTitle";
+import PostComment from "@/components/Comments/PostComment";
 import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+
 import useGetComments from "@/hooks/useGetComments";
-import PostComment from "./PostComment";
+import AddCommentForm from "./AddCommentForm";
 
 // Props type
 type PostCommentsProps = { postId: number };
 
 // The component
 function PostComments({ postId }: PostCommentsProps) {
+  // Get the isSignedIn status of current user
+  const { isSignedIn } = useUser();
+
   // Get the comments for posts
   const { comments, isLoading } = useGetComments(postId);
 
@@ -20,6 +27,11 @@ function PostComments({ postId }: PostCommentsProps) {
   return (
     <section className="mt-6">
       <SectionTitle as="h3">Comments</SectionTitle>
+
+      {/* New comment form */}
+      {isSignedIn && <AddCommentForm />}
+
+      {/* Existing comments */}
       {comments.length > 0 ? (
         <div>
           {comments.map((comment) => (
