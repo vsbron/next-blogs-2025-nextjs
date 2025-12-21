@@ -6,10 +6,12 @@ import PostSection from "@/components/Post/PostSection";
 import PostSidebar from "@/components/Sidebar/PostSidebar";
 import SectionTitle from "@/components/SectionTitle";
 import BreadCrumbsPostPage from "@/components/breadcrumbs/BreadCrumbsPostPage";
+import PostComments from "@/components/Comments/PostComments";
 import SkeletonArticle from "@/components/skeletons/SkeletonArticle";
 
 import { fetchPost } from "@/utils/actions/posts";
 import { SITE_DOMAIN } from "@/utils/constants";
+import SectionSeparator from "@/components/SectionSeparator";
 
 // Interface for the Post ID
 interface SinglePostPageProps {
@@ -77,6 +79,8 @@ async function PostPage({ params }: SinglePostPageProps) {
       <Suspense fallback={<SkeletonArticle />}>
         <ArticleLayout sidebar={<PostSidebar post={post} />}>
           <PostSection post={post} />
+          <SectionSeparator />
+          <PostComments postId={post.id} />
         </ArticleLayout>
       </Suspense>
     </section>
