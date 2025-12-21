@@ -20,7 +20,7 @@ async function PostRecentPosts() {
         {posts.map(({ id, title, published }) => (
           <div
             key={id}
-            className="flex justify-between items-start gap-4 border-b border-border/40 pb-0.5"
+            className="flex justify-between items-start gap-4 border-b border-border/40 pb-0.5 last-of-type:border-none"
           >
             <Link href={`/posts/${id}`} className="link-primary">
               {title}
