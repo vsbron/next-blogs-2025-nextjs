@@ -6,15 +6,18 @@ import Link from "next/link";
 
 import defaultAvatar from "@/assets/defaultUser.png";
 
+import { EditIcon, Trash2Icon } from "lucide-react";
+
 // Props type
 type PostCommentProps = {
   comment: Comment;
+  currentUserId: string | undefined;
 };
 
 // The component
-function PostComment({ comment }: PostCommentProps) {
+function PostComment({ comment, currentUserId }: PostCommentProps) {
   // Destructure comment
-  const { commentText, commentedTime, user } = comment;
+  const { commentText, commentedTime, user, userId } = comment;
   const { username, displayName, imageUrl } = user;
 
   // Returned JSX
@@ -42,6 +45,16 @@ function PostComment({ comment }: PostCommentProps) {
         </Link>
         <div className="max-xs:max-w-22 max-xs:text-right max-xs:text-xs">
           {formatDateTime(commentedTime)}
+          {currentUserId === userId && (
+            <div className="font-normal flex gap-3 items-center justify-end mt-0.5">
+              <span className="flex gap-1 text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors">
+                <EditIcon className="w-4 h-4" /> Edit
+              </span>
+              <span className="flex gap-1 text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
+                <Trash2Icon className="w-4 h-4" /> Delete
+              </span>
+            </div>
+          )}
         </div>
       </CardHeader>
       <CardContent className="px-4 !py-1">
