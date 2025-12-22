@@ -45,10 +45,6 @@ export async function addCommentAction(formData: FormData) {
     const validatedFields = validatedWithZodSchema(commentSchema, parsedData);
 
     // Update the prisma
-    await db.comment.create({
-      data: { ...validatedFields, userId: userId },
-    });
-
     await Promise.all([
       db.comment.create({ data: { ...validatedFields, userId: userId } }),
       db.post.update({
