@@ -7,6 +7,7 @@ import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
 
 import useGetComments from "@/hooks/useGetComments";
 import AddCommentForm from "./AddCommentForm";
+import AuthToComment from "./AuthToComment";
 
 // Props type
 type PostCommentsProps = { postId: number };
@@ -36,7 +37,7 @@ function PostComments({ postId }: PostCommentsProps) {
       <SectionTitle as="h3">Comments ({comments.length})</SectionTitle>
 
       {/* New comment form */}
-      {isSignedIn && <AddCommentForm postId={postId} />}
+      {isSignedIn ? <AddCommentForm postId={postId} /> : <AuthToComment />}
 
       {/* Existing comments */}
       {comments.length > 0 ? (
