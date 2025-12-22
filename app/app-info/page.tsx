@@ -114,6 +114,17 @@ function AppInfoPage() {
           <li>
             📱 <strong>Fully Responsive Layout</strong>
           </li>
+          <li>
+            💬 <strong>Comments System</strong>
+            <ul className="!m-0">
+              <li>Authorized users can add comments to posts</li>
+              <li>Comments are displayed directly on the post page</li>
+              <li>
+                Users can edit or delete their own comments from the post page
+              </li>
+              <li>All user comments are also accessible from the dashboard</li>
+            </ul>
+          </li>
         </ul>
 
         <h3>Backend / Logic Features</h3>
