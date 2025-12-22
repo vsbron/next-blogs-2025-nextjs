@@ -40,7 +40,9 @@ function PostComment({ comment }: PostCommentProps) {
             <span>{username}</span>
           </div>
         </Link>
-        <div>{formatDateTime(commentedTime)}</div>
+        <div className="max-xs:max-w-22 max-xs:text-right max-xs:text-xs">
+          {formatDateTime(commentedTime)}
+        </div>
       </CardHeader>
       <CardContent className="px-4 !py-1">
         <div>{commentText}</div>
