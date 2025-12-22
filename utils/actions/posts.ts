@@ -18,6 +18,7 @@ const postFields = {
   category: true,
   likes: { select: { id: true } },
   likesCount: true,
+  commentsCount: true,
 };
 
 /* GLOBAL POSTS */

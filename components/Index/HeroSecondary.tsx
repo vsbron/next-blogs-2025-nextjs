@@ -17,6 +17,7 @@ function HeroSecondary({ post }: { post: PostPreview }) {
     published,
     views,
     likesCount,
+    commentsCount,
     imageUrl,
     id,
     category,
@@ -41,6 +42,7 @@ function HeroSecondary({ post }: { post: PostPreview }) {
               views={views}
               likes={likesCount}
               date={date}
+              comments={commentsCount}
             />
           </div>
           <Link

@@ -21,6 +21,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
     published,
     views,
     likesCount,
+    commentsCount,
     id,
     imageUrl,
     category,
@@ -45,7 +46,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
       </div>
       <Card className="gap-1 sm:gap-3 px-0 sm:px-6 py-4 sm:py-8 shadow-none bg-0 border-none">
         <CardHeader className="px-0">
-          <div className="text-sm flex flex-row sm:flex-col md:flex-row items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
+          <div className="text-sm flex flex-col xs:flex-row sm:flex-col md:flex-row items-start xs:items-center sm:items-start md:items-center justify-between gap-x-4 gap-y-1.5 xs:border-b xs:pb-2 border-foreground/10">
             <div className="bg-accent/15 font-bold px-1.5 pt-0.5 pb-0.75 sm:px-2 sm:py-1 rounded-lg flex items-center gap-1 lg:gap-1.5 text-sm">
               <StarIcon className="fill-accent stroke-accent w-3 h-3 sm:w-4 sm:h-4" />{" "}
               Featured<span className="hidden xs:inline"> article</span>
@@ -54,6 +55,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
               views={views}
               likes={likesCount}
               date={date}
+              comments={commentsCount}
             />
           </div>
           <Link
@@ -68,7 +70,7 @@ function HeroFeatured({ post }: { post: PostPreview }) {
         <CardContent className="px-0">
           <p className="!mb-4 sm:!mb-6 text-sm md:text-base">{preview}</p>
           <Button asChild>
-            <Link href={`/posts/${id}`}>Read posts</Link>
+            <Link href={`/posts/${id}`}>Read post</Link>
           </Button>
         </CardContent>
       </Card>

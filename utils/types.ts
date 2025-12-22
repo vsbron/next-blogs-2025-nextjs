@@ -39,6 +39,7 @@ export type PostPreview = {
   views: number;
   category: string;
   likesCount: number;
+  commentsCount: number;
 };
 
 // Post type

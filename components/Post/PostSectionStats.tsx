@@ -6,12 +6,12 @@ import { CardContent } from "@/components/ui/card";
 
 import { Post } from "@/utils/types";
 
-import { Eye } from "lucide-react";
+import { Eye, MessageCircle } from "lucide-react";
 import defaultAvatar from "@/assets/defaultUser.png";
 
 function PostSectionStats({ post }: { post: Post }) {
   // Destructure the post and set icons class
-  const { id, author, views, likes } = post;
+  const { id, author, views, likes, commentsCount } = post;
 
   // Returned JSX
   return (
@@ -43,6 +43,10 @@ function PostSectionStats({ post }: { post: Post }) {
         <div className="flex items-center text-[15px] gap-x-4 xs:gap-x-5">
           <div className="post-stats-icons-container">
             <PostSectionStatsLike likes={likes} postId={id} />
+          </div>
+          <div className="post-stats-icons-container">
+            <MessageCircle className="post-stats-icon" />
+            {commentsCount}
           </div>
           <div className="post-stats-icons-container">
             <Eye className="post-stats-icon" />

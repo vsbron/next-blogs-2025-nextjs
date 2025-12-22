@@ -26,6 +26,7 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
     views,
     imageUrl,
     likesCount,
+    commentsCount,
     category,
   } = post;
   const href = `/posts/${id}`;
@@ -49,7 +50,12 @@ function PostPreviewTile({ post }: PostPreviewTileProps) {
         </div>
       </Link>
       <CardHeader className="px-4">
-        <PostPreviewStatsProps views={views} likes={likesCount} date={date} />
+        <PostPreviewStatsProps
+          views={views}
+          likes={likesCount}
+          date={date}
+          comments={commentsCount}
+        />
       </CardHeader>
       <CardContent className="pb-5 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
