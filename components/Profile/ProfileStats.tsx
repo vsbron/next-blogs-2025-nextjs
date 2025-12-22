@@ -2,7 +2,7 @@ import ProfileDetailsLine from "@/components/Profile/ProfileDetailsLine";
 import PostPreviewTileMini from "@/components/PostPreview/PostPreviewTileMini";
 import { fetchUserStats } from "@/utils/actions/users";
 
-import { MdArticle, MdRemoveRedEye } from "react-icons/md";
+import { MdArticle, MdRemoveRedEye, MdMessage } from "react-icons/md";
 import { Card } from "../ui/card";
 
 async function ProfileStats({ userId }: { userId: string }) {
@@ -13,7 +13,7 @@ async function ProfileStats({ userId }: { userId: string }) {
   if (!data) return <p>There was some error. Please try again later</p>;
 
   // Destructure fetched data
-  const { totalPosts, totalViews, mostPopularPost } = data;
+  const { totalPosts, totalViews, totalComments, mostPopularPost } = data;
 
   // Returned JSX
   return (
@@ -24,12 +24,21 @@ async function ProfileStats({ userId }: { userId: string }) {
         <ProfileDetailsLine
           icon={<MdArticle className="w-5 h-5" />}
           label="Total posts"
+          wide={true}
         >
           {totalPosts}
         </ProfileDetailsLine>
         <ProfileDetailsLine
+          icon={<MdMessage className="w-5 h-5" />}
+          label="Total comments"
+          wide={true}
+        >
+          {totalComments}
+        </ProfileDetailsLine>
+        <ProfileDetailsLine
           icon={<MdRemoveRedEye className="w-5 h-5" />}
           label="Total views"
+          wide={true}
         >
           {totalViews}
         </ProfileDetailsLine>

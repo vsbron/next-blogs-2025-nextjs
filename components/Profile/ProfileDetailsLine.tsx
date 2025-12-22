@@ -7,6 +7,7 @@ type ProfileDetailsLineProps = {
   className?: string;
   icon: ReactElement<{ className?: string }>;
   column?: boolean;
+  wide?: boolean;
 };
 
 // The component
@@ -16,6 +17,7 @@ function ProfileDetailsLine({
   className,
   icon,
   column = false,
+  wide = false,
 }: ProfileDetailsLineProps) {
   // Clone the icon and apply a class
   const styledIcon = icon
@@ -24,12 +26,23 @@ function ProfileDetailsLine({
 
   // Returned JSX
   return (
-    <div className={`flex ${column ? "flex-col" : "items-end"}  ${className}`}>
+    <div
+      className={[
+        "flex max-xs:items-start max-xs:mb-1",
+        column ? "flex-col" : "items-end",
+        !wide && "max-xs:flex-col",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       <div className="flex items-center gap-x-1.5">
         {styledIcon}
-        <span className="w-30 font-bold">{label}:</span>
+        <span className={`font-bold ${wide ? "w-36" : "w-30"}`}>{label}:</span>
       </div>
-      <span>{children}</span>
+      <span className={!wide ? "max-xs:pl-6 max-xs:leading-5" : undefined}>
+        {children}
+      </span>
     </div>
   );
 }

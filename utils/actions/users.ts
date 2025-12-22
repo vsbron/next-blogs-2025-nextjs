@@ -167,6 +167,7 @@ export const fetchUserWithID = cache(async (userId: string) => {
 export type UserStats = {
   totalPosts: number;
   totalViews: number;
+  totalComments: number;
   mostPopularPost: PostPreview | null;
 };
 
@@ -186,6 +187,12 @@ export async function fetchUserStats(
     where: { authorId: userId },
     _count: { id: true },
     _sum: { views: true },
+  });
+
+  // Aggregate counts: posts, total views
+  const commentsAggregate = await db.post.aggregate({
+    where: { authorId: userId },
+    _sum: { commentsCount: true },
   });
 
   // Fetch only the top post by views
@@ -209,6 +216,7 @@ export async function fetchUserStats(
   return {
     totalPosts: postsAggregate._count.id,
     totalViews: postsAggregate._sum.views || 0,
+    totalComments: commentsAggregate._sum.commentsCount || 0,
     mostPopularPost,
   };
 }
