@@ -1,10 +1,7 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { PrismaClient } from "@prisma/client";
 import type { WebhookEvent } from "@clerk/nextjs/server";
-
-// Create Prisma client
-const prisma = new PrismaClient();
+import db from "@/utils/db";
 
 export async function POST(req: Request) {
   // Get the payload and headers
@@ -39,7 +36,7 @@ export async function POST(req: Request) {
     // Get the event data
     const u = evt.data;
 
-    await prisma.user.create({
+    await db.user.create({
       data: {
         clerkId: u.id,
         email:
@@ -64,7 +61,7 @@ export async function POST(req: Request) {
   // Handle user deleted event
   if (evt.type === "user.deleted") {
     const u = evt.data;
-    await prisma.user.delete({
+    await db.user.delete({
       where: { clerkId: u.id },
     });
   }
