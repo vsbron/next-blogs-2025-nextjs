@@ -9,6 +9,7 @@ import { addCommentAction } from "@/utils/actions/comments";
 import { handleFormAction } from "@/utils/helpers";
 import { commentSchema } from "@/utils/schemas";
 import { Comment } from "@/utils/types";
+import { useRouter } from "next/navigation";
 
 // Type for form values
 type FormValues = {
@@ -24,6 +25,7 @@ type AddCommentFormProps = {
 
 // The component
 function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
+  // Initiate form
   const {
     register,
     handleSubmit,
@@ -37,14 +39,16 @@ function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
     },
   });
 
+  // Get the router
+  const router = useRouter();
+
   // On submit handler
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
-
     // Handle the form submission and redirect user if successful
     const result = await handleFormAction(addCommentAction, data);
 
-    console.log(result);
+    // If success, trigger a message
+    if (result.success) router.push(`/posts/${postId}`);
   };
 
   // Returned JSX

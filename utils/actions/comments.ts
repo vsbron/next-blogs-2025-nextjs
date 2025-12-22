@@ -31,8 +31,6 @@ export const fetchPostComments = async (id: number) => {
 
 // Action function for adding a comment
 export async function addCommentAction(formData: FormData) {
-  console.log("here");
-
   // Get the current user clerkId
   const { userId } = await auth();
   if (!userId) redirect("/dashboard");

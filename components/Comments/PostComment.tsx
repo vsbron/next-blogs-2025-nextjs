@@ -15,7 +15,7 @@ function PostComment({ comment }: PostCommentProps) {
 
   // Returned JSX
   return (
-    <Card className="shadow-none py-2 gap-2">
+    <Card className="shadow-none py-2 gap-2 max-w-[800px]">
       <CardHeader className="px-4 !pb-1 border-b border-border flex justify-between">
         <div>
           <div>{username}</div>
