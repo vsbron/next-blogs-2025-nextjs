@@ -201,6 +201,7 @@ export async function fetchUserStats(
       views: true,
       category: true,
       likesCount: true,
+      commentsCount: true,
     },
   });
 

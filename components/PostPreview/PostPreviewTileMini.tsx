@@ -17,13 +17,22 @@ type PostPreviewTileMiniProps = {
 // The component
 function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
   // Destructure props and configure
-  const { id, title, published, views, imageUrl, likesCount, category } = post;
+  const {
+    id,
+    title,
+    published,
+    views,
+    imageUrl,
+    likesCount,
+    commentsCount,
+    category,
+  } = post;
   const href = `/posts/${id}`;
   const date = formatDate(published);
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 overflow-hidden max-w-70">
+    <Card className="p-0 gap-0 overflow-hidden max-w-80">
       <Link href={href} className="mb-3">
         <div className="relative h-20 sm:h-30 group overflow-hidden rounded-t-lg">
           <Image
@@ -40,7 +49,12 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
         </div>
       </Link>
       <CardHeader className="px-4 p">
-        <PostPreviewStatsProps views={views} likes={likesCount} date={date} />
+        <PostPreviewStatsProps
+          views={views}
+          likes={likesCount}
+          date={date}
+          comments={commentsCount}
+        />
       </CardHeader>
       <CardContent className="pb-4 px-4 h-full flex flex-col items-start">
         <Link href={href} className="hover:text-foreground/75 transition-all">
