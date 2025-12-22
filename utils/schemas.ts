@@ -82,6 +82,16 @@ function validateImageFile() {
 
 /**********************************/
 
+export const commentSchema = z.object({
+  commentText: z
+    .string()
+    .min(3, "Comment should be at least 3 characters")
+    .max(90, "Comment should be at most 90 characters"),
+  postId: z.number(),
+});
+
+/**********************************/
+
 export const contactUsSchema = z.object({
   name: z
     .string()

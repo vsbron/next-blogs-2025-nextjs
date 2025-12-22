@@ -56,8 +56,8 @@ export type Like = {
 // Like type
 export type Comment = {
   id: number;
-  userId?: string;
-  postId?: number;
+  userId: string;
+  postId: number;
   commentText: string;
   commentedTime: Date;
 };

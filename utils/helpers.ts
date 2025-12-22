@@ -31,6 +31,7 @@ export async function handleFormAction(
 ) {
   // Handle the form data
   const formData = new FormData();
+
   Object.entries(data).forEach(([key, value]) => {
     formData.append(key, value as any);
   });

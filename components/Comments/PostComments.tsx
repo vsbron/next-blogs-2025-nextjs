@@ -21,7 +21,14 @@ function PostComments({ postId }: PostCommentsProps) {
 
   // Guard clause
   if (isLoading) return <SkeletonPostsGrid />;
-  if (!comments) return <p>Sorry! There was an error while loading the comments.<br />Please try again...</p>;
+  if (!comments)
+    return (
+      <p>
+        Sorry! There was an error while loading the comments.
+        <br />
+        Please try again...
+      </p>
+    );
 
   // Returned JSX
   return (
@@ -29,7 +36,7 @@ function PostComments({ postId }: PostCommentsProps) {
       <SectionTitle as="h3">Comments</SectionTitle>
 
       {/* New comment form */}
-      {isSignedIn && <AddCommentForm />}
+      {isSignedIn && <AddCommentForm postId={postId} />}
 
       {/* Existing comments */}
       {comments.length > 0 ? (
