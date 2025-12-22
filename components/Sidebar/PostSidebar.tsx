@@ -25,7 +25,7 @@ function PostSidebar({ post }: { post: Post }) {
 // Helper components for exports
 export function PostSidebarCard({ children }: { children: React.ReactNode }) {
   return (
-    <Card className="pt-2 pb-2.5 md:pt-4 md:pb-5 lg:pt-5 lg:pb-6 px-4 xs:px-5 md:pl-6 lg:px-7 gap-y-0 md:gap-y-0.5 mb-4 md:mb-0 text-sm lg:text-base">
+    <Card className="pt-3 pb-3.5 md:pt-4 md:pb-5 lg:pt-5 lg:pb-6 px-4 xs:px-5 md:pl-6 lg:px-7 gap-y-0 md:gap-y-0.5 mb-4 md:mb-0 text-sm lg:text-base">
       {children}
     </Card>
   );

@@ -21,7 +21,7 @@ function PostComments({ postId }: PostCommentsProps) {
 
   // Guard clause
   if (isLoading) return <SkeletonPostsGrid />;
-  if (!comments) return <p>Error</p>;
+  if (!comments) return <p>Sorry! There was an error while loading the comments.<br />Please try again...</p>;
 
   // Returned JSX
   return (

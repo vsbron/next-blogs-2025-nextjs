@@ -5,11 +5,11 @@ import { Textarea } from "@/components/ui/textarea";
 function AddCommentForm() {
   // Returned JSX
   return (
-    <Card className="gap-0 py-4 mb-6">
-      <CardHeader className="py-0">
+    <Card className="gap-0 py-3 sm:py-4 mb-6">
+      <CardHeader className="max-sm:px-4 py-0">
         <div className="text-lg">Add a new comment</div>
       </CardHeader>
-      <CardContent className="flex flex-col gap-2 py-0">
+      <CardContent className="flex flex-col gap-3 py-0 max-sm:px-4 ">
         <Textarea
           id="comment"
           className="resize-none"

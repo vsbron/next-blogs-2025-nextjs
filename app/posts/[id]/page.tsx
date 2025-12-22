@@ -79,7 +79,7 @@ async function PostPage({ params }: SinglePostPageProps) {
       <Suspense fallback={<SkeletonArticle />}>
         <ArticleLayout sidebar={<PostSidebar post={post} />}>
           <PostSection post={post} />
-          <SectionSeparator />
+          <SectionSeparator className="my-10 sm:my-16" />
           <PostComments postId={post.id} />
         </ArticleLayout>
       </Suspense>
