@@ -6,8 +6,7 @@ import UserPosts from "@/components/dashboard/MyPosts";
 // Metadata
 export const metadata: Metadata = {
   title: "My Posts",
-  description:
-    "View, edit, and manage all the posts you've created on NextBlogs.",
+  description: "Track, review, and manage your comments across the platform.",
 };
 
 // The page
