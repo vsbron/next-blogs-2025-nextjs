@@ -40,7 +40,7 @@ function PostComments({ postId }: PostCommentsProps) {
 
       {/* Existing comments */}
       {comments.length > 0 ? (
-        <div>
+        <div className="flex flex-col gap-4 max-md:mb-20">
           {comments.map((comment) => (
             <PostComment key={comment.id} comment={comment} />
           ))}

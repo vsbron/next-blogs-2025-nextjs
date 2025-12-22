@@ -2,11 +2,14 @@
 export type actionFunction = (formData: FormData) => actionReturnType;
 export type actionReturnType = Promise<{ success: boolean; message: string }>;
 
-// Post type
-export type UserPreview = {
+export type UserMin = {
   username: string;
   displayName: string;
   imageUrl: string | null;
+};
+
+// Post type
+export type UserPreview = UserMin & {
   dateCreated: Date;
   country: string | null;
   _count?: { posts: number };
@@ -60,4 +63,5 @@ export type Comment = {
   postId: number;
   commentText: string;
   commentedTime: Date;
+  user: UserMin;
 };

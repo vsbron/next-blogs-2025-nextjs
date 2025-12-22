@@ -61,6 +61,18 @@ export const formatDate = (date: Date) => {
     day: "numeric",
   }).format(date);
 };
+// Helper function to format date
+export const formatDateTime = (date: Date) => {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  }).format(date);
+};
 
 // Function that calculates the current age or the age at the time of passing
 export function calculateAge(birthdate: string, death?: string) {
