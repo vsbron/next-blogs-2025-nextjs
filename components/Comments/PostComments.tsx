@@ -33,7 +33,7 @@ function PostComments({ postId }: PostCommentsProps) {
   // Returned JSX
   return (
     <section className="mt-6">
-      <SectionTitle as="h3">Comments</SectionTitle>
+      <SectionTitle as="h3">Comments ({comments.length})</SectionTitle>
 
       {/* New comment form */}
       {isSignedIn && <AddCommentForm postId={postId} />}

@@ -49,6 +49,14 @@ export async function addCommentAction(formData: FormData) {
       data: { ...validatedFields, userId: userId },
     });
 
+    await Promise.all([
+      db.comment.create({ data: { ...validatedFields, userId: userId } }),
+      db.post.update({
+        where: { id: parsedData.postId },
+        data: { commentsCount: { increment: 1 } },
+      }),
+    ]);
+
     // Revalidate path
     revalidatePath(`/posts/${rawData.postId}`);
 
@@ -58,14 +66,3 @@ export async function addCommentAction(formData: FormData) {
     return renderError(err, "adding a comment");
   }
 }
-
-// Action function that increases the views count
-export const incrementPostComment = async (id: number) => {
-  // Create post in the database
-  await db.post.update({
-    where: { id: id },
-    data: {
-      commentsCount: { increment: 1 },
-    },
-  });
-};
