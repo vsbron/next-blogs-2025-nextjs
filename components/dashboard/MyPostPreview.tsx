@@ -23,6 +23,7 @@ function MyPostPreview({ post }: MyPostPreviewProps) {
     views,
     imageUrl,
     likesCount,
+    commentsCount,
     category,
   } = post;
   const date = formatDate(published);
@@ -45,7 +46,12 @@ function MyPostPreview({ post }: MyPostPreviewProps) {
           <div className="bg-primary/90 text-white font-bold py-0.15 px-1.5 text-[11px] leading-4 rounded-md">
             {category}
           </div>
-          <PostPreviewStatsProps views={views} likes={likesCount} date={date} />
+          <PostPreviewStatsProps
+            views={views}
+            likes={likesCount}
+            date={date}
+            comments={commentsCount}
+          />
         </CardHeader>
         <CardContent className="px-4 flex flex-col items-start">
           <h2 className=" md:text-lg lg:text-xl leading-snug line-clamp-1 mt-0.5 xs:mt-1">
