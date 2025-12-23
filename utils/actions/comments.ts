@@ -61,6 +61,34 @@ export async function addCommentAction(formData: FormData) {
   }
 }
 
+// Action function for editing a comment
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function editCommentAction(commentId: number, data: any) {
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/dashboard");
+
+  try {
+    // Parse and validate
+    const parsedData = {
+      ...data,
+      postId: Number(data.postId),
+    };
+    const validatedFields = validatedWithZodSchema(commentSchema, parsedData);
+
+    // Update the prisma
+    await db.comment.update({
+      where: { id: commentId },
+      data: { ...validatedFields, userId },
+    });
+
+    // Return success message
+    return { success: true, message: "Comment edited successfully" };
+  } catch (err) {
+    return renderError(err, "editing a comment");
+  }
+}
+
 // Action function to delete a comment
 export const deleteCommentAction = async (
   commentId: number

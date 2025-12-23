@@ -34,20 +34,24 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
 
   // Returned JSX
   return (
-    <div className="relative">
-      <span onClick={toggleIsDeleting} className="flex gap-1">
-        {isDeleting ? (
-          <>
-            <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
-          </>
-        ) : (
-          <>
-            <Trash2Icon className="w-4 h-4" /> Delete
-          </>
-        )}
-      </span>
+    <div
+      className="relative flex gap-1 text-destructive cursor-pointer hover:text-destructive/60 transition-colors"
+      onClick={toggleIsDeleting}
+    >
+      {isDeleting ? (
+        <>
+          <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
+        </>
+      ) : (
+        <>
+          <Trash2Icon className="w-4 h-4" /> Delete
+        </>
+      )}
       {isDeleting && (
-        <div className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground">
+        <div
+          className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground cursor-default"
+          onClick={(e) => e.stopPropagation()}
+        >
           Are you sure you want to delete this comment?
           <ButtonsContainer className="mt-2 gap-2 justify-end">
             <Button
@@ -62,7 +66,7 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
               variant="outline"
               size="xs"
               className="!text-xs"
-              onClick={() => setIsDeleting(false)}
+              onClick={toggleIsDeleting}
             >
               Cancel
             </Button>
