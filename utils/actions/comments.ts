@@ -26,7 +26,7 @@ export const fetchPostComments = async (id: number) => {
     orderBy: { commentedTime: "asc" },
   });
 
-  // Return post
+  // Return comments
   return comments;
 };
 
@@ -91,7 +91,8 @@ export async function editCommentAction(commentId: number, data: any) {
 
 // Action function to delete a comment
 export const deleteCommentAction = async (
-  commentId: number
+  commentId: number,
+  postId: number
 ): actionReturnType => {
   // Get the current user clerkId
   const { userId } = await auth();
@@ -113,6 +114,17 @@ export const deleteCommentAction = async (
     await db.comment.delete({
       where: { id: commentId },
     });
+
+    // Update the prisma
+    await Promise.all([
+      db.comment.delete({
+        where: { id: commentId },
+      }),
+      db.post.update({
+        where: { id: postId },
+        data: { commentsCount: { decrement: 1 } },
+      }),
+    ]);
 
     // Return success message
     return { success: true, message: "Comment successfully deleted" };

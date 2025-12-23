@@ -26,7 +26,7 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
   // Delete comment handler
   const deleteCommentHandler = async () => {
     // Delete the comment, display the message invalidate query
-    const result = await deleteCommentAction(commentId);
+    const result = await deleteCommentAction(commentId, postId);
     toast(result.message);
     queryClient.invalidateQueries({ queryKey: ["comments", postId] });
     setIsDeleting(false);
