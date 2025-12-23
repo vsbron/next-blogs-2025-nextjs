@@ -24,7 +24,7 @@ type AddCommentFormProps = {
 };
 
 // The component
-function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
+function AddCommentForm({ postId }: AddCommentFormProps) {
   // Initiate form
   const {
     register,
@@ -33,10 +33,7 @@ function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
   } = useForm<FormValues>({
     resolver: zodResolver(commentSchema),
     mode: "onBlur",
-    defaultValues: {
-      commentText: defaultValues?.commentText || "",
-      postId,
-    },
+    defaultValues: { postId },
   });
 
   // Get the queryClient
@@ -76,7 +73,7 @@ function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
           <SubmitButton
             className="self-start"
             size="sm"
-            text={defaultValues ? "Edit" : "Add" + " comment"}
+            text="Add comment"
             isPending={isSubmitting}
           />
         </form>
