@@ -29,6 +29,7 @@ function AddCommentForm({ postId }: AddCommentFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(commentSchema),
@@ -44,9 +45,11 @@ function AddCommentForm({ postId }: AddCommentFormProps) {
     // Handle the form submission and redirect user if successful
     const result = await handleFormAction(addCommentAction, data);
 
-    // If success, invalidate query
-    if (result.success)
+    // If success, reset the field and invalidate query
+    if (result.success) {
+      reset();
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+    }
   };
 
   // Returned JSX
