@@ -1,13 +1,13 @@
+import Link from "next/link";
+import Image from "next/image";
+
+import DeleteComment from "@/components/Comments/DeleteComment";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+
 import { formatDateTime } from "@/utils/helpers";
 import { Comment } from "@/utils/types";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import Image from "next/image";
-import Link from "next/link";
-
-import defaultAvatar from "@/assets/defaultUser.png";
-
 import { EditIcon } from "lucide-react";
-import DeleteComment from "./DeleteComment";
+import defaultAvatar from "@/assets/defaultUser.png";
 
 // Props type
 type PostCommentProps = {
@@ -17,8 +17,8 @@ type PostCommentProps = {
 
 // The component
 function PostComment({ comment, currentUserId }: PostCommentProps) {
-  // Destructure comment
-  const { id, commentText, commentedTime, user, userId } = comment;
+  // Destructure comment and user
+  const { id, commentText, commentedTime, user, userId, postId } = comment;
   const { username, displayName, imageUrl } = user;
 
   // Returned JSX
@@ -51,8 +51,8 @@ function PostComment({ comment, currentUserId }: PostCommentProps) {
               <span className="flex gap-1 text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors">
                 <EditIcon className="w-4 h-4" /> Edit
               </span>
-              <span className="flex gap-1 text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
-                <DeleteComment commentId={id} />
+              <span className="text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
+                <DeleteComment commentId={id} postId={postId} />
               </span>
             </div>
           )}

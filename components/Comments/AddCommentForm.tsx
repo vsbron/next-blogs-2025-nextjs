@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { SubmitButton } from "@/components/form/Buttons";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -9,7 +10,6 @@ import { addCommentAction } from "@/utils/actions/comments";
 import { handleFormAction } from "@/utils/helpers";
 import { commentSchema } from "@/utils/schemas";
 import { Comment } from "@/utils/types";
-import { useRouter } from "next/navigation";
 
 // Type for form values
 type FormValues = {
@@ -39,16 +39,17 @@ function AddCommentForm({ defaultValues, postId }: AddCommentFormProps) {
     },
   });
 
-  // Get the router
-  const router = useRouter();
+  // Get the queryClient
+  const queryClient = useQueryClient();
 
   // On submit handler
   const onSubmit = async (data: FormValues) => {
     // Handle the form submission and redirect user if successful
     const result = await handleFormAction(addCommentAction, data);
 
-    // If success, trigger a message
-    if (result.success) router.push(`/posts/${postId}`);
+    // If success, invalidate query
+    if (result.success)
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
   };
 
   // Returned JSX

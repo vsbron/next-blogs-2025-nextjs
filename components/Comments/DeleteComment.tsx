@@ -1,13 +1,21 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-
-import { Trash2Icon } from "lucide-react";
 import { toast } from "sonner";
-import { ButtonsContainer } from "../form/Buttons";
-import { Button } from "../ui/button";
-import { deleteCommentAction } from "@/utils/actions/comments";
 
-function DeleteComment({ commentId }: { commentId: number }) {
+import { ButtonsContainer } from "@/components/form/Buttons";
+import { Button } from "@/components/ui/button";
+
+import { deleteCommentAction } from "@/utils/actions/comments";
+import { Trash2Icon, XIcon } from "lucide-react";
+
+// Props type
+type DeleteCommentProps = {
+  commentId: number;
+  postId: number;
+};
+
+// The component
+function DeleteComment({ commentId, postId }: DeleteCommentProps) {
   // Set state value for delete prompt
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
@@ -17,21 +25,29 @@ function DeleteComment({ commentId }: { commentId: number }) {
 
   // Delete comment handler
   const deleteCommentHandler = async () => {
-    // Delete the post, display the message invalidate query
+    // Delete the comment, display the message invalidate query
     const result = await deleteCommentAction(commentId);
     toast(result.message);
-    queryClient.invalidateQueries({ queryKey: ["user-posts"] });
+    queryClient.invalidateQueries({ queryKey: ["comments", postId] });
     setIsDeleting(false);
   };
 
   // Returned JSX
   return (
     <div className="relative">
-      <span onClick={toggleIsDeleting}>
-        <Trash2Icon className="w-4 h-4" /> Delete
+      <span onClick={toggleIsDeleting} className="flex gap-1">
+        {isDeleting ? (
+          <>
+            <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
+          </>
+        ) : (
+          <>
+            <Trash2Icon className="w-4 h-4" /> Delete
+          </>
+        )}
       </span>
       {isDeleting && (
-        <div className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-38 text-right">
+        <div className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground">
           Are you sure you want to delete this comment?
           <ButtonsContainer className="mt-2 gap-2 justify-end">
             <Button

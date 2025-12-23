@@ -1,12 +1,12 @@
 "use server";
-import { auth } from "@clerk/nextjs/server";
-import db from "../db";
 import { redirect } from "next/navigation";
-import { validatedWithZodSchema } from "../schemaFunctions";
-import { commentSchema } from "../schemas";
-import { revalidatePath } from "next/cache";
-import { renderError } from "../helpers";
-import { actionReturnType } from "../types";
+import { auth } from "@clerk/nextjs/server";
+
+import db from "@/utils/db";
+import { renderError } from "@/utils/helpers";
+import { validatedWithZodSchema } from "@/utils/schemaFunctions";
+import { commentSchema } from "@/utils/schemas";
+import { actionReturnType } from "@/utils/types";
 
 // Action function that fetches all post comments
 export const fetchPostComments = async (id: number) => {
@@ -54,9 +54,6 @@ export async function addCommentAction(formData: FormData) {
       }),
     ]);
 
-    // Revalidate path
-    revalidatePath(`/posts/${rawData.postId}`);
-
     // Return success message
     return { success: true, message: "Comment added successfully" };
   } catch (err) {
@@ -64,7 +61,7 @@ export async function addCommentAction(formData: FormData) {
   }
 }
 
-// Action function to delete a post
+// Action function to delete a comment
 export const deleteCommentAction = async (
   commentId: number
 ): actionReturnType => {
@@ -72,19 +69,19 @@ export const deleteCommentAction = async (
   const { userId } = await auth();
   if (!userId) redirect("/");
 
-  // Fetch the post to check ownership
-  const post = await db.comment.findUnique({
+  // Fetch the comment to check ownership
+  const comment = await db.comment.findUnique({
     where: { id: commentId },
     select: { userId: true },
   });
 
   // Guard clauses
-  if (!post) return { success: false, message: "Comment not found" };
-  if (post.userId !== userId)
+  if (!comment) return { success: false, message: "Comment not found" };
+  if (comment.userId !== userId)
     return { success: false, message: "Unauthorized" };
 
   try {
-    // Delete post from the database
+    // Delete comment from the database
     await db.comment.delete({
       where: { id: commentId },
     });
