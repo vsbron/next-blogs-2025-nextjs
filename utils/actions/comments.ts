@@ -6,6 +6,7 @@ import { validatedWithZodSchema } from "../schemaFunctions";
 import { commentSchema } from "../schemas";
 import { revalidatePath } from "next/cache";
 import { renderError } from "../helpers";
+import { actionReturnType } from "../types";
 
 // Action function that fetches all post comments
 export const fetchPostComments = async (id: number) => {
@@ -62,3 +63,35 @@ export async function addCommentAction(formData: FormData) {
     return renderError(err, "adding a comment");
   }
 }
+
+// Action function to delete a post
+export const deleteCommentAction = async (
+  commentId: number
+): actionReturnType => {
+  // Get the current user clerkId
+  const { userId } = await auth();
+  if (!userId) redirect("/");
+
+  // Fetch the post to check ownership
+  const post = await db.comment.findUnique({
+    where: { id: commentId },
+    select: { userId: true },
+  });
+
+  // Guard clauses
+  if (!post) return { success: false, message: "Comment not found" };
+  if (post.userId !== userId)
+    return { success: false, message: "Unauthorized" };
+
+  try {
+    // Delete post from the database
+    await db.comment.delete({
+      where: { id: commentId },
+    });
+
+    // Return success message
+    return { success: true, message: "Comment successfully deleted" };
+  } catch (err) {
+    return renderError(err, "deleting a comment");
+  }
+};

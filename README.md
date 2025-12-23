@@ -42,10 +42,10 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - 🌙 **Light/Dark Theme Toggle**
 - 📱 **Fully Responsive Layout**
 - 💬 **Comments System**
-- - Authorized users can add comments to posts
-- - Comments are displayed directly on the post page
-- - Users can edit or delete their own comments from the post page
-- - All user comments are also accessible from the dashboard
+  - Authorized users can add comments to posts
+  - Comments are displayed directly on the post page
+  - Users can edit or delete their own comments from the post page
+  - All user comments are also accessible from the dashboard
 
 ### Backend / Logic Features
 

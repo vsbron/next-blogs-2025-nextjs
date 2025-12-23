@@ -6,7 +6,8 @@ import Link from "next/link";
 
 import defaultAvatar from "@/assets/defaultUser.png";
 
-import { EditIcon, Trash2Icon } from "lucide-react";
+import { EditIcon } from "lucide-react";
+import DeleteComment from "./DeleteComment";
 
 // Props type
 type PostCommentProps = {
@@ -17,7 +18,7 @@ type PostCommentProps = {
 // The component
 function PostComment({ comment, currentUserId }: PostCommentProps) {
   // Destructure comment
-  const { commentText, commentedTime, user, userId } = comment;
+  const { id, commentText, commentedTime, user, userId } = comment;
   const { username, displayName, imageUrl } = user;
 
   // Returned JSX
@@ -51,7 +52,7 @@ function PostComment({ comment, currentUserId }: PostCommentProps) {
                 <EditIcon className="w-4 h-4" /> Edit
               </span>
               <span className="flex gap-1 text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
-                <Trash2Icon className="w-4 h-4" /> Delete
+                <DeleteComment commentId={id} />
               </span>
             </div>
           )}
