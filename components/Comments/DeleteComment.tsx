@@ -51,20 +51,22 @@ function DeleteComment({
     <div className="relative text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
       {isOpen ? (
         <div className="flex gap-1" onClick={onClose}>
-          <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
+          <XIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4 relative top-0.25" />{" "}
+          Cancel
         </div>
       ) : (
         <div className="flex gap-1" onClick={onOpen}>
-          <Trash2Icon className="w-4 h-4" onClick={onOpen} /> Delete
+          <Trash2Icon className="w-3.5 h-3.5 xs:w-4 xs:h-4" onClick={onOpen} />{" "}
+          Delete
         </div>
       )}
       {isOpen && (
         <div
-          className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground cursor-default"
+          className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground cursor-default shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
           Are you sure you want to delete this comment?
-          <ButtonsContainer className="mt-2 gap-2 justify-end">
+          <ButtonsContainer className="mt-2 gap-2 justify-end flex-row">
             <Button
               variant="destructive"
               size="xs"

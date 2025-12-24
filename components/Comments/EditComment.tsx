@@ -65,26 +65,27 @@ function EditComment({
   return (
     <div className="relative text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors">
       {isOpen ? (
+        // prettier-ignore
         <div className="flex gap-1" onClick={onClose}>
-          <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
+          <XIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4 relative top-0.25" /> Cancel
         </div>
       ) : (
         <div className="flex gap-1" onClick={onOpen}>
-          <EditIcon className="w-4 h-4" /> Edit
+          <EditIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4" /> Edit
         </div>
       )}
 
       {isOpen && (
         <div
-          className="border border-border rounded-md absolute bg-white px-4 py-2 bottom-8 right-0 text-xs w-[270px] text-foreground cursor-default"
+          className="border border-border rounded-md absolute bg-background px-4 py-2 bottom-8 right-0 text-xs w-[270px] text-foreground cursor-default shadow-lg"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="text-base mb-1">Edit your comment</div>
+          <div className="text-sm xs:text-base mb-1">Edit your comment</div>
           <form onSubmit={handleSubmit(onSubmit)} className="basic-form gap-1">
             <input type="hidden" id="postId" {...register("postId")} />
             <Textarea
               id="commentText"
-              className="resize-none"
+              className="resize-none text-xs xs:text-base bg-white"
               {...register("commentText")}
               placeholder="Write your comment here..."
             />
@@ -95,7 +96,7 @@ function EditComment({
               </span>
             )}
 
-            <ButtonsContainer className="mt-2 gap-2 justify-end">
+            <ButtonsContainer className="mt-1 gap-2 justify-end flex-row">
               <Button
                 size="xs"
                 className="!text-xs"

@@ -2,8 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
-import DeleteComment from "@/components/Comments/DeleteComment";
-import EditComment from "@/components/Comments/EditComment";
+import CommentButtons from "@/components/Comments/CommentButtons";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDateTime } from "@/utils/helpers";
@@ -62,37 +61,19 @@ function PostComment({
         </Link>
         <div className="max-xs:max-w-22 max-xs:text-right max-xs:text-xs">
           {formatDateTime(commentedTime)}
-          {currentUserId === userId && (
-            <div className="font-normal flex gap-3 items-center justify-end mt-0.5">
-              <EditComment
-                commentId={id}
-                postId={postId}
-                text={commentText}
-                isOpen={
-                  activeAction?.commentId === id &&
-                  activeAction?.type === "edit"
-                }
-                onOpen={() => setActiveAction({ commentId: id, type: "edit" })}
-                onClose={() => setActiveAction(null)}
-              />
-              <DeleteComment
-                commentId={id}
-                postId={postId}
-                isOpen={
-                  activeAction?.commentId === id &&
-                  activeAction?.type === "delete"
-                }
-                onOpen={() =>
-                  setActiveAction({ commentId: id, type: "delete" })
-                }
-                onClose={() => setActiveAction(null)}
-              />
-            </div>
-          )}
         </div>
       </CardHeader>
-      <CardContent className="px-4 !py-1">
+      <CardContent className="px-4 !py-1 flex justify-between gap-6">
         <div>{commentText}</div>
+        {currentUserId === userId && (
+          <CommentButtons
+            id={id}
+            postId={postId}
+            text={commentText}
+            activeAction={activeAction}
+            setActiveAction={setActiveAction}
+          />
+        )}
       </CardContent>
     </Card>
   );
