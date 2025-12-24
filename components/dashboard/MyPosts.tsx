@@ -41,9 +41,9 @@ function MyPosts() {
   // Returned JSX
   return (
     <MyPostsLayout>
-      {posts.map((post) => {
-        return <MyPostPreview key={post.id} post={post} />;
-      })}
+      {posts.map((post) => (
+        <MyPostPreview key={post.id} post={post} />
+      ))}
     </MyPostsLayout>
   );
 }

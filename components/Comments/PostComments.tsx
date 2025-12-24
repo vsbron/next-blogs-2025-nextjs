@@ -6,7 +6,7 @@ import SectionTitle from "@/components/SectionTitle";
 import AddCommentForm from "@/components/Comments/AddCommentForm";
 import AuthToComment from "@/components/Comments/AuthToComment";
 import PostComment from "@/components/Comments/PostComment";
-import SkeletonPostsGrid from "@/components/skeletons/SkeletonPostsGrid";
+import SkeletonComments from "@/components/skeletons/SkeletonComments";
 
 import useGetComments from "@/hooks/useGetComments";
 
@@ -27,15 +27,21 @@ function PostComments({ postId }: PostCommentsProps) {
     type: "edit" | "delete";
   } | null>(null);
 
-  // Guard clause
-  if (isLoading) return <SkeletonPostsGrid />;
+  // Guard clauses
+  if (isLoading)
+    return (
+      <>
+        <SectionTitle as="h3">Comments</SectionTitle>
+        <SkeletonComments />
+      </>
+    );
   if (!comments)
     return (
-      <p>
+      <div>
         Sorry! There was an error while loading the comments.
         <br />
         Please try again...
-      </p>
+      </div>
     );
 
   // Returned JSX
