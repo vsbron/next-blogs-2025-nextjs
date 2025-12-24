@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Dispatch, SetStateAction } from "react";
 
 import DeleteComment from "@/components/Comments/DeleteComment";
 import EditComment from "@/components/Comments/EditComment";
@@ -13,10 +14,25 @@ import defaultAvatar from "@/assets/defaultUser.png";
 type PostCommentProps = {
   comment: Comment;
   currentUserId: string | undefined;
+  activeAction: {
+    commentId: number;
+    type: "edit" | "delete";
+  } | null;
+  setActiveAction: Dispatch<
+    SetStateAction<{
+      commentId: number;
+      type: "edit" | "delete";
+    } | null>
+  >;
 };
 
 // The component
-function PostComment({ comment, currentUserId }: PostCommentProps) {
+function PostComment({
+  comment,
+  currentUserId,
+  activeAction,
+  setActiveAction,
+}: PostCommentProps) {
   // Destructure comment and user
   const { id, commentText, commentedTime, user, userId, postId } = comment;
   const { username, displayName, imageUrl } = user;
@@ -48,8 +64,29 @@ function PostComment({ comment, currentUserId }: PostCommentProps) {
           {formatDateTime(commentedTime)}
           {currentUserId === userId && (
             <div className="font-normal flex gap-3 items-center justify-end mt-0.5">
-              <EditComment commentId={id} postId={postId} text={commentText} />
-              <DeleteComment commentId={id} postId={postId} />
+              <EditComment
+                commentId={id}
+                postId={postId}
+                text={commentText}
+                isOpen={
+                  activeAction?.commentId === id &&
+                  activeAction?.type === "edit"
+                }
+                onOpen={() => setActiveAction({ commentId: id, type: "edit" })}
+                onClose={() => setActiveAction(null)}
+              />
+              <DeleteComment
+                commentId={id}
+                postId={postId}
+                isOpen={
+                  activeAction?.commentId === id &&
+                  activeAction?.type === "delete"
+                }
+                onOpen={() =>
+                  setActiveAction({ commentId: id, type: "delete" })
+                }
+                onClose={() => setActiveAction(null)}
+              />
             </div>
           )}
         </div>

@@ -12,14 +12,21 @@ import { Trash2Icon, XIcon } from "lucide-react";
 type DeleteCommentProps = {
   commentId: number;
   postId: number;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 };
 
 // The component
-function DeleteComment({ commentId, postId }: DeleteCommentProps) {
+function DeleteComment({
+  commentId,
+  postId,
+  isOpen,
+  onOpen,
+  onClose,
+}: DeleteCommentProps) {
   // Set state value for isBusy state and delete prompt
   const [isBusy, setIsBusy] = useState<boolean>(false);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
 
   // Get the query client
   const queryClient = useQueryClient();
@@ -34,27 +41,24 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
     toast(result.message);
     queryClient.invalidateQueries({ queryKey: ["comments", postId] });
 
-    // Disable all states
+    // Disable busy state and close pop up
     setIsBusy(false);
-    setIsDeleting(false);
+    onClose();
   };
 
   // Returned JSX
   return (
-    <div
-      className="relative flex gap-1 text-destructive cursor-pointer hover:text-destructive/60 transition-colors"
-      onClick={toggleIsDeleting}
-    >
-      {isDeleting ? (
-        <>
+    <div className="relative text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
+      {isOpen ? (
+        <div className="flex gap-1" onClick={onClose}>
           <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
-        </>
+        </div>
       ) : (
-        <>
-          <Trash2Icon className="w-4 h-4" /> Delete
-        </>
+        <div className="flex gap-1" onClick={onOpen}>
+          <Trash2Icon className="w-4 h-4" onClick={onOpen} /> Delete
+        </div>
       )}
-      {isDeleting && (
+      {isOpen && (
         <div
           className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground cursor-default"
           onClick={(e) => e.stopPropagation()}
@@ -74,7 +78,7 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
               variant="outline"
               size="xs"
               className="!text-xs"
-              onClick={toggleIsDeleting}
+              onClick={onClose}
             >
               Cancel
             </Button>

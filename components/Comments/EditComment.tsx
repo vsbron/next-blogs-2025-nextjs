@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,10 +22,20 @@ type EditCommentProps = {
   commentId: number;
   postId: number;
   text: string;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 };
 
 // The component
-function EditComment({ commentId, postId, text }: EditCommentProps) {
+function EditComment({
+  commentId,
+  postId,
+  text,
+  isOpen,
+  onOpen,
+  onClose,
+}: EditCommentProps) {
   // Initiate form
   const {
     register,
@@ -38,10 +47,6 @@ function EditComment({ commentId, postId, text }: EditCommentProps) {
     defaultValues: { postId, commentText: text },
   });
 
-  // Set state value for editing pop up
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const toggleIsEditing = () => setIsEditing((iE) => !iE);
-
   // Get the query client
   const queryClient = useQueryClient();
 
@@ -51,26 +56,25 @@ function EditComment({ commentId, postId, text }: EditCommentProps) {
     const result = await editCommentAction(commentId, data);
     toast(result.message);
     queryClient.invalidateQueries({ queryKey: ["comments", postId] });
-    setIsEditing(false);
+
+    // Close pop up
+    onClose();
   };
 
   // Returned JSX
   return (
-    <div
-      className="relative flex gap-1 text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors"
-      onClick={toggleIsEditing}
-    >
-      {isEditing ? (
-        <>
+    <div className="relative text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors">
+      {isOpen ? (
+        <div className="flex gap-1" onClick={onClose}>
           <XIcon className="w-4 h-4 relative top-0.25" /> Cancel
-        </>
+        </div>
       ) : (
-        <>
+        <div className="flex gap-1" onClick={onOpen}>
           <EditIcon className="w-4 h-4" /> Edit
-        </>
+        </div>
       )}
 
-      {isEditing && (
+      {isOpen && (
         <div
           className="border border-border rounded-md absolute bg-white px-4 py-2 bottom-8 right-0 text-xs w-[270px] text-foreground cursor-default"
           onClick={(e) => e.stopPropagation()}
@@ -104,10 +108,7 @@ function EditComment({ commentId, postId, text }: EditCommentProps) {
                 variant="outline"
                 size="xs"
                 className="!text-xs"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleIsEditing();
-                }}
+                onClick={onClose}
               >
                 Cancel
               </Button>
