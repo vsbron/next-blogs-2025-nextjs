@@ -16,9 +16,9 @@ type DeleteCommentProps = {
 
 // The component
 function DeleteComment({ commentId, postId }: DeleteCommentProps) {
-  // Set state value for delete prompt
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  // Set state value for isBusy state and delete prompt
   const [isBusy, setIsBusy] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
 
   // Get the query client

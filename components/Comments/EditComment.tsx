@@ -38,7 +38,7 @@ function EditComment({ commentId, postId, text }: EditCommentProps) {
     defaultValues: { postId, commentText: text },
   });
 
-  // Set state value for delete prompt
+  // Set state value for editing pop up
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const toggleIsEditing = () => setIsEditing((iE) => !iE);
 
@@ -93,10 +93,10 @@ function EditComment({ commentId, postId, text }: EditCommentProps) {
 
             <ButtonsContainer className="mt-2 gap-2 justify-end">
               <Button
-                variant="destructive"
                 size="xs"
                 className="!text-xs"
                 type="submit"
+                disabled={isSubmitting}
               >
                 {isSubmitting ? "Saving..." : "Save"}
               </Button>
