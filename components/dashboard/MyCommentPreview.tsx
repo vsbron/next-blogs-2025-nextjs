@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
@@ -13,9 +14,36 @@ function MyCommentPreview({ comment }: { comment: CommentPreview }) {
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 grid grid-cols-[1fr_min-content] md:grid-cols-[120px_1fr_min-content]">
-      <CardHeader>Test</CardHeader>
-      <CardContent>Test 2</CardContent>
+    <Card className="pt-0 pb-3 gap-0">
+      <CardHeader className="pl-0 pr-4 !pb-0 border-b grid-rows-1">
+        <div className="flex gap-3 items-center">
+          <div className="relative w-18 h-18">
+            <Image
+              src={imageUrl}
+              fill
+              className="object-cover rounded-tl-xl"
+              alt={title}
+            />
+          </div>
+          <div className="flex flex-col">
+            <Link href={`/posts/${postId}`} className="link-primary text-lg">
+              {title}
+            </Link>
+            <div>
+              Published by{" "}
+              <Link href={`/authors/${authorId}`} className="link-primary">
+                {author.displayName}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="pt-3 px-4">
+        <div className="text-sm text-foreground/40 font-bold">
+          Left on {date}
+        </div>
+        <div className="text-lg">{commentText}</div>
+      </CardContent>
     </Card>
   );
 }
