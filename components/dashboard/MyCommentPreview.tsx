@@ -16,8 +16,8 @@ function MyCommentPreview({ comment }: { comment: CommentPreview }) {
   return (
     <Card className="pt-0 pb-3 gap-0">
       <CardHeader className="pl-0 pr-4 !pb-0 border-b grid-rows-1">
-        <div className="flex gap-3 items-center">
-          <div className="relative w-18 h-18">
+        <div className="grid grid-cols-[max-content_1fr] gap-3 items-center">
+          <div className="relative w-20 h-20 xs:w-24 xs:h-24 lg:w-18 lg:h-18">
             <Image
               src={imageUrl}
               fill
@@ -25,11 +25,14 @@ function MyCommentPreview({ comment }: { comment: CommentPreview }) {
               alt={title}
             />
           </div>
-          <div className="flex flex-col">
-            <Link href={`/posts/${postId}`} className="link-primary text-lg">
+          <div className="flex flex-col max-xs:gap-0.5">
+            <Link
+              href={`/posts/${postId}`}
+              className="link-primary text-base xs:text-lg leading-tight"
+            >
               {title}
             </Link>
-            <div>
+            <div className="max-xs:text-sm">
               Published by{" "}
               <Link href={`/authors/${authorId}`} className="link-primary">
                 {author.displayName}
@@ -42,7 +45,7 @@ function MyCommentPreview({ comment }: { comment: CommentPreview }) {
         <div className="text-sm text-foreground/40 font-bold">
           Left on {date}
         </div>
-        <div className="text-lg">{commentText}</div>
+        <div className="xs:text-lg">{commentText}</div>
       </CardContent>
     </Card>
   );
