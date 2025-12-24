@@ -18,6 +18,7 @@ type DeleteCommentProps = {
 function DeleteComment({ commentId, postId }: DeleteCommentProps) {
   // Set state value for delete prompt
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isBusy, setIsBusy] = useState<boolean>(false);
   const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
 
   // Get the query client
@@ -25,10 +26,16 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
 
   // Delete comment handler
   const deleteCommentHandler = async () => {
+    // Enable busy state
+    setIsBusy(true);
+
     // Delete the comment, display the message invalidate query
     const result = await deleteCommentAction(commentId, postId);
     toast(result.message);
     queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+
+    // Disable all states
+    setIsBusy(false);
     setIsDeleting(false);
   };
 
@@ -59,8 +66,9 @@ function DeleteComment({ commentId, postId }: DeleteCommentProps) {
               size="xs"
               className="!text-xs"
               onClick={deleteCommentHandler}
+              disabled={isBusy}
             >
-              Delete
+              {isBusy ? "Deleting..." : "Delete"}
             </Button>
             <Button
               variant="outline"

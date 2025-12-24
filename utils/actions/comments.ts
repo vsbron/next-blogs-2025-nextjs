@@ -110,12 +110,7 @@ export const deleteCommentAction = async (
     return { success: false, message: "Unauthorized" };
 
   try {
-    // Delete comment from the database
-    await db.comment.delete({
-      where: { id: commentId },
-    });
-
-    // Update the prisma
+    // Delete comment from the database and update comment count
     await Promise.all([
       db.comment.delete({
         where: { id: commentId },
