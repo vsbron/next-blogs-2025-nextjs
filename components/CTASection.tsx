@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
+import Authorization from "@/components/Authorization";
 import SectionTitle from "@/components/SectionTitle";
 import { Button } from "@/components/ui/button";
 
@@ -43,16 +44,7 @@ function CTASection({ index = false }: { index?: boolean }) {
             Sign up or log in to start sharing your stories today!
           </p>
           <div className="flex gap-2 sm:gap-4">
-            <SignInButton mode="modal">
-              <Button size="lg" className="text-lg">
-                Log In
-              </Button>
-            </SignInButton>
-            <SignUpButton mode="modal">
-              <Button variant="outline" size="lg" className="text-lg">
-                Sign Up
-              </Button>
-            </SignUpButton>
+            <Authorization className="text-lg" size="lg" />
           </div>
         </SignedOut>
       </div>

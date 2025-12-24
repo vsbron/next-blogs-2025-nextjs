@@ -1,7 +1,7 @@
-import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
-import FooterNavColumn from "./FooterNavColumn";
-import { Button } from "@/components/ui/button";
+import Authorization from "@/components/Authorization";
+import FooterNavColumn from "@/components/Footer/FooterNavColumn";
 
 import { personalAreaLinks, primaryLinks, secondaryLinks } from "@/utils/links";
 
@@ -21,12 +21,7 @@ function FooterNavbar() {
         <div>
           <SignedOut>
             <div className="flex sm:flex-col gap-2">
-              <SignInButton mode="modal">
-                <Button>Log In</Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <Button variant="outline">Sign Up</Button>
-              </SignUpButton>
+              <Authorization />
             </div>
           </SignedOut>
           <SignedIn>

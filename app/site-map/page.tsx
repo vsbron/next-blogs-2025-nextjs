@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
 
 import ArticleLayout from "@/components/ArticleLayout";
+import Authorization from "@/components/Authorization";
 import SectionTitle from "@/components/SectionTitle";
 
 import { personalAreaLinks, primaryLinks, secondaryLinks } from "@/utils/links";
@@ -15,7 +17,10 @@ export const metadata: Metadata = {
 };
 
 // The page
-function SitemapPage() {
+async function SitemapPage() {
+  // Get is Signed in status from auth
+  const { isAuthenticated } = await auth();
+
   // Returned JSX
   return (
     <section>
@@ -52,12 +57,20 @@ function SitemapPage() {
           </div>
           <div>
             <h3>Personal area links</h3>
-            <ul className="text-xl flex flex-col gap-2">
-              {personalAreaLinks.map(({ label, href }) => (
-                <li key={href}>
-                  <Link href={href}>{label}</Link>
-                </li>
-              ))}
+            <ul
+              className={`text-xl flex flex-col gap-2 ${
+                !isAuthenticated && "!pl-0 items-start"
+              }`}
+            >
+              {isAuthenticated ? (
+                personalAreaLinks.map(({ label, href }) => (
+                  <li key={href}>
+                    <Link href={href}>{label}</Link>
+                  </li>
+                ))
+              ) : (
+                <Authorization />
+              )}
             </ul>
           </div>
         </div>

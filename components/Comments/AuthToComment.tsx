@@ -1,7 +1,6 @@
-import { SignInButton, SignUpButton } from "@clerk/nextjs";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { Button } from "../ui/button";
-import { ButtonsContainer } from "../form/Buttons";
+import Authorization from "@/components/Authorization";
+import { ButtonsContainer } from "@/components/form/Buttons";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 function AuthToComment() {
   // Returned JSX
@@ -15,14 +14,7 @@ function AuthToComment() {
           Sign in or create an account to join the discussion.
         </div>
         <ButtonsContainer className="m-0 flex-row">
-          <SignInButton mode="modal">
-            <Button size="sm">Log In</Button>
-          </SignInButton>
-          <SignUpButton mode="modal">
-            <Button variant="outline" size="sm">
-              Sign Up
-            </Button>
-          </SignUpButton>
+          <Authorization size="sm" />
         </ButtonsContainer>
       </CardContent>
     </Card>
