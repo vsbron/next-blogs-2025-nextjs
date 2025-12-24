@@ -11,6 +11,7 @@ import defaultAvatar from "@/assets/defaultUser.png";
 
 // Props type
 type PostCommentProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   comment: Comment;
   currentUserId: string | undefined;
   activeAction: {

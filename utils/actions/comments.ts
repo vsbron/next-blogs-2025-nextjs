@@ -30,12 +30,15 @@ export const fetchPostComments = async (id: number) => {
   const comments = await db.comment.findMany({
     where: { postId: id },
     include: {
-      user: {
+      user: true,
+      post: {
         select: {
-          clerkId: true,
-          username: true,
-          displayName: true,
+          title: true,
           imageUrl: true,
+          authorId: true,
+          author: {
+            select: { displayName: true },
+          },
         },
       },
     },
