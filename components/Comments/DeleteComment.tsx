@@ -39,7 +39,11 @@ function DeleteComment({
     // Delete the comment, display the message invalidate query
     const result = await deleteCommentAction(commentId, postId);
     toast(result.message);
-    queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+    queryClient.invalidateQueries({
+      predicate: (query) =>
+        query.queryKey[0] === "comments" ||
+        query.queryKey[0] === "user-comments",
+    });
 
     // Disable busy state and close pop up
     setIsBusy(false);

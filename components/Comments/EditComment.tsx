@@ -55,7 +55,11 @@ function EditComment({
     // Edit the comment, display the message invalidate query
     const result = await editCommentAction(commentId, data);
     toast(result.message);
-    queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+    queryClient.invalidateQueries({
+      predicate: (query) =>
+        query.queryKey[0] === "comments" ||
+        query.queryKey[0] === "user-comments",
+    });
 
     // Close pop up
     onClose();

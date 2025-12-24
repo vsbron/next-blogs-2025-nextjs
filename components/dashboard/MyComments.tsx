@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Link } from "lucide-react";
 
 import ArticleLayout from "@/components/ArticleLayout";
@@ -11,6 +12,12 @@ import useUserComments from "@/hooks/useUserComments";
 function MyComments() {
   // Get the comments from database
   const { data: comments, isLoading, error } = useUserComments();
+
+  // Set state value for opened pop up
+  const [activeAction, setActiveAction] = useState<{
+    commentId: number;
+    type: "edit" | "delete";
+  } | null>(null);
 
   // Show skeleton while data is being loaded
   if (isLoading) return <SkeletonPostsList />;
@@ -42,7 +49,12 @@ function MyComments() {
   return (
     <MyContentLayout>
       {comments.map((comment) => (
-        <MyCommentPreview key={comment.id} comment={comment} />
+        <MyCommentPreview
+          key={comment.id}
+          comment={comment}
+          activeAction={activeAction}
+          setActiveAction={setActiveAction}
+        />
       ))}
     </MyContentLayout>
   );

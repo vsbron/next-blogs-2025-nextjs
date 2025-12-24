@@ -1,12 +1,34 @@
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import CommentButtons from "@/components/Comments/CommentButtons";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import { formatDate } from "@/utils/helpers";
 import { CommentPreview } from "@/utils/types";
 
-function MyCommentPreview({ comment }: { comment: CommentPreview }) {
+// Props type
+type MyCommentPreviewProps = {
+  comment: CommentPreview;
+  activeAction: {
+    commentId: number;
+    type: "edit" | "delete";
+  } | null;
+  setActiveAction: Dispatch<
+    SetStateAction<{
+      commentId: number;
+      type: "edit" | "delete";
+    } | null>
+  >;
+};
+
+// The component
+function MyCommentPreview({
+  comment,
+  activeAction,
+  setActiveAction,
+}: MyCommentPreviewProps) {
   // Destructure props and configure date
   const { id, post, postId, commentText, commentedTime } = comment;
   const { title, imageUrl, author, authorId } = post;
@@ -46,6 +68,13 @@ function MyCommentPreview({ comment }: { comment: CommentPreview }) {
           Left on {date}
         </div>
         <div className="xs:text-lg">{commentText}</div>
+        <CommentButtons
+          id={id}
+          postId={postId}
+          text={commentText}
+          activeAction={activeAction}
+          setActiveAction={setActiveAction}
+        />
       </CardContent>
     </Card>
   );
