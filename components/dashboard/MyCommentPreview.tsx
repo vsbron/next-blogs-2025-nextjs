@@ -36,7 +36,7 @@ function MyCommentPreview({
 
   // Returned JSX
   return (
-    <Card className="pt-0 pb-3 gap-0">
+    <Card className="pt-0 pb-2 gap-0">
       <CardHeader className="pl-0 pr-4 !pb-0 border-b grid-rows-1">
         <div className="grid grid-cols-[max-content_1fr] gap-3 items-center">
           <div className="relative w-20 h-20 xs:w-24 xs:h-24 lg:w-18 lg:h-18">
@@ -55,7 +55,7 @@ function MyCommentPreview({
               {title}
             </Link>
             <div className="max-xs:text-sm">
-              Published by{" "}
+              <span className="max-xs:hidden">Published </span>by{" "}
               <Link href={`/authors/${authorId}`} className="link-primary">
                 {author.displayName}
               </Link>
@@ -63,18 +63,21 @@ function MyCommentPreview({
           </div>
         </div>
       </CardHeader>
-      <CardContent className="pt-3 px-4">
-        <div className="text-sm text-foreground/40 font-bold">
-          Left on {date}
-        </div>
+      <CardContent className="pt-2 px-4 grid grid-cols-[1fr_100px] xs:grid-cols-1 md:grid-cols-[1fr_max-content] justify-between gap-4">
         <div className="xs:text-lg">{commentText}</div>
-        <CommentButtons
-          id={id}
-          postId={postId}
-          text={commentText}
-          activeAction={activeAction}
-          setActiveAction={setActiveAction}
-        />
+        <div className="flex flex-col gap-0.5 items-end">
+          <div className="text-xs xs:text-sm text-foreground/40 xs:font-bold text-right max-xs:mb-1">
+            <span className="max-xs:hidden">Left on </span>
+            {date}
+          </div>
+          <CommentButtons
+            id={id}
+            postId={postId}
+            text={commentText}
+            activeAction={activeAction}
+            setActiveAction={setActiveAction}
+          />
+        </div>
       </CardContent>
     </Card>
   );

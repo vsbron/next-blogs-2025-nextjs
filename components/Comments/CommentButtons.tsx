@@ -30,7 +30,7 @@ function CommentButtons({
 }: CommentButtonsProps) {
   // Returned JSX
   return (
-    <div className="font-normal flex flex-col xs:flex-row gap-1.5 xs:gap-3 items-end xs:items-center justify-end text-xs xs:text-sm ">
+    <div className="font-normal flex flex-col xs:flex-row gap-0.5 xs:gap-3 items-end xs:items-center justify-end text-xs xs:text-sm ">
       <EditComment
         commentId={id}
         postId={postId}
