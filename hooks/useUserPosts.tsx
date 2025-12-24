@@ -1,5 +1,5 @@
-import { fetchUserPosts } from "@/utils/actions/posts";
 import { useQuery } from "@tanstack/react-query";
+import { fetchUserPosts } from "@/utils/actions/posts";
 
 function useUserPosts(userId?: string) {
   const { data, isLoading, error } = useQuery({

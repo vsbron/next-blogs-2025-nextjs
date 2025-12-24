@@ -57,12 +57,21 @@ export type Like = {
   postId?: number;
 };
 
-// Like type
-export type Comment = {
+// Comment type
+export type CommentPreview = {
   id: number;
-  userId: string;
+  post: {
+    title: string;
+    imageUrl: string;
+    authorId: string;
+    author: { displayName: string };
+  };
   postId: number;
   commentText: string;
   commentedTime: Date;
+};
+
+export type Comment = CommentPreview & {
+  userId: string;
   user: UserMin;
 };

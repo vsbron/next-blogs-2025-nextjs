@@ -1,5 +1,5 @@
-import { Metadata } from "next";
 import Link from "next/link";
+import { Metadata } from "next";
 import { auth } from "@clerk/nextjs/server";
 
 import ArticleLayout from "@/components/ArticleLayout";

@@ -1,4 +1,4 @@
-import MyPostsLayout from "@/components/dashboard/MyPostsLayout";
+import MyPostsLayout from "@/components/dashboard/MyContentLayout";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 

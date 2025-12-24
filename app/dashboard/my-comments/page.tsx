@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import SectionTitle from "@/components/SectionTitle";
+import MyComments from "@/components/dashboard/MyComments";
 
 // Metadata
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ function MyCommentsPage() {
   return (
     <section>
       <SectionTitle>List of my comments</SectionTitle>
-      <p>Under construction</p>
+      <MyComments />
     </section>
   );
 }

@@ -1,16 +1,16 @@
 "use client";
-import Link from "next/link";
+import { Link } from "lucide-react";
 
 import ArticleLayout from "@/components/ArticleLayout";
-import MyPostPreview from "@/components/dashboard/MyPostPreview";
+import MyCommentPreview from "@/components/dashboard/MyCommentPreview";
 import MyContentLayout from "@/components/dashboard/MyContentLayout";
 import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
 
-import useUserPosts from "@/hooks/useUserPosts";
+import useUserComments from "@/hooks/useUserComments";
 
-function MyPosts() {
-  // Get the posts from database
-  const { data: posts, isLoading, error } = useUserPosts();
+function MyComments() {
+  // Get the comments from database
+  const { data: comments, isLoading, error } = useUserComments();
 
   // Show skeleton while data is being loaded
   if (isLoading) return <SkeletonPostsList />;
@@ -24,16 +24,16 @@ function MyPosts() {
       </ArticleLayout>
     );
 
-  // Guard clause - no posts
-  if (!posts?.length)
+  // Guard clause - no comments
+  if (!comments?.length)
     return (
       <ArticleLayout>
-        <h3 className="mb-2">No posts yet</h3>
+        <h3 className="mb-2">No comments yet</h3>
         <p>
-          Sorry! Looks like you do not have any posts yet.
+          You have not written any comments so far.
           <br />
-          Ready to start writing? Create your{" "}
-          <Link href="/dashboard/add-post">first post</Link> right now!
+          Head over to the <Link href="/posts/">posts</Link> page and join the
+          discussion.
         </p>
       </ArticleLayout>
     );
@@ -41,11 +41,11 @@ function MyPosts() {
   // Returned JSX
   return (
     <MyContentLayout>
-      {posts.map((post) => (
-        <MyPostPreview key={post.id} post={post} />
+      {comments.map((comment) => (
+        <MyCommentPreview key={comment.id} comment={comment} />
       ))}
     </MyContentLayout>
   );
 }
 
-export default MyPosts;
+export default MyComments;

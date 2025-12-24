@@ -8,6 +8,22 @@ import { validatedWithZodSchema } from "@/utils/schemaFunctions";
 import { commentSchema } from "@/utils/schemas";
 import { actionReturnType } from "@/utils/types";
 
+// Template for Comment fields to select in the database
+const commentFields = {
+  id: true,
+  post: {
+    select: {
+      title: true,
+      imageUrl: true,
+      author: { select: { displayName: true } },
+      authorId: true,
+    },
+  },
+  postId: true,
+  commentText: true,
+  commentedTime: true,
+};
+
 // Action function that fetches all post comments
 export const fetchPostComments = async (id: number) => {
   // Fetch the comments using post id
@@ -126,4 +142,25 @@ export const deleteCommentAction = async (
   } catch (err) {
     return renderError(err, "deleting a comment");
   }
+};
+
+/* USER-RELATED COMMENTS */
+// Server action that fetched user's comments
+export const fetchUserComments = async (userId?: string) => {
+  // If no userId provided, get it from auth()
+  if (!userId) {
+    const { userId: authUserId } = await auth();
+    if (!authUserId) redirect("/");
+    userId = authUserId;
+  }
+
+  // Search all user's comments
+  const comments = await db.comment.findMany({
+    where: { userId: userId },
+    orderBy: { commentedTime: "desc" },
+    select: commentFields,
+  });
+
+  // Return fetched comments
+  return comments;
 };
