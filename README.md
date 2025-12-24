@@ -45,7 +45,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
   - Authorized users can add comments to posts
   - Comments are displayed directly on the post page
   - Users can edit or delete their own comments from the post page
-  - All user comments are also accessible from the dashboard
+  - All user comments are also accessible and editable from the dashboard
 
 ### Backend / Logic Features
 

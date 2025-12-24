@@ -122,7 +122,10 @@ function AppInfoPage() {
               <li>
                 Users can edit or delete their own comments from the post page
               </li>
-              <li>All user comments are also accessible from the dashboard</li>
+              <li>
+                All user comments are also accessible and editable from the
+                dashboard
+              </li>
             </ul>
           </li>
         </ul>
