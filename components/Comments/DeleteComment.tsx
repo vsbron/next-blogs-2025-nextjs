@@ -66,7 +66,7 @@ function DeleteComment({
           onClick={(e) => e.stopPropagation()}
         >
           Are you sure you want to delete this comment?
-          <ButtonsContainer className="mt-2 gap-2 justify-end flex-row">
+          <ButtonsContainer className="mt-1 gap-2 justify-end flex-row">
             <Button
               variant="destructive"
               size="xs"
