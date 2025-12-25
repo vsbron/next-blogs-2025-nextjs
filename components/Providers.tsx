@@ -2,6 +2,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ModalProvider } from "./ModalContext";
 
 // Create a client for React Query with some options
 const queryClient = new QueryClient({
@@ -21,7 +22,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ModalProvider>{children}</ModalProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </ClerkProvider>

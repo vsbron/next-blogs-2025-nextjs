@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 import CommentButtons from "@/components/Comments/CommentButtons";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -11,24 +10,10 @@ import { CommentPreview } from "@/utils/types";
 // Props type
 type MyCommentPreviewProps = {
   comment: CommentPreview;
-  activeAction: {
-    commentId: number;
-    type: "edit" | "delete";
-  } | null;
-  setActiveAction: Dispatch<
-    SetStateAction<{
-      commentId: number;
-      type: "edit" | "delete";
-    } | null>
-  >;
 };
 
 // The component
-function MyCommentPreview({
-  comment,
-  activeAction,
-  setActiveAction,
-}: MyCommentPreviewProps) {
+function MyCommentPreview({ comment }: MyCommentPreviewProps) {
   // Destructure props and configure date
   const { id, post, postId, commentText, commentedTime } = comment;
   const { title, imageUrl, author, authorId } = post;
@@ -70,13 +55,7 @@ function MyCommentPreview({
             <span className="max-xs:hidden">Left on </span>
             {date}
           </div>
-          <CommentButtons
-            id={id}
-            postId={postId}
-            text={commentText}
-            activeAction={activeAction}
-            setActiveAction={setActiveAction}
-          />
+          <CommentButtons id={id} postId={postId} text={commentText} />
         </div>
       </CardContent>
     </Card>

@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 
+import { useModal } from "@/components/ModalContext";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -22,20 +23,10 @@ type EditCommentProps = {
   commentId: number;
   postId: number;
   text: string;
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
 };
 
 // The component
-function EditComment({
-  commentId,
-  postId,
-  text,
-  isOpen,
-  onOpen,
-  onClose,
-}: EditCommentProps) {
+function EditComment({ commentId, postId, text }: EditCommentProps) {
   // Initiate form
   const {
     register,
@@ -46,6 +37,9 @@ function EditComment({
     mode: "onBlur",
     defaultValues: { postId, commentText: text },
   });
+
+  // Get Modal function from context
+  const { onClose, onOpen, isOpen } = useModal();
 
   // Get the query client
   const queryClient = useQueryClient();
@@ -68,18 +62,18 @@ function EditComment({
   // Returned JSX
   return (
     <div className="relative text-foreground/60 cursor-pointer hover:text-foreground/40 transition-colors">
-      {isOpen ? (
+      {isOpen(commentId, "edit") ? (
         // prettier-ignore
         <div className="flex gap-1" onClick={onClose}>
           <XIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4 relative top-0.25" /> Cancel
         </div>
       ) : (
-        <div className="flex gap-1" onClick={onOpen}>
+        <div className="flex gap-1" onClick={() => onOpen(commentId, "edit")}>
           <EditIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4" /> Edit
         </div>
       )}
 
-      {isOpen && (
+      {isOpen(commentId, "edit") && (
         <div
           className="border border-border rounded-md absolute bg-background px-4 py-2 bottom-8 right-0 text-xs w-[270px] text-foreground cursor-default shadow-lg"
           onClick={(e) => e.stopPropagation()}

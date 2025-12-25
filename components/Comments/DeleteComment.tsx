@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+import { useModal } from "@/components/ModalContext";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 
@@ -12,21 +13,15 @@ import { Trash2Icon, XIcon } from "lucide-react";
 type DeleteCommentProps = {
   commentId: number;
   postId: number;
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
 };
 
 // The component
-function DeleteComment({
-  commentId,
-  postId,
-  isOpen,
-  onOpen,
-  onClose,
-}: DeleteCommentProps) {
+function DeleteComment({ commentId, postId }: DeleteCommentProps) {
   // Set state value for isBusy state and delete prompt
   const [isBusy, setIsBusy] = useState<boolean>(false);
+
+  // Get Modal function from context
+  const { onClose, onOpen, isOpen } = useModal();
 
   // Get the query client
   const queryClient = useQueryClient();
@@ -53,18 +48,21 @@ function DeleteComment({
   // Returned JSX
   return (
     <div className="relative text-destructive cursor-pointer hover:text-destructive/60 transition-colors">
-      {isOpen ? (
+      {isOpen(commentId, "delete") ? (
         <div className="flex gap-1" onClick={onClose}>
           <XIcon className="w-3.5 h-3.5 xs:w-4 xs:h-4 relative top-0.25" />{" "}
           Cancel
         </div>
       ) : (
-        <div className="flex gap-1" onClick={onOpen}>
-          <Trash2Icon className="w-3.5 h-3.5 xs:w-4 xs:h-4" onClick={onOpen} />{" "}
+        <div className="flex gap-1" onClick={() => onOpen(commentId, "delete")}>
+          <Trash2Icon
+            className="w-3.5 h-3.5 xs:w-4 xs:h-4"
+            onClick={() => onOpen(commentId, "delete")}
+          />{" "}
           Delete
         </div>
       )}
-      {isOpen && (
+      {isOpen(commentId, "delete") && (
         <div
           className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-42 text-right text-foreground cursor-default shadow-lg"
           onClick={(e) => e.stopPropagation()}
