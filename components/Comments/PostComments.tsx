@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 
 import SectionTitle from "@/components/SectionTitle";
@@ -20,12 +19,6 @@ function PostComments({ postId }: PostCommentsProps) {
 
   // Get the comments for posts
   const { comments, isLoading } = useGetComments(postId);
-
-  // Set state value for opened pop up
-  const [activeAction, setActiveAction] = useState<{
-    commentId: number;
-    type: "edit" | "delete";
-  } | null>(null);
 
   // Guard clauses
   if (isLoading)
@@ -60,8 +53,6 @@ function PostComments({ postId }: PostCommentsProps) {
               key={comment.id}
               comment={comment}
               currentUserId={user?.id}
-              activeAction={activeAction}
-              setActiveAction={setActiveAction}
             />
           ))}
         </div>

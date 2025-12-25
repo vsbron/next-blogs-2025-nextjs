@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
 
 import CommentButtons from "@/components/Comments/CommentButtons";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -13,25 +12,10 @@ import defaultAvatar from "@/assets/defaultUser.png";
 type PostCommentProps = {
   comment: Comment;
   currentUserId: string | undefined;
-  activeAction: {
-    commentId: number;
-    type: "edit" | "delete";
-  } | null;
-  setActiveAction: Dispatch<
-    SetStateAction<{
-      commentId: number;
-      type: "edit" | "delete";
-    } | null>
-  >;
 };
 
 // The component
-function PostComment({
-  comment,
-  currentUserId,
-  activeAction,
-  setActiveAction,
-}: PostCommentProps) {
+function PostComment({ comment, currentUserId }: PostCommentProps) {
   // Destructure comment and user
   const { id, commentText, commentedTime, user, userId, postId } = comment;
   const { username, displayName, imageUrl } = user;
@@ -66,13 +50,7 @@ function PostComment({
       <CardContent className="px-4 !py-1 flex justify-between gap-6">
         <div>{commentText}</div>
         {currentUserId === userId && (
-          <CommentButtons
-            id={id}
-            postId={postId}
-            text={commentText}
-            activeAction={activeAction}
-            setActiveAction={setActiveAction}
-          />
+          <CommentButtons id={id} postId={postId} text={commentText} />
         )}
       </CardContent>
     </Card>
