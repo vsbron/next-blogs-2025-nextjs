@@ -1,4 +1,3 @@
-"use state";
 import { createContext, useContext, useState } from "react";
 
 // Context types

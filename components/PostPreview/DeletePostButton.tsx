@@ -1,8 +1,8 @@
 "use client";
-import { useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 
+import { useModal } from "@/components/ModalContext";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import { Button } from "@/components/ui/button";
 
@@ -11,9 +11,8 @@ import { deletePostAction } from "@/utils/actions/post";
 import { Trash2Icon, XIcon } from "lucide-react";
 
 function DeletePostButton({ postId }: { postId: number }) {
-  // Set state value for delete prompt
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-  const toggleIsDeleting = () => setIsDeleting((iD) => !iD);
+  // Get modal functions from context
+  const { onClose, onOpen, isOpen } = useModal();
 
   // Get the query client
   const queryClient = useQueryClient();
@@ -24,7 +23,7 @@ function DeletePostButton({ postId }: { postId: number }) {
     const result = await deletePostAction(postId);
     toast(result.message);
     queryClient.invalidateQueries({ queryKey: ["user-posts"] });
-    setIsDeleting(false);
+    onClose();
   };
 
   // Set a class for icon
@@ -37,15 +36,15 @@ function DeletePostButton({ postId }: { postId: number }) {
         variant="destructive"
         size="xs"
         aria-label="Delete post"
-        onClick={toggleIsDeleting}
+        onClick={() => onOpen(postId, "delete")}
       >
-        {isDeleting ? (
+        {isOpen(postId, "delete") ? (
           <XIcon className={icon} />
         ) : (
           <Trash2Icon className={icon} />
         )}
       </Button>
-      {isDeleting && (
+      {isOpen(postId, "delete") && (
         <div className="border border-border rounded-md absolute bg-background px-3 py-2 bottom-8 right-0 text-xs w-38 text-right">
           Are you sure you want to delete this post?
           <ButtonsContainer className="mt-2 gap-2 justify-end">
@@ -61,7 +60,7 @@ function DeletePostButton({ postId }: { postId: number }) {
               variant="outline"
               size="xs"
               className="!text-xs"
-              onClick={() => setIsDeleting(false)}
+              onClick={onClose}
             >
               Cancel
             </Button>
