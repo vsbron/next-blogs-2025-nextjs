@@ -1,6 +1,6 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
-import { Link } from "lucide-react";
 
 import ArticleLayout from "@/components/ArticleLayout";
 import MyCommentPreview from "@/components/dashboard/MyCommentPreview";
