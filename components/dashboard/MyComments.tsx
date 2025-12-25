@@ -4,7 +4,7 @@ import Link from "next/link";
 import ArticleLayout from "@/components/ArticleLayout";
 import MyCommentPreview from "@/components/dashboard/MyCommentPreview";
 import MyContentLayout from "@/components/dashboard/MyContentLayout";
-import SkeletonPostsList from "@/components/skeletons/SkeletonPostsList";
+import SkeletonCommentsList from "@/components/skeletons/SkeletonCommentsList";
 
 import useUserComments from "@/hooks/useUserComments";
 
@@ -13,7 +13,7 @@ function MyComments() {
   const { data: comments, isLoading, error } = useUserComments();
 
   // Show skeleton while data is being loaded
-  if (isLoading) return <SkeletonPostsList />;
+  if (isLoading) return <SkeletonCommentsList />;
 
   // Guard clause - error
   if (error)
