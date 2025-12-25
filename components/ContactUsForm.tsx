@@ -83,7 +83,7 @@ function ContactUsForm() {
           </Label>
           <Textarea
             id="message"
-            className="resize-none h-30"
+            className="resize-none h-30 bg-white"
             placeholder="Type your message"
             disabled={isSubmitting}
             {...register("message")}

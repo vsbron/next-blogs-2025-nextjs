@@ -47,7 +47,7 @@ function DateInput({ id, label, control, error }: DateInputProps) {
                 <Button
                   variant="outline"
                   id={id}
-                  className="w-48 justify-between font-normal"
+                  className="w-48 justify-between font-normal bg-white"
                 >
                   {selectedDate
                     ? selectedDate.toLocaleDateString("en-US")
