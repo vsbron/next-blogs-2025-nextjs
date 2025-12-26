@@ -6,7 +6,7 @@ import SkeletonGeneralStats from "@/components/skeletons/SkeletonGeneralStats";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 import useGeneralStats from "@/hooks/useGeneralStats";
-import { EyeIcon, FilePenLine, ThumbsUp, User } from "lucide-react";
+import { FilePenLine, MessageCircle, ThumbsUp, User } from "lucide-react";
 
 function GeneralStats() {
   // Get the featured posts
@@ -25,7 +25,10 @@ function GeneralStats() {
           <SkeletonGeneralStats />
         ) : (
           <>
-            <StatsCard list={data.viewedPosts} title="Most viewed posts" />
+            <StatsCard
+              list={data.commentedPosts}
+              title="Most commented posts"
+            />
             <StatsCard
               list={data.likedPosts}
               title="Most liked posts"
@@ -60,7 +63,7 @@ function StatsCard({ list, title, className }: StatsCardProps) {
       className={`gap-0 py-4 xs:py-6 px-6 truncate max-w-[450px] ${className}`}
     >
       <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
-        {list[0].views ? <EyeIcon className={iconClass} /> : ""}
+        {list[0].commentsCount ? <MessageCircle className={iconClass} /> : ""}
         {list[0].likesCount ? <ThumbsUp className={iconClass} /> : ""}
         {list[0]._count ? <User className={iconClass} /> : ""}
         {title}
@@ -71,7 +74,7 @@ function StatsCard({ list, title, className }: StatsCardProps) {
             ({
               id,
               title,
-              views,
+              commentsCount,
               _count,
               likesCount,
               username,
@@ -85,10 +88,14 @@ function StatsCard({ list, title, className }: StatsCardProps) {
                   {isUser ? displayName : title}
                 </Link>
                 <div className="flex items-center gap-1 text-foreground/60 font-bold text-sm">
-                  {views ? <EyeIcon className={iconClassSm} /> : ""}
+                  {commentsCount !== undefined ? (
+                    <MessageCircle className={iconClassSm} />
+                  ) : (
+                    ""
+                  )}
                   {likesCount ? <ThumbsUp className={iconClassSm} /> : ""}
                   {_count ? <FilePenLine className={iconClassSm} /> : ""}
-                  {views || likesCount || _count.posts || 0}
+                  {commentsCount || likesCount || _count?.posts || 0}
                 </div>
               </li>
             )
