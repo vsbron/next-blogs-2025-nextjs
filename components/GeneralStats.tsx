@@ -59,9 +59,7 @@ function StatsCard({ list, title, className }: StatsCardProps) {
 
   // Returned JSX
   return (
-    <Card
-      className={`gap-0 py-4 xs:py-6 px-6 truncate max-w-[450px] ${className}`}
-    >
+    <Card className={`gap-0 py-4 xs:py-6 px-6 max-w-[450px] ${className}`}>
       <CardHeader className="text-xl font-poppins border-b-2 border-accent px-0 mb-3 flex items-center gap-x-2 pb-2">
         {list[0].commentsCount ? <MessageCircle className={iconClass} /> : ""}
         {list[0].likesCount ? <ThumbsUp className={iconClass} /> : ""}

@@ -32,9 +32,9 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
 
   // Returned JSX
   return (
-    <Card className="p-0 gap-0 overflow-hidden max-w-80">
-      <Link href={href} className="mb-3">
-        <div className="relative h-20 sm:h-30 group overflow-hidden rounded-t-lg">
+    <Card className="p-0 gap-0 overflow-hidden max-w-80 single-line-preview truncate">
+      <Link href={href} className="mb-2">
+        <div className="relative h-20 sm:h-25 group overflow-hidden rounded-t-lg">
           <Image
             src={imageUrl}
             fill
@@ -48,7 +48,7 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
           </div>
         </div>
       </Link>
-      <CardHeader className="px-4 p">
+      <CardHeader className="px-4 grid-rows-1">
         <PostPreviewStatsProps
           views={views}
           likes={likesCount}
@@ -56,11 +56,14 @@ function PostPreviewTileMini({ post }: PostPreviewTileMiniProps) {
           comments={commentsCount}
         />
       </CardHeader>
-      <CardContent className="pb-4 px-4 h-full flex flex-col items-start">
-        <Link href={href} className="hover:text-foreground/75 transition-all">
-          <h3 className="md:text-md">{title}</h3>
+      <CardContent className="pt-1 pb-3 px-3 h-full flex flex-col items-start">
+        <Link
+          href={href}
+          className="hover:text-foreground/75 transition-all max-w-full"
+        >
+          <h3 className="md:text-md truncate">{title}</h3>
         </Link>
-        <ButtonsContainer className="mt-2">
+        <ButtonsContainer className="mt-1">
           <Button variant="outline" size="xs" asChild>
             <Link href={href}>Read post</Link>
           </Button>

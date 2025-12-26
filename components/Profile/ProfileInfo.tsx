@@ -4,12 +4,12 @@ import Image from "next/image";
 import ProfileStats from "@/components/Profile/ProfileStats";
 import { ButtonsContainer } from "@/components/form/Buttons";
 import ProfileDetails from "@/components/Profile/ProfileDetails";
+import ProfileTopPosts from "@/components/Profile/ProfileTopPosts";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 import { User } from "@/utils/types";
-
 import defaultAvatar from "@/assets/defaultUser.png";
-import { Card, CardContent } from "../ui/card";
 
 // Props type
 type ProfileInfoProps = {
@@ -40,7 +40,7 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
           <h4 className="text-2xl text-foreground/50">{username}</h4>
         </div>
       </div>
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 max-w-[900px]">
+      <div className="grid lg:grid-cols-[1.2fr_1fr] items-start gap-8 max-w-[900px] mb-8">
         <Card>
           <CardContent>
             <ProfileDetails user={user} />
@@ -60,8 +60,9 @@ function ProfileInfo({ user, editBtns = false }: ProfileInfoProps) {
             )}
           </CardContent>
         </Card>
-        <ProfileStats userId={clerkId} />
+        <ProfileStats userId={clerkId} dateCreated={user.dateCreated} />
       </div>
+      <ProfileTopPosts userId={clerkId} />
     </>
   );
 }

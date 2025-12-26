@@ -8,7 +8,7 @@ import { EditIcon, EyeIcon } from "lucide-react";
 function PostPreviewButtons({ postId }: { postId: number }) {
   // Returned JSX
   return (
-    <div className="flex flex-col gap-y-1 ml-auto p-3 self-center w-14">
+    <div className="flex flex-col gap-y-1 ml-auto p-3 max-xs:pl-2 self-center w-13 xs:w-14">
       <Button variant="outline" size="xs" aria-label="View post" asChild>
         <Link href={`/posts/${postId}`}>
           <EyeIcon className="post-stats-icon" />

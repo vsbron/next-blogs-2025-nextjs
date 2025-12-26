@@ -12,6 +12,18 @@ import { renderError } from "../helpers";
 import { PostPreview } from "../types";
 import { USERS_PER_PAGE } from "../constants";
 
+const postFields = {
+  id: true,
+  title: true,
+  preview: true,
+  imageUrl: true,
+  published: true,
+  views: true,
+  category: true,
+  likesCount: true,
+  commentsCount: true,
+};
+
 // Server action function that returns user based on clerkID
 export async function fetchCurrentUser() {
   // Get current user ID
@@ -167,8 +179,13 @@ export const fetchUserWithID = cache(async (userId: string) => {
 export type UserStats = {
   totalPosts: number;
   totalViews: number;
+  totalLikes: number;
   totalComments: number;
-  mostPopularPost: PostPreview | null;
+};
+export type UserTopPosts = {
+  mostLikedPost: PostPreview | null;
+  mostViewedPost: PostPreview | null;
+  mostCommentedPost: PostPreview | null;
 };
 
 // Server action function that collects user's stats
@@ -182,42 +199,57 @@ export async function fetchUserStats(
     userId = authUserId;
   }
 
-  // Aggregate counts: posts, total views
+  // Aggregate counts: posts, total views, comments, likes
   const postsAggregate = await db.post.aggregate({
     where: { authorId: userId },
     _count: { id: true },
-    _sum: { views: true },
-  });
-
-  // Aggregate counts: posts, total views
-  const commentsAggregate = await db.post.aggregate({
-    where: { authorId: userId },
-    _sum: { commentsCount: true },
-  });
-
-  // Fetch only the top post by views
-  const mostPopularPost = await db.post.findFirst({
-    where: { authorId: userId },
-    orderBy: { likesCount: "desc" },
-    select: {
-      id: true,
-      title: true,
-      preview: true,
-      imageUrl: true,
-      published: true,
-      views: true,
-      category: true,
-      likesCount: true,
-      commentsCount: true,
-    },
+    _sum: { views: true, commentsCount: true, likesCount: true },
   });
 
   // Return total posts, views and most viewed post
   return {
     totalPosts: postsAggregate._count.id,
     totalViews: postsAggregate._sum.views || 0,
-    totalComments: commentsAggregate._sum.commentsCount || 0,
-    mostPopularPost,
+    totalLikes: postsAggregate._sum.likesCount || 0,
+    totalComments: postsAggregate._sum.commentsCount || 0,
+  };
+}
+
+// Server action function that collects user's top posts
+export async function fetchUserTopsPosts(
+  userId?: string
+): Promise<UserTopPosts | null> {
+  // Get current user ID if not provided
+  if (!userId) {
+    const { userId: authUserId } = await auth();
+    if (!authUserId) return null;
+    userId = authUserId;
+  }
+
+  // Fetch only the top post by views
+  const mostLikedPost = await db.post.findFirst({
+    where: { authorId: userId },
+    orderBy: { likesCount: "desc" },
+    select: postFields,
+  });
+  // Fetch only the top post by views
+  const mostViewedPost = await db.post.findFirst({
+    where: { authorId: userId },
+    orderBy: { views: "desc" },
+    select: postFields,
+  });
+  // Fetch only the top post by views
+  const mostCommentedPost = await db.post.findFirst({
+    where: { authorId: userId },
+    orderBy: { commentsCount: "desc" },
+    select: postFields,
+  });
+
+  // Return total posts
+  return {
+    mostViewedPost,
+    mostLikedPost,
+    mostCommentedPost,
   };
 }
 

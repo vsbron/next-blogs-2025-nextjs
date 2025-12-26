@@ -42,7 +42,7 @@ function MyPostPreview({ post }: MyPostPreviewProps) {
         />
       </div>
       <div className="pt-3">
-        <CardHeader className="px-4 mb-0.1 flex flex-col-reverse xs:flex-row gap-2 xs:gap-4 items-start xs:items-center">
+        <CardHeader className="pl-3 pr-2 xs:px-4 mb-0.1 flex flex-col-reverse xs:flex-row gap-2 xs:gap-4 items-start xs:items-center">
           <div className="bg-primary/90 text-white font-bold py-0.15 px-1.5 text-[11px] leading-4 rounded-md">
             {category}
           </div>
@@ -53,8 +53,8 @@ function MyPostPreview({ post }: MyPostPreviewProps) {
             comments={commentsCount}
           />
         </CardHeader>
-        <CardContent className="px-4 flex flex-col items-start">
-          <h2 className=" md:text-lg lg:text-xl leading-snug line-clamp-1 mt-0.5 xs:mt-1">
+        <CardContent className="pl-3 pr-2 xs:px-4 flex flex-col items-start">
+          <h2 className="md:text-lg lg:text-xl leading-snug line-clamp-1 mt-0.5 xs:mt-1">
             {title}
           </h2>
           <p className="text-sm md:text-base leading-snug line-clamp-1">
