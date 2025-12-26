@@ -182,12 +182,6 @@ export type UserStats = {
   totalLikes: number;
   totalComments: number;
 };
-export type UserTopPosts = {
-  mostLikedPost: PostPreview | null;
-  mostViewedPost: PostPreview | null;
-  mostCommentedPost: PostPreview | null;
-};
-
 // Server action function that collects user's stats
 export async function fetchUserStats(
   userId?: string
@@ -215,42 +209,43 @@ export async function fetchUserStats(
   };
 }
 
+// User's top posts action function type
+export type UserTopPosts = {
+  topPosts: (PostPreview | null)[];
+};
+
 // Server action function that collects user's top posts
 export async function fetchUserTopsPosts(
   userId?: string
-): Promise<UserTopPosts | null> {
+): Promise<UserTopPosts> {
   // Get current user ID if not provided
   if (!userId) {
     const { userId: authUserId } = await auth();
-    if (!authUserId) return null;
-    userId = authUserId;
+    if (authUserId) {
+      userId = authUserId;
+    }
   }
 
-  // Fetch only the top post by views
-  const mostLikedPost = await db.post.findFirst({
-    where: { authorId: userId },
-    orderBy: { likesCount: "desc" },
-    select: postFields,
-  });
-  // Fetch only the top post by views
-  const mostViewedPost = await db.post.findFirst({
-    where: { authorId: userId },
-    orderBy: { views: "desc" },
-    select: postFields,
-  });
-  // Fetch only the top post by views
-  const mostCommentedPost = await db.post.findFirst({
-    where: { authorId: userId },
-    orderBy: { commentsCount: "desc" },
-    select: postFields,
-  });
+  const topPosts = await Promise.all([
+    db.post.findFirst({
+      where: { authorId: userId },
+      orderBy: { likesCount: "desc" },
+      select: postFields,
+    }),
+    db.post.findFirst({
+      where: { authorId: userId },
+      orderBy: { views: "desc" },
+      select: postFields,
+    }),
+    db.post.findFirst({
+      where: { authorId: userId },
+      orderBy: { commentsCount: "desc" },
+      select: postFields,
+    }),
+  ]);
 
   // Return total posts
-  return {
-    mostViewedPost,
-    mostLikedPost,
-    mostCommentedPost,
-  };
+  return { topPosts };
 }
 
 // Small server action function for avatar update in DB
