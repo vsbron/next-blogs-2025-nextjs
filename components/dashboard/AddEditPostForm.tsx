@@ -14,7 +14,8 @@ import TextAreaInput from "@/components/form/TextAreaInput";
 import { Card, CardContent } from "@/components/ui/card";
 
 import { createEditPostAction, editPostAction } from "@/utils/actions/post";
-import { MAX_IMAGE_FILE_SIZE, POST_CATEGORIES } from "@/utils/constants";
+import { POST_CATEGORIES } from "@/utils/constants";
+import { MAX_IMAGE_FILE_SIZE } from "@/utils/constantsUI";
 import { handleFormAction } from "@/utils/helpers";
 import { imageSchema, postSchema } from "@/utils/schemas";
 import { Post } from "@/utils/types";

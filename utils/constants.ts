@@ -2,8 +2,6 @@ import { countries } from "countries-list";
 import { User } from "./types";
 
 export const SITE_DOMAIN = "https://next-blogs-2025.vercel.app";
-// export const MAX_IMAGE_FILE_SIZE = 3 * 1024 * 1024;
-export const MAX_IMAGE_FILE_SIZE = 1048576;
 export const BUCKET_NAME = "post-images";
 export const ARTICLES_PER_PAGE = 12;
 export const USERS_PER_PAGE = 12;

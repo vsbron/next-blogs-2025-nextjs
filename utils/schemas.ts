@@ -1,28 +1,40 @@
 import { z } from "zod";
-import { GENDERS, MAX_IMAGE_FILE_SIZE, POST_CATEGORIES } from "./constants";
+import { GENDERS, POST_CATEGORIES } from "./constants";
+import {
+  BIO_MAX,
+  DISPLAYNAME_MAX,
+  DISPLAYNAME_MIN,
+  POST_PREVIEW_MAX,
+  POST_PREVIEW_MIN,
+  POST_TEXT_MAX,
+  POST_TEXT_MIN,
+  POST_TITLE_MAX,
+  POST_TITLE_MIN,
+  USERNAME_MAX,
+  USERNAME_MIN,
+  MAX_IMAGE_FILE_SIZE,
+  CONTACT_MESSAGE_MAX,
+  CONTACT_NAME_MIN,
+  CONTACT_NAME_MAX,
+  COMMENT_TEXT_MIN,
+  COMMENT_TEXT_MAX,
+} from "./constantsUI";
 
+// prettier-ignore
 export const userSchema = z.object({
-  username: z
-    .string()
-    .min(3, "Username should be at least 3 characters")
-    .max(20, "Username should be at most 20 characters")
-    .refine((val) => !/^User\d+$/.test(val), {
-      message: "New username cannot be in this format: User[NUMBERS]",
-    }),
+  username: z.string()
+    .min(USERNAME_MIN, `Username should be at least ${USERNAME_MIN} characters`)
+    .max(USERNAME_MAX, `Username should be at most ${USERNAME_MAX} characters`)
+    .refine((val) => !/^User\d+$/.test(val), {message: "New username cannot be in this format: User[NUMBERS]" }),
   displayName: z
     .string()
-    .min(3, "Display name should be at least 3 characters")
-    .max(30, "Display name should be at most 30 characters"),
+    .min(DISPLAYNAME_MIN, `Display name should be at least ${DISPLAYNAME_MIN} characters`)
+    .max(DISPLAYNAME_MAX, `Display name should be at most ${DISPLAYNAME_MAX} characters`),
   birthday: z.string().optional(),
   gender: z.enum(GENDERS, { message: "Please select a gender" }),
-  country: z
-    .string()
-    .max(30, "Country name should be at most 30 characters")
-    .optional(),
-  bio: z
-    .string()
-    .max(300, "About text should be at most 300 characters")
-    .optional(),
+  country: z.string().optional(),
+  bio: z.string()
+    .max(BIO_MAX, `About text should be at most ${BIO_MAX} characters`).optional(),
   website: z.string(),
   facebook: z.string(),
   x: z.string(),
@@ -34,21 +46,21 @@ export type UserSchema = z.infer<typeof userSchema>;
 
 /**********************************/
 
+// prettier-ignore
 export const postSchema = z.object({
   title: z
     .string()
-    .min(3, "Post title should be at least 3 characters")
-    .max(45, "Post title should be at most 45 characters"),
-  preview: z
-    .string()
-    .min(10, "Post preview should be at least 10 characters")
-    .max(100, "Post preview should be at most 100 characters"),
+    .min(POST_TITLE_MIN, `Post title should be at least ${POST_TITLE_MIN} characters`)
+    .max(POST_TITLE_MAX, `Post title should be at most ${POST_TITLE_MAX} characters`),
+  preview: z.string()
+    .min(POST_PREVIEW_MIN, `Post preview should be at least ${POST_PREVIEW_MIN} characters`)
+    .max(POST_PREVIEW_MAX, `Post preview should be at most ${POST_PREVIEW_MAX} characters`),
   text: z.string().refine(
     (text) => {
       const wordCount = text.split(" ").length;
-      return wordCount >= 10 && wordCount <= 2500;
+      return wordCount >= POST_TEXT_MIN && wordCount <= POST_TEXT_MAX;
     },
-    { message: "Post text must be between 10 and 2500 words" }
+    { message: `Post text must be between ${POST_TEXT_MIN} and ${POST_TEXT_MAX} words` }
   ),
   category: z.enum(POST_CATEGORIES, { message: "Please select a category" }),
 });
@@ -57,46 +69,41 @@ export const imageSchema = z.object({
   imageUrl: validateImageFile(),
 });
 
+// prettier-ignore
 function validateImageFile() {
   // Set maximum size for an image
   const maxUploadSize = MAX_IMAGE_FILE_SIZE;
   const acceptedFileTypes = ["image/"];
 
   return (
-    z
-      .instanceof(File)
-      .optional()
+    z.instanceof(File).optional()
       // Check the size
-      .refine(
-        (file) => !file || file.size <= maxUploadSize,
-        "File size must be less than 1MB"
-      )
+      .refine((file) => !file || file.size <= maxUploadSize, "File size must be less than 1MB")
       // Check the file type
       .refine((file) => {
-        return (
-          !file || acceptedFileTypes.some((type) => file.type.startsWith(type))
-        );
+        return (!file || acceptedFileTypes.some((type) => file.type.startsWith(type)));
       }, "File must be an image")
   );
 }
 
 /**********************************/
 
+// prettier-ignore
 export const commentSchema = z.object({
-  commentText: z
-    .string()
-    .min(3, "Comment should be at least 3 characters")
-    .max(90, "Comment should be at most 90 characters"),
+  commentText: z.string()
+    .min(COMMENT_TEXT_MIN, `Comment should be at least ${COMMENT_TEXT_MIN} characters`)
+    .max(COMMENT_TEXT_MAX, `Comment should be at most ${COMMENT_TEXT_MAX} characters`),
   postId: z.number(),
 });
 
 /**********************************/
 
+// prettier-ignore
 export const contactUsSchema = z.object({
-  name: z
-    .string()
-    .min(3, "Name should be at least 3 characters")
-    .max(20, "Name should be at most 20 characters"),
+  name: z.string()
+    .min(CONTACT_NAME_MIN, `Name should be at least ${CONTACT_NAME_MIN} characters`)
+    .max(CONTACT_NAME_MAX, `Name should be at most ${CONTACT_NAME_MAX} characters`),
   email: z.email(),
-  message: z.string().max(300, "Message should be at most 300 characters"),
+  message: z.string()
+    .max(CONTACT_MESSAGE_MAX, `Message should be at most ${CONTACT_MESSAGE_MAX} characters`),
 });
