@@ -172,7 +172,9 @@ function AppInfoPage() {
           <li>Featured post section</li>
           <li>Recent posts grid</li>
           <li>Call-to-action banner</li>
-          <li>Stats: most viewed, most liked, and most active author</li>
+          <li>
+            Stats: most commented and most liked posts, and most active authors
+          </li>
           <li>Global header (logo, nav, search, theme toggle, user menu)</li>
           <li>Footer with links, small navigation, and copyright</li>
         </ul>
