@@ -123,7 +123,10 @@ function AppInfoPage() {
             💬 <strong>Comments System</strong>
             <ul className="!m-0">
               <li>Authorized users can add comments to posts</li>
-              <li>Comments are displayed directly on the post page</li>
+              <li>
+                Comments are displayed directly on the post page and can be
+                sorted by date
+              </li>
               <li>
                 Users can edit or delete their own comments from the post page
               </li>
@@ -162,7 +165,8 @@ function AppInfoPage() {
             for fetching dynamic lists
           </li>
           <li>
-            📦 <strong>Metadata</strong> including dynamic OpenGraph tags
+            📦 <strong>Metadata</strong> including dynamic OpenGraph tags and
+            Canonical URLs
           </li>
         </ul>
 

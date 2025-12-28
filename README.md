@@ -43,7 +43,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - 📱 **Fully Responsive Layout**
 - 💬 **Comments System**
   - Authorized users can add comments to posts
-  - Comments are displayed directly on the post page
+  - Comments are displayed directly on the post page and can be sorted by date
   - Users can edit or delete their own comments from the post page
   - All user comments are also accessible and editable from the dashboard
 
@@ -55,7 +55,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - ✍️ **Add, Edit, Delete Posts** with a Quill WYSIWYG editor
 - 🔒 **Secure Data Storage** in Supabase Postgres, managed through Prisma
 - 🔄 **Server Actions** + **React Query** for fetching dynamic lists
-- 📦 **Metadata** including dynamic OpenGraph tags
+- 📦 **Metadata** including dynamic OpenGraph tags and Canonical URLs
 
 ---
 
