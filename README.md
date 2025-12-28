@@ -66,7 +66,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - Featured post section
 - Recent posts grid
 - Call-to-action banner
-- Stats: most viewed, most liked, and most active author
+- Stats: most commented and most liked posts, and most active authors
 - Global header (logo, nav, search, theme toggle, user menu)
 - Footer with links, small navigation, and copyright
 

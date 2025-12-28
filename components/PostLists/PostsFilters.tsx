@@ -9,6 +9,7 @@ import {
 import FormGroup from "@/components/form/FormGroup";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -18,13 +19,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { POPULAR_POST_LIKES_COUNT, POST_CATEGORIES } from "@/utils/constants";
+import { POST_CATEGORIES } from "@/utils/constants";
+import FormInput from "../form/FormInput";
+import { Label } from "../ui/label";
 
 // Filter type
 type FilterFormValues = {
   category: string;
   sort: string;
-  popular: boolean;
+  comments: number;
+  likes: number;
 };
 
 type PostsFiltersProps = {
@@ -48,7 +52,8 @@ function PostsFilters({
     defaultValues: {
       category: searchParams.get("category") || "",
       sort: searchParams.get("sort") || "date_desc",
-      popular: !!searchParams.get("popular"),
+      comments: Number(searchParams.get("comments")) || 0,
+      likes: Number(searchParams.get("likes")) || 0,
     },
   });
 
@@ -62,8 +67,10 @@ function PostsFilters({
     else params.delete("category");
     if (data.sort) params.set("sort", data.sort);
     else params.delete("sort");
-    if (data.popular) params.set("popular", "1");
-    else params.delete("popular");
+    if (data.comments) params.set("comments", String(data.comments));
+    else params.delete("comments");
+    if (data.likes) params.set("likes", String(data.likes));
+    else params.delete("likes");
     params.set("page", "1");
 
     // Close Filters, redirect user
@@ -72,7 +79,7 @@ function PostsFilters({
   };
   // Clear handler
   const clearFilters = () => {
-    reset({ category: "", sort: "", popular: false });
+    reset({ category: "", sort: "", comments: 0, likes: 0 });
     closeFn();
     router.push(url);
   };
@@ -82,7 +89,7 @@ function PostsFilters({
     <Card className="mb-8 py-4">
       <CardContent className="px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex justify-between flex-col md:flex-row items-stretch md:items-center gap-y-4">
+          <div className="flex justify-between flex-col md:flex-row items-stretch md:items-end gap-y-4">
             <div className="flex items-center flex-wrap gap-x-6 gap-y-2">
               {/* Category Filter */}
               <FormGroup>
@@ -94,6 +101,7 @@ function PostsFilters({
                       value={field.value}
                       onValueChange={(val) => field.onChange(val)}
                     >
+                      <Label>Category</Label>
                       <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
@@ -122,6 +130,7 @@ function PostsFilters({
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
+                      <Label className="capitalize">Sort by</Label>
                       <SelectTrigger className="w-50">
                         <SelectValue placeholder="Sort By" />
                       </SelectTrigger>
@@ -157,20 +166,33 @@ function PostsFilters({
               </FormGroup>
               <FormGroup>
                 <Controller
-                  name="popular"
+                  name="comments"
                   control={control}
                   render={({ field }) => (
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={field.value}
-                        onChange={(e) => field.onChange(e.target.checked)}
-                      />
-                      Popular posts{" "}
-                      <span className="text-sm mt-0.5">
-                        ({POPULAR_POST_LIKES_COUNT}+ Likes)
-                      </span>
-                    </label>
+                    <FormInput
+                      {...field}
+                      type="number"
+                      label="Minimum comments"
+                      className="w-35"
+                      min={0}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  )}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Controller
+                  name="likes"
+                  control={control}
+                  render={({ field }) => (
+                    <FormInput
+                      {...field}
+                      type="number"
+                      label="Minimum likes"
+                      className="w-35"
+                      min={0}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                   )}
                 />
               </FormGroup>

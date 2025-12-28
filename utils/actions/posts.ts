@@ -48,8 +48,8 @@ export const fetchAllPosts = async (
   const where: Prisma.PostWhereInput = {};
   if (filters.category && filters.category !== "all")
     where.category = filters.category;
-  // if (filters.popular) where.views = { gte: 100 };
-  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+  if (filters.likes) where.likesCount = { gte: Number(filters.likes) };
+  if (filters.comments) where.commentsCount = { gte: Number(filters.comments) };
 
   // Get the order
   let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };
@@ -280,7 +280,8 @@ export async function fetchAuthorPosts(
   if (filters.category && filters.category !== "all")
     where.category = filters.category;
   where.authorId = userId;
-  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+  if (filters.likes) where.likesCount = { gte: Number(filters.likes) };
+  if (filters.comments) where.commentsCount = { gte: Number(filters.comments) };
 
   // Get the order
   let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };
