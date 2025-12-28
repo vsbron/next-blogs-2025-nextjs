@@ -12,16 +12,14 @@ import SearchCategoriesSelect from "@/components/Search/SearchCategoriesSelect";
 import SearchPostsSort from "@/components/Search/SearchPostsSort";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-
-import { POPULAR_POST_LIKES_COUNT } from "@/utils/constants";
 
 // Filter type
 export type FilterFormValues = {
   query: string;
   category: string[];
   sort: string;
-  popular: boolean;
+  comments: number;
+  likes: number;
 };
 
 // Props type
@@ -41,7 +39,8 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
       query,
       category: searchParams.get("category")?.split(",") || [],
       sort: searchParams.get("sort") || "",
-      popular: !!searchParams.get("popular"),
+      comments: Number(searchParams.get("comments")) || 0,
+      likes: Number(searchParams.get("likes")) || 0,
     },
   });
 
@@ -60,8 +59,10 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
     }
     if (data.sort) params.set("sort", data.sort);
     else params.delete("sort");
-    if (data.popular) params.set("popular", "1");
-    else params.delete("popular");
+    if (data.comments) params.set("comments", String(data.comments));
+    else params.delete("comments");
+    if (data.likes) params.set("likes", String(data.likes));
+    else params.delete("likes");
     params.set("page", "1");
 
     // Redirect user
@@ -70,7 +71,7 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
 
   // Clear form handler (Resets fields and redirects user)
   const clearSearchForm = () => {
-    reset({ category: [], sort: "", popular: false, query: "" });
+    reset({ category: [], sort: "", comments: 0, likes: 0, query: "" });
     router.push("/search");
   };
 
@@ -81,8 +82,8 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
     <Card className="mb-6 max-xs:py-4">
       <CardContent className="max-xs:px-4">
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Left side */}
           <div className="grid grid-cols-1 gap-y-4 xs:gap-y-2 xs:grid-cols-[1.5fr_2fr] sm:grid-cols-[1.25fr_2fr] gap-x-4 xs:gap-x-8">
+            {/* Left side */}
             {/* Categories */}
             <SearchCategoriesSelect
               control={control}
@@ -113,21 +114,34 @@ function SearchForm({ searchParams, query }: SearchFormProps) {
 
               {/* Popular */}
               <FormGroup>
-                <Label>Popular posts only?</Label>
                 <Controller
-                  name="popular"
+                  name="comments"
                   control={control}
                   render={({ field }) => (
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={field.value}
-                        onChange={(e) => field.onChange(e.target.checked)}
-                      />
-                      <span className="text-sm mt-0.5">
-                        ({POPULAR_POST_LIKES_COUNT}+ Likes)
-                      </span>
-                    </label>
+                    <FormInput
+                      {...field}
+                      type="number"
+                      label="Minimum comments"
+                      className="w-35"
+                      min={0}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  )}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Controller
+                  name="likes"
+                  control={control}
+                  render={({ field }) => (
+                    <FormInput
+                      {...field}
+                      type="number"
+                      label="Minimum likes"
+                      className="w-35"
+                      min={0}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                   )}
                 />
               </FormGroup>

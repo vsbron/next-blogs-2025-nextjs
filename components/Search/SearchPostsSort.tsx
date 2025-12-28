@@ -23,23 +23,23 @@ function SearchPostsSort({ control }: SearchPostsSortProps) {
   // Returned JSX
   return (
     <FormGroup>
-      <Label>Sort results</Label>
+      <Label>Sort by</Label>
       <Controller
         name="sort"
         control={control}
         render={({ field }) => (
           <Select value={field.value} onValueChange={field.onChange}>
             <SelectTrigger className="w-50">
-              <SelectValue placeholder="Sort By" />
+              <SelectValue placeholder="Select" />
             </SelectTrigger>
             <SelectContent align="start">
               <SelectGroup>
-                <SelectItem value="date_desc">Sort by Date (Newest)</SelectItem>
-                <SelectItem value="date_asc">Sort by Date (Oldest)</SelectItem>
-                <SelectItem value="likes_desc">Sort by Likes (Desc)</SelectItem>
-                <SelectItem value="likes_asc">Sort by Likes (Asc)</SelectItem>
-                <SelectItem value="views_desc">Sort by Views (Desc)</SelectItem>
-                <SelectItem value="views_asc">Sort by Views (Asc)</SelectItem>
+                <SelectItem value="date_desc">Date (Newest)</SelectItem>
+                <SelectItem value="date_asc">Date (Oldest)</SelectItem>
+                <SelectItem value="likes_desc">Likes (Desc)</SelectItem>
+                <SelectItem value="likes_asc">Likes (Asc)</SelectItem>
+                <SelectItem value="views_desc">Views (Desc)</SelectItem>
+                <SelectItem value="views_asc">Views (Asc)</SelectItem>
                 <SelectItem value="title_asc">Title (A-Z)</SelectItem>
                 <SelectItem value="title_desc">Title (Z-A)</SelectItem>
               </SelectGroup>

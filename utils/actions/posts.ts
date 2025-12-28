@@ -128,8 +128,8 @@ export const fetchSearchPosts = async (
       ],
     }));
   }
-  // if (filters.popular) where.views = { gte: 100 };
-  if (filters.popular) where.likesCount = { gte: POPULAR_POST_LIKES_COUNT };
+  if (filters.likes) where.likesCount = { gte: Number(filters.likes) };
+  if (filters.comments) where.commentsCount = { gte: Number(filters.comments) };
 
   // Get the order
   let orderBy: Prisma.PostOrderByWithRelationInput = { published: "desc" };

@@ -31,7 +31,7 @@ function SearchCategoriesSelect({
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="flex flex-col border rounded-md w-full h-28 xs:h-40 sm:h-50 md:h-62 overflow-scroll py-0.5">
+          <div className="flex flex-col border rounded-md w-full h-28 xs:h-86 sm:h-85 overflow-scroll py-0.5">
             {["All", ...POST_CATEGORIES].map((item) => (
               <button
                 key={item}
