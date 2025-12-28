@@ -199,7 +199,10 @@ function AppInfoPage() {
           <li>Dedicated page for discovering articles</li>
           <li>Search across title, preview text, and author names</li>
           <li>Category-based filtering</li>
-          <li>Sorting and additional filters (e.g. popular posts)</li>
+          <li>
+            Sorting and additional filters (e.g. minimum amount of
+            likes/comments)
+          </li>
           <li>Paginated results with clear empty-state messaging</li>
         </ul>
 

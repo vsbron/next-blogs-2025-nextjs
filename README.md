@@ -88,7 +88,7 @@ The platform focuses on clarity, modular design, and a smooth reading and writin
 - Dedicated page for discovering articles
 - Search across title, preview text, and author names
 - Category-based filtering
-- Sorting and additional filters (e.g. popular posts)
+- Sorting and additional filters (e.g. minimum amount of likes/comments)
 - Paginated results with clear empty-state messaging
 
 ### Dashboard
