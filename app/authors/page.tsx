@@ -5,11 +5,16 @@ import SectionTitle from "@/components/SectionTitle";
 import AllAuthors from "@/components/AuthorList/AllAuthors";
 import SkeletonAuthorList from "@/components/skeletons/SkeletonAuthorList";
 
+import { SITE_DOMAIN } from "@/utils/constants";
+
 // Meta data
 export const metadata: Metadata = {
   title: "All Authors",
   description:
     "Discover every author on NextBlogs - explore all stories, insights, and ideas from our community of writers.",
+  alternates: {
+    canonical: `${SITE_DOMAIN}/authors`,
+  },
 };
 
 function AllAuthorsPage() {

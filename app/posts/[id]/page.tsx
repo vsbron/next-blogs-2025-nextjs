@@ -59,6 +59,9 @@ export async function generateMetadata({
         },
       ],
     },
+    alternates: {
+      canonical: `${SITE_DOMAIN}/posts/${id}`,
+    },
   };
 }
 

@@ -3,11 +3,16 @@ import { Metadata } from "next";
 import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
 
+import { SITE_DOMAIN } from "@/utils/constants";
+
 // Meta data
 export const metadata: Metadata = {
   title: "App Info",
   description:
     "Learn more about NextBlogs - the modern multi-user blogging platform built for writers and readers alike.",
+  alternates: {
+    canonical: `${SITE_DOMAIN}/app-info`,
+  },
 };
 
 // The page

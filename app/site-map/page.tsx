@@ -6,14 +6,17 @@ import ArticleLayout from "@/components/ArticleLayout";
 import Authorization from "@/components/Authorization";
 import SectionTitle from "@/components/SectionTitle";
 
+import { POST_CATEGORIES, SITE_DOMAIN } from "@/utils/constants";
 import { personalAreaLinks, primaryLinks, secondaryLinks } from "@/utils/links";
-import { POST_CATEGORIES } from "@/utils/constants";
 
 // Meta data
 export const metadata: Metadata = {
   title: "Sitemap",
   description:
     "Explore the full map of NextBlogs - easily navigate through articles, authors, categories, and more.",
+  alternates: {
+    canonical: `${SITE_DOMAIN}/site-map`,
+  },
 };
 
 // The page

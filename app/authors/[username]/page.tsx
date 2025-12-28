@@ -3,13 +3,13 @@ import { Suspense } from "react";
 
 import SectionTitle from "@/components/SectionTitle";
 import BreadCrumbsAuthorPage from "@/components/breadcrumbs/BreadCrumbsAuthorPage";
+import AuthorPosts from "@/components/PostLists/AuthorPosts";
 import ProfileInfo from "@/components/Profile/ProfileInfo";
+import SectionSeparator from "@/components/SectionSeparator";
 import SkeletonProfile from "@/components/skeletons/SkeletonProfile";
 
 import { fetchUser } from "@/utils/actions/users";
 import { SITE_DOMAIN } from "@/utils/constants";
-import SectionSeparator from "@/components/SectionSeparator";
-import AuthorPosts from "@/components/PostLists/AuthorPosts";
 
 // Interface for the User ID
 interface UserPageProps {
@@ -42,6 +42,9 @@ export async function generateMetadata({
       title: `${user.displayName} - Author Profile`,
       description: `Explore posts, activity, and stats from ${user.displayName}.`,
       ...(user.imageUrl && { images: [user.imageUrl] }),
+    },
+    alternates: {
+      canonical: `${SITE_DOMAIN}/authors/${username}`,
     },
   };
 }

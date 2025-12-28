@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
     "Understand how NextBlogs collects, uses, and protects your personal information. Read our Privacy Policy for details on data handling and user rights.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 // The page
@@ -106,7 +110,7 @@ function PrivacyPolicyPage() {
           If you have any questions or concerns about this Privacy Policy,
           please contact us at:
           <br />
-          <a href="mailto:support@mail.app">support@mail.app</a>
+          <a href="mailto:vsbron.webdev@gmail.com">vsbron.webdev@gmail.com</a>.
         </p>
       </ArticleLayout>
     </section>

@@ -1,11 +1,18 @@
 import { Metadata } from "next";
+
 import ArticleLayout from "@/components/ArticleLayout";
 import SectionTitle from "@/components/SectionTitle";
+
+import { SITE_DOMAIN } from "@/utils/constants";
+
 // Meta data
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Discover the story behind NextBlogs, our mission, and the vision driving our modern blogging platform.",
+  alternates: {
+    canonical: `${SITE_DOMAIN}/about`,
+  },
 };
 // The page
 function AboutPage() {

@@ -9,6 +9,10 @@ export const metadata: Metadata = {
   title: "Terms of Use",
   description:
     "Review the Terms of Use for NextBlogs. Learn about your rights, responsibilities, and the conditions for using our website and services.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 // The page
@@ -19,9 +23,10 @@ function TermsOfUsePage() {
       <SectionTitle>Terms of use</SectionTitle>
       <ArticleLayout>
         <p>
-          Welcome to <strong>NextBlogs</strong> (“we”, “our”, or “us”). By
-          accessing or using NextBlogs you agree to be bound by these Terms of
-          Use. If you do not agree, please do not use the platform.
+          Welcome to <strong>NextBlogs</strong> (&quot;we&quot;,
+          &quot;our&quot;, or &quot;us&quot;). By accessing or using NextBlogs
+          you agree to be bound by these Terms of Use. If you do not agree,
+          please do not use the platform.
         </p>
 
         <SectionTitle as="h2">Eligibility</SectionTitle>
@@ -114,8 +119,8 @@ function TermsOfUsePage() {
         <SectionTitle as="h2">Changes to these terms</SectionTitle>
         <p>
           We may update these Terms from time to time. We will post the updated
-          Terms with a new “Last updated” date. Continued use of the service
-          after changes constitutes acceptance of the revised Terms.
+          Terms with a new &quot;Last updated&quot; date. Continued use of the
+          service after changes constitutes acceptance of the revised Terms.
         </p>
 
         <SectionTitle as="h2">Governing law</SectionTitle>
@@ -128,7 +133,7 @@ function TermsOfUsePage() {
         <SectionTitle as="h3">Contact us</SectionTitle>
         <p>
           For questions about these Terms, contact us at{" "}
-          <a href="mailto:support@mail.app">support@mail.app</a>.
+          <a href="mailto:vsbron.webdev@gmail.com">vsbron.webdev@gmail.com</a>.
         </p>
       </ArticleLayout>
     </section>

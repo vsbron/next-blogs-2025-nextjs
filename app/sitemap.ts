@@ -19,8 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_DOMAIN}/hot-posts` },
     { url: `${SITE_DOMAIN}/authors` },
     { url: `${SITE_DOMAIN}/about` },
-    { url: `${SITE_DOMAIN}/terms` },
-    { url: `${SITE_DOMAIN}/privacy` },
 
     // Posts
     ...posts.map((p) => ({
