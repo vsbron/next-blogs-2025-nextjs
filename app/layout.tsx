@@ -29,6 +29,7 @@ const RobotoSerif = Roboto({
 // Set the main meta data
 export const metadata: Metadata = {
   metadataBase: new URL("https://next-blogs-2025.vercel.app/"),
+  alternates: { canonical: "https://next-blogs-2025.vercel.app/" },
   title: {
     default: "NextBlogs - Read, Create, and Share your stories",
     template: "%s | NextBlogs",
