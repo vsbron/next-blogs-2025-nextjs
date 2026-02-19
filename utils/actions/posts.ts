@@ -6,7 +6,6 @@ import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
 import { ARTICLES_PER_PAGE, POPULAR_POST_LIKES_COUNT } from "../constants";
-import { unstable_cache } from "next/cache";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -229,7 +228,13 @@ export const fetchRecentPosts = async (amount: number = 12) => {
 };
 
 // Server action function that fetches recent posts with author info and likes
-export const fetchFeaturedPosts = unstable_cache(
+export const fetchFeaturedPosts = async () => {
+  const posts = await db.post.findMany({
+    take: 8,
+    orderBy: { likesCount: "desc" },
+    select: postFields,
+  });
+
   /*
   Here, same as Trending posts we need to add more logic based on a published date,
   to display the featured posts from recent period, but because we have no real
@@ -237,16 +242,8 @@ export const fetchFeaturedPosts = unstable_cache(
   */
 
   // Return recent posts
-  async () => {
-    return db.post.findMany({
-      take: 8,
-      orderBy: { likes: { _count: "desc" } },
-      select: postFields,
-    });
-  },
-  ["featured-posts"],
-  { revalidate: 300 }, // cache for 5 minutes
-);
+  return posts;
+};
 
 /* USER-RELATED POSTS */
 // Server action that fetched user's posts

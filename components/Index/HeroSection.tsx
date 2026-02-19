@@ -6,8 +6,10 @@ import { fetchFeaturedPosts } from "@/utils/actions/posts";
 
 async function HeroSection() {
   try {
+    // Fetch the posts
     const posts = await fetchFeaturedPosts();
 
+    // Guard clause
     if (!posts?.length) return <section>There was an error</section>;
 
     // Returned JSX
