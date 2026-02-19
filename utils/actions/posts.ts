@@ -6,6 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 
 import db from "../db";
 import { ARTICLES_PER_PAGE, POPULAR_POST_LIKES_COUNT } from "../constants";
+import { unstable_cache } from "next/cache";
 
 // Template for Post fields to select in the database
 const postFields = {
@@ -39,7 +40,7 @@ export const fetchPost = cache(async (postId: string) => {
 // Server action function that fetches all posts with filters
 export const fetchAllPosts = async (
   filters: Record<string, string>,
-  page: number
+  page: number,
 ) => {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
@@ -103,7 +104,7 @@ export const fetchSearchPosts = async (
   query: string,
   filters: Record<string, string>,
   page: number,
-  limit?: number
+  limit?: number,
 ) => {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
@@ -228,13 +229,7 @@ export const fetchRecentPosts = async (amount: number = 12) => {
 };
 
 // Server action function that fetches recent posts with author info and likes
-export const fetchFeaturedPosts = async () => {
-  const posts = await db.post.findMany({
-    take: 8,
-    orderBy: { likes: { _count: "desc" } },
-    select: postFields,
-  });
-
+export const fetchFeaturedPosts = unstable_cache(
   /*
   Here, same as Trending posts we need to add more logic based on a published date,
   to display the featured posts from recent period, but because we have no real
@@ -242,8 +237,16 @@ export const fetchFeaturedPosts = async () => {
   */
 
   // Return recent posts
-  return posts;
-};
+  async () => {
+    return db.post.findMany({
+      take: 8,
+      orderBy: { likes: { _count: "desc" } },
+      select: postFields,
+    });
+  },
+  ["featured-posts"],
+  { revalidate: 300 }, // cache for 5 minutes
+);
 
 /* USER-RELATED POSTS */
 // Server action that fetched user's posts
@@ -270,7 +273,7 @@ export const fetchUserPosts = async (userId?: string) => {
 export async function fetchAuthorPosts(
   userId: string,
   filters: Record<string, string>,
-  page: number
+  page: number,
 ) {
   // Skip pages
   const skip = (page - 1) * ARTICLES_PER_PAGE;
